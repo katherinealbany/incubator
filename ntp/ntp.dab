@@ -1,0 +1,17 @@
+{
+  "Services": {
+    "ntp-1": {
+      "Image": "katherinealbany/ntp@sha256:62364196aa8077cdeaa0b6648466567a19455106d9e33643bd8a7d7d074e0144", 
+      "Networks": []
+    }, 
+    "ntp-2": {
+      "Image": "katherinealbany/ntp@sha256:62364196aa8077cdeaa0b6648466567a19455106d9e33643bd8a7d7d074e0144", 
+      "Networks": []
+    }, 
+    "ntp-3": {
+      "Image": "katherinealbany/ntp@sha256:62364196aa8077cdeaa0b6648466567a19455106d9e33643bd8a7d7d074e0144", 
+      "Networks": []
+    }
+  }, 
+  "Version": "0.1"
+}
