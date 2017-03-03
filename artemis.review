@@ -1,0 +1,15 @@
+           71e2749   Update README to reflect older release dependencies
+           13de3d5   Use import | release when the import is being filtered by release (rather than distribution)
+           a2d25c5   Make includes more dynamic, just one for operating system family instead of two (or more going forward). Also due to includes being dynamic the name of the include is now removed from the tags, but are retained in the included yaml file.
+           e5ae234   Prevent as much as possible with_items with when conditions that apply to the entire task and not the list item. Easiest way to do this is to extract such loops out into other tasks files and then include them. The condition is then moved off the loop onto the include statement.
+           f05c37c   Update README.md and CHANGELOG.md
+           582b998   The raw module now comes up us changed, so the ping role needed a slight tweak. When the apt module updates the cache it is now marked as changed also. As a result we should only update the apt cache when we need too.
+           eb94d0a   These should not be escaped in Ansible 2
+           c5e3bc7   Ansible 2 does not like with_items on undefined lists even if they are not included with the when clause. This is due to the when clause being applied to each list item and not the entire task as a whole
+           deccde6   Set the static-ness of includes
+           5aa2aaa   Fix depreciated ansible_ssh_ variables
+           018822f   Adjust some complex boolean checks to make them more suited to Ansible 2
+           e871431   Make with_items all Ansible 2 compatible
+           37acb26   Make all include_vars statements work with Ansible 2 and with vars files that now have a .yml extension
+           54aaac5   Fix NTPD Ubuntu 14 import consistency with rest of Artemis
+APPROVED   e915ee2   Give all Vars files a .yml extension
