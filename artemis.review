@@ -11,5 +11,5 @@
            018822f   Adjust some complex boolean checks to make them more suited to Ansible 2
            e871431   Make with_items all Ansible 2 compatible
            37acb26   Make all include_vars statements work with Ansible 2 and with vars files that now have a .yml extension
-           54aaac5   Fix NTPD Ubuntu 14 import consistency with rest of Artemis
+APPROVED   54aaac5   Fix NTPD Ubuntu 14 import consistency with rest of Artemis
 APPROVED   e915ee2   Give all Vars files a .yml extension
