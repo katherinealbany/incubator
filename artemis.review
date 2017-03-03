@@ -6,7 +6,7 @@
            582b998   The raw module now comes up us changed, so the ping role needed a slight tweak. When the apt module updates the cache it is now marked as changed also. As a result we should only update the apt cache when we need too.
 APPROVED   eb94d0a   These should not be escaped in Ansible 2
            c5e3bc7   Ansible 2 does not like with_items on undefined lists even if they are not included with the when clause. This is due to the when clause being applied to each list item and not the entire task as a whole
-           deccde6   Set the static-ness of includes
+APPROVED   deccde6   Set the static-ness of includes
 APPROVED   5aa2aaa   Fix depreciated ansible_ssh_ variables
            018822f   Adjust some complex boolean checks to make them more suited to Ansible 2
 APPROVED   e871431   Make with_items all Ansible 2 compatible
