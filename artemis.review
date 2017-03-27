@@ -1,3 +1,10 @@
+           79fd765   Update CHANGELOG to include note about trimmed length checks
+           84f2213   Use trim on all length checks (except lists)
+           7dcadca   Whitespace formatting in platform/package/patch/tasks/debian.yml
+           2e866a6   Update CHANGELOG.md
+           a4ad971   Support specifying the users group to allow removal of become_user for ssh/*
+           e51c04e   Support specifying the users group to allow removal of become_user for logrotate
+           4a621fa   Support specifying the users group to allow removal of become_user for init-sysv
            71e2749   Update README to reflect older release dependencies
            13de3d5   Use import | release when the import is being filtered by release (rather than distribution)
            a2d25c5   Make includes more dynamic, just one for operating system family instead of two (or more going forward). Also due to includes being dynamic the name of the include is now removed from the tags, but are retained in the included yaml file.
