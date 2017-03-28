@@ -4,7 +4,7 @@ DIFF: git diff --numstat master ansible2
              26     0      CHANGELOG.md
              5      3      README.md
 
-             2      2      boot/grub/cmdline/tasks/main.yml
+APPROVED     2      2      boot/grub/cmdline/tasks/main.yml
 
              5      11     boot/grub/control/tasks/main.yml
              17     0      boot/grub/control/tasks/redhat.yml
