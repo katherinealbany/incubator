@@ -2,7 +2,7 @@ HEAD: 79fd765
 DIFF: git diff --numstat master ansible2
 
              26     0      CHANGELOG.md
-             5      3      README.md
+APPROVED     5      3      README.md
 
 APPROVED     2      2      boot/grub/cmdline/tasks/main.yml
 
