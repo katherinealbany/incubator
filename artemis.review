@@ -162,6 +162,6 @@ APPROVED     9      9      process-control/systemd/templates/service.j2
              4      26     volume/lvm/common/tasks/main.yml
              18     0      volume/lvm/common/tasks/redhat.yml
 
-             2      2      volume/lvm/group/tasks/main.yml
+APPROVED     2      2      volume/lvm/group/tasks/main.yml
 
-             2      2      volume/lvm/volume/tasks/main.yml
+APPROVED     2      2      volume/lvm/volume/tasks/main.yml
