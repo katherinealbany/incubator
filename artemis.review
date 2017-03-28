@@ -35,7 +35,7 @@ APPROVED     0      0      kernel/sysctl/vars/{ubuntu-14 => ubuntu-14.yml}
 APPROVED     0      0      platform/bounce/vars/{debian => debian.yml}
 APPROVED     0      0      platform/bounce/vars/{ubuntu-14 => ubuntu-14.yml}
 
-             1      1      platform/cron/allow/tasks/main.yml
+APPROVED     1      1      platform/cron/allow/tasks/main.yml
 
              18     0      platform/cron/daemon/tasks/debian.yml
              6      30     platform/cron/daemon/tasks/main.yml
