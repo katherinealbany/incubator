@@ -1,22 +1,127 @@
-           79fd765   Update CHANGELOG to include note about trimmed length checks
-           84f2213   Use trim on all length checks (except lists)
-           7dcadca   Whitespace formatting in platform/package/patch/tasks/debian.yml
-           2e866a6   Update CHANGELOG.md
-           a4ad971   Support specifying the users group to allow removal of become_user for ssh/*
-           e51c04e   Support specifying the users group to allow removal of become_user for logrotate
-           4a621fa   Support specifying the users group to allow removal of become_user for init-sysv
-           71e2749   Update README to reflect older release dependencies
-           13de3d5   Use import | release when the import is being filtered by release (rather than distribution)
-           a2d25c5   Make includes more dynamic, just one for operating system family instead of two (or more going forward). Also due to includes being dynamic the name of the include is now removed from the tags, but are retained in the included yaml file.
-           e5ae234   Prevent as much as possible with_items with when conditions that apply to the entire task and not the list item. Easiest way to do this is to extract such loops out into other tasks files and then include them. The condition is then moved off the loop onto the include statement.
-           f05c37c   Update README.md and CHANGELOG.md
-           582b998   The raw module now comes up us changed, so the ping role needed a slight tweak. When the apt module updates the cache it is now marked as changed also. As a result we should only update the apt cache when we need too.
-APPROVED   eb94d0a   These should not be escaped in Ansible 2
-           c5e3bc7   Ansible 2 does not like with_items on undefined lists even if they are not included with the when clause. This is due to the when clause being applied to each list item and not the entire task as a whole
-APPROVED   deccde6   Set the static-ness of includes
-APPROVED   5aa2aaa   Fix depreciated ansible_ssh_ variables
-           018822f   Adjust some complex boolean checks to make them more suited to Ansible 2
-APPROVED   e871431   Make with_items all Ansible 2 compatible
-           37acb26   Make all include_vars statements work with Ansible 2 and with vars files that now have a .yml extension
-APPROVED   54aaac5   Fix NTPD Ubuntu 14 import consistency with rest of Artemis
-APPROVED   e915ee2   Give all Vars files a .yml extension
+HEAD: 79fd765
+DIFF: git diff --numstat master ansible2
+
+             26     0      CHANGELOG.md
+             5      3      README.md
+
+             2      2      boot/grub/cmdline/tasks/main.yml
+             5      11     boot/grub/control/tasks/main.yml
+             17     0      boot/grub/control/tasks/redhat.yml
+             0      0      boot/grub/control/vars/{redhat => redhat.yml}
+             5      11     boot/initramfs/tasks/main.yml
+             17     0      boot/initramfs/tasks/redhat.yml
+             0      0      boot/initramfs/vars/{redhat => redhat.yml}
+             17     0      filesystem/btrfs/tasks/debian.yml
+             11     29     filesystem/btrfs/tasks/main.yml
+             17     0      filesystem/btrfs/tasks/redhat.yml
+             0      0      filesystem/btrfs/vars/{debian => debian.yml}
+             0      0      filesystem/btrfs/vars/{redhat => redhat.yml}
+             2      2      filesystem/ext/tasks/main.yml
+             4      5      kernel/sysctl/tasks/main.yml
+             0      0      kernel/sysctl/vars/{ubuntu-14 => ubuntu-14.yml}
+             3      2      logging/logrotate/defaults/main.yml
+             17     0      logging/logrotate/tasks/debian.yml
+             9      31     logging/logrotate/tasks/main.yml
+             17     0      logging/logrotate/tasks/redhat.yml
+             8      10     platform/bounce/tasks/main.yml
+             2      0      platform/bounce/tasks/required.yml
+             0      0      platform/bounce/vars/{debian => debian.yml}
+             0      0      platform/bounce/vars/{ubuntu-14 => ubuntu-14.yml}
+             1      1      platform/cron/allow/tasks/main.yml
+             18     0      platform/cron/daemon/tasks/debian.yml
+             6      30     platform/cron/daemon/tasks/main.yml
+             18     0      platform/cron/daemon/tasks/redhat.yml
+             0      0      platform/cron/daemon/vars/{redhat => redhat.yml}
+             1      1      platform/cron/deny/tasks/main.yml
+             1      1      platform/cron/shared/tasks/main.yml
+             0      0      platform/cron/shared/vars/{security-balanced => security-balanced.yml}
+             1      1      platform/firewall/tasks/debian.yml
+             10     20     platform/firewall/tasks/main.yml
+             1      1      platform/firewall/tasks/redhat.yml
+             0      0      platform/firewall/vars/{debian => debian.yml}
+             0      0      platform/firewall/vars/{redhat => redhat.yml}
+             0      0      platform/firewall/vars/{security-balanced => security-balanced.yml}
+             0      0      platform/firewall/vars/{security-enhanced => security-enhanced.yml}
+             4      5      platform/halt/tasks/main.yml
+             0      0      platform/halt/vars/{ubuntu-14 => ubuntu-14.yml}
+             1      1      platform/hostname/defaults/main.yml
+             1      1      platform/hostname/tasks/main.yml
+             1      1      platform/hosts/defaults/main.yml
+             2      2      platform/hosts/tasks/main.yml
+             1      1      platform/issue/tasks/main.yml
+             0      0      platform/issue/vars/{security-balanced => security-balanced.yml}
+             1      1      platform/locale/tasks/debian.yml
+             13     11     platform/locale/tasks/main.yml
+             0      0      platform/locale/vars/{debian => debian.yml}
+             0      0      platform/locale/vars/{redhat => redhat.yml}
+             1      1      platform/locale/vars/{ubuntu-14 => ubuntu-14.yml}
+             1      1      platform/mac/tasks/debian.yml
+             9      19     platform/mac/tasks/main.yml
+             1      1      platform/mac/tasks/redhat.yml
+             0      0      platform/mac/vars/{debian => debian.yml}
+             0      0      platform/mac/vars/{redhat => redhat.yml}
+             2      28     platform/motd/tasks/debian.yml
+             29     3      platform/motd/tasks/main.yml
+             0      0      platform/motd/vars/{debian => debian.yml}
+             4      4      platform/ntpd/defaults/main.yml
+             1      1      platform/ntpd/tasks/debian.yml
+             14     25     platform/ntpd/tasks/main.yml
+             1      1      platform/ntpd/tasks/redhat.yml
+             0      0      platform/ntpd/vars/{debian => debian.yml}
+             0      0      platform/ntpd/vars/{redhat => redhat.yml}
+             0      0      platform/ntpd/vars/{security-balanced => security-balanced.yml}
+             0      0      platform/ntpd/vars/{security-enhanced => security-enhanced.yml}
+             0      0      platform/ntpd/vars/{ubuntu-14.04 => ubuntu-14.yml}
+             18     0      platform/package/apt/tasks/keys.yml
+             6      21     platform/package/apt/tasks/main.yml
+             0      0      platform/package/apt/vars/{debian => debian.yml}
+             0      0      platform/package/apt/vars/{ubuntu => ubuntu.yml}
+             0      1      platform/package/patch/defaults/main.yml
+             2      19     platform/package/patch/tasks/debian.yml
+             4      18     platform/package/patch/tasks/main.yml
+             2      0      platform/ping/tasks/main.yml
+             1      1      platform/proxy/tasks/apt.yml
+             19     23     platform/proxy/tasks/main.yml
+             35     0      platform/proxy/tasks/pac-edit.yml
+             5      26     platform/proxy/tasks/pac.yml
+             2      2      platform/proxy/tasks/yum.yml
+             0      0      platform/proxy/vars/{apt => apt.yml}
+             0      0      platform/proxy/vars/{yum => yum.yml}
+             4      0      platform/ssh/agent/defaults/main.yml
+             2      1      platform/ssh/agent/meta/main.yml
+             7      9      platform/ssh/agent/tasks/main.yml
+             1      1      platform/ssh/auth/tasks/main.yml
+             3      2      platform/ssh/client/tasks/main.yml
+             4      0      platform/ssh/common/defaults/main.yml
+             18     0      platform/ssh/common/tasks/debian.yml
+             14     32     platform/ssh/common/tasks/main.yml
+             18     0      platform/ssh/common/tasks/redhat.yml
+             0      0      platform/ssh/common/vars/{debian => debian.yml}
+             0      0      platform/ssh/common/vars/{redhat => redhat.yml}
+             6      3      platform/ssh/daemon/tasks/main.yml
+             2      2      platform/ssh/daemon/templates/config.j2
+             0      0      platform/ssh/daemon/vars/{debian => debian.yml}
+             0      0      platform/ssh/daemon/vars/{redhat => redhat.yml}
+             0      0      platform/ssh/daemon/vars/{security-balanced => security-balanced.yml}
+             0      0      platform/ssh/daemon/vars/{security-enhanced => security-enhanced.yml}
+             3      2      platform/ssh/key/tasks/main.yml
+             2      2      platform/su/defaults/main.yml
+             1      1      platform/sysstat/tasks/debian.yml
+             6      21     platform/sysstat/tasks/main.yml
+             1      1      platform/sysstat/tasks/redhat.yml
+             1      1      platform/sysstat/vars/{debian => debian.yml}
+             6      7      platform/timezone/tasks/main.yml
+             0      0      platform/timezone/vars/{ubuntu-14 => ubuntu-14.yml}
+             2      1      process-control/init-sysv/defaults/main.yml
+             15     62     process-control/init-sysv/tasks/main.yml
+             1      1      process-control/init-sysv/templates/script.j2
+             2      2      process-control/systemd/tasks/main.yml
+             9      9      process-control/systemd/templates/service.j2
+             44     40     shared/defaults/main.yml
+             5      5      shared/tasks/main.yml
+             2      2      user/tasks/main.yml
+             18     0      volume/lvm/common/tasks/debian.yml
+             4      26     volume/lvm/common/tasks/main.yml
+             18     0      volume/lvm/common/tasks/redhat.yml
+             2      2      volume/lvm/group/tasks/main.yml
+             2      2      volume/lvm/volume/tasks/main.yml
