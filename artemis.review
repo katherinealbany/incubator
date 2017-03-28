@@ -86,7 +86,7 @@ APPROVED     0      0      platform/motd/vars/{debian => debian.yml}
              4      4      platform/ntpd/defaults/main.yml
 APPROVED     1      1      platform/ntpd/tasks/debian.yml
              14     25     platform/ntpd/tasks/main.yml
-             1      1      platform/ntpd/tasks/redhat.yml
+APPROVED     1      1      platform/ntpd/tasks/redhat.yml
 APPROVED     0      0      platform/ntpd/vars/{debian => debian.yml}
 APPROVED     0      0      platform/ntpd/vars/{redhat => redhat.yml}
 APPROVED     0      0      platform/ntpd/vars/{security-balanced => security-balanced.yml}
