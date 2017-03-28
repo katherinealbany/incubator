@@ -73,7 +73,7 @@ APPROVED     0      0      platform/locale/vars/{debian => debian.yml}
 APPROVED     0      0      platform/locale/vars/{redhat => redhat.yml}
              1      1      platform/locale/vars/{ubuntu-14 => ubuntu-14.yml}
 
-             1      1      platform/mac/tasks/debian.yml
+APPROVED     1      1      platform/mac/tasks/debian.yml
              9      19     platform/mac/tasks/main.yml
              1      1      platform/mac/tasks/redhat.yml
 APPROVED     0      0      platform/mac/vars/{debian => debian.yml}
