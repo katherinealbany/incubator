@@ -138,10 +138,10 @@ APPROVED     0      0      platform/ssh/daemon/vars/{security-enhanced => securi
 
              2      2      platform/su/defaults/main.yml
 
-             1      1      platform/sysstat/tasks/debian.yml
+APPROVED     1      1      platform/sysstat/tasks/debian.yml
              6      21     platform/sysstat/tasks/main.yml
-             1      1      platform/sysstat/tasks/redhat.yml
-             1      1      platform/sysstat/vars/{debian => debian.yml}
+APPROVED     1      1      platform/sysstat/tasks/redhat.yml
+APPROVED     1      1      platform/sysstat/vars/{debian => debian.yml}
 
              6      7      platform/timezone/tasks/main.yml
 APPROVED     0      0      platform/timezone/vars/{ubuntu-14 => ubuntu-14.yml}
