@@ -59,7 +59,7 @@ APPROVED     0      0      platform/firewall/vars/{security-enhanced => security
 APPROVED     0      0      platform/halt/vars/{ubuntu-14 => ubuntu-14.yml}
 
              1      1      platform/hostname/defaults/main.yml
-             1      1      platform/hostname/tasks/main.yml
+APPROVED     1      1      platform/hostname/tasks/main.yml
 
              1      1      platform/hosts/defaults/main.yml
              2      2      platform/hosts/tasks/main.yml
