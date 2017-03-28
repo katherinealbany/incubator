@@ -47,7 +47,7 @@ APPROVED     1      1      platform/cron/deny/tasks/main.yml
              1      1      platform/cron/shared/tasks/main.yml
 APPROVED     0      0      platform/cron/shared/vars/{security-balanced => security-balanced.yml}
 
-             1      1      platform/firewall/tasks/debian.yml
+APPROVED     1      1      platform/firewall/tasks/debian.yml
              10     20     platform/firewall/tasks/main.yml
              1      1      platform/firewall/tasks/redhat.yml
 APPROVED     0      0      platform/firewall/vars/{debian => debian.yml}
