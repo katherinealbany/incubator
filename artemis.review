@@ -20,7 +20,7 @@ APPROVED     0      0      boot/initramfs/vars/{redhat => redhat.yml}
 APPROVED     0      0      filesystem/btrfs/vars/{debian => debian.yml}
 APPROVED     0      0      filesystem/btrfs/vars/{redhat => redhat.yml}
 
-             2      2      filesystem/ext/tasks/main.yml
+APPROVED     2      2      filesystem/ext/tasks/main.yml
 
              4      5      kernel/sysctl/tasks/main.yml
 APPROVED     0      0      kernel/sysctl/vars/{ubuntu-14 => ubuntu-14.yml}
