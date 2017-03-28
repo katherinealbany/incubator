@@ -151,7 +151,7 @@ APPROVED     0      0      platform/timezone/vars/{ubuntu-14 => ubuntu-14.yml}
              1      1      process-control/init-sysv/templates/script.j2
 
 APPROVED     2      2      process-control/systemd/tasks/main.yml
-             9      9      process-control/systemd/templates/service.j2
+APPROVED     9      9      process-control/systemd/templates/service.j2
 
              44     40     shared/defaults/main.yml
              5      5      shared/tasks/main.yml
