@@ -42,7 +42,7 @@ APPROVED     1      1      platform/cron/allow/tasks/main.yml
              18     0      platform/cron/daemon/tasks/redhat.yml
 APPROVED     0      0      platform/cron/daemon/vars/{redhat => redhat.yml}
 
-             1      1      platform/cron/deny/tasks/main.yml
+APPROVED     1      1      platform/cron/deny/tasks/main.yml
 
              1      1      platform/cron/shared/tasks/main.yml
 APPROVED     0      0      platform/cron/shared/vars/{security-balanced => security-balanced.yml}
