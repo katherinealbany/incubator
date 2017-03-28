@@ -62,7 +62,7 @@ APPROVED     0      0      platform/halt/vars/{ubuntu-14 => ubuntu-14.yml}
 APPROVED     1      1      platform/hostname/tasks/main.yml
 
              1      1      platform/hosts/defaults/main.yml
-             2      2      platform/hosts/tasks/main.yml
+APPROVED     2      2      platform/hosts/tasks/main.yml
 
              1      1      platform/issue/tasks/main.yml
 APPROVED     0      0      platform/issue/vars/{security-balanced => security-balanced.yml}
