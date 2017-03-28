@@ -116,7 +116,7 @@ APPROVED     0      0      platform/proxy/vars/{yum => yum.yml}
              2      1      platform/ssh/agent/meta/main.yml
              7      9      platform/ssh/agent/tasks/main.yml
 
-             1      1      platform/ssh/auth/tasks/main.yml
+APPROVED     1      1      platform/ssh/auth/tasks/main.yml
 
              3      2      platform/ssh/client/tasks/main.yml
 
