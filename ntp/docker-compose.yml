@@ -6,8 +6,6 @@ services:
     deploy:
       replicas: 3
 
-# docker stack deploy --compose-file docker-compose.yml ntp
-
 #ntp-1:
 #  container_name: ntp-1
 #  image: katherinealbany/ntp
