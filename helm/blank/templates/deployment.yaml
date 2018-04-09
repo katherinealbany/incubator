@@ -1,0 +1,100 @@
+###################################################################################################
+
+kind: Deployment
+apiVersion: "{{ .Values.apiVersionDeployment }}"
+metadata:
+  name: "{{ template "XXXXName" . }}"
+  namespace: "{{ template "XXXXNamespace" . }}"
+  labels:
+    name: "{{ template "XXXXName" . }}"
+    chart: "{{ template "XXXXChart" . }}"
+    release: "{{ template "XXXXRelease" . }}"
+    heritage: "{{ template "XXXXHeritage" . }}"
+  annotations:
+    config.sha256sum: "{{ include (print .Template.BasePath "/config-map.yaml") . | sha256sum }}"
+spec:
+  selector:
+    matchLabels:
+      name: "{{ template "XXXXName" . }}"
+  template:
+    metadata:
+      labels:
+        name: "{{ template "XXXXName" . }}"
+        chart: "{{ template "XXXXChart" . }}"
+        release: "{{ template "XXXXRelease" . }}"
+        heritage: "{{ template "XXXXHeritage" . }}"
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
+    spec:
+      {{- if or (gt (default 0 (.Values.fsGroup | int)) 0) (gt (default 0 (.Values.runAsUser | int)) 0) }}
+      securityContext:
+        {{- if gt (default 0 (.Values.fsGroup | int)) 0 }}
+        fsGroup: {{ .Values.fsGroup }}
+        {{- end }}
+        {{- if gt (default 0 (.Values.runAsUser | int)) 0 }}
+        runAsUser: {{ .Values.runAsUser }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.podNodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.podNodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.podTolerations }}
+      tolerations:
+{{ toYaml .Values.podTolerations | indent 8 }}
+      {{- end }}
+      {{- if .Values.podVolumes }}
+      volumes:
+{{ toYaml .Values.podVolumes | indent 8 }}
+      {{- end }}
+      containers:
+        - name: "{{ .Chart.Name }}"
+          image: "{{ template "XXXXImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          securityContext:
+            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          {{- if or .Values.cpuMinimum .Values.cpuMaximum .Values.memoryMinimum .Values.memoryMaximum }}
+          resources:
+            {{- if or .Values.cpuMinimum .Values.memoryMinimum }}
+            requests:
+              {{- if .Values.cpuMinimum }}
+              cpu: "{{ .Values.cpuMinimum }}"
+              {{- end }}
+              {{- if .Values.memoryMinimum }}
+              memory: "{{ .Values.memoryMinimum }}"
+              {{- end }}
+            {{- end }}
+            {{- if or .Values.cpuMaximum .Values.memoryMaximum }}
+            limits:
+              {{- if .Values.cpuMaximum }}
+              cpu: "{{ .Values.cpuMaximum }}"
+              {{- end }}
+              {{- if .Values.memoryMaximum }}
+              memory: "{{ .Values.memoryMaximum }}"
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.podVolumeMounts }}
+          volumeMounts:
+{{ toYaml .Values.podVolumeMounts | indent 12 }}
+          {{- end }}
+          livenessProbe:
+            TODO: TODO
+            periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.livenessProbeFailureThreshold }}
+            initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
+          readinessProbe:
+            TODO: TODO
+            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
+
+###################################################################################################

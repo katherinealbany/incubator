@@ -44,6 +44,7 @@ podVolumeMounts:
 
 apiVersionService: v1
 apiVersionConfigMap: v1
+apiVersionDeployment: apps/v1
 apiVersionStatefulSet: apps/v1
 
 ###################################################################################################
