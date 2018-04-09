@@ -1,0 +1,17 @@
+###################################################################################################
+
+kind: ConfigMap
+apiVersion: "{{ .Values.apiVersionConfigMap }}"
+metadata:
+  name: "{{ template "XXXXName" . }}"
+  namespace: "{{ template "XXXXNamespace" . }}"
+  labels:
+    name: "{{ template "XXXXName" . }}"
+    chart: "{{ template "XXXXChart" . }}"
+    release: "{{ template "XXXXRelease" . }}"
+    heritage: "{{ template "XXXXHeritage" . }}"
+data:
+  TODO: |
+    TODO
+
+###################################################################################################
