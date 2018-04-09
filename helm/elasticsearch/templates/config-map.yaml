@@ -1,0 +1,17 @@
+###################################################################################################
+
+kind: ConfigMap
+apiVersion: "{{ .Values.apiVersionConfigMap }}"
+metadata:
+  name: "{{ template "elasticsearchName" . }}"
+  namespace: "{{ template "elasticsearchNamespace" . }}"
+  labels:
+    name: "{{ template "elasticsearchName" . }}"
+    chart: "{{ template "elasticsearchChart" . }}"
+    release: "{{ template "elasticsearchRelease" . }}"
+    heritage: "{{ template "elasticsearchHeritage" . }}"
+data:
+  TODO: |
+    TODO
+
+###################################################################################################
