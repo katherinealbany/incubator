@@ -69,10 +69,12 @@ spec:
           imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           securityContext:
             allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
-          {{- if or .Values.cpuMinimum .Values.cpuMaximum .Values.memoryMinimum .Values.memoryMaximum }}
           ports:
+            - name: http
+              containerPort: {{ .Values.httpPort }}
             - name: transport
               containerPort: {{ .Values.transportPort }}
+          {{- if or .Values.cpuMinimum .Values.cpuMaximum .Values.memoryMinimum .Values.memoryMaximum }}
           resources:
             {{- if or .Values.cpuMinimum .Values.memoryMinimum }}
             requests:
@@ -99,7 +101,7 @@ spec:
           {{- end }}
           livenessProbe:
             tcpSocket:
-              port: transport
+              port: http
             periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
@@ -107,7 +109,7 @@ spec:
             initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
           readinessProbe:
             tcpSocket:
-              port: transport
+              port: http
             periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
