@@ -80,6 +80,17 @@ spec:
           imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           securityContext:
             allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          env:
+            - name: http.port
+              value: "{{ .Values.httpPort }}"
+            - name: node.name
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: cluster.name
+              value: "{{ template "elasticsearchName" . }}"
+            - name: transport.tcp.port
+              value: "{{ .Values.transportPort }}"
           ports:
             - name: http
               containerPort: {{ .Values.httpPort }}
