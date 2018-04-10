@@ -16,6 +16,7 @@ spec:
   selector:
     matchLabels:
       name: "{{ template "elasticsearchName" . }}"
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
@@ -33,6 +34,15 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
+          {{- if eq (.Values.podAntiAffinity | lower) "required" }}
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: "{{ .Values.podAntiAffinityTopologyKey }}"
+              labelSelector:
+                matchExpressions:
+                  - key: name
+                    values: [ "{{ template "elasticsearchName" . }}" ]
+                    operator: In
+          {{- else }}
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: {{ .Values.podAntiAffinityWeight }}
               podAffinityTerm:
@@ -42,6 +52,7 @@ spec:
                     - key: name
                       values: [ "{{ template "elasticsearchName" . }}" ]
                       operator: In
+          {{- end }}
       {{- if or (gt (default 0 (.Values.fsGroup | int)) 0) (gt (default 0 (.Values.runAsUser | int)) 0) }}
       securityContext:
         {{- if gt (default 0 (.Values.fsGroup | int)) 0 }}
