@@ -1,15 +1,15 @@
 ###################################################################################################
 
-replicas: 3
+httpPort: 9200
+
+###################################################################################################
+
+replicas: 1
 
 ###################################################################################################
 
 fsGroup: 1000
 runAsUser: 1000
-
-###################################################################################################
-
-httpPort: 9200
 
 ###################################################################################################
 
@@ -97,19 +97,25 @@ readinessProbeFailureThreshold: 3
 
 # configPathData:                           path.data
 # configPathLogs:                           path.logs
-# configNetworkHost:                        network.host                          _site_
-# configNetworkTcpNoDelay:                  network.tcp.no_delay                  true
-# configNetworkTcpKeepAlive:                network.tcp.keep_alive                true
-# configTransportTcpCompress:               transport.tcp.compress                false
-# configTransportPingSchedule:              transport.ping_schedule               5s
-# configTransportTcpConnectTimeout:         transport.tcp.connect_timeout         30s
-# configDiscoveryZenPingUnicastHosts:       discovery.zen.ping.unicast.hosts      {{ template "elasticsearchName" . }}
-# configDiscoveryZenMinimumMasterNodes:     discovery.zen.minimum_master_nodes    ({{ .Values.replicas }} / 2) + 1
+configNetworkHost: _local:ipv4_,_site:ipv4_
+configNetworkTcpNoDelay: true
+configNetworkTcpKeepAlive: true
+configTransportTcpCompress: false
+configTransportPingSchedule: 5s
+configTransportTcpConnectTimeout: 30s
 
 # ES_JAVA_OPTS="${ES_JAVA_OPTS} -Xms4000m -Xmx4000m"
 
 # https://github.com/pires/kubernetes-elasticsearch-cluster
 # https://github.com/clockworksoul/helm-elasticsearch
+
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
+# node.data: true
+# node.client: true
+# node.ingest: true
+# node.master: true
+
+# _cluster/health?local=true
 
 ###################################################################################################
 ###################################################################################################

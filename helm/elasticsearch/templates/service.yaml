@@ -10,25 +10,13 @@ metadata:
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
-  {{- if or .Values.serviceAnnotations (and (eq .Values.serviceType "LoadBalancer") (or .Values.serviceAwsInternalLoadBalancer .Values.serviceGcpInternalLoadBalancer)) }}
-  annotations:
-    {{- if .Values.serviceAwsInternalLoadBalancer }}
-    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
-    {{- end }}
-    {{- if .Values.serviceGcpInternalLoadBalancer }}
-    cloud.google.com/load-balancer-type: Internal
-    {{- end }}
-    {{- if .Values.serviceAnnotations }}
-{{ toYaml .Values.serviceAnnotations | indent 4 }}
-    {{- end }}
-  {{- end }}
 spec:
-  type: "{{ .Values.serviceType }}"
+  ClusterIP: None
   selector:
     name: "{{ template "elasticsearchName" . }}"
   ports:
-    - name: http
-      port: {{ .Values.httpPort }}
-      targetPort: http
+    - name: transport
+      port: {{ .Values.transportPort }}
+      targetPort: transport
 
 ###################################################################################################

@@ -17,6 +17,7 @@ spec:
     matchLabels:
       name: "{{ template "elasticsearchName" . }}"
   replicas: {{ .Values.replicas }}
+  serviceName: "{{ template "elasticsearchName" . }}"
   template:
     metadata:
       labels:
@@ -70,8 +71,11 @@ spec:
       tolerations:
 {{ toYaml .Values.podTolerations | indent 8 }}
       {{- end }}
-      {{- if .Values.podVolumes }}
       volumes:
+        - name: config
+          configMap:
+            name: "{{ template "elasticsearchName" . }}"
+      {{- if .Values.podVolumes }}
 {{ toYaml .Values.podVolumes | indent 8 }}
       {{- end }}
       containers:
@@ -81,16 +85,14 @@ spec:
           securityContext:
             allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
           env:
-            - name: http.port
-              value: "{{ .Values.httpPort }}"
             - name: node.name
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: cluster.name
-              value: "{{ template "elasticsearchName" . }}"
-            - name: transport.tcp.port
-              value: "{{ .Values.transportPort }}"
+            {{- if (.Values.configNetworkHost | contains "ipv4") }}
+            - name: ES_JAVA_OPTS
+              value: "-Djava.net.preferIPv4Stack=true"
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.httpPort }}
@@ -117,13 +119,16 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
-          {{- if .Values.podVolumeMounts }}
           volumeMounts:
+            - name: config
+              subPath: elasticsearch.yml
+              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          {{- if .Values.podVolumeMounts }}
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}
           livenessProbe:
             tcpSocket:
-              port: http
+              port: transport
             periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
@@ -131,7 +136,7 @@ spec:
             initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
           readinessProbe:
             tcpSocket:
-              port: http
+              port: transport
             periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.readinessProbeSuccessThreshold }}

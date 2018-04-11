@@ -11,7 +11,17 @@ metadata:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
-  TODO: |
-    TODO
+  elasticsearch.yml: |
+    http.port: "{{ .Values.httpPort }}"
+    cluster.name: "{{ template "elasticsearchName" . }}"
+    network.host: "{{ .Values.configNetworkHost }}"
+    transport.tcp.port: "{{ .Values.transportPort }}"
+    network.tcp.no_delay: "{{ .Values.configNetworkTcpNoDelay }}"
+    network.tcp.keep_alive: "{{ .Values.configNetworkTcpKeepAlive }}"
+    transport.tcp.compress: "{{ .Values.configTransportTcpCompress }}"
+    transport.ping_schedule: "{{ .Values.configTransportPingSchedule }}"
+    transport.tcp.connect_timeout: "{{ .Values.configTransportTcpConnectTimeout }}"
+    discovery.zen.ping.unicast.hosts: "{{ template "elasticsearchName" . }}"
+    discovery.zen.minimum_master_nodes: "{{ template "elasticsearchMinimumMasterNodes" . }}"
 
 ###################################################################################################
