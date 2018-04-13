@@ -124,6 +124,9 @@ readinessProbeFailureThreshold: 3
 
 configFile: elasticsearch.yml
 configName: config
+configNodeData: false
+configNodeIngest: false
+configNodeMaster: true
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay: true
 configNetworkTcpKeepAlive: true
@@ -135,18 +138,13 @@ configTransportTcpConnectTimeout: 30s
 ###################################################################################################
 ###################################################################################################
 
+# processors: 2
+# -Des.enforce.bootstrap.checks=true
 # ES_JAVA_OPTS="${ES_JAVA_OPTS} -Xms4000m -Xmx4000m"
 
-# https://github.com/pires/kubernetes-elasticsearch-cluster
 # https://github.com/clockworksoul/helm-elasticsearch
-
+# https://github.com/pires/kubernetes-elasticsearch-cluster
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
-# node.data: true
-# node.client: true
-# node.ingest: true
-# node.master: true
-
-# _cluster/health?local=true
 
 ###################################################################################################
 ###################################################################################################

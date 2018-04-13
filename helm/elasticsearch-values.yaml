@@ -1,7 +1,7 @@
 ###################################################################################################
 
 #fsGroup: 0
-#replicas: 1
+replicas: 1
 #runAsUser: 0
 #podAntiAffinity: preferred
 #volumeDataEnabled: true

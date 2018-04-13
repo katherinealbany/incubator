@@ -13,12 +13,16 @@ metadata:
 data:
   "{{ .Values.configFile }}": |
     http.port: "{{ .Values.httpPort }}"
+    node.data: "{{ .Values.configNodeData }}"
     path.data: "{{ template "elasticsearchVolumeDataMount" . }}"
     path.logs: "{{ template "elasticsearchVolumeLogsMount" . }}"
+    node.ingest: "{{ .Values.configNodeIngest }}"
+    node.master: "{{ .Values.configNodeMaster }}"
     cluster.name: "{{ template "elasticsearchName" . }}"
     network.host: "{{ .Values.configNetworkHost }}"
     transport.tcp.port: "{{ .Values.transportPort }}"
     network.tcp.no_delay: "{{ .Values.configNetworkTcpNoDelay }}"
+    bootstrap.memory_lock: false
     network.tcp.keep_alive: "{{ .Values.configNetworkTcpKeepAlive }}"
     transport.tcp.compress: "{{ .Values.configTransportTcpCompress }}"
     transport.ping_schedule: "{{ .Values.configTransportPingSchedule }}"
