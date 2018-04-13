@@ -11,8 +11,10 @@ metadata:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
-  elasticsearch.yml: |
+  "{{ .Values.configFile }}": |
     http.port: "{{ .Values.httpPort }}"
+    path.data: "{{ template "elasticsearchVolumeDataMount" . }}"
+    path.logs: "{{ template "elasticsearchVolumeLogsMount" . }}"
     cluster.name: "{{ template "elasticsearchName" . }}"
     network.host: "{{ .Values.configNetworkHost }}"
     transport.tcp.port: "{{ .Values.transportPort }}"

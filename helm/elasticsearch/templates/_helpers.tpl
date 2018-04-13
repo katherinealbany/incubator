@@ -36,7 +36,23 @@
 {{- end -}}
 
 ###################################################################################################
+
+{{- define "elasticsearchConfigMount" -}}
+{{- default (printf "%s/%s/%s" .Values.volumeMountBase .Values.configName .Values.configFile) .Values.elasticsearchConfigMount -}}
+{{- end -}}
+
 ###################################################################################################
+
+{{- define "elasticsearchVolumeDataMount" -}}
+{{- default (printf "%s/%s" .Values.volumeMountBase .Values.volumeDataName) .Values.elasticsearchVolumeDataMount -}}
+{{- end -}}
+
+###################################################################################################
+
+{{- define "elasticsearchVolumeLogsMount" -}}
+{{- default (printf "%s/%s" .Values.volumeMountBase .Values.volumeLogsName) .Values.elasticsearchVolumeLogsMount -}}
+{{- end -}}
+
 ###################################################################################################
 
 {{- define "elasticsearchMinimumMasterNodes" -}}

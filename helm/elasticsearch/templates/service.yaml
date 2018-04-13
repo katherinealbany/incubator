@@ -15,8 +15,8 @@ spec:
   selector:
     name: "{{ template "elasticsearchName" . }}"
   ports:
-    - name: transport
+    - name: "{{ .Values.transportName }}"
       port: {{ .Values.transportPort }}
-      targetPort: transport
+      targetPort: "{{ .Values.transportName }}"
 
 ###################################################################################################

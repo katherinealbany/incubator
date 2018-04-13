@@ -18,6 +18,31 @@ spec:
       name: "{{ template "elasticsearchName" . }}"
   replicas: {{ .Values.replicas }}
   serviceName: "{{ template "elasticsearchName" . }}"
+  {{- if or .Values.volumeDataEnabled .Values.volumeLogsEnabled }}
+  volumeClaimTemplates:
+    {{- if .Values.volumeDataEnabled }}
+    - metadata:
+        name: "{{ .Values.volumeDataName }}"
+        annotations:
+          volume.alpha.kubernetes.io/storage-class: "{{ .Values.volumeDataClass }}"
+      spec:
+        resources:
+          requests:
+            storage: "{{ .Values.volumeDataSize }}"
+        accessModes: [ "{{ .Values.volumeDataMode }}" ]
+    {{- end }}
+    {{- if .Values.volumeLogsEnabled }}
+    - metadata:
+        name: "{{ .Values.volumeLogsName }}"
+        annotations:
+          volume.alpha.kubernetes.io/storage-class: "{{ .Values.volumeLogsClass }}"
+      spec:
+        resources:
+          requests:
+            storage: "{{ .Values.volumeLogsSize }}"
+        accessModes: [ "{{ .Values.volumeLogsMode }}" ]
+    {{- end }}
+  {{- end }}
   template:
     metadata:
       labels:
@@ -72,9 +97,17 @@ spec:
 {{ toYaml .Values.podTolerations | indent 8 }}
       {{- end }}
       volumes:
-        - name: config
+        - name: "{{ .Values.configName }}"
           configMap:
             name: "{{ template "elasticsearchName" . }}"
+        {{- if not .Values.volumeDataEnabled }}
+        - name: "{{ .Values.volumeDataName }}"
+          emptyDir: {}
+        {{- end }}
+        {{- if not .Values.volumeLogsEnabled }}
+        - name: "{{ .Values.volumeLogsName }}"
+          emptyDir: {}
+        {{- end }}
       {{- if .Values.podVolumes }}
 {{ toYaml .Values.podVolumes | indent 8 }}
       {{- end }}
@@ -94,9 +127,9 @@ spec:
               value: "-Djava.net.preferIPv4Stack=true"
             {{- end }}
           ports:
-            - name: http
+            - name: "{{ .Values.httpName }}"
               containerPort: {{ .Values.httpPort }}
-            - name: transport
+            - name: "{{ .Values.transportName }}"
               containerPort: {{ .Values.transportPort }}
           {{- if or .Values.cpuMinimum .Values.cpuMaximum .Values.memoryMinimum .Values.memoryMaximum }}
           resources:
@@ -120,15 +153,19 @@ spec:
             {{- end }}
           {{- end }}
           volumeMounts:
-            - name: config
-              subPath: elasticsearch.yml
-              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+            - name: "{{ .Values.configName }}"
+              subPath: "{{ .Values.configFile }}"
+              mountPath: "{{ template "elasticsearchConfigMount" . }}"
+            - name: "{{ .Values.volumeDataName }}"
+              mountPath: "{{ template "elasticsearchVolumeDataMount" . }}"
+            - name: "{{ .Values.volumeLogsName }}"
+              mountPath: "{{ template "elasticsearchVolumeLogsMount" . }}"
           {{- if .Values.podVolumeMounts }}
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}
           livenessProbe:
             tcpSocket:
-              port: transport
+              port: "{{ .Values.transportName }}"
             periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
@@ -136,7 +173,7 @@ spec:
             initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
           readinessProbe:
             tcpSocket:
-              port: transport
+              port: "{{ .Values.transportName }}"
             periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.readinessProbeSuccessThreshold }}

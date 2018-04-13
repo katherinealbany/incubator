@@ -1,5 +1,6 @@
 ###################################################################################################
 
+httpName: http
 httpPort: 9200
 
 ###################################################################################################
@@ -27,6 +28,7 @@ memoryMaximum:
 
 ###################################################################################################
 
+transportName: transport
 transportPort: 9300
 
 ###################################################################################################
@@ -54,8 +56,28 @@ podVolumeMounts:
 
 ###################################################################################################
 
+volumeMountBase: /usr/share/elasticsearch
+
+###################################################################################################
+
 podMinAvailable:
 podMaxUnavailable: 1
+
+###################################################################################################
+
+volumeDataName: data
+volumeDataSize: 1Gi
+volumeDataMode: ReadWriteOnce
+volumeDataClass: anything
+volumeDataEnabled: true
+
+###################################################################################################
+
+volumeLogsName: logs
+volumeLogsSize: 5Gi
+volumeLogsMode: ReadWriteOnce
+volumeLogsClass: anything
+volumeLogsEnabled: true
 
 ###################################################################################################
 
@@ -99,17 +121,19 @@ readinessProbeSuccessThreshold: 1
 readinessProbeFailureThreshold: 3
 
 ###################################################################################################
-###################################################################################################
-###################################################################################################
 
-# configPathData:                           path.data
-# configPathLogs:                           path.logs
+configFile: elasticsearch.yml
+configName: config
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay: true
 configNetworkTcpKeepAlive: true
 configTransportTcpCompress: false
 configTransportPingSchedule: 5s
 configTransportTcpConnectTimeout: 30s
+
+###################################################################################################
+###################################################################################################
+###################################################################################################
 
 # ES_JAVA_OPTS="${ES_JAVA_OPTS} -Xms4000m -Xmx4000m"
 
