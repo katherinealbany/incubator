@@ -83,6 +83,12 @@ spec:
           volumeMounts:
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}
+          readinessProbe:
+            TODO: TODO
+            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
           livenessProbe:
             TODO: TODO
             periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
@@ -90,11 +96,5 @@ spec:
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
             failureThreshold: {{ .Values.livenessProbeFailureThreshold }}
             initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
-          readinessProbe:
-            TODO: TODO
-            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
-            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
-            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
-            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
 
 ###################################################################################################

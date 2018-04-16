@@ -5,7 +5,7 @@ httpPort: 9200
 
 ###################################################################################################
 
-replicas: 3
+replicas: 1
 
 ###################################################################################################
 
@@ -81,15 +81,6 @@ volumeLogsEnabled: true
 
 ###################################################################################################
 
-apiVersionService: v1
-apiVersionConfigMap: v1
-apiVersionDeployment: apps/v1
-apiVersionStatefulSet: apps/v1
-apiVersionNetworkPolicy: networking.k8s.io/v1
-apiVersionPodDisruptionBudget: policy/v1beta1
-
-###################################################################################################
-
 allowPrivilegeEscalation: false
 
 ###################################################################################################
@@ -108,10 +99,41 @@ podAntiAffinityTopologyKey: kubernetes.io/hostname
 
 ###################################################################################################
 
+apiVersionService: v1
+apiVersionConfigMap: v1
+apiVersionDeployment: apps/v1
+apiVersionStatefulSet: apps/v1
+apiVersionNetworkPolicy: networking.k8s.io/v1
+apiVersionPodDisruptionBudget: policy/v1beta1
+
+###################################################################################################
+
+readinessProbePeriodSeconds: 5
+readinessProbeTimeoutSeconds: 1
+readinessProbeSuccessThreshold: 1
+readinessProbeFailureThreshold: 3
+
+###################################################################################################
+
 serviceType: LoadBalancer
 serviceAnnotations:
 serviceAwsInternalLoadBalancer: true
 serviceGcpInternalLoadBalancer: true
+
+###################################################################################################
+
+configFile: elasticsearch.yml
+configName: config
+configNodeData: false
+configNodeIngest: false
+configNodeMaster: true
+configProcessors: 1
+configNetworkHost: _local:ipv4_,_site:ipv4_
+configNetworkTcpNoDelay:
+configNetworkTcpKeepAlive:
+configTransportTcpCompress:
+configTransportPingSchedule:
+configTransportTcpConnectTimeout:
 
 ###################################################################################################
 
@@ -123,37 +145,14 @@ livenessProbeInitialDelaySeconds: 30
 
 ###################################################################################################
 
-readinessProbePeriodSeconds: 5
-readinessProbeTimeoutSeconds: 1
-readinessProbeSuccessThreshold: 1
-readinessProbeFailureThreshold: 3
+jvmFile: jvm.options
+jvmName: jvm
+jvmHeapSize: 1g
+jvmGcLogFile: gc.log
+jvmGcLogFiles: 32
+jvmFileEncoding: UTF-8
+jvmGcLogFileSize: 64m
+jvmThreadStackSize: 1m
+jmvCmsInitiatingOccupancyFraction: 75
 
-###################################################################################################
-
-configFile: elasticsearch.yml
-configName: config
-configNodeData: false
-configNodeIngest: false
-configNodeMaster: true
-configNetworkHost: _local:ipv4_,_site:ipv4_
-configNetworkTcpNoDelay:
-configNetworkTcpKeepAlive:
-configTransportTcpCompress:
-configTransportPingSchedule:
-configTransportTcpConnectTimeout:
-
-###################################################################################################
-###################################################################################################
-###################################################################################################
-
-# processors: 2
-# -Des.enforce.bootstrap.checks=true
-# ES_JAVA_OPTS="${ES_JAVA_OPTS} -Xms4000m -Xmx4000m" ### heapMemory: XZY
-
-# https://github.com/clockworksoul/helm-elasticsearch
-# https://github.com/pires/kubernetes-elasticsearch-cluster
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
-
-###################################################################################################
-###################################################################################################
 ###################################################################################################

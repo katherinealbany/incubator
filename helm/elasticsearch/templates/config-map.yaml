@@ -11,41 +11,72 @@ metadata:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
-  "{{ .Values.configFile }}": |
-    http.port: "{{ .Values.httpPort }}"
-    node.data: "{{ .Values.configNodeData }}"
-    path.data: "{{ template "elasticsearchVolumeDataMount" . }}"
-    path.logs: "{{ template "elasticsearchVolumeLogsMount" . }}"
-    node.ingest: "{{ .Values.configNodeIngest }}"
-    node.master: "{{ .Values.configNodeMaster }}"
-    cluster.name: "{{ template "elasticsearchName" . }}"
-    network.host: "{{ .Values.configNetworkHost }}"
-    transport.tcp.port: "{{ .Values.transportPort }}"
-    {{- if .Values.configNetworkTcpNoDelay }}
-    network.tcp.no_delay: "{{ .Values.configNetworkTcpNoDelay }}"
+  {{ .Values.jvmFile }}: |
+    -Xms{{ .Values.jvmHeapSize }}
+    -Xmx{{ .Values.jvmHeapSize }}
+    -Xss{{ .Values.jvmThreadStackSize }}
+    -Xloggc:{{ template "elasticsearchVolumeLogsMount" . }}/{{ .Values.jvmGcLogFile }}
+    -Djna.nosys=true
+    -Dfile.encoding={{ .Values.jvmFileEncoding }}
+    -Djava.io.tmpdir=${ES_TMPDIR}
+    -XX:GCLogFileSize={{ .Values.jvmGcLogFileSize }}
+    -XX:+AlwaysPreTouch
+    -Dio.netty.noUnsafe=true
+    -Djava.awt.headless=true
+    -XX:+PrintGCDetails
+    -Dlog4j2.disable.jmx=true
+    -XX:NumberOfGCLogFiles={{ .Values.jvmGcLogFiles }}
+    -XX:+PrintGCDateStamps
+    -XX:+UseConcMarkSweepGC
+    -XX:+UseGCLogFileRotation
+    {{- if (.Values.configNetworkHost | contains "ipv4") }}
+    -Djava.net.preferIPv4Stack=true
     {{- end }}
-    {{- if .Values.configNetworkTcpKeepAlive }}
-    network.tcp.keep_alive: "{{ .Values.configNetworkTcpKeepAlive }}"
-    {{- end }}
-    {{- if .Values.configTransportTcpCompress }}
-    transport.tcp.compress: "{{ .Values.configTransportTcpCompress }}"
-    {{- end }}
-    {{- if .Values.configTransportPingSchedule }}
-    transport.ping_schedule: "{{ .Values.configTransportPingSchedule }}"
-    {{- end }}
-    {{- if .Values.configTransportTcpConnectTimeout }}
-    transport.tcp.connect_timeout: "{{ .Values.configTransportTcpConnectTimeout }}"
-    {{- end }}
-    discovery.zen.ping.unicast.hosts: "{{ template "elasticsearchName" . }}"
-    discovery.zen.minimum_master_nodes: "{{ template "elasticsearchMinimumMasterNodes" . }}"
+    -Dlog4j.shutdownHookEnabled=false
+    -XX:-OmitStackTraceInFastThrow
+    -XX:+PrintTenuringDistribution
+    -Dio.netty.noKeySetOptimization=true
+    -XX:+PrintGCApplicationStoppedTime
+    -XX:+UseCMSInitiatingOccupancyOnly
+    -XX:CMSInitiatingOccupancyFraction={{ .Values.jmvCmsInitiatingOccupancyFraction }}
+    -Dio.netty.recycler.maxCapacityPerThread=0
 
-  "{{ .Values.log4jFile }}": |
+  {{ .Values.log4jFile }}: |
     status = {{ .Values.log4jStatus }}
+    rootLogger.level = {{ .Values.log4jRootLevel }}
     appender.console.name = console
     appender.console.type = Console
     appender.console.layout.type = PatternLayout
     appender.console.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
     rootLogger.appenderRef.console.ref = console
-    rootLogger.level = {{ .Values.log4jRootLevel }}
+
+  {{ .Values.configFile }}: |
+    http.port: {{ .Values.httpPort }}
+    node.data: {{ .Values.configNodeData }}
+    path.data: {{ template "elasticsearchVolumeDataMount" . }}
+    path.logs: {{ template "elasticsearchVolumeLogsMount" . }}
+    processors: {{ .Values.configProcessors }}
+    node.ingest: {{ .Values.configNodeIngest }}
+    node.master: {{ .Values.configNodeMaster }}
+    cluster.name: {{ template "elasticsearchName" . }}
+    network.host: {{ .Values.configNetworkHost }}
+    transport.tcp.port: {{ .Values.transportPort }}
+    {{- if .Values.configNetworkTcpNoDelay }}
+    network.tcp.no_delay: {{ .Values.configNetworkTcpNoDelay }}
+    {{- end }}
+    {{- if .Values.configNetworkTcpKeepAlive }}
+    network.tcp.keep_alive: {{ .Values.configNetworkTcpKeepAlive }}
+    {{- end }}
+    {{- if .Values.configTransportTcpCompress }}
+    transport.tcp.compress: {{ .Values.configTransportTcpCompress }}
+    {{- end }}
+    {{- if .Values.configTransportPingSchedule }}
+    transport.ping_schedule: {{ .Values.configTransportPingSchedule }}
+    {{- end }}
+    {{- if .Values.configTransportTcpConnectTimeout }}
+    transport.tcp.connect_timeout: {{ .Values.configTransportTcpConnectTimeout }}
+    {{- end }}
+    discovery.zen.ping.unicast.hosts: {{ template "elasticsearchName" . }}
+    discovery.zen.minimum_master_nodes: {{ template "elasticsearchMinimumMasterNodes" . }}
 
 ###################################################################################################

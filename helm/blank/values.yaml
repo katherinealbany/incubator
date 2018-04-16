@@ -53,6 +53,13 @@ allowPrivilegeEscalation: false
 
 ###################################################################################################
 
+readinessProbePeriodSeconds: 5
+readinessProbeTimeoutSeconds: 1
+readinessProbeSuccessThreshold: 1
+readinessProbeFailureThreshold: 3
+
+###################################################################################################
+
 serviceType: LoadBalancer
 serviceAnnotations:
 serviceAwsInternalLoadBalancer: true
@@ -65,12 +72,5 @@ livenessProbeTimeoutSeconds: 1
 livenessProbeSuccessThreshold: 1
 livenessProbeFailureThreshold: 3
 livenessProbeInitialDelaySeconds: TODO
-
-###################################################################################################
-
-readinessProbePeriodSeconds: 5
-readinessProbeTimeoutSeconds: 1
-readinessProbeSuccessThreshold: 1
-readinessProbeFailureThreshold: 3
 
 ###################################################################################################

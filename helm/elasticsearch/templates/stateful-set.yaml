@@ -122,10 +122,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            {{- if (.Values.configNetworkHost | contains "ipv4") }}
-            - name: ES_JAVA_OPTS
-              value: "-Djava.net.preferIPv4Stack=true"
-            {{- end }}
           ports:
             - name: "{{ .Values.httpName }}"
               containerPort: {{ .Values.httpPort }}
@@ -154,11 +150,14 @@ spec:
           {{- end }}
           volumeMounts:
             - name: "{{ template "elasticsearchName" . }}"
-              subPath: "{{ .Values.configFile }}"
-              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
+              subPath: "{{ .Values.jvmFile }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.jvmFile }}"
             - name: "{{ template "elasticsearchName" . }}"
               subPath: "{{ .Values.log4jFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.log4jFile }}"
+            - name: "{{ template "elasticsearchName" . }}"
+              subPath: "{{ .Values.configFile }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
             - name: "{{ .Values.volumeDataName }}"
               mountPath: "{{ template "elasticsearchVolumeDataMount" . }}"
             - name: "{{ .Values.volumeLogsName }}"
@@ -166,6 +165,13 @@ spec:
           {{- if .Values.podVolumeMounts }}
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}
+          readinessProbe:
+            tcpSocket:
+              port: "{{ .Values.transportName }}"
+            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
           livenessProbe:
             tcpSocket:
               port: "{{ .Values.transportName }}"
@@ -174,12 +180,5 @@ spec:
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
             failureThreshold: {{ .Values.livenessProbeFailureThreshold }}
             initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
-          readinessProbe:
-            tcpSocket:
-              port: "{{ .Values.transportName }}"
-            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
-            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
-            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
-            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
 
 ###################################################################################################
