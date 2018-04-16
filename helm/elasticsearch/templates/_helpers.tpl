@@ -37,8 +37,8 @@
 
 ###################################################################################################
 
-{{- define "elasticsearchConfigMount" -}}
-{{- default (printf "%s/%s/%s" .Values.volumeMountBase .Values.configName .Values.configFile) .Values.elasticsearchConfigMount -}}
+{{- define "elasticsearchConfigMountBase" -}}
+{{- default (printf "%s/%s" .Values.volumeMountBase .Values.configName) .Values.elasticsearchConfigMountBase -}}
 {{- end -}}
 
 ###################################################################################################

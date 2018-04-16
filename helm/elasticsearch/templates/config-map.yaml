@@ -21,13 +21,31 @@ data:
     cluster.name: "{{ template "elasticsearchName" . }}"
     network.host: "{{ .Values.configNetworkHost }}"
     transport.tcp.port: "{{ .Values.transportPort }}"
+    {{- if .Values.configNetworkTcpNoDelay }}
     network.tcp.no_delay: "{{ .Values.configNetworkTcpNoDelay }}"
-    bootstrap.memory_lock: false
+    {{- end }}
+    {{- if .Values.configNetworkTcpKeepAlive }}
     network.tcp.keep_alive: "{{ .Values.configNetworkTcpKeepAlive }}"
+    {{- end }}
+    {{- if .Values.configTransportTcpCompress }}
     transport.tcp.compress: "{{ .Values.configTransportTcpCompress }}"
+    {{- end }}
+    {{- if .Values.configTransportPingSchedule }}
     transport.ping_schedule: "{{ .Values.configTransportPingSchedule }}"
+    {{- end }}
+    {{- if .Values.configTransportTcpConnectTimeout }}
     transport.tcp.connect_timeout: "{{ .Values.configTransportTcpConnectTimeout }}"
+    {{- end }}
     discovery.zen.ping.unicast.hosts: "{{ template "elasticsearchName" . }}"
     discovery.zen.minimum_master_nodes: "{{ template "elasticsearchMinimumMasterNodes" . }}"
+
+  "{{ .Values.log4jFile }}": |
+    status = {{ .Values.log4jStatus }}
+    appender.console.name = console
+    appender.console.type = Console
+    appender.console.layout.type = PatternLayout
+    appender.console.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
+    rootLogger.appenderRef.console.ref = console
+    rootLogger.level = {{ .Values.log4jRootLevel }}
 
 ###################################################################################################

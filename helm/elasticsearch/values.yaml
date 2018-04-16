@@ -94,6 +94,14 @@ allowPrivilegeEscalation: false
 
 ###################################################################################################
 
+log4jFile: log4j2.properties
+log4jName: log4j
+log4jStatus: info
+log4jRootLevel: info
+log4jAppenderLayoutPattern: '[%d{ISO8601}][%-5p][%-25c{1.}] %marker%m%n'
+
+###################################################################################################
+
 podAntiAffinity: required
 podAntiAffinityWeight: 100
 podAntiAffinityTopologyKey: kubernetes.io/hostname
@@ -128,11 +136,11 @@ configNodeData: false
 configNodeIngest: false
 configNodeMaster: true
 configNetworkHost: _local:ipv4_,_site:ipv4_
-configNetworkTcpNoDelay: true
-configNetworkTcpKeepAlive: true
-configTransportTcpCompress: false
-configTransportPingSchedule: 5s
-configTransportTcpConnectTimeout: 30s
+configNetworkTcpNoDelay:
+configNetworkTcpKeepAlive:
+configTransportTcpCompress:
+configTransportPingSchedule:
+configTransportTcpConnectTimeout:
 
 ###################################################################################################
 ###################################################################################################
@@ -140,7 +148,7 @@ configTransportTcpConnectTimeout: 30s
 
 # processors: 2
 # -Des.enforce.bootstrap.checks=true
-# ES_JAVA_OPTS="${ES_JAVA_OPTS} -Xms4000m -Xmx4000m"
+# ES_JAVA_OPTS="${ES_JAVA_OPTS} -Xms4000m -Xmx4000m" ### heapMemory: XZY
 
 # https://github.com/clockworksoul/helm-elasticsearch
 # https://github.com/pires/kubernetes-elasticsearch-cluster

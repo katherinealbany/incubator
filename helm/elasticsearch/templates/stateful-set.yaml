@@ -97,7 +97,7 @@ spec:
 {{ toYaml .Values.podTolerations | indent 8 }}
       {{- end }}
       volumes:
-        - name: "{{ .Values.configName }}"
+        - name: "{{ template "elasticsearchName" . }}"
           configMap:
             name: "{{ template "elasticsearchName" . }}"
         {{- if not .Values.volumeDataEnabled }}
@@ -153,9 +153,12 @@ spec:
             {{- end }}
           {{- end }}
           volumeMounts:
-            - name: "{{ .Values.configName }}"
+            - name: "{{ template "elasticsearchName" . }}"
               subPath: "{{ .Values.configFile }}"
-              mountPath: "{{ template "elasticsearchConfigMount" . }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
+            - name: "{{ template "elasticsearchName" . }}"
+              subPath: "{{ .Values.log4jFile }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.log4jFile }}"
             - name: "{{ .Values.volumeDataName }}"
               mountPath: "{{ template "elasticsearchVolumeDataMount" . }}"
             - name: "{{ .Values.volumeLogsName }}"
