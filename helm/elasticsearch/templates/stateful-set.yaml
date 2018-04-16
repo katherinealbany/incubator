@@ -79,12 +79,12 @@ spec:
                       values: [ "{{ template "elasticsearchName" . }}" ]
                       operator: In
           {{- end }}
-      {{- if or (gt (default 0 (.Values.fsGroup | int)) 0) (gt (default 0 (.Values.runAsUser | int)) 0) }}
+      {{- if or (ge (default 0 (.Values.fsGroup | int)) 0) (ge (default 0 (.Values.runAsUser | int)) 0) }}
       securityContext:
-        {{- if gt (default 0 (.Values.fsGroup | int)) 0 }}
+        {{- if ge (default 0 (.Values.fsGroup | int)) 0 }}
         fsGroup: {{ .Values.fsGroup }}
         {{- end }}
-        {{- if gt (default 0 (.Values.runAsUser | int)) 0 }}
+        {{- if ge (default 0 (.Values.runAsUser | int)) 0 }}
         runAsUser: {{ .Values.runAsUser }}
         {{- end }}
       {{- end }}

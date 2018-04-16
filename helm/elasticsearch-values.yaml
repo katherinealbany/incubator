@@ -1,11 +1,11 @@
 ###################################################################################################
 
-#fsGroup: 0
+fsGroup: 0
 replicas: 1
-#runAsUser: 0
+runAsUser: 0
 #podAntiAffinity: preferred
-#volumeDataEnabled: true
-#volumeLogsEnabled: true
-#allowPrivilegeEscalation: true
+volumeDataEnabled: true
+volumeLogsEnabled: true
+allowPrivilegeEscalation: true
 
 ###################################################################################################
