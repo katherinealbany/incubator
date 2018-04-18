@@ -1,6 +1,6 @@
 ###################################################################################################
 
-#replicas: 1
+replicas: 1
 log4jRollingRandomAccessFileImmediateFlush: true
 
 # https://github.com/clockworksoul/helm-elasticsearch
