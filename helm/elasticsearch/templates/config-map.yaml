@@ -44,11 +44,27 @@ data:
   {{ .Values.log4jFile }}: |
     status = {{ .Values.log4jStatus }}
     rootLogger.level = {{ .Values.log4jRootLevel }}
-    appender.console.name = console
-    appender.console.type = Console
-    appender.console.layout.type = PatternLayout
-    appender.console.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
-    rootLogger.appenderRef.console.ref = console
+    appender.CONSOLE.name = CONSOLE
+    appender.CONSOLE.type = Console
+    appender.CONSOLE.layout.type = PatternLayout
+    appender.CONSOLE.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
+    rootLogger.appenderRef.CONSOLE.ref = CONSOLE
+    appender.ROLLINGRANDOMACCESSFILE.name = ROLLINGRANDOMACCESSFILE
+    appender.ROLLINGRANDOMACCESSFILE.type = RollingRandomAccessFile
+    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchVolumeLogsMount" . }}/{{ .Values.log4jRollingRandomAccessFileName }}
+    appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.fsGroup }}
+    appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.runAsUser }}
+    appender.ROLLINGRANDOMACCESSFILE.bufferSize = {{ .Values.log4jRollingRandomAccessFileBufferSize }}
+    appender.ROLLINGRANDOMACCESSFILE.filePattern = {{ .Values.log4jRollingRandomAccessFilePattern }}
+    appender.ROLLINGRANDOMACCESSFILE.layout.type = PatternLayout
+    appender.ROLLINGRANDOMACCESSFILE.policy.size = {{ .Values.log4jRollingRandomAccessFileSize }}
+    appender.ROLLINGRANDOMACCESSFILE.policy.type = SizeBasedTriggeringPolicy
+    appender.ROLLINGRANDOMACCESSFILE.strategy.max = {{ .Values.log4jRollingRandomAccessFiles }}
+    appender.ROLLINGRANDOMACCESSFILE.strategy.type = DefaultRolloverStrategy
+    appender.ROLLINGRANDOMACCESSFILE.immediateFlush = {{ .Values.log4jRollingRandomAccessFileImmediateFlush }}
+    appender.ROLLINGRANDOMACCESSFILE.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
+    appender.ROLLINGRANDOMACCESSFILE.filePermissions = {{ .Values.log4jRollingRandomAccessFilePermissions }}
+    rootLogger.appenderRef.ROLLINGRANDOMACCESSFILE.ref = ROLLINGRANDOMACCESSFILE
 
   {{ .Values.configFile }}: |
     http.port: {{ .Values.httpPort }}

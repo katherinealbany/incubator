@@ -5,7 +5,7 @@ httpPort: 9200
 
 ###################################################################################################
 
-replicas: 1
+replicas: 3
 
 ###################################################################################################
 
@@ -66,7 +66,7 @@ podMaxUnavailable: 1
 ###################################################################################################
 
 volumeDataName: data
-volumeDataSize: 1Gi
+volumeDataSize: 10Gi
 volumeDataMode: ReadWriteOnce
 volumeDataClass: anything
 volumeDataEnabled: true
@@ -82,14 +82,6 @@ volumeLogsEnabled: true
 ###################################################################################################
 
 allowPrivilegeEscalation: false
-
-###################################################################################################
-
-log4jFile: log4j2.properties
-log4jName: log4j
-log4jStatus: info
-log4jRootLevel: info
-log4jAppenderLayoutPattern: '[%d{ISO8601}][%-5p][%-25c{1.}] %marker%m%n'
 
 ###################################################################################################
 
@@ -141,7 +133,7 @@ livenessProbePeriodSeconds: 5
 livenessProbeTimeoutSeconds: 1
 livenessProbeSuccessThreshold: 1
 livenessProbeFailureThreshold: 3
-livenessProbeInitialDelaySeconds: 30
+livenessProbeInitialDelaySeconds: 10
 
 ###################################################################################################
 
@@ -149,10 +141,25 @@ jvmFile: jvm.options
 jvmName: jvm
 jvmHeapSize: 1g
 jvmGcLogFile: gc.log
-jvmGcLogFiles: 32
+jvmGcLogFiles: 10
 jvmFileEncoding: UTF-8
-jvmGcLogFileSize: 64m
+jvmGcLogFileSize: 128m
 jvmThreadStackSize: 1m
 jmvCmsInitiatingOccupancyFraction: 75
+
+###################################################################################################
+
+log4jFile: log4j2.properties
+log4jName: log4j
+log4jStatus: info
+log4jRootLevel: info
+log4jAppenderLayoutPattern: '[%d{ISO8601}][%-5p][%-25c{1.}] %marker%m%n'
+log4jRollingRandomAccessFiles: 10
+log4jRollingRandomAccessFileName: es.log
+log4jRollingRandomAccessFileSize: 256MB
+log4jRollingRandomAccessFilePattern: es.log.%i.gz
+log4jRollingRandomAccessFileBufferSize: 262144
+log4jRollingRandomAccessFilePermissions: rw-rw-r--
+log4jRollingRandomAccessFileImmediateFlush: false
 
 ###################################################################################################
