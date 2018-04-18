@@ -130,24 +130,24 @@ spec:
               containerPort: {{ .Values.httpPort }}
             - name: "{{ .Values.transportName }}"
               containerPort: {{ .Values.transportPort }}
-          {{- if or .Values.cpuMinimum .Values.cpuMaximum .Values.memoryMinimum .Values.memoryMaximum }}
+          {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
           resources:
-            {{- if or .Values.cpuMinimum .Values.memoryMinimum }}
+            {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
             requests:
-              {{- if .Values.cpuMinimum }}
-              cpu: "{{ .Values.cpuMinimum }}"
+              {{- if or .Values.cpu .Values.cpuMinimum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMinimum }}{{ end }}"
               {{- end }}
-              {{- if .Values.memoryMinimum }}
-              memory: "{{ .Values.memoryMinimum }}"
+              {{- if or .Values.memory .Values.memoryMinimum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMinimum }}{{ end }}"
               {{- end }}
             {{- end }}
-            {{- if or .Values.cpuMaximum .Values.memoryMaximum }}
+            {{- if or .Values.cpu .Values.cpuMaximum .Values.memory .Values.memoryMaximum }}
             limits:
-              {{- if .Values.cpuMaximum }}
-              cpu: "{{ .Values.cpuMaximum }}"
+              {{- if or .Values.cpu .Values.cpuMaximum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMaximum }}{{ end }}"
               {{- end }}
-              {{- if .Values.memoryMaximum }}
-              memory: "{{ .Values.memoryMaximum }}"
+              {{- if or .Values.memory .Values.memoryMaximum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMaximum }}{{ end }}"
               {{- end }}
             {{- end }}
           {{- end }}

@@ -18,11 +18,13 @@ podLabels:
 
 ###################################################################################################
 
+cpu:
 cpuMinimum:
 cpuMaximum:
 
 ###################################################################################################
 
+memory:
 memoryMinimum:
 memoryMaximum:
 
@@ -66,7 +68,7 @@ podMaxUnavailable: 1
 ###################################################################################################
 
 volumeDataName: data
-volumeDataSize: 10Gi
+volumeDataSize: 1Gi
 volumeDataMode: ReadWriteOnce
 volumeDataClass: anything
 volumeDataEnabled: true
@@ -107,19 +109,12 @@ readinessProbeFailureThreshold: 3
 
 ###################################################################################################
 
-serviceType: LoadBalancer
-serviceAnnotations:
-serviceAwsInternalLoadBalancer: true
-serviceGcpInternalLoadBalancer: true
-
-###################################################################################################
-
 configFile: elasticsearch.yml
 configName: config
 configNodeData: false
 configNodeIngest: false
 configNodeMaster: true
-configProcessors: 1
+configProcessors:
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay:
 configNetworkTcpKeepAlive:
@@ -139,7 +134,7 @@ livenessProbeInitialDelaySeconds: 10
 
 jvmFile: jvm.options
 jvmName: jvm
-jvmHeapSize: 1g
+jvmHeapSize:
 jvmGcLogFile: gc.log
 jvmGcLogFiles: 10
 jvmFileEncoding: UTF-8
@@ -158,8 +153,8 @@ log4jRollingRandomAccessFiles: 10
 log4jRollingRandomAccessFileName: es.log
 log4jRollingRandomAccessFileSize: 256MB
 log4jRollingRandomAccessFilePattern: es.log.%i.gz
-log4jRollingRandomAccessFileBufferSize: 262144
-log4jRollingRandomAccessFilePermissions: rw-rw-r--
-log4jRollingRandomAccessFileImmediateFlush: false
+log4jRollingRandomAccessFileBufferSize:
+log4jRollingRandomAccessFilePermissions:
+log4jRollingRandomAccessFileImmediateFlush:
 
 ###################################################################################################
