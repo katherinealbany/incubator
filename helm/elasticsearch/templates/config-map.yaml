@@ -12,8 +12,8 @@ metadata:
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
   {{ .Values.jvmFile }}: |
-    -Xms{{ .Values.jvmHeapSize }}
-    -Xmx{{ .Values.jvmHeapSize }}
+    -Xms{{ required ".Values.jvmHeapSize" .Values.jvmHeapSize }}
+    -Xmx{{ required ".Values.jvmHeapSize" .Values.jvmHeapSize }}
     -Xss{{ .Values.jvmThreadStackSize }}
     -Xloggc:{{ template "elasticsearchVolumeLogsMount" . }}/{{ .Values.jvmGcLogFile }}
     -Djna.nosys=true

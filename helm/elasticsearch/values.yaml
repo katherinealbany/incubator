@@ -19,8 +19,8 @@ podLabels:
 ###################################################################################################
 
 cpu:
-cpuMinimum:
-cpuMaximum:
+cpuMinimum: 100m
+cpuMaximum: 1
 
 ###################################################################################################
 
@@ -114,7 +114,7 @@ configName: config
 configNodeData: false
 configNodeIngest: false
 configNodeMaster: true
-configProcessors:
+configProcessors: 1
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay:
 configNetworkTcpKeepAlive:
