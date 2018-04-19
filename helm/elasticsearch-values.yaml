@@ -6,7 +6,7 @@ memoryMinimum: 1024Mi
 memoryMaximum: 1024Mi
 
 dataReplicas: 2
-ingestReplicas: 1
+ingestReplicas: 0
 masterReplicas: 3
 
 ###################################################################################################
