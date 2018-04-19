@@ -1,7 +1,7 @@
 ###################################################################################################
 
-kind: PodDisruptionBudget
-apiVersion: "{{ .Values.apiVersionPodDisruptionBudget }}"
+kind: NetworkPolicy
+apiVersion: "{{ .Values.apiVersionNetworkPolicy }}"
 metadata:
   name: "{{ template "elasticsearchClusterName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
@@ -11,11 +11,19 @@ metadata:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 spec:
-  selector:
+  podSelector:
     matchLabels:
       chart: "{{ template "elasticsearchChart" . }}"
       release: "{{ template "elasticsearchRelease" . }}"
       heritage: "{{ template "elasticsearchHeritage" . }}"
-  maxUnavailable: {{ .Values.clusterPodMaxUnavailable }}
+  ingress:
+    - ports:
+        - port: {{ .Values.clusterPort }}
+      from:
+        - podSelector:
+            matchLabels:
+              chart: "{{ template "elasticsearchChart" . }}"
+              release: "{{ template "elasticsearchRelease" . }}"
+              heritage: "{{ template "elasticsearchHeritage" . }}"
 
 ###################################################################################################

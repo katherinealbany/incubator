@@ -86,26 +86,10 @@ volumeLogsEnabled: true
 
 ###################################################################################################
 
-dataPodMinAvailable:
-dataPodMaxUnavailable: 1
-
-###################################################################################################
-
-ingestPodMinAvailable:
-ingestPodMaxUnavailable: 1
-
-###################################################################################################
-
-masterPodMinAvailable:
-masterPodMaxUnavailable: 1
-
-###################################################################################################
-
 allowPrivilegeEscalation: false
 
 ###################################################################################################
 
-clusterPodMinAvailable:
 clusterPodMaxUnavailable: 1
 
 ###################################################################################################
@@ -150,7 +134,7 @@ livenessProbePeriodSeconds: 5
 livenessProbeTimeoutSeconds: 1
 livenessProbeSuccessThreshold: 1
 livenessProbeFailureThreshold: 3
-livenessProbeInitialDelaySeconds: 10
+livenessProbeInitialDelaySeconds: 240
 
 ###################################################################################################
 

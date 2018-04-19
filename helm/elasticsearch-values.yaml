@@ -1,6 +1,6 @@
 ###################################################################################################
 
-replicas: 5
+replicas: 3
 
 jvmHeapSize: 768m
 
@@ -8,11 +8,5 @@ memoryMinimum: 1024Mi
 memoryMaximum: 1024Mi
 
 podAntiAffinity: preferred
-
-###################################################################################################
-
-# https://github.com/clockworksoul/helm-elasticsearch
-# https://github.com/pires/kubernetes-elasticsearch-cluster
-# https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
 
 ###################################################################################################

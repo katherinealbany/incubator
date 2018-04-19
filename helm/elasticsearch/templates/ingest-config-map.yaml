@@ -3,10 +3,10 @@
 kind: ConfigMap
 apiVersion: "{{ .Values.apiVersionConfigMap }}"
 metadata:
-  name: "{{ template "elasticsearchName" . }}"
+  name: "{{ template "elasticsearchIngestName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchName" . }}"
+    name: "{{ template "elasticsearchIngestName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
@@ -98,7 +98,7 @@ data:
     {{- if .Values.configTransportTcpConnectTimeout }}
     transport.tcp.connect_timeout: {{ .Values.configTransportTcpConnectTimeout }}
     {{- end }}
-    discovery.zen.ping.unicast.hosts: {{ template "elasticsearchName" . }}
+    discovery.zen.ping.unicast.hosts: {{ template "elasticsearchClusterName" . }}
     discovery.zen.minimum_master_nodes: {{ template "elasticsearchMinimumMasterNodes" . }}
 
 ###################################################################################################
