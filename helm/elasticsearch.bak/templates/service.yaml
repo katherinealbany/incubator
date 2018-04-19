@@ -1,0 +1,22 @@
+###################################################################################################
+
+kind: Service
+apiVersion: "{{ .Values.apiVersionService }}"
+metadata:
+  name: "{{ template "elasticsearchName" . }}"
+  namespace: "{{ template "elasticsearchNamespace" . }}"
+  labels:
+    name: "{{ template "elasticsearchName" . }}"
+    chart: "{{ template "elasticsearchChart" . }}"
+    release: "{{ template "elasticsearchRelease" . }}"
+    heritage: "{{ template "elasticsearchHeritage" . }}"
+spec:
+  ClusterIP: None
+  selector:
+    name: "{{ template "elasticsearchName" . }}"
+  ports:
+    - name: "{{ .Values.transportName }}"
+      port: {{ .Values.transportPort }}
+      targetPort: "{{ .Values.transportName }}"
+
+###################################################################################################

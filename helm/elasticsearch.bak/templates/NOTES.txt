@@ -1,0 +1,14 @@
+###################################################################################################
+
+Uninstall
+---------
+
+helm delete --purge {{ template "elasticsearchRelease" . }}
+
+Purge
+-----
+
+kubectl delete pvc/{{ .Values.volumeDataName }}-{{ template "elasticsearchName" . }}-<<ORDINAL>>
+kubectl delete pvc/{{ .Values.volumeLogsName }}-{{ template "elasticsearchName" . }}-<<ORDINAL>>
+
+###################################################################################################
