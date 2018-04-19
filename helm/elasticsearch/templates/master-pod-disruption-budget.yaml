@@ -1,0 +1,23 @@
+###################################################################################################
+
+kind: PodDisruptionBudget
+apiVersion: "{{ .Values.apiVersionPodDisruptionBudget }}"
+metadata:
+  name: "{{ template "elasticsearchName" . }}"
+  namespace: "{{ template "elasticsearchNamespace" . }}"
+  labels:
+    name: "{{ template "elasticsearchName" . }}"
+    chart: "{{ template "elasticsearchChart" . }}"
+    release: "{{ template "elasticsearchRelease" . }}"
+    heritage: "{{ template "elasticsearchHeritage" . }}"
+spec:
+  selector:
+    matchLabels:
+      name: "{{ template "elasticsearchName" . }}"
+  {{- if .Values.podMinAvailable }}
+  minAvailable: {{ .Values.podMinAvailable }}
+  {{- else }}
+  maxUnavailable: {{ .Values.podMaxUnavailable }}
+  {{- end }}
+
+###################################################################################################
