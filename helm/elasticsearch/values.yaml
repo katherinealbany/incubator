@@ -1,5 +1,19 @@
 ###################################################################################################
 
+dataConfigNodeData: true
+dataConfigNodeIngest: false
+dataConfigNodeMaster: false
+
+ingestConfigNodeData: false
+ingestConfigNodeIngest: true
+ingestConfigNodeMaster: false
+
+masterConfigNodeData: false
+masterConfigNodeIngest: false
+masterConfigNodeMaster: true
+
+###################################################################################################
+
 httpPort: 9200
 
 ###################################################################################################
@@ -117,9 +131,6 @@ readinessProbeFailureThreshold: 3
 ###################################################################################################
 
 configFile: elasticsearch.yml
-configNodeData: false
-configNodeIngest: false
-configNodeMaster: true
 configProcessors: 1
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay:

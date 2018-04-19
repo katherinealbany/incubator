@@ -74,12 +74,12 @@ data:
 
   {{ .Values.configFile }}: |
     http.port: {{ .Values.httpPort }}
-    node.data: {{ .Values.configNodeData }}
+    node.data: {{ .Values.ingestConfigNodeData }}
     path.data: {{ template "elasticsearchVolumeDataMount" . }}
     path.logs: {{ template "elasticsearchVolumeLogsMount" . }}
     processors: {{ .Values.configProcessors }}
-    node.ingest: {{ .Values.configNodeIngest }}
-    node.master: {{ .Values.configNodeMaster }}
+    node.ingest: {{ .Values.ingestConfigNodeIngest }}
+    node.master: {{ .Values.ingestConfigNodeMaster }}
     cluster.name: {{ template "elasticsearchName" . }}
     network.host: {{ .Values.configNetworkHost }}
     transport.tcp.port: {{ .Values.clusterPort }}

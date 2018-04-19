@@ -10,9 +10,9 @@ metadata:
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
-    node.data: "{{ .Values.configNodeData }}"
-    node.ingest: "{{ .Values.configNodeIngest }}"
-    node.master: "{{ .Values.configNodeMaster }}"
+    node.data: "{{ .Values.masterConfigNodeData }}"
+    node.ingest: "{{ .Values.masterConfigNodeIngest }}"
+    node.master: "{{ .Values.masterConfigNodeMaster }}"
   annotations:
     config.sha256sum: "{{ include (print .Template.BasePath "/master-config-map.yaml") . | sha256sum }}"
 spec:

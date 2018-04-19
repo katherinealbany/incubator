@@ -1,0 +1,21 @@
+###################################################################################################
+
+kind: NetworkPolicy
+apiVersion: "{{ .Values.apiVersionNetworkPolicy }}"
+metadata:
+  name: "{{ template "elasticsearchIngestName" . }}"
+  namespace: "{{ template "elasticsearchNamespace" . }}"
+  labels:
+    name: "{{ template "elasticsearchIngestName" . }}"
+    chart: "{{ template "elasticsearchChart" . }}"
+    release: "{{ template "elasticsearchRelease" . }}"
+    heritage: "{{ template "elasticsearchHeritage" . }}"
+spec:
+  podSelector:
+    matchLabels:
+      name: "{{ template "elasticsearchIngestName" . }}"
+  ingress:
+    - ports:
+        - port: {{ .Values.httpPort }}
+
+###################################################################################################
