@@ -3,17 +3,19 @@
 kind: Service
 apiVersion: "{{ .Values.apiVersionService }}"
 metadata:
-  name: "{{ template "elasticsearchName" . }}"
+  name: "{{ template "elasticsearchTransportServiceName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchName" . }}"
+    name: "{{ template "elasticsearchTransportServiceName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 spec:
   ClusterIP: None
   selector:
-    name: "{{ template "elasticsearchName" . }}"
+    chart: "{{ template "elasticsearchChart" . }}"
+    release: "{{ template "elasticsearchRelease" . }}"
+    heritage: "{{ template "elasticsearchHeritage" . }}"
   ports:
     - name: "{{ .Values.transportName }}"
       port: {{ .Values.transportPort }}

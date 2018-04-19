@@ -1,7 +1,7 @@
 ###################################################################################################
 
 {{- define "elasticsearchName" -}}
-{{- $holding := default (printf "%s-%s" .Release.Name .Chart.Name) .Values.elasticsearchName -}}
+{{- $holding := default (printf "%s-%s" (include "elasticsearchRelease" .) .Chart.Name) .Values.elasticsearchName -}}
 {{- $holding | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -57,6 +57,13 @@
 
 {{- define "elasticsearchMinimumMasterNodes" -}}
 {{- default (int (add (div .Values.replicas 2) 1)) .Values.elasticsearchMinimumMasterNodes -}}
+{{- end -}}
+
+###################################################################################################
+
+{{- define "elasticsearchTransportServiceName" -}}
+{{- $holding := default (printf "%s-%s" (include "elasticsearchName" .) .Values.transportName) .Values.elasticsearchTransportServiceName -}}
+{{- $holding | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 ###################################################################################################

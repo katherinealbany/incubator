@@ -14,7 +14,7 @@ metadata:
     node.ingest: "{{ .Values.configNodeIngest }}"
     node.master: "{{ .Values.configNodeMaster }}"
   annotations:
-    config.sha256sum: "{{ include (print .Template.BasePath "/config-map.yaml") . | sha256sum }}"
+    config.sha256sum: "{{ include (print .Template.BasePath "/data-config-map.yaml") . | sha256sum }}"
 spec:
   selector:
     matchLabels:
