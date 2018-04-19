@@ -84,7 +84,7 @@
 ###################################################################################################
 
 {{- define "elasticsearchMinimumMasterNodes" -}}
-{{- default (int (add (div .Values.replicas 2) 1)) .Values.elasticsearchMinimumMasterNodes -}}
+{{- default (int (add (div .Values.masterReplicas 2) 1)) .Values.elasticsearchMinimumMasterNodes -}}
 {{- end -}}
 
 ###################################################################################################

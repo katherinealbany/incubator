@@ -1,12 +1,12 @@
 ###################################################################################################
 
-replicas: 3
-
 jvmHeapSize: 768m
 
 memoryMinimum: 1024Mi
 memoryMaximum: 1024Mi
 
-podAntiAffinity: preferred
+dataReplicas: 2
+ingestReplicas: 1
+masterReplicas: 3
 
 ###################################################################################################

@@ -19,7 +19,7 @@ spec:
   selector:
     matchLabels:
       name: "{{ template "elasticsearchMasterName" . }}"
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.masterReplicas }}
   serviceName: "{{ template "elasticsearchClusterName" . }}"
   {{- if or .Values.volumeDataEnabled .Values.volumeLogsEnabled }}
   volumeClaimTemplates:
@@ -53,6 +53,9 @@ spec:
         chart: "{{ template "elasticsearchChart" . }}"
         release: "{{ template "elasticsearchRelease" . }}"
         heritage: "{{ template "elasticsearchHeritage" . }}"
+        node.data: "{{ .Values.masterConfigNodeData }}"
+        node.ingest: "{{ .Values.masterConfigNodeIngest }}"
+        node.master: "{{ .Values.masterConfigNodeMaster }}"
         {{- if .Values.podLabels }}
 {{ toYaml .Values.podLabels | indent 8 }}
         {{- end }}

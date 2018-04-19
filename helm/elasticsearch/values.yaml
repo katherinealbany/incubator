@@ -1,17 +1,34 @@
 ###################################################################################################
 
+dataReplicas: 2
+
 dataConfigNodeData: true
 dataConfigNodeIngest: false
 dataConfigNodeMaster: false
+
+###################################################################################################
+
+ingestReplicas: 1
 
 ingestConfigNodeData: false
 ingestConfigNodeIngest: true
 ingestConfigNodeMaster: false
 
+ingestServiceType: LoadBalancer
+ingestServiceAnnotations:
+ingestServiceAwsInternalLoadBalancer: true
+ingestServiceGcpInternalLoadBalancer: true
+
+###################################################################################################
+
+masterReplicas: 3
+
 masterConfigNodeData: false
 masterConfigNodeIngest: false
 masterConfigNodeMaster: true
 
+###################################################################################################
+###################################################################################################
 ###################################################################################################
 
 httpPort: 9200
@@ -100,6 +117,12 @@ volumeLogsEnabled: true
 
 ###################################################################################################
 
+readinessProbeLocal: true
+readinessProbeStatus: yellow
+readinessProbeHttpPath: _cluster/health?local={{ .Values.readinessProbeLocal }}&wait_for_status={{ .Values.readinessProbeStatus }}&timeout={{ .Values.readinessProbeTimeoutSeconds }}s
+
+###################################################################################################
+
 allowPrivilegeEscalation: false
 
 ###################################################################################################
@@ -124,7 +147,7 @@ apiVersionPodDisruptionBudget: policy/v1beta1
 ###################################################################################################
 
 readinessProbePeriodSeconds: 5
-readinessProbeTimeoutSeconds: 1
+readinessProbeTimeoutSeconds: 3
 readinessProbeSuccessThreshold: 1
 readinessProbeFailureThreshold: 3
 
@@ -142,7 +165,7 @@ configTransportTcpConnectTimeout:
 ###################################################################################################
 
 livenessProbePeriodSeconds: 5
-livenessProbeTimeoutSeconds: 1
+livenessProbeTimeoutSeconds: 3
 livenessProbeSuccessThreshold: 1
 livenessProbeFailureThreshold: 3
 livenessProbeInitialDelaySeconds: 240
