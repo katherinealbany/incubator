@@ -25,7 +25,7 @@ spec:
   volumeClaimTemplates:
     {{- if .Values.volumeDataEnabled }}
     - metadata:
-        name: "{{ .Values.volumeDataName }}"
+        name: "{{ .Values.dataWord }}"
         annotations:
           volume.alpha.kubernetes.io/storage-class: "{{ .Values.volumeDataClass }}"
       spec:
@@ -36,7 +36,7 @@ spec:
     {{- end }}
     {{- if .Values.volumeLogsEnabled }}
     - metadata:
-        name: "{{ .Values.volumeLogsName }}"
+        name: "{{ .Values.logsWord }}"
         annotations:
           volume.alpha.kubernetes.io/storage-class: "{{ .Values.volumeLogsClass }}"
       spec:
@@ -104,11 +104,11 @@ spec:
           configMap:
             name: "{{ template "elasticsearchName" . }}"
         {{- if not .Values.volumeDataEnabled }}
-        - name: "{{ .Values.volumeDataName }}"
+        - name: "{{ .Values.dataWord }}"
           emptyDir: {}
         {{- end }}
         {{- if not .Values.volumeLogsEnabled }}
-        - name: "{{ .Values.volumeLogsName }}"
+        - name: "{{ .Values.logsWord }}"
           emptyDir: {}
         {{- end }}
       {{- if .Values.podVolumes }}
@@ -126,10 +126,10 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
           ports:
-            - name: "{{ .Values.httpName }}"
+            - name: "{{ .Values.httpWord }}"
               containerPort: {{ .Values.httpPort }}
-            - name: "{{ .Values.transportName }}"
-              containerPort: {{ .Values.transportPort }}
+            - name: "{{ .Values.clusterWord }}"
+              containerPort: {{ .Values.clusterPort }}
           {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
           resources:
             {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
@@ -161,23 +161,23 @@ spec:
             - name: "{{ template "elasticsearchName" . }}"
               subPath: "{{ .Values.configFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
-            - name: "{{ .Values.volumeDataName }}"
+            - name: "{{ .Values.dataWord }}"
               mountPath: "{{ template "elasticsearchVolumeDataMount" . }}"
-            - name: "{{ .Values.volumeLogsName }}"
+            - name: "{{ .Values.logsWord }}"
               mountPath: "{{ template "elasticsearchVolumeLogsMount" . }}"
           {{- if .Values.podVolumeMounts }}
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}
           readinessProbe:
             tcpSocket:
-              port: "{{ .Values.transportName }}"
+              port: "{{ .Values.clusterWord }}"
             periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
             failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
           livenessProbe:
             tcpSocket:
-              port: "{{ .Values.transportName }}"
+              port: "{{ .Values.clusterWord }}"
             periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}

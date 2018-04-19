@@ -3,10 +3,10 @@
 kind: NetworkPolicy
 apiVersion: "{{ .Values.apiVersionNetworkPolicy }}"
 metadata:
-  name: "{{ template "elasticsearchTransportName" . }}"
+  name: "{{ template "elasticsearchClusterName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchTransportName" . }}"
+    name: "{{ template "elasticsearchClusterName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
@@ -18,7 +18,7 @@ spec:
       heritage: "{{ template "elasticsearchHeritage" . }}"
   ingress:
     - ports:
-        - port: {{ .Values.transportPort }}
+        - port: {{ .Values.clusterPort }}
       from:
         - podSelector:
             matchLabels:

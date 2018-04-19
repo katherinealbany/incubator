@@ -1,14 +1,5 @@
 ###################################################################################################
 
-dataName: data
-ingestName: ingest
-masterName: master
-
-###################################################################################################
-###################################################################################################
-###################################################################################################
-
-httpName: http
 httpPort: 9200
 
 ###################################################################################################
@@ -32,14 +23,25 @@ cpuMaximum: 1
 
 ###################################################################################################
 
-memory:
-memoryMinimum:
-memoryMaximum:
+clusterPort: 9300
 
 ###################################################################################################
 
-transportName: transport
-transportPort: 9300
+jvmWord: jvm
+dataWord: data
+httpWord: http
+logsWord: logs
+log4jWord: log4j
+configWord: config
+ingestWord: ingest
+masterWord: master
+clusterWord: cluster
+
+###################################################################################################
+
+memory:
+memoryMinimum:
+memoryMaximum:
 
 ###################################################################################################
 
@@ -70,12 +72,6 @@ volumeMountBase: /usr/share/elasticsearch
 
 ###################################################################################################
 
-podMinAvailable:
-podMaxUnavailable: 1
-
-###################################################################################################
-
-volumeDataName: data
 volumeDataSize: 1Gi
 volumeDataMode: ReadWriteOnce
 volumeDataClass: anything
@@ -83,7 +79,6 @@ volumeDataEnabled: true
 
 ###################################################################################################
 
-volumeLogsName: logs
 volumeLogsSize: 5Gi
 volumeLogsMode: ReadWriteOnce
 volumeLogsClass: anything
@@ -91,7 +86,27 @@ volumeLogsEnabled: true
 
 ###################################################################################################
 
+dataPodMinAvailable:
+dataPodMaxUnavailable: 1
+
+###################################################################################################
+
+ingestPodMinAvailable:
+ingestPodMaxUnavailable: 1
+
+###################################################################################################
+
+masterPodMinAvailable:
+masterPodMaxUnavailable: 1
+
+###################################################################################################
+
 allowPrivilegeEscalation: false
+
+###################################################################################################
+
+clusterPodMinAvailable:
+clusterPodMaxUnavailable: 1
 
 ###################################################################################################
 
@@ -118,7 +133,6 @@ readinessProbeFailureThreshold: 3
 ###################################################################################################
 
 configFile: elasticsearch.yml
-configName: config
 configNodeData: false
 configNodeIngest: false
 configNodeMaster: true
@@ -141,7 +155,6 @@ livenessProbeInitialDelaySeconds: 10
 ###################################################################################################
 
 jvmFile: jvm.options
-jvmName: jvm
 jvmHeapSize:
 jvmGcLogFile: gc.log
 jvmGcLogFiles: 10
@@ -153,7 +166,6 @@ jmvCmsInitiatingOccupancyFraction: 75
 ###################################################################################################
 
 log4jFile: log4j2.properties
-log4jName: log4j
 log4jStatus: info
 log4jRootLevel: info
 log4jAppenderLayoutPattern: '[%d{ISO8601}][%-5p][%-25c{1.}] %marker%m%n'

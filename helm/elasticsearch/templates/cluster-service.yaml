@@ -3,10 +3,10 @@
 kind: Service
 apiVersion: "{{ .Values.apiVersionService }}"
 metadata:
-  name: "{{ template "elasticsearchTransportName" . }}"
+  name: "{{ template "elasticsearchClusterName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchTransportName" . }}"
+    name: "{{ template "elasticsearchClusterName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
@@ -17,8 +17,8 @@ spec:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
   ports:
-    - name: "{{ .Values.transportName }}"
-      port: {{ .Values.transportPort }}
-      targetPort: "{{ .Values.transportName }}"
+    - name: "{{ .Values.clusterWord }}"
+      port: {{ .Values.clusterPort }}
+      targetPort: "{{ .Values.clusterWord }}"
 
 ###################################################################################################

@@ -3,21 +3,21 @@
 kind: PodDisruptionBudget
 apiVersion: "{{ .Values.apiVersionPodDisruptionBudget }}"
 metadata:
-  name: "{{ template "elasticsearchName" . }}"
+  name: "{{ template "elasticsearchMasterName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchName" . }}"
+    name: "{{ template "elasticsearchMasterName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 spec:
   selector:
     matchLabels:
-      name: "{{ template "elasticsearchName" . }}"
-  {{- if .Values.podMinAvailable }}
-  minAvailable: {{ .Values.podMinAvailable }}
+      name: "{{ template "elasticsearchMasterName" . }}"
+  {{- if .Values.masterPodMinAvailable }}
+  minAvailable: {{ .Values.masterPodMinAvailable }}
   {{- else }}
-  maxUnavailable: {{ .Values.podMaxUnavailable }}
+  maxUnavailable: {{ .Values.masterPodMaxUnavailable }}
   {{- end }}
 
 ###################################################################################################

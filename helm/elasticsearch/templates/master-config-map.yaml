@@ -82,7 +82,7 @@ data:
     node.master: {{ .Values.configNodeMaster }}
     cluster.name: {{ template "elasticsearchName" . }}
     network.host: {{ .Values.configNetworkHost }}
-    transport.tcp.port: {{ .Values.transportPort }}
+    transport.tcp.port: {{ .Values.clusterPort }}
     {{- if .Values.configNetworkTcpNoDelay }}
     network.tcp.no_delay: {{ .Values.configNetworkTcpNoDelay }}
     {{- end }}
