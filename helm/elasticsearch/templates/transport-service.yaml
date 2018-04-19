@@ -3,10 +3,10 @@
 kind: Service
 apiVersion: "{{ .Values.apiVersionService }}"
 metadata:
-  name: "{{ template "elasticsearchTransportServiceName" . }}"
+  name: "{{ template "elasticsearchTransportName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchTransportServiceName" . }}"
+    name: "{{ template "elasticsearchTransportName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"

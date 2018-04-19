@@ -3,24 +3,27 @@
 kind: NetworkPolicy
 apiVersion: "{{ .Values.apiVersionNetworkPolicy }}"
 metadata:
-  name: "{{ template "elasticsearchName" . }}"
+  name: "{{ template "elasticsearchTransportName" . }}"
   namespace: "{{ template "elasticsearchNamespace" . }}"
   labels:
-    name: "{{ template "elasticsearchName" . }}"
+    name: "{{ template "elasticsearchTransportName" . }}"
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 spec:
   podSelector:
     matchLabels:
-      name: "{{ template "elasticsearchName" . }}"
+      chart: "{{ template "elasticsearchChart" . }}"
+      release: "{{ template "elasticsearchRelease" . }}"
+      heritage: "{{ template "elasticsearchHeritage" . }}"
   ingress:
     - ports:
-        - port: {{ .Values.httpPort }}
         - port: {{ .Values.transportPort }}
       from:
         - podSelector:
             matchLabels:
-              name: "{{ template "elasticsearchName" . }}"
+              chart: "{{ template "elasticsearchChart" . }}"
+              release: "{{ template "elasticsearchRelease" . }}"
+              heritage: "{{ template "elasticsearchHeritage" . }}"
 
 ###################################################################################################
