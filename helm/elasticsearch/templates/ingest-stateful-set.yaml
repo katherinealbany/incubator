@@ -102,12 +102,13 @@ spec:
       {{- end }}
       initContainers:
         - name: init
-          image: busybox
-          imagePullPolicy: Always
+          image: "{{ template "elasticsearchImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           securityContext:
             runAsUser: 0
+            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
           command:
-            - /bin/sh
+            - /bin/bash
             - -c
             - mkdir -pv {{ template "elasticsearchDataBase" . }} &&
               mkdir -pv {{ template "elasticsearchLogsBase" . }} &&
@@ -132,24 +133,24 @@ spec:
               containerPort: {{ .Values.httpPort }}
             - name: "{{ .Values.clusterWord }}"
               containerPort: {{ .Values.clusterPort }}
-          {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
+          {{- if or .Values.ingestCpu .Values.ingestCpuMinimum .Values.ingestCpuMaximum .Values.ingestMemory .Values.ingestMemoryMinimum .Values.ingestMemoryMaximum }}
           resources:
-            {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
+            {{- if or .Values.ingestCpu .Values.ingestCpuMinimum .Values.ingestMemory .Values.ingestMemoryMinimum }}
             requests:
-              {{- if or .Values.cpu .Values.cpuMinimum }}
-              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMinimum }}{{ end }}"
+              {{- if or .Values.ingestCpu .Values.ingestCpuMinimum }}
+              cpu: "{{ if .Values.ingestCpu }}{{ .Values.ingestCpu }}{{ else }}{{ .Values.ingestCpuMinimum }}{{ end }}"
               {{- end }}
-              {{- if or .Values.memory .Values.memoryMinimum }}
-              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMinimum }}{{ end }}"
+              {{- if or .Values.ingestMemory .Values.ingestMemoryMinimum }}
+              memory: "{{ if .Values.ingestMemory }}{{ .Values.ingestMemory }}{{ else }}{{ .Values.ingestMemoryMinimum }}{{ end }}"
               {{- end }}
             {{- end }}
-            {{- if or .Values.cpu .Values.cpuMaximum .Values.memory .Values.memoryMaximum }}
+            {{- if or .Values.ingestCpu .Values.ingestCpuMaximum .Values.ingestMemory .Values.ingestMemoryMaximum }}
             limits:
-              {{- if or .Values.cpu .Values.cpuMaximum }}
-              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMaximum }}{{ end }}"
+              {{- if or .Values.ingestCpu .Values.ingestCpuMaximum }}
+              cpu: "{{ if .Values.ingestCpu }}{{ .Values.ingestCpu }}{{ else }}{{ .Values.ingestCpuMaximum }}{{ end }}"
               {{- end }}
-              {{- if or .Values.memory .Values.memoryMaximum }}
-              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMaximum }}{{ end }}"
+              {{- if or .Values.ingestMemory .Values.ingestMemoryMaximum }}
+              memory: "{{ if .Values.ingestMemory }}{{ .Values.ingestMemory }}{{ else }}{{ .Values.ingestMemoryMaximum }}{{ end }}"
               {{- end }}
             {{- end }}
           {{- end }}

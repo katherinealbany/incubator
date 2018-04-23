@@ -1,10 +1,5 @@
 ###################################################################################################
 
-jvmHeapSize: 768m
-
-memoryMinimum: 1024Mi
-memoryMaximum: 1024Mi
-
 dataReplicas: 1
 ingestReplicas: 1
 masterReplicas: 1

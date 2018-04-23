@@ -9,7 +9,7 @@ Purge
 -----
 
 kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchDataName" . }}-<<ORDINAL>>
-kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchMasterName" . }}-<<ORDINAL>>
 kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchIngestName" . }}-<<ORDINAL>>
+kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchMasterName" . }}-<<ORDINAL>>
 
 ###################################################################################################

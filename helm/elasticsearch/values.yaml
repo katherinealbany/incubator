@@ -14,12 +14,6 @@ podLabels:
 
 ###################################################################################################
 
-cpu:
-cpuMinimum: 100m
-cpuMaximum: 1
-
-###################################################################################################
-
 clusterPort: 9300
 
 ###################################################################################################
@@ -33,12 +27,6 @@ configWord: config
 ingestWord: ingest
 masterWord: master
 clusterWord: cluster
-
-###################################################################################################
-
-memory:
-memoryMinimum:
-memoryMaximum:
 
 ###################################################################################################
 
@@ -134,7 +122,7 @@ livenessProbeInitialDelaySeconds: 240
 ###################################################################################################
 
 jvmFile: jvm.options
-jvmHeapSize:
+jvmHeapSize: 768m
 jvmGcLogFile: gc.log
 jvmGcLogFiles: 10
 jvmFileEncoding: UTF-8
@@ -161,8 +149,16 @@ log4jRollingRandomAccessFileImmediateFlush:
 
 dataReplicas: 3
 
+dataCpu:
+dataCpuMinimum: 100m
+dataCpuMaximum: 1
+
 dataVolumeSize: 25Gi
 dataVolumeClass: anything
+
+dataMemory:
+dataMemoryMinimum: 1024Mi
+dataMemoryMaximum: 1024Mi
 
 dataConfigNodeData: true
 dataConfigNodeIngest: false
@@ -171,26 +167,42 @@ dataConfigNodeMaster: false
 ###################################################################################################
 ###################################################################################################
 
-masterReplicas: 3
-
-masterVolumeSize: 5Gi
-masterVolumeClass: anything
-
-masterConfigNodeData: false
-masterConfigNodeIngest: false
-masterConfigNodeMaster: true
-
-###################################################################################################
-###################################################################################################
-
 ingestReplicas: 3
+
+ingestCpu:
+ingestCpuMinimum: 100m
+ingestCpuMaximum: 1
 
 ingestVolumeSize: 5Gi
 ingestVolumeClass: anything
 
+ingestMemory:
+ingestMemoryMinimum: 1024Mi
+ingestMemoryMaximum: 1024Mi
+
 ingestConfigNodeData: false
 ingestConfigNodeIngest: true
 ingestConfigNodeMaster: false
+
+###################################################################################################
+###################################################################################################
+
+masterReplicas: 3
+
+masterCpu:
+masterCpuMinimum: 100m
+masterCpuMaximum: 1
+
+masterVolumeSize: 5Gi
+masterVolumeClass: anything
+
+masterMemory:
+masterMemoryMinimum: 1024Mi
+masterMemoryMaximum: 1024Mi
+
+masterConfigNodeData: false
+masterConfigNodeIngest: false
+masterConfigNodeMaster: true
 
 ###################################################################################################
 ###################################################################################################
