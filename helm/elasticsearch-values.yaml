@@ -5,8 +5,8 @@ jvmHeapSize: 768m
 memoryMinimum: 1024Mi
 memoryMaximum: 1024Mi
 
-dataReplicas: 3
-ingestReplicas: 0
-masterReplicas: 3
+dataReplicas: 1
+ingestReplicas: 1
+masterReplicas: 1
 
 ###################################################################################################

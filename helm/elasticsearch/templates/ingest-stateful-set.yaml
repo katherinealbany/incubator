@@ -21,30 +21,17 @@ spec:
       name: "{{ template "elasticsearchIngestName" . }}"
   replicas: {{ .Values.ingestReplicas }}
   serviceName: "{{ template "elasticsearchClusterName" . }}"
-  {{- if or .Values.volumeDataEnabled .Values.volumeLogsEnabled }}
+  {{- if .Values.volumeEnabled }}
   volumeClaimTemplates:
-    {{- if .Values.volumeDataEnabled }}
     - metadata:
-        name: "{{ .Values.dataWord }}"
+        name: "{{ .Values.volumeName }}"
         annotations:
-          volume.alpha.kubernetes.io/storage-class: "{{ .Values.volumeDataClass }}"
+          volume.alpha.kubernetes.io/storage-class: "{{ .Values.ingestVolumeClass }}"
       spec:
         resources:
           requests:
-            storage: "{{ .Values.volumeDataSize }}"
-        accessModes: [ "{{ .Values.volumeDataMode }}" ]
-    {{- end }}
-    {{- if .Values.volumeLogsEnabled }}
-    - metadata:
-        name: "{{ .Values.logsWord }}"
-        annotations:
-          volume.alpha.kubernetes.io/storage-class: "{{ .Values.volumeLogsClass }}"
-      spec:
-        resources:
-          requests:
-            storage: "{{ .Values.volumeLogsSize }}"
-        accessModes: [ "{{ .Values.volumeLogsMode }}" ]
-    {{- end }}
+            storage: "{{ .Values.ingestVolumeSize }}"
+        accessModes: [ "{{ .Values.volumeMode }}" ]
   {{- end }}
   template:
     metadata:
@@ -103,20 +90,32 @@ spec:
 {{ toYaml .Values.podTolerations | indent 8 }}
       {{- end }}
       volumes:
-        - name: "{{ template "elasticsearchIngestName" . }}"
+        - name: "{{ .Values.configWord }}"
           configMap:
             name: "{{ template "elasticsearchIngestName" . }}"
-        {{- if not .Values.volumeDataEnabled }}
-        - name: "{{ .Values.dataWord }}"
-          emptyDir: {}
-        {{- end }}
-        {{- if not .Values.volumeLogsEnabled }}
-        - name: "{{ .Values.logsWord }}"
+        {{- if not .Values.volumeEnabled }}
+        - name: "{{ .Values.volumeName }}"
           emptyDir: {}
         {{- end }}
       {{- if .Values.podVolumes }}
 {{ toYaml .Values.podVolumes | indent 8 }}
       {{- end }}
+      initContainers:
+        - name: init
+          image: busybox
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 0
+          command:
+            - /bin/sh
+            - -c
+            - mkdir -pv {{ template "elasticsearchDataBase" . }} &&
+              mkdir -pv {{ template "elasticsearchLogsBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchLogsBase" . }}
+          volumeMounts:
+            - name: "{{ .Values.volumeName }}"
+              mountPath: "{{ .Values.volumeMountBase }}"
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "elasticsearchImage" . }}"
@@ -155,19 +154,17 @@ spec:
             {{- end }}
           {{- end }}
           volumeMounts:
-            - name: "{{ template "elasticsearchIngestName" . }}"
+            - name: "{{ .Values.configWord }}"
               subPath: "{{ .Values.jvmFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.jvmFile }}"
-            - name: "{{ template "elasticsearchIngestName" . }}"
+            - name: "{{ .Values.configWord }}"
               subPath: "{{ .Values.log4jFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.log4jFile }}"
-            - name: "{{ template "elasticsearchIngestName" . }}"
+            - name: "{{ .Values.configWord }}"
               subPath: "{{ .Values.configFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
-            - name: "{{ .Values.dataWord }}"
-              mountPath: "{{ template "elasticsearchVolumeDataMount" . }}"
-            - name: "{{ .Values.logsWord }}"
-              mountPath: "{{ template "elasticsearchVolumeLogsMount" . }}"
+            - name: "{{ .Values.volumeName }}"
+              mountPath: "{{ .Values.volumeMountBase }}"
           {{- if .Values.podVolumeMounts }}
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}

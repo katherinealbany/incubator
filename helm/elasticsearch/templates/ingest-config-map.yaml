@@ -15,7 +15,7 @@ data:
     -Xms{{ required ".Values.jvmHeapSize" .Values.jvmHeapSize }}
     -Xmx{{ required ".Values.jvmHeapSize" .Values.jvmHeapSize }}
     -Xss{{ .Values.jvmThreadStackSize }}
-    -Xloggc:{{ template "elasticsearchVolumeLogsMount" . }}/{{ .Values.jvmGcLogFile }}
+    -Xloggc:{{ template "elasticsearchLogsBase" . }}/{{ .Values.jvmGcLogFile }}
     -Djna.nosys=true
     -Dfile.encoding={{ .Values.jvmFileEncoding }}
     -Djava.io.tmpdir=${ES_TMPDIR}
@@ -51,7 +51,7 @@ data:
     rootLogger.appenderRef.CONSOLE.ref = CONSOLE
     appender.ROLLINGRANDOMACCESSFILE.name = ROLLINGRANDOMACCESSFILE
     appender.ROLLINGRANDOMACCESSFILE.type = RollingRandomAccessFile
-    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchVolumeLogsMount" . }}/{{ .Values.log4jRollingRandomAccessFileName }}
+    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchLogsBase" . }}/{{ .Values.log4jRollingRandomAccessFileName }}
     appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.fsGroup }}
     appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.runAsUser }}
     {{- if .Values.log4jRollingRandomAccessFileBufferSize }}
@@ -75,8 +75,8 @@ data:
   {{ .Values.configFile }}: |
     http.port: {{ .Values.httpPort }}
     node.data: {{ .Values.ingestConfigNodeData }}
-    path.data: {{ template "elasticsearchVolumeDataMount" . }}
-    path.logs: {{ template "elasticsearchVolumeLogsMount" . }}
+    path.data: {{ template "elasticsearchDataBase" . }}
+    path.logs: {{ template "elasticsearchLogsBase" . }}
     processors: {{ .Values.configProcessors }}
     node.ingest: {{ .Values.ingestConfigNodeIngest }}
     node.master: {{ .Values.ingestConfigNodeMaster }}

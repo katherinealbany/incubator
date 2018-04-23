@@ -25,6 +25,12 @@
 
 ###################################################################################################
 
+{{- define "elasticsearchDataBase" -}}
+{{- default (printf "%s/%s" .Values.volumeMountBase .Values.dataWord) .Values.elasticsearchDataBase -}}
+{{- end -}}
+
+###################################################################################################
+
 {{- define "elasticsearchDataName" -}}
 {{- $holding := default (printf "%s-%s" (include "elasticsearchName" .) .Values.dataWord) .Values.elasticsearchDataName -}}
 {{- $holding | trunc 63 | trimSuffix "-" -}}
@@ -34,6 +40,12 @@
 
 {{- define "elasticsearchHeritage" -}}
 {{- default .Release.Service .Values.elasticsearchHeritage -}}
+{{- end -}}
+
+###################################################################################################
+
+{{- define "elasticsearchLogsBase" -}}
+{{- default (printf "%s/%s" .Values.volumeMountBase .Values.logsWord) .Values.elasticsearchLogsBase -}}
 {{- end -}}
 
 ###################################################################################################
@@ -66,19 +78,7 @@
 ###################################################################################################
 
 {{- define "elasticsearchConfigMountBase" -}}
-{{- default (printf "%s/%s" .Values.volumeMountBase .Values.configWord) .Values.elasticsearchConfigMountBase -}}
-{{- end -}}
-
-###################################################################################################
-
-{{- define "elasticsearchVolumeDataMount" -}}
-{{- default (printf "%s/%s" .Values.volumeMountBase .Values.dataWord) .Values.elasticsearchVolumeDataMount -}}
-{{- end -}}
-
-###################################################################################################
-
-{{- define "elasticsearchVolumeLogsMount" -}}
-{{- default (printf "%s/%s" .Values.volumeMountBase .Values.logsWord) .Values.elasticsearchVolumeLogsMount -}}
+{{- default (printf "%s/%s" .Values.configMountBase .Values.configWord) .Values.elasticsearchConfigMountBase -}}
 {{- end -}}
 
 ###################################################################################################

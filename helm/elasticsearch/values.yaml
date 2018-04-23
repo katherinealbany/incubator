@@ -1,34 +1,4 @@
 ###################################################################################################
-
-dataReplicas: 3
-
-dataConfigNodeData: true
-dataConfigNodeIngest: false
-dataConfigNodeMaster: false
-
-###################################################################################################
-
-masterReplicas: 3
-
-masterConfigNodeData: false
-masterConfigNodeIngest: false
-masterConfigNodeMaster: true
-
-###################################################################################################
-
-ingestReplicas: 0
-
-ingestConfigNodeData: false
-ingestConfigNodeIngest: true
-ingestConfigNodeMaster: false
-
-ingestServiceType: LoadBalancer
-ingestServiceAnnotations:
-ingestServiceAwsInternalLoadBalancer: true
-ingestServiceGcpInternalLoadBalancer: true
-
-###################################################################################################
-###################################################################################################
 ###################################################################################################
 
 httpPort: 9200
@@ -95,21 +65,10 @@ podVolumeMounts:
 
 ###################################################################################################
 
-volumeMountBase: /usr/share/elasticsearch
-
-###################################################################################################
-
-volumeDataSize: 1Gi
-volumeDataMode: ReadWriteOnce
-volumeDataClass: anything
-volumeDataEnabled: true
-
-###################################################################################################
-
-volumeLogsSize: 5Gi
-volumeLogsMode: ReadWriteOnce
-volumeLogsClass: anything
-volumeLogsEnabled: true
+volumeMode: ReadWriteOnce
+volumeName: state
+volumeEnabled: true
+volumeMountBase: /state
 
 ###################################################################################################
 
@@ -147,7 +106,15 @@ readinessProbeFailureThreshold: 3
 
 ###################################################################################################
 
+serviceType: LoadBalancer
+serviceAnnotations:
+serviceAwsInternalLoadBalancer: true
+serviceGcpInternalLoadBalancer: true
+
+###################################################################################################
+
 configFile: elasticsearch.yml
+configMountBase: /usr/share/elasticsearch
 configProcessors: 1
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay:
@@ -189,4 +156,41 @@ log4jRollingRandomAccessFileBufferSize:
 log4jRollingRandomAccessFilePermissions:
 log4jRollingRandomAccessFileImmediateFlush:
 
+###################################################################################################
+###################################################################################################
+
+dataReplicas: 3
+
+dataVolumeSize: 25Gi
+dataVolumeClass: anything
+
+dataConfigNodeData: true
+dataConfigNodeIngest: false
+dataConfigNodeMaster: false
+
+###################################################################################################
+###################################################################################################
+
+masterReplicas: 3
+
+masterVolumeSize: 5Gi
+masterVolumeClass: anything
+
+masterConfigNodeData: false
+masterConfigNodeIngest: false
+masterConfigNodeMaster: true
+
+###################################################################################################
+###################################################################################################
+
+ingestReplicas: 3
+
+ingestVolumeSize: 5Gi
+ingestVolumeClass: anything
+
+ingestConfigNodeData: false
+ingestConfigNodeIngest: true
+ingestConfigNodeMaster: false
+
+###################################################################################################
 ###################################################################################################

@@ -8,13 +8,8 @@ helm delete --purge {{ template "elasticsearchRelease" . }}
 Purge
 -----
 
-kubectl delete pvc/{{ .Values.dataWord }}-{{ template "elasticsearchDataName" . }}-<<ORDINAL>>
-kubectl delete pvc/{{ .Values.logsWord }}-{{ template "elasticsearchDataName" . }}-<<ORDINAL>>
-
-kubectl delete pvc/{{ .Values.dataWord }}-{{ template "elasticsearchIngestName" . }}-<<ORDINAL>>
-kubectl delete pvc/{{ .Values.logsWord }}-{{ template "elasticsearchIngestName" . }}-<<ORDINAL>>
-
-kubectl delete pvc/{{ .Values.dataWord }}-{{ template "elasticsearchMasterName" . }}-<<ORDINAL>>
-kubectl delete pvc/{{ .Values.logsWord }}-{{ template "elasticsearchMasterName" . }}-<<ORDINAL>>
+kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchDataName" . }}-<<ORDINAL>>
+kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchMasterName" . }}-<<ORDINAL>>
+kubectl delete pvc/{{ .Values.volumeName }}-{{ template "elasticsearchIngestName" . }}-<<ORDINAL>>
 
 ###################################################################################################

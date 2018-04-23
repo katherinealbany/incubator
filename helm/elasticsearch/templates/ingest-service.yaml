@@ -10,20 +10,20 @@ metadata:
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
-  {{- if or .Values.ingestServiceAnnotations (and (eq .Values.ingestServiceType "LoadBalancer") (or .Values.ingestServiceAwsInternalLoadBalancer .Values.ingestServiceGcpInternalLoadBalancer)) }}
+  {{- if or .Values.serviceAnnotations (and (eq .Values.serviceType "LoadBalancer") (or .Values.serviceAwsInternalLoadBalancer .Values.serviceGcpInternalLoadBalancer)) }}
   annotations:
-    {{- if .Values.ingestServiceAwsInternalLoadBalancer }}
+    {{- if .Values.serviceAwsInternalLoadBalancer }}
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
     {{- end }}
-    {{- if .Values.ingestServiceGcpInternalLoadBalancer }}
+    {{- if .Values.serviceGcpInternalLoadBalancer }}
     cloud.google.com/load-balancer-type: Internal
     {{- end }}
-    {{- if .Values.ingestServiceAnnotations }}
-{{ toYaml .Values.ingestServiceAnnotations | indent 4 }}
+    {{- if .Values.serviceAnnotations }}
+{{ toYaml .Values.serviceAnnotations | indent 4 }}
     {{- end }}
   {{- end }}
 spec:
-  type: "{{ .Values.ingestServiceType }}"
+  type: "{{ .Values.serviceType }}"
   selector:
     name: "{{ template "elasticsearchIngestName" . }}"
   ports:
