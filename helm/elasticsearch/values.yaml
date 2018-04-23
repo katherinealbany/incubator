@@ -103,7 +103,6 @@ serviceGcpInternalLoadBalancer: true
 
 configFile: elasticsearch.yml
 configMountBase: /usr/share/elasticsearch
-configProcessors: 1
 configNetworkHost: _local:ipv4_,_site:ipv4_
 configNetworkTcpNoDelay:
 configNetworkTcpKeepAlive:
@@ -122,7 +121,6 @@ livenessProbeInitialDelaySeconds: 240
 ###################################################################################################
 
 jvmFile: jvm.options
-jvmHeapSize: 768m
 jvmGcLogFile: gc.log
 jvmGcLogFiles: 10
 jvmFileEncoding: UTF-8
@@ -153,6 +151,8 @@ dataCpu:
 dataCpuMinimum: 100m
 dataCpuMaximum: 1
 
+dataJvmHeapSize: 768m
+
 dataVolumeSize: 25Gi
 dataVolumeClass: anything
 
@@ -163,6 +163,7 @@ dataMemoryMaximum: 1024Mi
 dataConfigNodeData: true
 dataConfigNodeIngest: false
 dataConfigNodeMaster: false
+dataConfigProcessors: 1
 
 ###################################################################################################
 ###################################################################################################
@@ -172,6 +173,8 @@ ingestReplicas: 3
 ingestCpu:
 ingestCpuMinimum: 100m
 ingestCpuMaximum: 1
+
+ingestJvmHeapSize: 768m
 
 ingestVolumeSize: 5Gi
 ingestVolumeClass: anything
@@ -183,6 +186,7 @@ ingestMemoryMaximum: 1024Mi
 ingestConfigNodeData: false
 ingestConfigNodeIngest: true
 ingestConfigNodeMaster: false
+ingestConfigProcessors: 1
 
 ###################################################################################################
 ###################################################################################################
@@ -192,6 +196,8 @@ masterReplicas: 3
 masterCpu:
 masterCpuMinimum: 100m
 masterCpuMaximum: 1
+
+masterJvmHeapSize: 768m
 
 masterVolumeSize: 5Gi
 masterVolumeClass: anything
@@ -203,6 +209,7 @@ masterMemoryMaximum: 1024Mi
 masterConfigNodeData: false
 masterConfigNodeIngest: false
 masterConfigNodeMaster: true
+masterConfigProcessors: 1
 
 ###################################################################################################
 ###################################################################################################

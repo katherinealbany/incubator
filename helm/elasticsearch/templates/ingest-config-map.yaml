@@ -12,8 +12,8 @@ metadata:
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
   {{ .Values.jvmFile }}: |
-    -Xms{{ required ".Values.jvmHeapSize" .Values.jvmHeapSize }}
-    -Xmx{{ required ".Values.jvmHeapSize" .Values.jvmHeapSize }}
+    -Xms{{ required ".Values.ingestJvmHeapSize" .Values.ingestJvmHeapSize }}
+    -Xmx{{ required ".Values.ingestJvmHeapSize" .Values.ingestJvmHeapSize }}
     -Xss{{ .Values.jvmThreadStackSize }}
     -Xloggc:{{ template "elasticsearchLogsBase" . }}/{{ .Values.jvmGcLogFile }}
     -Djna.nosys=true
@@ -77,7 +77,7 @@ data:
     node.data: {{ .Values.ingestConfigNodeData }}
     path.data: {{ template "elasticsearchDataBase" . }}
     path.logs: {{ template "elasticsearchLogsBase" . }}
-    processors: {{ .Values.configProcessors }}
+    processors: {{ .Values.ingestConfigProcessors }}
     node.ingest: {{ .Values.ingestConfigNodeIngest }}
     node.master: {{ .Values.ingestConfigNodeMaster }}
     cluster.name: {{ template "elasticsearchName" . }}
