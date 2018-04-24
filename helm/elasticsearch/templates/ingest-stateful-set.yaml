@@ -43,19 +43,19 @@ spec:
         node.data: "{{ .Values.ingestConfigNodeData }}"
         node.ingest: "{{ .Values.ingestConfigNodeIngest }}"
         node.master: "{{ .Values.ingestConfigNodeMaster }}"
-        {{- if .Values.podLabels }}
-{{ toYaml .Values.podLabels | indent 8 }}
+        {{- if .Values.ingestPodLabels }}
+{{ toYaml .Values.ingestPodLabels | indent 8 }}
         {{- end }}
-      {{- if .Values.podAnnotations }}
+      {{- if .Values.ingestPodAnnotations }}
       annotations:
-{{ toYaml .Values.podAnnotations | indent 8 }}
+{{ toYaml .Values.ingestPodAnnotations | indent 8 }}
       {{- end }}
     spec:
       affinity:
         podAntiAffinity:
-          {{- if eq (.Values.podAntiAffinity | lower) "required" }}
+          {{- if eq (.Values.ingestPodAntiAffinity | lower) "required" }}
           requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "{{ .Values.podAntiAffinityTopologyKey }}"
+            - topologyKey: "{{ .Values.ingestPodAntiAffinityTopologyKey }}"
               labelSelector:
                 matchExpressions:
                   - key: name
@@ -63,9 +63,9 @@ spec:
                     operator: In
           {{- else }}
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: {{ .Values.podAntiAffinityWeight }}
+            - weight: {{ .Values.ingestPodAntiAffinityWeight }}
               podAffinityTerm:
-                topologyKey: "{{ .Values.podAntiAffinityTopologyKey }}"
+                topologyKey: "{{ .Values.ingestPodAntiAffinityTopologyKey }}"
                 labelSelector:
                   matchExpressions:
                     - key: name
@@ -81,13 +81,13 @@ spec:
         runAsUser: {{ .Values.runAsUser }}
         {{- end }}
       {{- end }}
-      {{- if .Values.podNodeSelector }}
+      {{- if .Values.ingestPodNodeSelector }}
       nodeSelector:
-{{ toYaml .Values.podNodeSelector | indent 8 }}
+{{ toYaml .Values.ingestPodNodeSelector | indent 8 }}
       {{- end }}
-      {{- if .Values.podTolerations }}
+      {{- if .Values.ingestPodTolerations }}
       tolerations:
-{{ toYaml .Values.podTolerations | indent 8 }}
+{{ toYaml .Values.ingestPodTolerations | indent 8 }}
       {{- end }}
       volumes:
         - name: "{{ .Values.configWord }}"
@@ -97,8 +97,8 @@ spec:
         - name: "{{ .Values.volumeName }}"
           emptyDir: {}
         {{- end }}
-      {{- if .Values.podVolumes }}
-{{ toYaml .Values.podVolumes | indent 8 }}
+      {{- if .Values.ingestPodVolumes }}
+{{ toYaml .Values.ingestPodVolumes | indent 8 }}
       {{- end }}
       initContainers:
         - name: init
@@ -166,8 +166,8 @@ spec:
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
             - name: "{{ .Values.volumeName }}"
               mountPath: "{{ .Values.volumeMountBase }}"
-          {{- if .Values.podVolumeMounts }}
-{{ toYaml .Values.podVolumeMounts | indent 12 }}
+          {{- if .Values.ingestPodVolumeMounts }}
+{{ toYaml .Values.ingestPodVolumeMounts | indent 12 }}
           {{- end }}
           readinessProbe:
             httpGet:
