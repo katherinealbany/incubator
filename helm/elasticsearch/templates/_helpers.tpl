@@ -46,14 +46,14 @@
 
 ###################################################################################################
 
-{{- define "elasticsearchConfigMountBase" -}}
-{{- default (printf "%s/%s" .Values.configMountBase .Values.configWord) .Values.elasticsearchConfigMountBase -}}
+{{- define "elasticsearchClusterConfigMountBase" -}}
+{{- default (printf "%s/%s" .Values.clusterConfigMountBase .Values.configWord) .Values.elasticsearchClusterConfigMountBase -}}
 {{- end -}}
 
 ###################################################################################################
 
-{{- define "elasticsearchMinimumMasterNodes" -}}
-{{- default (int (add (div .Values.masterReplicas 2) 1)) .Values.elasticsearchMinimumMasterNodes -}}
+{{- define "elasticsearchClusterMinimumMasterNodes" -}}
+{{- default (int (add (div .Values.masterReplicas 2) 1)) .Values.elasticsearchClusterMinimumMasterNodes -}}
 {{- end -}}
 
 ###################################################################################################

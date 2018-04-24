@@ -29,7 +29,17 @@ clusterRunAsUser: 1000
 
 ###################################################################################################
 
+clusterJvmFile: jvm.options
+clusterJvmGcLogFile: gc.log
+
+###################################################################################################
+
 clusterTransportPort: 9300
+
+###################################################################################################
+
+clusterConfigFile: elasticsearch.yml
+clusterConfigMountBase: /usr/share/elasticsearch
 
 ###################################################################################################
 
@@ -42,49 +52,16 @@ clusterImagePullPolicy: IfNotPresent
 clusterPodMaxUnavailable: 1
 
 ###################################################################################################
-###################################################################################################
-###################################################################################################
-###################################################################################################
 
 clusterReadinessProbeHttpPath: _cluster/health?local=true&wait_for_status=yellow&timeout=1s
 
 ###################################################################################################
 
-configFile: elasticsearch.yml
-configMountBase: /usr/share/elasticsearch
-configNetworkHost: _local:ipv4_,_site:ipv4_
-configNetworkTcpNoDelay:
-configNetworkTcpKeepAlive:
-configTransportTcpCompress:
-configTransportPingSchedule:
-configTransportTcpConnectTimeout:
+clusterLog4jFile: log4j2.properties
+clusterLog4jFileName: es.log
+clusterLog4jFilePattern: es.log.%i.gz
+clusterLog4jAppenderLayoutPattern: '[%d{ISO8601}][%-5p][%-25c{1.}] %marker%m%n'
 
-###################################################################################################
-
-jvmFile: jvm.options
-jvmGcLogFile: gc.log
-jvmGcLogFiles: 10
-jvmFileEncoding: UTF-8
-jvmGcLogFileSize: 128m
-jvmThreadStackSize: 1m
-jmvCmsInitiatingOccupancyFraction: 75
-
-###################################################################################################
-
-log4jFile: log4j2.properties
-log4jStatus: info
-log4jRootLevel: info
-log4jAppenderLayoutPattern: '[%d{ISO8601}][%-5p][%-25c{1.}] %marker%m%n'
-log4jRollingRandomAccessFiles: 10
-log4jRollingRandomAccessFileName: es.log
-log4jRollingRandomAccessFileSize: 256MB
-log4jRollingRandomAccessFilePattern: es.log.%i.gz
-log4jRollingRandomAccessFileBufferSize:
-log4jRollingRandomAccessFilePermissions:
-log4jRollingRandomAccessFileImmediateFlush:
-
-###################################################################################################
-###################################################################################################
 ###################################################################################################
 ###################################################################################################
 
@@ -99,10 +76,6 @@ dataPodLabels:
 dataCpu:
 dataCpuMinimum: 100m
 dataCpuMaximum: 1
-
-###################################################################################################
-
-dataJvmHeapSize: 768m
 
 ###################################################################################################
 
@@ -142,6 +115,22 @@ dataConfigNodeData: true
 dataConfigNodeIngest: false
 dataConfigNodeMaster: false
 dataConfigProcessors: 1
+dataConfigNetworkHost: _local:ipv4_,_site:ipv4_
+
+###################################################################################################
+
+dataJvmHeapSize: 768m
+dataJvmGcLogFiles: 10
+dataJvmGcLogFileSize: 128m
+dataJvmThreadStackSize: 1m
+
+###################################################################################################
+
+dataLog4jFiles: 10
+dataLog4jStatus: info
+dataLog4jFileSize: 256MB
+dataLog4jRootLevel: info
+dataLog4jImmediateFlush: false
 
 ###################################################################################################
 
@@ -185,10 +174,6 @@ ingestCpuMaximum: 1
 
 ###################################################################################################
 
-ingestJvmHeapSize: 768m
-
-###################################################################################################
-
 ingestVolumeMode: ReadWriteOnce
 ingestVolumeName: state
 ingestVolumeSize: 5Gi
@@ -225,6 +210,22 @@ ingestConfigNodeData: false
 ingestConfigNodeIngest: true
 ingestConfigNodeMaster: false
 ingestConfigProcessors: 1
+ingestConfigNetworkHost: _local:ipv4_,_site:ipv4_
+
+###################################################################################################
+
+ingestJvmHeapSize: 768m
+ingestJvmGcLogFiles: 10
+ingestJvmGcLogFileSize: 128m
+ingestJvmThreadStackSize: 1m
+
+###################################################################################################
+
+ingestLog4jFiles: 10
+ingestLog4jStatus: info
+ingestLog4jFileSize: 256MB
+ingestLog4jRootLevel: info
+ingestLog4jImmediateFlush: false
 
 ###################################################################################################
 
@@ -275,10 +276,6 @@ masterCpuMaximum: 1
 
 ###################################################################################################
 
-masterJvmHeapSize: 768m
-
-###################################################################################################
-
 masterVolumeMode: ReadWriteOnce
 masterVolumeName: state
 masterVolumeSize: 5Gi
@@ -315,6 +312,22 @@ masterConfigNodeData: false
 masterConfigNodeIngest: false
 masterConfigNodeMaster: true
 masterConfigProcessors: 1
+masterConfigNetworkHost: _local:ipv4_,_site:ipv4_
+
+###################################################################################################
+
+masterJvmHeapSize: 768m
+masterJvmGcLogFiles: 10
+masterJvmGcLogFileSize: 128m
+masterJvmThreadStackSize: 1m
+
+###################################################################################################
+
+masterLog4jFiles: 10
+masterLog4jStatus: info
+masterLog4jFileSize: 256MB
+masterLog4jRootLevel: info
+masterLog4jImmediateFlush: false
 
 ###################################################################################################
 

@@ -11,25 +11,25 @@ metadata:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
-  {{ .Values.jvmFile }}: |
+  {{ .Values.clusterJvmFile }}: |
     -Xms{{ required ".Values.masterJvmHeapSize" .Values.masterJvmHeapSize }}
     -Xmx{{ required ".Values.masterJvmHeapSize" .Values.masterJvmHeapSize }}
-    -Xss{{ .Values.jvmThreadStackSize }}
-    -Xloggc:{{ template "elasticsearchMasterLogsBase" . }}/{{ .Values.jvmGcLogFile }}
+    -Xss{{ .Values.masterJvmThreadStackSize }}
+    -Xloggc:{{ template "elasticsearchMasterLogsBase" . }}/{{ .Values.clusterJvmGcLogFile }}
     -Djna.nosys=true
-    -Dfile.encoding={{ .Values.jvmFileEncoding }}
+    -Dfile.encoding=UTF-8
     -Djava.io.tmpdir=${ES_TMPDIR}
-    -XX:GCLogFileSize={{ .Values.jvmGcLogFileSize }}
+    -XX:GCLogFileSize={{ .Values.masterJvmGcLogFileSize }}
     -XX:+AlwaysPreTouch
     -Dio.netty.noUnsafe=true
     -Djava.awt.headless=true
     -XX:+PrintGCDetails
     -Dlog4j2.disable.jmx=true
-    -XX:NumberOfGCLogFiles={{ .Values.jvmGcLogFiles }}
+    -XX:NumberOfGCLogFiles={{ .Values.masterJvmGcLogFiles }}
     -XX:+PrintGCDateStamps
     -XX:+UseConcMarkSweepGC
     -XX:+UseGCLogFileRotation
-    {{- if (.Values.configNetworkHost | contains "ipv4") }}
+    {{- if (.Values.masterConfigNetworkHost | contains "ipv4") }}
     -Djava.net.preferIPv4Stack=true
     {{- end }}
     -Dlog4j.shutdownHookEnabled=false
@@ -38,41 +38,33 @@ data:
     -Dio.netty.noKeySetOptimization=true
     -XX:+PrintGCApplicationStoppedTime
     -XX:+UseCMSInitiatingOccupancyOnly
-    -XX:CMSInitiatingOccupancyFraction={{ .Values.jmvCmsInitiatingOccupancyFraction }}
+    -XX:CMSInitiatingOccupancyFraction=75
     -Dio.netty.recycler.maxCapacityPerThread=0
 
-  {{ .Values.log4jFile }}: |
-    status = {{ .Values.log4jStatus }}
-    rootLogger.level = {{ .Values.log4jRootLevel }}
+  {{ .Values.clusterLog4jFile }}: |
+    status = {{ .Values.masterLog4jStatus }}
+    rootLogger.level = {{ .Values.masterLog4jRootLevel }}
     appender.CONSOLE.name = CONSOLE
     appender.CONSOLE.type = Console
     appender.CONSOLE.layout.type = PatternLayout
-    appender.CONSOLE.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
+    appender.CONSOLE.layout.pattern = {{ .Values.clusterLog4jAppenderLayoutPattern }}
     rootLogger.appenderRef.CONSOLE.ref = CONSOLE
     appender.ROLLINGRANDOMACCESSFILE.name = ROLLINGRANDOMACCESSFILE
     appender.ROLLINGRANDOMACCESSFILE.type = RollingRandomAccessFile
-    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchMasterLogsBase" . }}/{{ .Values.log4jRollingRandomAccessFileName }}
+    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchMasterLogsBase" . }}/{{ .Values.clusterLog4jFileName }}
     appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.clusterFsGroup }}
     appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.clusterRunAsUser }}
-    {{- if .Values.log4jRollingRandomAccessFileBufferSize }}
-    appender.ROLLINGRANDOMACCESSFILE.bufferSize = {{ .Values.log4jRollingRandomAccessFileBufferSize }}
-    {{- end }}
-    appender.ROLLINGRANDOMACCESSFILE.filePattern = {{ .Values.log4jRollingRandomAccessFilePattern }}
+    appender.ROLLINGRANDOMACCESSFILE.filePattern = {{ .Values.clusterLog4jFilePattern }}
     appender.ROLLINGRANDOMACCESSFILE.layout.type = PatternLayout
-    appender.ROLLINGRANDOMACCESSFILE.policy.size = {{ .Values.log4jRollingRandomAccessFileSize }}
+    appender.ROLLINGRANDOMACCESSFILE.policy.size = {{ .Values.masterLog4jFileSize }}
     appender.ROLLINGRANDOMACCESSFILE.policy.type = SizeBasedTriggeringPolicy
-    appender.ROLLINGRANDOMACCESSFILE.strategy.max = {{ .Values.log4jRollingRandomAccessFiles }}
+    appender.ROLLINGRANDOMACCESSFILE.strategy.max = {{ .Values.masterLog4jFiles }}
     appender.ROLLINGRANDOMACCESSFILE.strategy.type = DefaultRolloverStrategy
-    {{- if .Values.log4jRollingRandomAccessFileImmediateFlush }}
-    appender.ROLLINGRANDOMACCESSFILE.immediateFlush = {{ .Values.log4jRollingRandomAccessFileImmediateFlush }}
-    {{- end }}
-    appender.ROLLINGRANDOMACCESSFILE.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
-    {{- if .Values.log4jRollingRandomAccessFilePermissions }}
-    appender.ROLLINGRANDOMACCESSFILE.filePermissions = {{ .Values.log4jRollingRandomAccessFilePermissions }}
-    {{- end }}
+    appender.ROLLINGRANDOMACCESSFILE.immediateFlush = {{ .Values.masterLog4jImmediateFlush }}
+    appender.ROLLINGRANDOMACCESSFILE.layout.pattern = {{ .Values.clusterLog4jAppenderLayoutPattern }}
     rootLogger.appenderRef.ROLLINGRANDOMACCESSFILE.ref = ROLLINGRANDOMACCESSFILE
 
-  {{ .Values.configFile }}: |
+  {{ .Values.clusterConfigFile }}: |
     http.port: {{ .Values.clusterHttpPort }}
     node.data: {{ .Values.masterConfigNodeData }}
     path.data: {{ template "elasticsearchMasterDataBase" . }}
@@ -81,24 +73,9 @@ data:
     node.ingest: {{ .Values.masterConfigNodeIngest }}
     node.master: {{ .Values.masterConfigNodeMaster }}
     cluster.name: {{ template "elasticsearchName" . }}
-    network.host: {{ .Values.configNetworkHost }}
+    network.host: {{ .Values.masterConfigNetworkHost }}
     transport.tcp.port: {{ .Values.clusterTransportPort }}
-    {{- if .Values.configNetworkTcpNoDelay }}
-    network.tcp.no_delay: {{ .Values.configNetworkTcpNoDelay }}
-    {{- end }}
-    {{- if .Values.configNetworkTcpKeepAlive }}
-    network.tcp.keep_alive: {{ .Values.configNetworkTcpKeepAlive }}
-    {{- end }}
-    {{- if .Values.configTransportTcpCompress }}
-    transport.tcp.compress: {{ .Values.configTransportTcpCompress }}
-    {{- end }}
-    {{- if .Values.configTransportPingSchedule }}
-    transport.ping_schedule: {{ .Values.configTransportPingSchedule }}
-    {{- end }}
-    {{- if .Values.configTransportTcpConnectTimeout }}
-    transport.tcp.connect_timeout: {{ .Values.configTransportTcpConnectTimeout }}
-    {{- end }}
     discovery.zen.ping.unicast.hosts: {{ template "elasticsearchClusterName" . }}
-    discovery.zen.minimum_master_nodes: {{ template "elasticsearchMinimumMasterNodes" . }}
+    discovery.zen.minimum_master_nodes: {{ template "elasticsearchClusterMinimumMasterNodes" . }}
 
 ###################################################################################################

@@ -156,14 +156,14 @@ spec:
           {{- end }}
           volumeMounts:
             - name: "{{ .Values.configWord }}"
-              subPath: "{{ .Values.jvmFile }}"
-              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.jvmFile }}"
+              subPath: "{{ .Values.clusterJvmFile }}"
+              mountPath: "{{ template "elasticsearchClusterConfigMountBase" . }}/{{ .Values.clusterJvmFile }}"
             - name: "{{ .Values.configWord }}"
-              subPath: "{{ .Values.log4jFile }}"
-              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.log4jFile }}"
+              subPath: "{{ .Values.clusterLog4jFile }}"
+              mountPath: "{{ template "elasticsearchClusterConfigMountBase" . }}/{{ .Values.clusterLog4jFile }}"
             - name: "{{ .Values.configWord }}"
-              subPath: "{{ .Values.configFile }}"
-              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
+              subPath: "{{ .Values.clusterConfigFile }}"
+              mountPath: "{{ template "elasticsearchClusterConfigMountBase" . }}/{{ .Values.clusterConfigFile }}"
             - name: "{{ .Values.ingestVolumeName }}"
               mountPath: "{{ .Values.ingestVolumeMountBase }}"
           {{- if .Values.ingestPodVolumeMounts }}
