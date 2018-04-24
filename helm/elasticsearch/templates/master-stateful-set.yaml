@@ -172,17 +172,17 @@ spec:
           readinessProbe:
             tcpSocket:
               port: "{{ .Values.clusterWord }}"
-            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
-            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
-            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
-            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
+            periodSeconds: {{ .Values.masterReadinessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.masterReadinessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.masterReadinessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.masterReadinessProbeFailureThreshold }}
           livenessProbe:
             tcpSocket:
               port: "{{ .Values.clusterWord }}"
-            periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
-            timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
-            successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
-            failureThreshold: {{ .Values.livenessProbeFailureThreshold }}
-            initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
+            periodSeconds: {{ .Values.masterLivenessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.masterLivenessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.masterLivenessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.masterLivenessProbeFailureThreshold }}
+            initialDelaySeconds: {{ .Values.masterLivenessProbeInitialDelaySeconds }}
 
 ###################################################################################################

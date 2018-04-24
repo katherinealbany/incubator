@@ -50,13 +50,6 @@ clusterReadinessProbeHttpPath: _cluster/health?local=true&wait_for_status=yellow
 
 ###################################################################################################
 
-readinessProbePeriodSeconds: 5
-readinessProbeTimeoutSeconds: 3
-readinessProbeSuccessThreshold: 1
-readinessProbeFailureThreshold: 3
-
-###################################################################################################
-
 configFile: elasticsearch.yml
 configMountBase: /usr/share/elasticsearch
 configNetworkHost: _local:ipv4_,_site:ipv4_
@@ -65,14 +58,6 @@ configNetworkTcpKeepAlive:
 configTransportTcpCompress:
 configTransportPingSchedule:
 configTransportTcpConnectTimeout:
-
-###################################################################################################
-
-livenessProbePeriodSeconds: 5
-livenessProbeTimeoutSeconds: 3
-livenessProbeSuccessThreshold: 1
-livenessProbeFailureThreshold: 3
-livenessProbeInitialDelaySeconds: 240
 
 ###################################################################################################
 
@@ -169,6 +154,21 @@ dataPodAntiAffinityWeight: 100
 dataPodAntiAffinityTopologyKey: kubernetes.io/hostname
 
 ###################################################################################################
+
+dataReadinessProbePeriodSeconds: 5
+dataReadinessProbeTimeoutSeconds: 3
+dataReadinessProbeSuccessThreshold: 1
+dataReadinessProbeFailureThreshold: 3
+
+###################################################################################################
+
+dataLivenessProbePeriodSeconds: 5
+dataLivenessProbeTimeoutSeconds: 3
+dataLivenessProbeSuccessThreshold: 1
+dataLivenessProbeFailureThreshold: 3
+dataLivenessProbeInitialDelaySeconds: 240
+
+###################################################################################################
 ###################################################################################################
 
 ingestReplicas: 3
@@ -238,10 +238,25 @@ ingestPodAntiAffinityTopologyKey: kubernetes.io/hostname
 
 ###################################################################################################
 
+ingestReadinessProbePeriodSeconds: 5
+ingestReadinessProbeTimeoutSeconds: 3
+ingestReadinessProbeSuccessThreshold: 1
+ingestReadinessProbeFailureThreshold: 3
+
+###################################################################################################
+
 ingestServiceType: LoadBalancer
 ingestServiceAnnotations:
 ingestServiceAwsInternalLoadBalancer: true
 ingestServiceGcpInternalLoadBalancer: true
+
+###################################################################################################
+
+ingestLivenessProbePeriodSeconds: 5
+ingestLivenessProbeTimeoutSeconds: 3
+ingestLivenessProbeSuccessThreshold: 1
+ingestLivenessProbeFailureThreshold: 3
+ingestLivenessProbeInitialDelaySeconds: 240
 
 ###################################################################################################
 ###################################################################################################
@@ -310,6 +325,21 @@ masterAllowPrivilegeEscalation: false
 masterPodAntiAffinity: required
 masterPodAntiAffinityWeight: 100
 masterPodAntiAffinityTopologyKey: kubernetes.io/hostname
+
+###################################################################################################
+
+masterReadinessProbePeriodSeconds: 5
+masterReadinessProbeTimeoutSeconds: 3
+masterReadinessProbeSuccessThreshold: 1
+masterReadinessProbeFailureThreshold: 3
+
+###################################################################################################
+
+masterLivenessProbePeriodSeconds: 5
+masterLivenessProbeTimeoutSeconds: 3
+masterLivenessProbeSuccessThreshold: 1
+masterLivenessProbeFailureThreshold: 3
+masterLivenessProbeInitialDelaySeconds: 240
 
 ###################################################################################################
 ###################################################################################################

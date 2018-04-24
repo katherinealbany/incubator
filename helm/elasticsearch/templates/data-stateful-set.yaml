@@ -173,17 +173,17 @@ spec:
             httpGet:
               path: "{{ .Values.clusterReadinessProbeHttpPath }}"
               port: "{{ .Values.httpWord }}"
-            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
-            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
-            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
-            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
+            periodSeconds: {{ .Values.dataReadinessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.dataReadinessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.dataReadinessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.dataReadinessProbeFailureThreshold }}
           livenessProbe:
             tcpSocket:
               port: "{{ .Values.clusterWord }}"
-            periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
-            timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
-            successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
-            failureThreshold: {{ .Values.livenessProbeFailureThreshold }}
-            initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
+            periodSeconds: {{ .Values.dataLivenessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.dataLivenessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.dataLivenessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.dataLivenessProbeFailureThreshold }}
+            initialDelaySeconds: {{ .Values.dataLivenessProbeInitialDelaySeconds }}
 
 ###################################################################################################
