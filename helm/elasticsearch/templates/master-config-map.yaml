@@ -52,8 +52,8 @@ data:
     appender.ROLLINGRANDOMACCESSFILE.name = ROLLINGRANDOMACCESSFILE
     appender.ROLLINGRANDOMACCESSFILE.type = RollingRandomAccessFile
     appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchMasterLogsBase" . }}/{{ .Values.log4jRollingRandomAccessFileName }}
-    appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.fsGroup }}
-    appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.runAsUser }}
+    appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.clusterFsGroup }}
+    appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.clusterRunAsUser }}
     {{- if .Values.log4jRollingRandomAccessFileBufferSize }}
     appender.ROLLINGRANDOMACCESSFILE.bufferSize = {{ .Values.log4jRollingRandomAccessFileBufferSize }}
     {{- end }}
@@ -73,7 +73,7 @@ data:
     rootLogger.appenderRef.ROLLINGRANDOMACCESSFILE.ref = ROLLINGRANDOMACCESSFILE
 
   {{ .Values.configFile }}: |
-    http.port: {{ .Values.httpPort }}
+    http.port: {{ .Values.clusterHttpPort }}
     node.data: {{ .Values.masterConfigNodeData }}
     path.data: {{ template "elasticsearchMasterDataBase" . }}
     path.logs: {{ template "elasticsearchMasterLogsBase" . }}
@@ -82,7 +82,7 @@ data:
     node.master: {{ .Values.masterConfigNodeMaster }}
     cluster.name: {{ template "elasticsearchName" . }}
     network.host: {{ .Values.configNetworkHost }}
-    transport.tcp.port: {{ .Values.clusterPort }}
+    transport.tcp.port: {{ .Values.clusterTransportPort }}
     {{- if .Values.configNetworkTcpNoDelay }}
     network.tcp.no_delay: {{ .Values.configNetworkTcpNoDelay }}
     {{- end }}

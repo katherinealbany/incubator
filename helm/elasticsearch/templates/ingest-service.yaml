@@ -10,25 +10,25 @@ metadata:
     chart: "{{ template "elasticsearchChart" . }}"
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
-  {{- if or .Values.serviceAnnotations (and (eq .Values.serviceType "LoadBalancer") (or .Values.serviceAwsInternalLoadBalancer .Values.serviceGcpInternalLoadBalancer)) }}
+  {{- if or .Values.ingestServiceAnnotations (and (eq .Values.ingestServiceType "LoadBalancer") (or .Values.ingestServiceAwsInternalLoadBalancer .Values.ingestServiceGcpInternalLoadBalancer)) }}
   annotations:
-    {{- if .Values.serviceAwsInternalLoadBalancer }}
+    {{- if .Values.ingestServiceAwsInternalLoadBalancer }}
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
     {{- end }}
-    {{- if .Values.serviceGcpInternalLoadBalancer }}
+    {{- if .Values.ingestServiceGcpInternalLoadBalancer }}
     cloud.google.com/load-balancer-type: Internal
     {{- end }}
-    {{- if .Values.serviceAnnotations }}
-{{ toYaml .Values.serviceAnnotations | indent 4 }}
+    {{- if .Values.ingestServiceAnnotations }}
+{{ toYaml .Values.ingestServiceAnnotations | indent 4 }}
     {{- end }}
   {{- end }}
 spec:
-  type: "{{ .Values.serviceType }}"
+  type: "{{ .Values.ingestServiceType }}"
   selector:
     name: "{{ template "elasticsearchIngestName" . }}"
   ports:
     - name: "{{ .Values.httpWord }}"
-      port: {{ .Values.httpPort }}
+      port: {{ .Values.clusterHttpPort }}
       targetPort: "{{ .Values.httpWord }}"
 
 ###################################################################################################

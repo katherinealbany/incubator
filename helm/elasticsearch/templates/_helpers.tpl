@@ -14,12 +14,6 @@
 
 ###################################################################################################
 
-{{- define "elasticsearchImage" -}}
-{{- default (printf "%s:%s" .Values.imageName .Values.imageTag) .Values.elasticsearchImage -}}
-{{- end -}}
-
-###################################################################################################
-
 {{- define "elasticsearchRelease" -}}
 {{- default .Release.Name .Values.elasticsearchRelease -}}
 {{- end -}}
@@ -37,10 +31,17 @@
 {{- end -}}
 
 ###################################################################################################
+###################################################################################################
 
 {{- define "elasticsearchClusterName" -}}
 {{- $holding := default (printf "%s-%s" (include "elasticsearchName" .) .Values.clusterWord) .Values.elasticsearchClusterName -}}
 {{- $holding | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+###################################################################################################
+
+{{- define "elasticsearchClusterImage" -}}
+{{- default (printf "%s:%s" .Values.clusterImageName .Values.clusterImageTag) .Values.elasticsearchClusterImage -}}
 {{- end -}}
 
 ###################################################################################################

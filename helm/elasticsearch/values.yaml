@@ -1,24 +1,9 @@
 ###################################################################################################
 ###################################################################################################
 
-httpPort: 9200
-
-###################################################################################################
-
-fsGroup: 1000
-runAsUser: 1000
-
-###################################################################################################
-
-clusterPort: 9300
-
-###################################################################################################
-
-jvmWord: jvm
 dataWord: data
 httpWord: http
 logsWord: logs
-log4jWord: log4j
 configWord: config
 ingestWord: ingest
 masterWord: master
@@ -26,30 +11,42 @@ clusterWord: cluster
 
 ###################################################################################################
 
-imageTag: 6.2.3
-imageName: docker.elastic.co/elasticsearch/elasticsearch-oss
-imagePullPolicy: IfNotPresent
+apiVersionService: v1
+apiVersionConfigMap: v1
+apiVersionStatefulSet: apps/v1
+apiVersionNetworkPolicy: networking.k8s.io/v1
+apiVersionPodDisruptionBudget: policy/v1beta1
+
+###################################################################################################
+###################################################################################################
+
+clusterHttpPort: 9200
 
 ###################################################################################################
 
-readinessProbeHttpPath: _cluster/health?local=true&wait_for_status=yellow&timeout=1s
+clusterFsGroup: 1000
+clusterRunAsUser: 1000
 
 ###################################################################################################
 
-allowPrivilegeEscalation: false
+clusterTransportPort: 9300
+
+###################################################################################################
+
+clusterImageTag: 6.2.3
+clusterImageName: docker.elastic.co/elasticsearch/elasticsearch-oss
+clusterImagePullPolicy: IfNotPresent
 
 ###################################################################################################
 
 clusterPodMaxUnavailable: 1
 
 ###################################################################################################
+###################################################################################################
+###################################################################################################
+###################################################################################################
 
-apiVersionService: v1
-apiVersionConfigMap: v1
-apiVersionDeployment: apps/v1
-apiVersionStatefulSet: apps/v1
-apiVersionNetworkPolicy: networking.k8s.io/v1
-apiVersionPodDisruptionBudget: policy/v1beta1
+clusterReadinessProbeHttpPath: _cluster/health?local=true&wait_for_status=yellow&timeout=1s
 
 ###################################################################################################
 
@@ -57,13 +54,6 @@ readinessProbePeriodSeconds: 5
 readinessProbeTimeoutSeconds: 3
 readinessProbeSuccessThreshold: 1
 readinessProbeFailureThreshold: 3
-
-###################################################################################################
-
-serviceType: LoadBalancer
-serviceAnnotations:
-serviceAwsInternalLoadBalancer: true
-serviceGcpInternalLoadBalancer: true
 
 ###################################################################################################
 
@@ -108,6 +98,8 @@ log4jRollingRandomAccessFileBufferSize:
 log4jRollingRandomAccessFilePermissions:
 log4jRollingRandomAccessFileImmediateFlush:
 
+###################################################################################################
+###################################################################################################
 ###################################################################################################
 ###################################################################################################
 
@@ -165,6 +157,10 @@ dataConfigNodeData: true
 dataConfigNodeIngest: false
 dataConfigNodeMaster: false
 dataConfigProcessors: 1
+
+###################################################################################################
+
+dataAllowPrivilegeEscalation: false
 
 ###################################################################################################
 
@@ -232,9 +228,20 @@ ingestConfigProcessors: 1
 
 ###################################################################################################
 
+ingestAllowPrivilegeEscalation: false
+
+###################################################################################################
+
 ingestPodAntiAffinity: required
 ingestPodAntiAffinityWeight: 100
 ingestPodAntiAffinityTopologyKey: kubernetes.io/hostname
+
+###################################################################################################
+
+ingestServiceType: LoadBalancer
+ingestServiceAnnotations:
+ingestServiceAwsInternalLoadBalancer: true
+ingestServiceGcpInternalLoadBalancer: true
 
 ###################################################################################################
 ###################################################################################################
@@ -293,6 +300,10 @@ masterConfigNodeData: false
 masterConfigNodeIngest: false
 masterConfigNodeMaster: true
 masterConfigProcessors: 1
+
+###################################################################################################
+
+masterAllowPrivilegeEscalation: false
 
 ###################################################################################################
 

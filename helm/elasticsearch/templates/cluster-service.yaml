@@ -18,7 +18,7 @@ spec:
     heritage: "{{ template "elasticsearchHeritage" . }}"
   ports:
     - name: "{{ .Values.clusterWord }}"
-      port: {{ .Values.clusterPort }}
+      port: {{ .Values.clusterTransportPort }}
       targetPort: "{{ .Values.clusterWord }}"
 
 ###################################################################################################

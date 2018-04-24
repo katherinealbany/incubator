@@ -72,13 +72,13 @@ spec:
                       values: [ "{{ template "elasticsearchMasterName" . }}" ]
                       operator: In
           {{- end }}
-      {{- if or (ge (default 0 (.Values.fsGroup | int)) 0) (ge (default 0 (.Values.runAsUser | int)) 0) }}
+      {{- if or (ge (default 0 (.Values.clusterFsGroup | int)) 0) (ge (default 0 (.Values.clusterRunAsUser | int)) 0) }}
       securityContext:
-        {{- if ge (default 0 (.Values.fsGroup | int)) 0 }}
-        fsGroup: {{ .Values.fsGroup }}
+        {{- if ge (default 0 (.Values.clusterFsGroup | int)) 0 }}
+        fsGroup: {{ .Values.clusterFsGroup }}
         {{- end }}
-        {{- if ge (default 0 (.Values.runAsUser | int)) 0 }}
-        runAsUser: {{ .Values.runAsUser }}
+        {{- if ge (default 0 (.Values.clusterRunAsUser | int)) 0 }}
+        runAsUser: {{ .Values.clusterRunAsUser }}
         {{- end }}
       {{- end }}
       {{- if .Values.masterPodNodeSelector }}
@@ -102,27 +102,27 @@ spec:
       {{- end }}
       initContainers:
         - name: init
-          image: "{{ template "elasticsearchImage" . }}"
-          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          image: "{{ template "elasticsearchClusterImage" . }}"
+          imagePullPolicy: "{{ .Values.clusterImagePullPolicy }}"
           securityContext:
             runAsUser: 0
-            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+            allowPrivilegeEscalation: {{ .Values.masterAllowPrivilegeEscalation }}
           command:
             - /bin/bash
             - -c
             - mkdir -pv {{ template "elasticsearchMasterDataBase" . }} &&
               mkdir -pv {{ template "elasticsearchMasterLogsBase" . }} &&
-              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchMasterDataBase" . }} &&
-              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchMasterLogsBase" . }}
+              chown -cR {{ .Values.clusterRunAsUser }}:{{ .Values.clusterFsGroup }} {{ template "elasticsearchMasterDataBase" . }} &&
+              chown -cR {{ .Values.clusterRunAsUser }}:{{ .Values.clusterFsGroup }} {{ template "elasticsearchMasterLogsBase" . }}
           volumeMounts:
             - name: "{{ .Values.masterVolumeName }}"
               mountPath: "{{ .Values.masterVolumeMountBase }}"
       containers:
         - name: "{{ .Chart.Name }}"
-          image: "{{ template "elasticsearchImage" . }}"
-          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          image: "{{ template "elasticsearchClusterImage" . }}"
+          imagePullPolicy: "{{ .Values.clusterImagePullPolicy }}"
           securityContext:
-            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+            allowPrivilegeEscalation: {{ .Values.masterAllowPrivilegeEscalation }}
           env:
             - name: node.name
               valueFrom:
@@ -130,9 +130,9 @@ spec:
                   fieldPath: metadata.name
           ports:
             - name: "{{ .Values.httpWord }}"
-              containerPort: {{ .Values.httpPort }}
+              containerPort: {{ .Values.clusterHttpPort }}
             - name: "{{ .Values.clusterWord }}"
-              containerPort: {{ .Values.clusterPort }}
+              containerPort: {{ .Values.clusterTransportPort }}
           {{- if or .Values.masterCpu .Values.masterCpuMinimum .Values.masterCpuMaximum .Values.masterMemory .Values.masterMemoryMinimum .Values.masterMemoryMaximum }}
           resources:
             {{- if or .Values.masterCpu .Values.masterCpuMinimum .Values.masterMemory .Values.masterMemoryMinimum }}
