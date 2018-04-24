@@ -21,17 +21,17 @@ spec:
       name: "{{ template "elasticsearchMasterName" . }}"
   replicas: {{ .Values.masterReplicas }}
   serviceName: "{{ template "elasticsearchClusterName" . }}"
-  {{- if .Values.volumeEnabled }}
+  {{- if .Values.masterVolumeEnabled }}
   volumeClaimTemplates:
     - metadata:
-        name: "{{ .Values.volumeName }}"
+        name: "{{ .Values.masterVolumeName }}"
         annotations:
           volume.alpha.kubernetes.io/storage-class: "{{ .Values.masterVolumeClass }}"
       spec:
         resources:
           requests:
             storage: "{{ .Values.masterVolumeSize }}"
-        accessModes: [ "{{ .Values.volumeMode }}" ]
+        accessModes: [ "{{ .Values.masterVolumeMode }}" ]
   {{- end }}
   template:
     metadata:
@@ -93,8 +93,8 @@ spec:
         - name: "{{ .Values.configWord }}"
           configMap:
             name: "{{ template "elasticsearchMasterName" . }}"
-        {{- if not .Values.volumeEnabled }}
-        - name: "{{ .Values.volumeName }}"
+        {{- if not .Values.masterVolumeEnabled }}
+        - name: "{{ .Values.masterVolumeName }}"
           emptyDir: {}
         {{- end }}
       {{- if .Values.masterPodVolumes }}
@@ -110,13 +110,13 @@ spec:
           command:
             - /bin/bash
             - -c
-            - mkdir -pv {{ template "elasticsearchDataBase" . }} &&
-              mkdir -pv {{ template "elasticsearchLogsBase" . }} &&
-              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataBase" . }} &&
-              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchLogsBase" . }}
+            - mkdir -pv {{ template "elasticsearchMasterDataBase" . }} &&
+              mkdir -pv {{ template "elasticsearchMasterLogsBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchMasterDataBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchMasterLogsBase" . }}
           volumeMounts:
-            - name: "{{ .Values.volumeName }}"
-              mountPath: "{{ .Values.volumeMountBase }}"
+            - name: "{{ .Values.masterVolumeName }}"
+              mountPath: "{{ .Values.masterVolumeMountBase }}"
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "elasticsearchImage" . }}"
@@ -164,8 +164,8 @@ spec:
             - name: "{{ .Values.configWord }}"
               subPath: "{{ .Values.configFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
-            - name: "{{ .Values.volumeName }}"
-              mountPath: "{{ .Values.volumeMountBase }}"
+            - name: "{{ .Values.masterVolumeName }}"
+              mountPath: "{{ .Values.masterVolumeMountBase }}"
           {{- if .Values.masterPodVolumeMounts }}
 {{ toYaml .Values.masterPodVolumeMounts | indent 12 }}
           {{- end }}

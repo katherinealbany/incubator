@@ -32,13 +32,6 @@ imagePullPolicy: IfNotPresent
 
 ###################################################################################################
 
-volumeMode: ReadWriteOnce
-volumeName: state
-volumeEnabled: true
-volumeMountBase: /state
-
-###################################################################################################
-
 readinessProbeHttpPath: _cluster/health?local=true&wait_for_status=yellow&timeout=1s
 
 ###################################################################################################
@@ -136,8 +129,12 @@ dataJvmHeapSize: 768m
 
 ###################################################################################################
 
+dataVolumeMode: ReadWriteOnce
+dataVolumeName: state
 dataVolumeSize: 25Gi
 dataVolumeClass: anything
+dataVolumeEnabled: true
+dataVolumeMountBase: /state
 
 ###################################################################################################
 
@@ -196,8 +193,12 @@ ingestJvmHeapSize: 768m
 
 ###################################################################################################
 
+ingestVolumeMode: ReadWriteOnce
+ingestVolumeName: state
 ingestVolumeSize: 5Gi
 ingestVolumeClass: anything
+ingestVolumeEnabled: true
+ingestVolumeMountBase: /state
 
 ###################################################################################################
 
@@ -256,8 +257,12 @@ masterJvmHeapSize: 768m
 
 ###################################################################################################
 
+masterVolumeMode: ReadWriteOnce
+masterVolumeName: state
 masterVolumeSize: 5Gi
 masterVolumeClass: anything
+masterVolumeEnabled: true
+masterVolumeMountBase: /state
 
 ###################################################################################################
 
