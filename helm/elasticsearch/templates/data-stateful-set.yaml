@@ -110,13 +110,13 @@ spec:
           command:
             - /bin/bash
             - -c
-            - mkdir -pv {{ template "elasticsearchDataDataBase" . }} &&
-              mkdir -pv {{ template "elasticsearchDataLogsBase" . }} &&
-              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataDataBase" . }} &&
-              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataLogsBase" . }}
+            - mkdir -pv {{ template "elasticsearchDataBase" . }} &&
+              mkdir -pv {{ template "elasticsearchLogsBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchLogsBase" . }}
           volumeMounts:
             - name: "{{ .Values.dataVolumeName }}"
-              mountPath: "{{ .Values.dataVolumeMountBase }}"
+              mountPath: "{{ .Values.volumeMountBase }}"
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "elasticsearchImage" . }}"
@@ -165,7 +165,7 @@ spec:
               subPath: "{{ .Values.configFile }}"
               mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
             - name: "{{ .Values.dataVolumeName }}"
-              mountPath: "{{ .Values.dataVolumeMountBase }}"
+              mountPath: "{{ .Values.volumeMountBase }}"
           {{- if .Values.dataPodVolumeMounts }}
 {{ toYaml .Values.dataPodVolumeMounts | indent 12 }}
           {{- end }}

@@ -29,12 +29,16 @@ jvmGcLogFile: gc.log
 
 ###################################################################################################
 
+maxUnavailable: 1
+
+###################################################################################################
+
 configFile: elasticsearch.yml
 configMountBase: /usr/share/elasticsearch
 
 ###################################################################################################
 
-maxUnavailable: 1
+volumeMountBase: /state
 
 ###################################################################################################
 
@@ -78,18 +82,17 @@ dataCpuMaximum: 1
 
 ###################################################################################################
 
+dataMemory:
+dataMemoryMinimum: 1024Mi
+dataMemoryMaximum: 1024Mi
+
+###################################################################################################
+
 dataVolumeMode: ReadWriteOnce
 dataVolumeName: state
 dataVolumeSize: 25Gi
 dataVolumeClass: anything
 dataVolumeEnabled: true
-dataVolumeMountBase: /state
-
-###################################################################################################
-
-dataMemory:
-dataMemoryMinimum: 1024Mi
-dataMemoryMaximum: 1024Mi
 
 ###################################################################################################
 
@@ -173,18 +176,17 @@ ingestCpuMaximum: 1
 
 ###################################################################################################
 
+ingestMemory:
+ingestMemoryMinimum: 1024Mi
+ingestMemoryMaximum: 1024Mi
+
+###################################################################################################
+
 ingestVolumeMode: ReadWriteOnce
 ingestVolumeName: state
 ingestVolumeSize: 5Gi
 ingestVolumeClass: anything
 ingestVolumeEnabled: true
-ingestVolumeMountBase: /state
-
-###################################################################################################
-
-ingestMemory:
-ingestMemoryMinimum: 1024Mi
-ingestMemoryMaximum: 1024Mi
 
 ###################################################################################################
 
@@ -275,18 +277,17 @@ masterCpuMaximum: 1
 
 ###################################################################################################
 
+masterMemory:
+masterMemoryMinimum: 1024Mi
+masterMemoryMaximum: 1024Mi
+
+###################################################################################################
+
 masterVolumeMode: ReadWriteOnce
 masterVolumeName: state
 masterVolumeSize: 5Gi
 masterVolumeClass: anything
 masterVolumeEnabled: true
-masterVolumeMountBase: /state
-
-###################################################################################################
-
-masterMemory:
-masterMemoryMinimum: 1024Mi
-masterMemoryMaximum: 1024Mi
 
 ###################################################################################################
 
