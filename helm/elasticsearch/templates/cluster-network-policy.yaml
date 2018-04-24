@@ -18,7 +18,7 @@ spec:
       heritage: "{{ template "elasticsearchHeritage" . }}"
   ingress:
     - ports:
-        - port: {{ .Values.clusterTransportPort }}
+        - port: {{ .Values.clusterPort }}
       from:
         - podSelector:
             matchLabels:

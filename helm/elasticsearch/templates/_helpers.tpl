@@ -14,6 +14,12 @@
 
 ###################################################################################################
 
+{{- define "elasticsearchImage" -}}
+{{- default (printf "%s:%s" .Values.imageName .Values.imageTag) .Values.elasticsearchImage -}}
+{{- end -}}
+
+###################################################################################################
+
 {{- define "elasticsearchRelease" -}}
 {{- default .Release.Name .Values.elasticsearchRelease -}}
 {{- end -}}
@@ -31,7 +37,6 @@
 {{- end -}}
 
 ###################################################################################################
-###################################################################################################
 
 {{- define "elasticsearchClusterName" -}}
 {{- $holding := default (printf "%s-%s" (include "elasticsearchName" .) .Values.clusterWord) .Values.elasticsearchClusterName -}}
@@ -40,20 +45,14 @@
 
 ###################################################################################################
 
-{{- define "elasticsearchClusterImage" -}}
-{{- default (printf "%s:%s" .Values.clusterImageName .Values.clusterImageTag) .Values.elasticsearchClusterImage -}}
+{{- define "elasticsearchConfigMountBase" -}}
+{{- default (printf "%s/%s" .Values.configMountBase .Values.configWord) .Values.elasticsearchConfigMountBase -}}
 {{- end -}}
 
 ###################################################################################################
 
-{{- define "elasticsearchClusterConfigMountBase" -}}
-{{- default (printf "%s/%s" .Values.clusterConfigMountBase .Values.configWord) .Values.elasticsearchClusterConfigMountBase -}}
-{{- end -}}
-
-###################################################################################################
-
-{{- define "elasticsearchClusterMinimumMasterNodes" -}}
-{{- default (int (add (div .Values.masterReplicas 2) 1)) .Values.elasticsearchClusterMinimumMasterNodes -}}
+{{- define "elasticsearchMinimumMasterNodes" -}}
+{{- default (int (add (div .Values.masterReplicas 2) 1)) .Values.elasticsearchMinimumMasterNodes -}}
 {{- end -}}
 
 ###################################################################################################

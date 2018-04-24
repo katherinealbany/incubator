@@ -1,5 +1,12 @@
 ###################################################################################################
 
+Logs
+----
+
+kubectl logs -f --namespace {{ template "elasticsearchNamespace" . }} po/{{ template "elasticsearchDataName" . }}-<<ORDINAL>>
+kubectl logs -f --namespace {{ template "elasticsearchNamespace" . }} po/{{ template "elasticsearchIngestName" . }}-<<ORDINAL>>
+kubectl logs -f --namespace {{ template "elasticsearchNamespace" . }} po/{{ template "elasticsearchMasterName" . }}-<<ORDINAL>>
+
 Uninstall
 ---------
 

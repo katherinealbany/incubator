@@ -16,6 +16,6 @@ spec:
       chart: "{{ template "elasticsearchChart" . }}"
       release: "{{ template "elasticsearchRelease" . }}"
       heritage: "{{ template "elasticsearchHeritage" . }}"
-  maxUnavailable: {{ .Values.clusterPodMaxUnavailable }}
+  maxUnavailable: {{ .Values.maxUnavailable }}
 
 ###################################################################################################

@@ -72,13 +72,13 @@ spec:
                       values: [ "{{ template "elasticsearchDataName" . }}" ]
                       operator: In
           {{- end }}
-      {{- if or (ge (default 0 (.Values.clusterFsGroup | int)) 0) (ge (default 0 (.Values.clusterRunAsUser | int)) 0) }}
+      {{- if or (ge (default 0 (.Values.fsGroup | int)) 0) (ge (default 0 (.Values.runAsUser | int)) 0) }}
       securityContext:
-        {{- if ge (default 0 (.Values.clusterFsGroup | int)) 0 }}
-        fsGroup: {{ .Values.clusterFsGroup }}
+        {{- if ge (default 0 (.Values.fsGroup | int)) 0 }}
+        fsGroup: {{ .Values.fsGroup }}
         {{- end }}
-        {{- if ge (default 0 (.Values.clusterRunAsUser | int)) 0 }}
-        runAsUser: {{ .Values.clusterRunAsUser }}
+        {{- if ge (default 0 (.Values.runAsUser | int)) 0 }}
+        runAsUser: {{ .Values.runAsUser }}
         {{- end }}
       {{- end }}
       {{- if .Values.dataPodNodeSelector }}
@@ -102,8 +102,8 @@ spec:
       {{- end }}
       initContainers:
         - name: init
-          image: "{{ template "elasticsearchClusterImage" . }}"
-          imagePullPolicy: "{{ .Values.clusterImagePullPolicy }}"
+          image: "{{ template "elasticsearchImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           securityContext:
             runAsUser: 0
             allowPrivilegeEscalation: {{ .Values.dataAllowPrivilegeEscalation }}
@@ -112,15 +112,15 @@ spec:
             - -c
             - mkdir -pv {{ template "elasticsearchDataDataBase" . }} &&
               mkdir -pv {{ template "elasticsearchDataLogsBase" . }} &&
-              chown -cR {{ .Values.clusterRunAsUser }}:{{ .Values.clusterFsGroup }} {{ template "elasticsearchDataDataBase" . }} &&
-              chown -cR {{ .Values.clusterRunAsUser }}:{{ .Values.clusterFsGroup }} {{ template "elasticsearchDataLogsBase" . }}
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataDataBase" . }} &&
+              chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ template "elasticsearchDataLogsBase" . }}
           volumeMounts:
             - name: "{{ .Values.dataVolumeName }}"
               mountPath: "{{ .Values.dataVolumeMountBase }}"
       containers:
         - name: "{{ .Chart.Name }}"
-          image: "{{ template "elasticsearchClusterImage" . }}"
-          imagePullPolicy: "{{ .Values.clusterImagePullPolicy }}"
+          image: "{{ template "elasticsearchImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           securityContext:
             allowPrivilegeEscalation: {{ .Values.dataAllowPrivilegeEscalation }}
           env:
@@ -130,9 +130,9 @@ spec:
                   fieldPath: metadata.name
           ports:
             - name: "{{ .Values.httpWord }}"
-              containerPort: {{ .Values.clusterHttpPort }}
+              containerPort: {{ .Values.httpPort }}
             - name: "{{ .Values.clusterWord }}"
-              containerPort: {{ .Values.clusterTransportPort }}
+              containerPort: {{ .Values.clusterPort }}
           {{- if or .Values.dataCpu .Values.dataCpuMinimum .Values.dataCpuMaximum .Values.dataMemory .Values.dataMemoryMinimum .Values.dataMemoryMaximum }}
           resources:
             {{- if or .Values.dataCpu .Values.dataCpuMinimum .Values.dataMemory .Values.dataMemoryMinimum }}
@@ -156,14 +156,14 @@ spec:
           {{- end }}
           volumeMounts:
             - name: "{{ .Values.configWord }}"
-              subPath: "{{ .Values.clusterJvmFile }}"
-              mountPath: "{{ template "elasticsearchClusterConfigMountBase" . }}/{{ .Values.clusterJvmFile }}"
+              subPath: "{{ .Values.jvmFile }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.jvmFile }}"
             - name: "{{ .Values.configWord }}"
-              subPath: "{{ .Values.clusterLog4jFile }}"
-              mountPath: "{{ template "elasticsearchClusterConfigMountBase" . }}/{{ .Values.clusterLog4jFile }}"
+              subPath: "{{ .Values.log4jFile }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.log4jFile }}"
             - name: "{{ .Values.configWord }}"
-              subPath: "{{ .Values.clusterConfigFile }}"
-              mountPath: "{{ template "elasticsearchClusterConfigMountBase" . }}/{{ .Values.clusterConfigFile }}"
+              subPath: "{{ .Values.configFile }}"
+              mountPath: "{{ template "elasticsearchConfigMountBase" . }}/{{ .Values.configFile }}"
             - name: "{{ .Values.dataVolumeName }}"
               mountPath: "{{ .Values.dataVolumeMountBase }}"
           {{- if .Values.dataPodVolumeMounts }}
@@ -171,7 +171,7 @@ spec:
           {{- end }}
           readinessProbe:
             httpGet:
-              path: "{{ .Values.clusterReadinessProbeHttpPath }}"
+              path: "{{ .Values.readinessProbeHttpPath }}"
               port: "{{ .Values.httpWord }}"
             periodSeconds: {{ .Values.dataReadinessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.dataReadinessProbeTimeoutSeconds }}

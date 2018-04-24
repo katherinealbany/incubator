@@ -11,11 +11,11 @@ metadata:
     release: "{{ template "elasticsearchRelease" . }}"
     heritage: "{{ template "elasticsearchHeritage" . }}"
 data:
-  {{ .Values.clusterJvmFile }}: |
+  {{ .Values.jvmFile }}: |
     -Xms{{ required ".Values.ingestJvmHeapSize" .Values.ingestJvmHeapSize }}
     -Xmx{{ required ".Values.ingestJvmHeapSize" .Values.ingestJvmHeapSize }}
     -Xss{{ .Values.ingestJvmThreadStackSize }}
-    -Xloggc:{{ template "elasticsearchIngestLogsBase" . }}/{{ .Values.clusterJvmGcLogFile }}
+    -Xloggc:{{ template "elasticsearchIngestLogsBase" . }}/{{ .Values.jvmGcLogFile }}
     -Djna.nosys=true
     -Dfile.encoding=UTF-8
     -Djava.io.tmpdir=${ES_TMPDIR}
@@ -41,31 +41,31 @@ data:
     -XX:CMSInitiatingOccupancyFraction=75
     -Dio.netty.recycler.maxCapacityPerThread=0
 
-  {{ .Values.clusterLog4jFile }}: |
+  {{ .Values.log4jFile }}: |
     status = {{ .Values.ingestLog4jStatus }}
     rootLogger.level = {{ .Values.ingestLog4jRootLevel }}
     appender.CONSOLE.name = CONSOLE
     appender.CONSOLE.type = Console
     appender.CONSOLE.layout.type = PatternLayout
-    appender.CONSOLE.layout.pattern = {{ .Values.clusterLog4jAppenderLayoutPattern }}
+    appender.CONSOLE.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
     rootLogger.appenderRef.CONSOLE.ref = CONSOLE
     appender.ROLLINGRANDOMACCESSFILE.name = ROLLINGRANDOMACCESSFILE
     appender.ROLLINGRANDOMACCESSFILE.type = RollingRandomAccessFile
-    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchIngestLogsBase" . }}/{{ .Values.clusterLog4jFileName }}
-    appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.clusterFsGroup }}
-    appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.clusterRunAsUser }}
-    appender.ROLLINGRANDOMACCESSFILE.filePattern = {{ .Values.clusterLog4jFilePattern }}
+    appender.ROLLINGRANDOMACCESSFILE.fileName = {{ template "elasticsearchIngestLogsBase" . }}/{{ .Values.log4jFileName }}
+    appender.ROLLINGRANDOMACCESSFILE.fileGroup = {{ .Values.fsGroup }}
+    appender.ROLLINGRANDOMACCESSFILE.fileOwner = {{ .Values.runAsUser }}
+    appender.ROLLINGRANDOMACCESSFILE.filePattern = {{ .Values.log4jFilePattern }}
     appender.ROLLINGRANDOMACCESSFILE.layout.type = PatternLayout
     appender.ROLLINGRANDOMACCESSFILE.policy.size = {{ .Values.ingestLog4jFileSize }}
     appender.ROLLINGRANDOMACCESSFILE.policy.type = SizeBasedTriggeringPolicy
     appender.ROLLINGRANDOMACCESSFILE.strategy.max = {{ .Values.ingestLog4jFiles }}
     appender.ROLLINGRANDOMACCESSFILE.strategy.type = DefaultRolloverStrategy
     appender.ROLLINGRANDOMACCESSFILE.immediateFlush = {{ .Values.ingestLog4jImmediateFlush }}
-    appender.ROLLINGRANDOMACCESSFILE.layout.pattern = {{ .Values.clusterLog4jAppenderLayoutPattern }}
+    appender.ROLLINGRANDOMACCESSFILE.layout.pattern = {{ .Values.log4jAppenderLayoutPattern }}
     rootLogger.appenderRef.ROLLINGRANDOMACCESSFILE.ref = ROLLINGRANDOMACCESSFILE
 
-  {{ .Values.clusterConfigFile }}: |
-    http.port: {{ .Values.clusterHttpPort }}
+  {{ .Values.configFile }}: |
+    http.port: {{ .Values.httpPort }}
     node.data: {{ .Values.ingestConfigNodeData }}
     path.data: {{ template "elasticsearchIngestDataBase" . }}
     path.logs: {{ template "elasticsearchIngestLogsBase" . }}
@@ -74,8 +74,8 @@ data:
     node.master: {{ .Values.ingestConfigNodeMaster }}
     cluster.name: {{ template "elasticsearchName" . }}
     network.host: {{ .Values.ingestConfigNetworkHost }}
-    transport.tcp.port: {{ .Values.clusterTransportPort }}
+    transport.tcp.port: {{ .Values.clusterPort }}
     discovery.zen.ping.unicast.hosts: {{ template "elasticsearchClusterName" . }}
-    discovery.zen.minimum_master_nodes: {{ template "elasticsearchClusterMinimumMasterNodes" . }}
+    discovery.zen.minimum_master_nodes: {{ template "elasticsearchMinimumMasterNodes" . }}
 
 ###################################################################################################

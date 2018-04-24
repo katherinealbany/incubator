@@ -28,7 +28,7 @@ spec:
     name: "{{ template "elasticsearchIngestName" . }}"
   ports:
     - name: "{{ .Values.httpWord }}"
-      port: {{ .Values.clusterHttpPort }}
+      port: {{ .Values.httpPort }}
       targetPort: "{{ .Values.httpWord }}"
 
 ###################################################################################################

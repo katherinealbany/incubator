@@ -16,6 +16,6 @@ spec:
       name: "{{ template "elasticsearchIngestName" . }}"
   ingress:
     - ports:
-        - port: {{ .Values.clusterHttpPort }}
+        - port: {{ .Values.httpPort }}
 
 ###################################################################################################
