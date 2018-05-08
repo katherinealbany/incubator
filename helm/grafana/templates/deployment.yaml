@@ -1,0 +1,106 @@
+###################################################################################################
+
+kind: Deployment
+apiVersion: "{{ .Values.apiVersionDeployment }}"
+metadata:
+  name: "{{ template "grafanaName" . }}"
+  namespace: "{{ template "grafanaNamespace" . }}"
+  labels:
+    name: "{{ template "grafanaName" . }}"
+    chart: "{{ template "grafanaChart" . }}"
+    release: "{{ template "grafanaRelease" . }}"
+    heritage: "{{ template "grafanaHeritage" . }}"
+  annotations:
+    config.sha256sum: "{{ include (print .Template.BasePath "/config-map.yaml") . | sha256sum }}"
+spec:
+  selector:
+    matchLabels:
+      name: "{{ template "grafanaName" . }}"
+  template:
+    metadata:
+      labels:
+        name: "{{ template "grafanaName" . }}"
+        chart: "{{ template "grafanaChart" . }}"
+        release: "{{ template "grafanaRelease" . }}"
+        heritage: "{{ template "grafanaHeritage" . }}"
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
+    spec:
+      {{- if or (ge (default 0 (.Values.fsGroup | int)) 0) (ge (default 0 (.Values.runAsUser | int)) 0) }}
+      securityContext:
+        {{- if ge (default 0 (.Values.fsGroup | int)) 0 }}
+        fsGroup: {{ .Values.fsGroup }}
+        {{- end }}
+        {{- if ge (default 0 (.Values.runAsUser | int)) 0 }}
+        runAsUser: {{ .Values.runAsUser }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.podNodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.podNodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.podTolerations }}
+      tolerations:
+{{ toYaml .Values.podTolerations | indent 8 }}
+      {{- end }}
+      {{- if .Values.podVolumes }}
+      volumes:
+{{ toYaml .Values.podVolumes | indent 8 }}
+      {{- end }}
+      containers:
+        - name: "{{ template "grafanaChart" . }}"
+          image: "{{ template "grafanaImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          securityContext:
+            readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
+            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          ports:
+            - name: "{{ template "grafanaChart" . }}"
+              containerPort: {{ .Values.podPort }}
+          {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
+          resources:
+            {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
+            requests:
+              {{- if or .Values.cpu .Values.cpuMinimum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMinimum }}{{ end }}"
+              {{- end }}
+              {{- if or .Values.memory .Values.memoryMinimum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMinimum }}{{ end }}"
+              {{- end }}
+            {{- end }}
+            {{- if or .Values.cpu .Values.cpuMaximum .Values.memory .Values.memoryMaximum }}
+            limits:
+              {{- if or .Values.cpu .Values.cpuMaximum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMaximum }}{{ end }}"
+              {{- end }}
+              {{- if or .Values.memory .Values.memoryMaximum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMaximum }}{{ end }}"
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.podVolumeMounts }}
+          volumeMounts:
+{{ toYaml .Values.podVolumeMounts | indent 12 }}
+          {{- end }}
+          readinessProbe:
+            tcpSocket:
+              port: "{{ template "grafanaChart" . }}"
+            periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
+          livenessProbe:
+            tcpSocket:
+              port: "{{ template "grafanaChart" . }}"
+            periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
+            failureThreshold: {{ .Values.livenessProbeFailureThreshold }}
+            initialDelaySeconds: {{ .Values.livenessProbeInitialDelaySeconds }}
+
+###################################################################################################

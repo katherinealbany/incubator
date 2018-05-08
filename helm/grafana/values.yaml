@@ -1,0 +1,86 @@
+###################################################################################################
+
+podPort: 3000
+
+###################################################################################################
+
+podLabels:
+
+###################################################################################################
+
+cpu:
+cpuMinimum: 100m
+cpuMaximum: 1
+
+###################################################################################################
+
+fsGroup: 0
+runAsUser: 0
+
+###################################################################################################
+
+memory:
+memoryMinimum:
+memoryMaximum:
+
+###################################################################################################
+
+podAnnotations:
+
+###################################################################################################
+
+podTolerations:
+
+###################################################################################################
+
+imageTag: 5.1.1
+imageName: grafana/grafana
+imagePullPolicy: IfNotPresent
+
+###################################################################################################
+
+podNodeSelector:
+
+###################################################################################################
+
+podVolumes:
+podVolumeMounts:
+
+###################################################################################################
+
+readOnlyRootFilesystem: true
+allowPrivilegeEscalation: false
+
+###################################################################################################
+
+apiVersionService: v1
+apiVersionConfigMap: v1
+apiVersionDeployment: apps/v1
+apiVersionStatefulSet: apps/v1
+apiVersionNetworkPolicy: networking.k8s.io/v1
+apiVersionPodDisruptionBudget: policy/v1beta1
+
+###################################################################################################
+
+readinessProbePeriodSeconds: 5
+readinessProbeTimeoutSeconds: 1
+readinessProbeSuccessThreshold: 1
+readinessProbeFailureThreshold: 3
+
+###################################################################################################
+
+servicePort: 80
+serviceType: LoadBalancer
+serviceAnnotations:
+serviceAwsInternalLoadBalancer: true
+serviceGcpInternalLoadBalancer: true
+
+###################################################################################################
+
+livenessProbePeriodSeconds: 5
+livenessProbeTimeoutSeconds: 1
+livenessProbeSuccessThreshold: 1
+livenessProbeFailureThreshold: 3
+livenessProbeInitialDelaySeconds: 60
+
+###################################################################################################
