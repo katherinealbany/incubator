@@ -27,8 +27,8 @@ spec:
   selector:
     name: "{{ template "grafanaName" . }}"
   ports:
-    - name: "{{ template "grafanaChart" . }}"
+    - name: "{{ .Chart.Name }}"
       port: {{ .Values.servicePort }}
-      targetPort: "{{ template "grafanaChart" . }}"
+      targetPort: "{{ .Chart.Name }}"
 
 ###################################################################################################

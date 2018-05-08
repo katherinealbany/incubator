@@ -53,14 +53,14 @@ spec:
 {{ toYaml .Values.podVolumes | indent 8 }}
       {{- end }}
       containers:
-        - name: "{{ template "grafanaChart" . }}"
+        - name: "{{ .Chart.Name }}"
           image: "{{ template "grafanaImage" . }}"
           imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           securityContext:
             readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
             allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
           ports:
-            - name: "{{ template "grafanaChart" . }}"
+            - name: "{{ .Chart.Name }}"
               containerPort: {{ .Values.podPort }}
           {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
           resources:
@@ -89,14 +89,14 @@ spec:
           {{- end }}
           readinessProbe:
             tcpSocket:
-              port: "{{ template "grafanaChart" . }}"
+              port: "{{ .Chart.Name }}"
             periodSeconds: {{ .Values.readinessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.readinessProbeSuccessThreshold }}
             failureThreshold: {{ .Values.readinessProbeFailureThreshold }}
           livenessProbe:
             tcpSocket:
-              port: "{{ template "grafanaChart" . }}"
+              port: "{{ .Chart.Name }}"
             periodSeconds: {{ .Values.livenessProbePeriodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbeTimeoutSeconds }}
             successThreshold: {{ .Values.livenessProbeSuccessThreshold }}
