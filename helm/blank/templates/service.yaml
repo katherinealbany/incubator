@@ -27,8 +27,8 @@ spec:
   selector:
     name: "{{ template "XXXXName" . }}"
   ports:
-    - name: TODO
-      port: TODO
-      targetPort: TODO
+    - name: "{{ template "XXXXChart" . }}"
+      port: {{ .Values.servicePort }}
+      targetPort: "{{ template "XXXXChart" . }}"
 
 ###################################################################################################

@@ -1,7 +1,7 @@
 ###################################################################################################
 
 {{- define "XXXXName" -}}
-{{- $holding := default (printf "%s-%s" .Release.Name .Chart.Name) .Values.XXXXName -}}
+{{- $holding := default (printf "%s-%s" (include "XXXXRelease" .) .Chart.Name) .Values.XXXXName -}}
 {{- $holding | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 

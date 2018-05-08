@@ -1,0 +1,24 @@
+###################################################################################################
+
+kind: NetworkPolicy
+apiVersion: "{{ .Values.apiVersionNetworkPolicy }}"
+metadata:
+  name: "{{ template "XXXXName" . }}"
+  namespace: "{{ template "XXXXNamespace" . }}"
+  labels:
+    name: "{{ template "XXXXName" . }}"
+    chart: "{{ template "XXXXChart" . }}"
+    release: "{{ template "XXXXRelease" . }}"
+    heritage: "{{ template "XXXXHeritage" . }}"
+spec:
+  podSelector:
+    matchLabels:
+      name: "{{ template "XXXXName" . }}"
+      chart: "{{ template "XXXXChart" . }}"
+      release: "{{ template "XXXXRelease" . }}"
+      heritage: "{{ template "XXXXHeritage" . }}"
+  ingress:
+    - ports:
+        - port: {{ .Values.podPort }}
+
+###################################################################################################

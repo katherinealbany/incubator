@@ -1,0 +1,22 @@
+###################################################################################################
+
+kind: PodDisruptionBudget
+apiVersion: "{{ .Values.apiVersionPodDisruptionBudget }}"
+metadata:
+  name: "{{ template "XXXXName" . }}"
+  namespace: "{{ template "XXXXNamespace" . }}"
+  labels:
+    name: "{{ template "XXXXName" . }}"
+    chart: "{{ template "XXXXChart" . }}"
+    release: "{{ template "XXXXRelease" . }}"
+    heritage: "{{ template "XXXXHeritage" . }}"
+spec:
+  selector:
+    matchLabels:
+      name: "{{ template "XXXXName" . }}"
+      chart: "{{ template "XXXXChart" . }}"
+      release: "{{ template "XXXXRelease" . }}"
+      heritage: "{{ template "XXXXHeritage" . }}"
+  maxUnavailable: {{ .Values.maxUnavailable }}
+
+###################################################################################################
