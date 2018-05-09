@@ -1,8 +1,9 @@
 ###################################################################################################
 
 configLogLevel: debug
-configSecurityAdminUser: devops
-configServerRouterLogging: true
-configSecurityAdminPassword: automation
+
+###################################################################################################
+
+configDatasourcePrometheusUrl: http://prometheus-k8s.monitoring:9090/
 
 ###################################################################################################

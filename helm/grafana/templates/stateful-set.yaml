@@ -128,6 +128,11 @@ spec:
             - name: "{{ .Values.configName }}"
               subPath: {{ .Values.configFile }}
               mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
+            {{- if .Values.configDatasourcePrometheusUrl }}
+            - name: "{{ .Values.configName }}"
+              subPath: {{ .Values.configDatasourcePrometheusFile }}
+              mountPath: "{{ .Values.configDatasourceProvisioningPath }}/{{ .Values.configDatasourcePrometheusFile }}"
+            {{- end }}
             - name: "{{ .Values.volumeName }}"
               mountPath: {{ .Values.volumeMount }}
           {{- if .Values.podVolumeMounts }}

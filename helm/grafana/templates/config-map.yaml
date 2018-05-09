@@ -42,4 +42,12 @@ data:
     [log.console]
     format = {{ .Values.configLogConsoleFormat }}
 
+  {{- if .Values.configDatasourcePrometheusUrl }}
+  {{ .Values.configDatasourcePrometheusFile }}: |
+    datasources:
+      - type: prometheus
+        name: {{ .Values.configDatasourcePrometheusName  }}
+        url: {{ .Values.configDatasourcePrometheusUrl }}
+  {{- end }}
+
 ###################################################################################################
