@@ -1,5 +1,11 @@
 ###################################################################################################
 
+Logs
+----
+
+kubectl logs -f deploy/{{ template "XXXXName" . }}
+kubectl logs -f statefulset/{{ template "XXXXName" . }}
+
 Uninstall
 ---------
 
