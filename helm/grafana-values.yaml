@@ -1,5 +1,8 @@
 ###################################################################################################
 
-
+configLogLevel: debug
+configSecurityAdminUser: devops
+configServerRouterLogging: true
+configSecurityAdminPassword: automation
 
 ###################################################################################################

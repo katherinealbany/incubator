@@ -64,6 +64,10 @@ spec:
         - name: "{{ .Values.configName }}"
           configMap:
             name: "{{ template "grafanaName" . }}"
+        {{- if not .Values.volumeEnabled }}
+        - name: "{{ .Values.volumeName }}"
+          emptyDir: {}
+        {{- end }}
       {{- if .Values.podVolumes }}
 {{ toYaml .Values.podVolumes | indent 8 }}
       {{- end }}
@@ -124,10 +128,8 @@ spec:
             - name: "{{ .Values.configName }}"
               subPath: {{ .Values.configFile }}
               mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
-          {{- if .Values.volumeEnabled }}
             - name: "{{ .Values.volumeName }}"
               mountPath: {{ .Values.volumeMount }}
-          {{- end }}
           {{- if .Values.podVolumeMounts }}
 {{ toYaml .Values.podVolumeMounts | indent 12 }}
           {{- end }}

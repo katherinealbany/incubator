@@ -19,12 +19,6 @@ runAsUser: 472
 
 ###################################################################################################
 
-configName: config
-configFile: grafana.ini
-configPath: /etc/grafana
-
-###################################################################################################
-
 memory:
 memoryMinimum:
 memoryMaximum:
@@ -63,7 +57,7 @@ podVolumeMounts:
 
 ###################################################################################################
 
-readOnlyRootFilesystem: false
+readOnlyRootFilesystem: true
 allowPrivilegeEscalation: false
 
 ###################################################################################################
@@ -87,6 +81,23 @@ serviceType: LoadBalancer
 serviceAnnotations:
 serviceAwsInternalLoadBalancer: true
 serviceGcpInternalLoadBalancer: true
+
+###################################################################################################
+
+configName: config
+configFile: grafana.ini
+configPath: /etc/grafana
+configLogLevel: info
+configMetricsEnabled: true
+configAlertingEnabled: true
+configMetricsInterval: 10
+configLogConsoleFormat: console
+configSecurityAdminUser: admin
+configServerRouterLogging: false
+configAlertingExecuteAlerts: true
+configSecurityAdminPassword: admin
+configDashboardsVersionsToKeep: 20
+configAnalyticsReportingEnabled: false
 
 ###################################################################################################
 
