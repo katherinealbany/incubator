@@ -69,12 +69,6 @@ apiVersionNetworkPolicy: networking.k8s.io/v1
 
 ###################################################################################################
 
-configDatasourcePrometheusUrl:
-configDatasourcePrometheusFile: prometheus.yaml
-configDatasourcePrometheusName: Prometheus
-
-###################################################################################################
-
 readinessProbePeriodSeconds: 5
 readinessProbeTimeoutSeconds: 1
 readinessProbeSuccessThreshold: 1
@@ -113,5 +107,12 @@ livenessProbeTimeoutSeconds: 1
 livenessProbeSuccessThreshold: 1
 livenessProbeFailureThreshold: 3
 livenessProbeInitialDelaySeconds: 60
+
+###################################################################################################
+
+configDatasourcePrometheusUrl:
+configDatasourcePrometheusFile: prometheus.yaml
+configDatasourcePrometheusName: Prometheus
+configDatasourcePrometheusDocumentVersion: 1
 
 ###################################################################################################

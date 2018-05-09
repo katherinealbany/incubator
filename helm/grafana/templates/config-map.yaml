@@ -44,6 +44,7 @@ data:
 
   {{- if .Values.configDatasourcePrometheusUrl }}
   {{ .Values.configDatasourcePrometheusFile }}: |
+    apiVersion: {{ .Values.configDatasourcePrometheusDocumentVersion }}
     datasources:
       - type: prometheus
         name: {{ .Values.configDatasourcePrometheusName  }}
