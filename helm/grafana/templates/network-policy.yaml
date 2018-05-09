@@ -14,9 +14,6 @@ spec:
   podSelector:
     matchLabels:
       name: "{{ template "grafanaName" . }}"
-      chart: "{{ template "grafanaChart" . }}"
-      release: "{{ template "grafanaRelease" . }}"
-      heritage: "{{ template "grafanaHeritage" . }}"
   ingress:
     - ports:
         - port: {{ .Values.podPort }}

@@ -3,7 +3,7 @@
 Logs
 ----
 
-kubectl logs -f deploy/{{ template "grafanaName" . }}
+kubectl logs -f statefulset/{{ template "grafanaName" . }}
 
 Uninstall
 ---------

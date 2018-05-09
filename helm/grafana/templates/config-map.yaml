@@ -11,7 +11,7 @@ metadata:
     release: "{{ template "grafanaRelease" . }}"
     heritage: "{{ template "grafanaHeritage" . }}"
 data:
-  TODO: |
-    TODO
+  {{ .Values.configFile }}: |
+    instance_name = ${HOSTNAME}
 
 ###################################################################################################
