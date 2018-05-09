@@ -67,6 +67,23 @@ spec:
       {{- if .Values.podVolumes }}
 {{ toYaml .Values.podVolumes | indent 8 }}
       {{- end }}
+      {{- if .Values.volumeEnabled }}
+      initContainers:
+        - name: init
+          image: "{{ template "grafanaImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          securityContext:
+            runAsUser: 0
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          command:
+            - /bin/bash
+            - -c
+            - chown -cR {{ .Values.runAsUser }}:{{ .Values.fsGroup }} {{ .Values.volumeMount }}
+          volumeMounts:
+            - name: "{{ .Values.volumeName }}"
+              mountPath: {{ .Values.volumeMount }}
+      {{- end }}
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "grafanaImage" . }}"
@@ -74,6 +91,11 @@ spec:
           securityContext:
             readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
             allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           ports:
             - name: "{{ .Chart.Name }}"
               containerPort: {{ .Values.podPort }}

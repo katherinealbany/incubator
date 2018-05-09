@@ -12,6 +12,6 @@ metadata:
     heritage: "{{ template "grafanaHeritage" . }}"
 data:
   {{ .Values.configFile }}: |
-    instance_name = ${HOSTNAME}
+    instance_name = ${POD_NAME}
 
 ###################################################################################################
