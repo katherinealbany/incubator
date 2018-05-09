@@ -25,7 +25,7 @@ memoryMaximum:
 
 ###################################################################################################
 
-volumeName: data
+volumeName: state
 volumeSize: 1G
 volumeMode: ReadWriteOnce
 volumeClass: anything
