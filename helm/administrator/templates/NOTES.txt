@@ -1,0 +1,13 @@
+###################################################################################################
+
+Connect
+-------
+
+kubectl exec -it --namespace {{ template "administratorNamespace" . }} <<POD_NAME>> -c {{ .Chart.Name }} -- chroot {{ .Values.hostMountPath }} {{ .Values.shell }} -i
+
+Uninstall
+---------
+
+helm delete --purge {{ template "administratorRelease" . }}
+
+###################################################################################################
