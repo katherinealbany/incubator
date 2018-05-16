@@ -1,0 +1,65 @@
+###################################################################################################
+
+kind: DaemonSet
+apiVersion: "{{ .Values.apiVersionDaemonSet }}"
+metadata:
+  name: "{{ template "fluentBitName" . }}"
+  namespace: "{{ template "fluentBitNamespace" . }}"
+  labels:
+    name: "{{ template "fluentBitName" . }}"
+    chart: "{{ template "fluentBitChart" . }}"
+    release: "{{ template "fluentBitRelease" . }}"
+    heritage: "{{ template "fluentBitHeritage" . }}"
+spec:
+  selector:
+    matchLabels:
+      name: "{{ template "fluentBitName" . }}"
+  template:
+    metadata:
+      labels:
+        name: "{{ template "fluentBitName" . }}"
+        chart: "{{ template "fluentBitChart" . }}"
+        release: "{{ template "fluentBitRelease" . }}"
+        heritage: "{{ template "fluentBitHeritage" . }}"
+    spec:
+      securityContext:
+        fsGroup: {{ .Values.fsGroup }}
+        runAsUser: {{ .Values.runAsUser }}
+      volumes:
+        - name: var
+          hostPath:
+            path: /var
+      containers:
+        - name: "{{ .Chart.Name }}"
+          image: "{{ template "fluentBitImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          securityContext:
+            readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
+            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          volumeMounts:
+            - name: var
+              readOnly: true
+              mountPath: /var
+          {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
+          resources:
+            {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
+            requests:
+              {{- if or .Values.cpu .Values.cpuMinimum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMinimum }}{{ end }}"
+              {{- end }}
+              {{- if or .Values.memory .Values.memoryMinimum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMinimum }}{{ end }}"
+              {{- end }}
+            {{- end }}
+            {{- if or .Values.cpu .Values.cpuMaximum .Values.memory .Values.memoryMaximum }}
+            limits:
+              {{- if or .Values.cpu .Values.cpuMaximum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMaximum }}{{ end }}"
+              {{- end }}
+              {{- if or .Values.memory .Values.memoryMaximum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMaximum }}{{ end }}"
+              {{- end }}
+            {{- end }}
+          {{- end }}
+
+###################################################################################################
