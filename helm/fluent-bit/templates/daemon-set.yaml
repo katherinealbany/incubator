@@ -10,6 +10,8 @@ metadata:
     chart: "{{ template "fluentBitChart" . }}"
     release: "{{ template "fluentBitRelease" . }}"
     heritage: "{{ template "fluentBitHeritage" . }}"
+  annotations:
+    config.sha256sum: "{{ include (print .Template.BasePath "/config-map.yaml") . | sha256sum }}"
 spec:
   selector:
     matchLabels:
@@ -26,6 +28,9 @@ spec:
         fsGroup: {{ .Values.fsGroup }}
         runAsUser: {{ .Values.runAsUser }}
       volumes:
+        - name: "{{ .Values.configName }}"
+          configMap:
+            name: "{{ template "fluentBitName" . }}"
         - name: var
           hostPath:
             path: /var
@@ -36,10 +41,6 @@ spec:
           securityContext:
             readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
             allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
-          volumeMounts:
-            - name: var
-              readOnly: true
-              mountPath: /var
           {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
           resources:
             {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
@@ -61,5 +62,11 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+          volumeMounts:
+            - name: "{{ .Values.configName }}"
+              subPath: {{ .Values.configFile }}
+              mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
+            - name: var
+              mountPath: /var
 
 ###################################################################################################
