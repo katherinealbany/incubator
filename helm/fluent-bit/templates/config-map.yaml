@@ -15,11 +15,12 @@ data:
     [SERVICE]
         Flush        1
         Daemon       Off
-        Log_Level    trace
+        Log_Level    info
         HTTP_Port    2020
         HTTP_Listen  0.0.0.0
         HTTP_Server  Off
         Parsers_File parsers.conf
+        Parsers_File parsers_java.conf
 
     [INPUT]
         Name              tail
@@ -28,28 +29,28 @@ data:
         Path              /var/log/containers/*.log
         Parser            docker
         Exclude_Path      /var/log/containers/{{ template "fluentBitName" . }}*.log
-        Mem_Buf_Limit     5MB
-        Skip_Long_Lines   On
-        Refresh_Interval  10
+        # Mem_Buf_Limit     5MB
+        # Skip_Long_Lines   On
+        # Refresh_Interval  10
 
     [FILTER]
         Name                kubernetes
         Match               kube.*
         Kube_URL            https://kubernetes.default.svc.cluster.local:443
-        Merge_Log           On
+        # Merge_Log           On
         K8S-Logging.Parser  On
 
-    # [OUTPUT]
-    #     Name            es
-    #     Host            elasticsearch001-elasticsearch-client.default.svc.cluster.local
-    #     Port            80
-    #     Match           kube.*
-    #     Retry_Limit     False
-    #     Generate_ID     On
-    #     Logstash_Format On
-
     [OUTPUT]
-        Name  stdout
-        Match kube.*
+        Name            es
+        Host            elasticsearch001-elasticsearch-client.default.svc.cluster.local
+        Port            80
+        Match           kube.*
+        Retry_Limit     False
+        Generate_ID     On
+        Logstash_Format On
+
+    # [OUTPUT]
+    #     Name  stdout
+    #     Match kube.*
 
 ###################################################################################################
