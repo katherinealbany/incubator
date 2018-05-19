@@ -1,0 +1,16 @@
+###################################################################################################
+
+kind: ConfigMap
+apiVersion: "{{ .Values.apiVersionConfigMap }}"
+metadata:
+  name: "{{ template "filebeatName" . }}"
+  namespace: "{{ template "filebeatNamespace" . }}"
+  labels:
+    name: "{{ template "filebeatName" . }}"
+    chart: "{{ template "filebeatChart" . }}"
+    release: "{{ template "filebeatRelease" . }}"
+    heritage: "{{ template "filebeatHeritage" . }}"
+data:
+  {{ .Values.configFile }}: |
+
+###################################################################################################

@@ -1,0 +1,72 @@
+###################################################################################################
+
+kind: DaemonSet
+apiVersion: "{{ .Values.apiVersionDaemonSet }}"
+metadata:
+  name: "{{ template "filebeatName" . }}"
+  namespace: "{{ template "filebeatNamespace" . }}"
+  labels:
+    name: "{{ template "filebeatName" . }}"
+    chart: "{{ template "filebeatChart" . }}"
+    release: "{{ template "filebeatRelease" . }}"
+    heritage: "{{ template "filebeatHeritage" . }}"
+  annotations:
+    config.sha256sum: "{{ include (print .Template.BasePath "/config-map.yaml") . | sha256sum }}"
+spec:
+  selector:
+    matchLabels:
+      name: "{{ template "filebeatName" . }}"
+  template:
+    metadata:
+      labels:
+        name: "{{ template "filebeatName" . }}"
+        chart: "{{ template "filebeatChart" . }}"
+        release: "{{ template "filebeatRelease" . }}"
+        heritage: "{{ template "filebeatHeritage" . }}"
+    spec:
+      securityContext:
+        fsGroup: {{ .Values.fsGroup }}
+        runAsUser: {{ .Values.runAsUser }}
+      volumes:
+        - name: "{{ .Values.configName }}"
+          configMap:
+            name: "{{ template "filebeatName" . }}"
+        - name: var
+          hostPath:
+            path: /var
+      containers:
+        - name: "{{ .Chart.Name }}"
+          image: "{{ template "filebeatImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          securityContext:
+            readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
+            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          {{- if or .Values.cpu .Values.cpuMinimum .Values.cpuMaximum .Values.memory .Values.memoryMinimum .Values.memoryMaximum }}
+          resources:
+            {{- if or .Values.cpu .Values.cpuMinimum .Values.memory .Values.memoryMinimum }}
+            requests:
+              {{- if or .Values.cpu .Values.cpuMinimum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMinimum }}{{ end }}"
+              {{- end }}
+              {{- if or .Values.memory .Values.memoryMinimum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMinimum }}{{ end }}"
+              {{- end }}
+            {{- end }}
+            {{- if or .Values.cpu .Values.cpuMaximum .Values.memory .Values.memoryMaximum }}
+            limits:
+              {{- if or .Values.cpu .Values.cpuMaximum }}
+              cpu: "{{ if .Values.cpu }}{{ .Values.cpu }}{{ else }}{{ .Values.cpuMaximum }}{{ end }}"
+              {{- end }}
+              {{- if or .Values.memory .Values.memoryMaximum }}
+              memory: "{{ if .Values.memory }}{{ .Values.memory }}{{ else }}{{ .Values.memoryMaximum }}{{ end }}"
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          volumeMounts:
+            - name: "{{ .Values.configName }}"
+              subPath: {{ .Values.configFile }}
+              mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
+            - name: var
+              mountPath: /var
+
+###################################################################################################
