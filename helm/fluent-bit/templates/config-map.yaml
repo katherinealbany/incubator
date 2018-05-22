@@ -27,8 +27,9 @@ data:
         Tag               kube.*
         Path              /var/log/containers/*.log
         Parser            docker
+        Rotate_Wait       30
         Exclude_Path      /var/log/containers/{{ template "fluentBitName" . }}*.log
-        Mem_Buf_Limit     5MB
+        Mem_Buf_Limit     8MB
         Skip_Long_Lines   On
         Refresh_Interval  10
 
@@ -46,7 +47,7 @@ data:
         Host            elasticsearch001-elasticsearch-client.default.svc
         Port            80
         Match           *
-        Buffer_Size     1M
+        Buffer_Size     3M
         Retry_Limit     False
         # Generate_ID     On
         Logstash_Format On
