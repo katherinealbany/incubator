@@ -66,6 +66,9 @@ spec:
             - name: "{{ .Values.configName }}"
               subPath: {{ .Values.configFile }}
               mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
+            - name: "{{ .Values.configName }}"
+              subPath: default.yml
+              mountPath: "{{ .Values.configPath }}/prospectors.d/default.yml"
             - name: var
               mountPath: /var
 
