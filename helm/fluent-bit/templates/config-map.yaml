@@ -44,7 +44,7 @@ data:
 
     [OUTPUT]
         Name            es
-        Host            elasticsearch001-elasticsearch-client.default.svc
+        Host            elasticsearch-elasticsearch-ingest.logging.svc
         Port            80
         Match           *
         Buffer_Size     3M

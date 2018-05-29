@@ -44,7 +44,7 @@ data:
         events: 8192
 
     output.elasticsearch:
-      hosts: [ "elasticsearch001-elasticsearch-client.default.svc:80" ]
+      hosts: [ "elasticsearch-elasticsearch-ingest.logging.svc:80" ]
       worker: 16
       bulk_max_size: 1024
       compression_level: 1
