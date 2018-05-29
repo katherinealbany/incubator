@@ -13,13 +13,14 @@ metadata:
 data:
   {{ .Values.configFile }}: |
     filebeat.config:
-      prospectors:
-        path: ${path.config}/prospectors.d/*.yml
       modules:
-        path: ${path.config}/modules.d/*.yml
+        path: "${path.config}/modules.d/*.yml"
+      prospectors:
+        path: "${path.config}/prospectors.d/*.yml"
 
-    logging.level: info
-    logging.metrics.enabled: false
+    logging.level: "info"
+    logging.metrics.enabled: true
+    logging.metrics.period: "60s"
 
     setup.kibana:
       host: "kibana001-kibana.default.svc:80"
@@ -27,27 +28,33 @@ data:
     filebeat.prospectors:
       multiline.pattern: '^[[:space:]]+(at|\.{3})\b|^Caused by:'
       multiline.negate: false
-      multiline.match: after
+      multiline.match: "after"
 
     processors:
       - add_locale:
       - add_cloud_metadata:
       - decode_json_fields:
           fields: [ "message" ]
-          process_array: false
-          max_depth: 8
-          target: "json_message"
-          overwrite_keys: false
+          target: "payload"
+          max_depth: 10
+          process_array: true
+
+    queue:
+      mem:
+        events: 8192
 
     output.elasticsearch:
-      hosts: [ 'elasticsearch001-elasticsearch-client.default.svc:80' ]
+      hosts: [ "elasticsearch001-elasticsearch-client.default.svc:80" ]
+      worker: 16
+      bulk_max_size: 1024
+      compression_level: 1
 
   default.yml: |
-    - type: docker
-      containers.ids:
-      - "*"
+    - type: "docker"
       processors:
         - add_kubernetes_metadata:
             in_cluster: true
+      containers.ids:
+        - "*"
 
 ###################################################################################################
