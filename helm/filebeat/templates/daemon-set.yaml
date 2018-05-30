@@ -23,10 +23,21 @@ spec:
         chart: "{{ template "filebeatChart" . }}"
         release: "{{ template "filebeatRelease" . }}"
         heritage: "{{ template "filebeatHeritage" . }}"
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+      {{- end }}
     spec:
       securityContext:
         fsGroup: {{ .Values.fsGroup }}
         runAsUser: {{ .Values.runAsUser }}
+      {{- if .Values.podTolerations }}
+      tolerations:
+{{ toYaml .Values.podTolerations | indent 8 }}
+      {{- end }}
       volumes:
         - name: "{{ .Values.configName }}"
           configMap:
@@ -34,6 +45,9 @@ spec:
         - name: "{{ .Values.hostMountName }}"
           hostPath:
             path: "{{ .Values.hostMountPath }}"
+        {{- if .Values.podVolumes }}
+{{ toYaml .Values.podVolumes | indent 8 }}
+        {{- end }}
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "filebeatImage" . }}"
@@ -68,5 +82,8 @@ spec:
               mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
             - name: "{{ .Values.hostMountName }}"
               mountPath: "{{ .Values.hostMountPath }}"
+            {{- if .Values.podVolumeMounts }}
+{{ toYaml .Values.podVolumeMounts | indent 12 }}
+            {{- end }}
 
 ###################################################################################################
