@@ -4,8 +4,22 @@ configName: config
 configFile: filebeat.yml
 configPath: /usr/share/filebeat
 
-hostMountName: var
-hostMountPath: /var
+configDataPath: /var/log
+configLogsPath: /var/log
+
+configLoggingLevel: info
+configLoggingMetricsPeriod: 60s
+configLoggingMetricsEnabled: true
+
+configLocaleProcessorEnabled: true
+
+configCloudMetadataProcessorEnabled: true
+
+configDecodeJsonProcessorField: message
+configDecodeJsonProcessorTarget: payload
+configDecodeJsonProcessorEnabled: true
+configDecodeJsonProcessorMaxDepth: 10
+configDecodeJsonProcessorProcessArray: true
 
 ###################################################################################################
 ###################################################################################################
@@ -22,6 +36,11 @@ runAsUser: 0
 cpu:
 cpuMinimum: 100m
 cpuMaximum: 1
+
+###################################################################################################
+
+hostMountName: var
+hostMountPath: /var
 
 ###################################################################################################
 

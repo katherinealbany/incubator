@@ -12,16 +12,12 @@ metadata:
     heritage: "{{ template "filebeatHeritage" . }}"
 data:
   {{ .Values.configFile }}: |
-    filebeat.config:
-      modules:
-        path: "${path.config}/modules.d/*.yml"
+    path.data: "{{ .Values.configDataPath }}"
+    path.logs: "{{ .Values.configLogsPath }}"
 
-    path.data: /var/log
-    path.logs: /var/log
-
-    logging.level: "info"
-    logging.metrics.enabled: true
-    logging.metrics.period: "60s"
+    logging.level: "{{ .Values.configLoggingLevel }}"
+    logging.metrics.period: "{{ .Values.configLoggingMetricsPeriod }}"
+    logging.metrics.enabled: {{ .Values.configLoggingMetricsEnabled }}
 
     setup.kibana:
       host: "kibana001-kibana.default.svc:80"
@@ -39,14 +35,22 @@ data:
         containers.ids:
           - "*"
 
+    {{- if or .Values.configLocaleProcessorEnabled .Values.configCloudMetadataProcessorEnabled .Values.configDecodeJsonProcessorEnabled }}
     processors:
+      {{- if .Values.configLocaleProcessorEnabled }}
       - add_locale:
+      {{- end }}
+      {{- if .Values.configCloudMetadataProcessorEnabled }}
       - add_cloud_metadata:
+      {{- end }}
+      {{- if .Values.configDecodeJsonProcessorEnabled }}
       - decode_json_fields:
-          fields: [ "message" ]
-          target: "payload"
-          max_depth: 10
-          process_array: true
+          fields: [ "{{ .Values.configDecodeJsonProcessorField }}" ]
+          target: "{{ .Values.configDecodeJsonProcessorTarget }}"
+          max_depth: {{ .Values.configDecodeJsonProcessorMaxDepth }}
+          process_array: {{ .Values.configDecodeJsonProcessorProcessArray }}
+      {{- end }}
+    {{- end }}
 
     queue:
       mem:
