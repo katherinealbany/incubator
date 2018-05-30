@@ -15,8 +15,9 @@ data:
     filebeat.config:
       modules:
         path: "${path.config}/modules.d/*.yml"
-      prospectors:
-        path: "${path.config}/prospectors.d/*.yml"
+
+    path.data: /var/log
+    path.logs: /var/log
 
     logging.level: "info"
     logging.metrics.enabled: true
@@ -29,6 +30,14 @@ data:
       multiline.pattern: '^[[:space:]]+(at|\.{3})\b|^Caused by:'
       multiline.negate: false
       multiline.match: "after"
+
+    filebeat.prospectors:
+      - type: "docker"
+        processors:
+          - add_kubernetes_metadata:
+              in_cluster: true
+        containers.ids:
+          - "*"
 
     processors:
       - add_locale:
@@ -48,13 +57,5 @@ data:
       worker: 16
       bulk_max_size: 1024
       compression_level: 1
-
-  default.yml: |
-    - type: "docker"
-      processors:
-        - add_kubernetes_metadata:
-            in_cluster: true
-      containers.ids:
-        - "*"
 
 ###################################################################################################

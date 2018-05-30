@@ -31,9 +31,9 @@ spec:
         - name: "{{ .Values.configName }}"
           configMap:
             name: "{{ template "filebeatName" . }}"
-        - name: var
+        - name: "{{ .Values.hostMountName }}"
           hostPath:
-            path: /var
+            path: "{{ .Values.hostMountPath }}"
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "filebeatImage" . }}"
@@ -66,10 +66,7 @@ spec:
             - name: "{{ .Values.configName }}"
               subPath: {{ .Values.configFile }}
               mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
-            - name: "{{ .Values.configName }}"
-              subPath: default.yml
-              mountPath: "{{ .Values.configPath }}/prospectors.d/default.yml"
-            - name: var
-              mountPath: /var
+            - name: "{{ .Values.hostMountName }}"
+              mountPath: "{{ .Values.hostMountPath }}"
 
 ###################################################################################################

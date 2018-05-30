@@ -1,5 +1,10 @@
 ###################################################################################################
 
+Logs
+----
+
+kubectl logs -f --namespace {{ template "filebeatNamespace" . }} po/{{ template "filebeatName" . }}-<<UNIQUE_ID>>
+
 Uninstall
 ---------
 
