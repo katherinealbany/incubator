@@ -3,7 +3,7 @@
 Logs
 ----
 
-kubectl logs -f --namespace {{ template "filebeatNamespace" . }} po/{{ template "filebeatName" . }}-<<UNIQUE_ID>>
+kubectl logs -f --namespace {{ template "filebeatNamespace" . }} po/{{ template "filebeatName" . }}-<<ID>>
 
 Uninstall
 ---------

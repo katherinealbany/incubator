@@ -48,6 +48,25 @@ spec:
         {{- if .Values.podVolumes }}
 {{ toYaml .Values.podVolumes | indent 8 }}
         {{- end }}
+      {{- if .Values.configSetupKibanaHost }}
+      initContainers:
+        - name: kibana
+          image: "{{ template "filebeatImage" . }}"
+          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          securityContext:
+            readOnlyRootFilesystem: {{ .Values.readOnlyRootFilesystem }}
+            allowPrivilegeEscalation: {{ .Values.allowPrivilegeEscalation }}
+          command:
+            - filebeat
+            - setup
+            - --dashboards
+          volumeMounts:
+            - name: "{{ .Values.configName }}"
+              subPath: {{ .Values.configFile }}
+              mountPath: "{{ .Values.configPath }}/{{ .Values.configFile }}"
+            - name: "{{ .Values.hostMountName }}"
+              mountPath: "{{ .Values.hostMountPath }}"
+      {{- end }}
       containers:
         - name: "{{ .Chart.Name }}"
           image: "{{ template "filebeatImage" . }}"

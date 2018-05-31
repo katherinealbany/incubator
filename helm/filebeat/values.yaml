@@ -1,35 +1,17 @@
 ###################################################################################################
 
-configName: config
-configFile: filebeat.yml
-configPath: /usr/share/filebeat
-
-configDataPath: /var/log
-configLogsPath: /var/log
-
-configLoggingLevel: info
-configLoggingMetricsPeriod: 60s
-configLoggingMetricsEnabled: true
-
-configLocaleProcessorEnabled: true
-
-configCloudMetadataProcessorEnabled: true
-
-configDecodeJsonProcessorField: message
-configDecodeJsonProcessorTarget: payload
-configDecodeJsonProcessorEnabled: true
-configDecodeJsonProcessorMaxDepth: 10
-configDecodeJsonProcessorProcessArray: true
-
-###################################################################################################
-###################################################################################################
-
 podLabels:
 
 ###################################################################################################
 
 fsGroup: 1000
 runAsUser: 0
+
+###################################################################################################
+
+configName: config
+configFile: filebeat.yml
+configPath: /usr/share/filebeat
 
 ###################################################################################################
 
@@ -47,6 +29,11 @@ hostMountPath: /var
 memory:
 memoryMinimum: 250Mi
 memoryMaximum: 250Mi
+
+###################################################################################################
+
+configPathData: /var/log
+configPathLogs: /var/log
 
 ###################################################################################################
 
@@ -69,12 +56,62 @@ podVolumeMounts:
 
 ###################################################################################################
 
+configLoggingLevel: info
+
+###################################################################################################
+
 apiVersionConfigMap: v1
 apiVersionDaemonSet: apps/v1
 
 ###################################################################################################
 
+configSetupKibanaHost:
+
+###################################################################################################
+
 readOnlyRootFilesystem: true
 allowPrivilegeEscalation: false
+
+###################################################################################################
+
+configLoggingMetricsPeriod: 60s
+configLoggingMetricsEnabled: true
+
+###################################################################################################
+
+configProcessorAddLocaleFormat: offset
+configProcessorAddLocaleEnabled: true
+
+###################################################################################################
+
+configProcessorAddCloudMetadataEnabled: true
+
+###################################################################################################
+
+configOutputElasticsearchHost:
+configOutputElasticsearchWorker: 5
+configOutputElasticsearchMaxRetries: 0
+configOutputElasticsearchBulkMaxSize: 250
+configOutputElasticsearchCompressionLevel:
+
+###################################################################################################
+
+configFilebeatProspectorsDockerMultilineMatch: after
+configFilebeatProspectorsDockerMultilineNegate: false
+configFilebeatProspectorsDockerMultilineEnabled: true
+configFilebeatProspectorsDockerMultilinePattern: '^[[:space:]]+(at|\.{3})\b|^Caused by:'
+
+###################################################################################################
+
+configFilebeatProspectorsDockerProcessorsAddKubernetesMetadataEnabled: true
+
+###################################################################################################
+
+configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsField: message
+configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsTarget: payload
+configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsEnabled: true
+configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsMaxDepth: 5
+configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsProcessArray: false
+configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsOverwriteKeys: false
 
 ###################################################################################################

@@ -12,54 +12,61 @@ metadata:
     heritage: "{{ template "filebeatHeritage" . }}"
 data:
   {{ .Values.configFile }}: |
-    path.data: "{{ .Values.configDataPath }}"
-    path.logs: "{{ .Values.configLogsPath }}"
-
+    path.data: "{{ .Values.configPathData }}"
+    path.logs: "{{ .Values.configPathLogs }}"
     logging.level: "{{ .Values.configLoggingLevel }}"
+    logging.to_files: false
+    logging.to_syslog: false
+    {{- if .Values.configSetupKibanaHost }}
+    setup.kibana.host: "{{ .Values.configSetupKibanaHost }}"
+    {{- end }}
     logging.metrics.period: "{{ .Values.configLoggingMetricsPeriod }}"
     logging.metrics.enabled: {{ .Values.configLoggingMetricsEnabled }}
-
-    setup.kibana:
-      host: "kibana001-kibana.default.svc:80"
-
     filebeat.prospectors:
-      multiline.pattern: '^[[:space:]]+(at|\.{3})\b|^Caused by:'
-      multiline.negate: false
-      multiline.match: "after"
-
-    filebeat.prospectors:
-      - type: "docker"
+      - type: docker
+        {{- if or .Values.configFilebeatProspectorsDockerProcessorsAddKubernetesMetadataEnabled .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsEnabled }}
         processors:
+          {{- if .Values.configFilebeatProspectorsDockerProcessorsAddKubernetesMetadataEnabled }}
           - add_kubernetes_metadata:
               in_cluster: true
-        containers.ids:
-          - "*"
-
-    {{- if or .Values.configLocaleProcessorEnabled .Values.configCloudMetadataProcessorEnabled .Values.configDecodeJsonProcessorEnabled }}
+          {{- end }}
+          {{- if .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsEnabled }}
+          - decode_json_fields:
+              fields: [ "{{ .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsField }}" ]
+              target: "{{ .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsTarget }}"
+              max_depth: {{ .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsMaxDepth }}
+              process_array: {{ .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsProcessArray }}
+              overwrite_keys: {{ .Values.configFilebeatProspectorsDockerProcessorsDecodeJsonFieldsOverwriteKeys }}
+          {{- end }}
+        {{- end }}
+        containers.ids: [ '*' ]
+        {{- if .Values.configFilebeatProspectorsDockerMultilineEnabled }}
+        multiline.match: "{{ .Values.configFilebeatProspectorsDockerMultilineMatch }}"
+        multiline.negate: {{ .Values.configFilebeatProspectorsDockerMultilineNegate }}
+        multiline.pattern: '{{ .Values.configFilebeatProspectorsDockerMultilinePattern }}'
+        {{- end }}
+    {{- if or .Values.configProcessorAddLocaleEnabled .Values.configProcessorAddCloudMetadataEnabled }}
     processors:
-      {{- if .Values.configLocaleProcessorEnabled }}
+      {{- if .Values.configProcessorAddLocaleEnabled }}
       - add_locale:
+          format: "{{ .Values.configProcessorAddLocaleFormat }}"
       {{- end }}
-      {{- if .Values.configCloudMetadataProcessorEnabled }}
-      - add_cloud_metadata:
-      {{- end }}
-      {{- if .Values.configDecodeJsonProcessorEnabled }}
-      - decode_json_fields:
-          fields: [ "{{ .Values.configDecodeJsonProcessorField }}" ]
-          target: "{{ .Values.configDecodeJsonProcessorTarget }}"
-          max_depth: {{ .Values.configDecodeJsonProcessorMaxDepth }}
-          process_array: {{ .Values.configDecodeJsonProcessorProcessArray }}
+      {{- if .Values.configProcessorAddCloudMetadataEnabled }}
+      - add_cloud_metadata: ~
       {{- end }}
     {{- end }}
-
-    queue:
-      mem:
-        events: 8192
-
-    output.elasticsearch:
-      hosts: [ "elasticsearch-elasticsearch-ingest.logging.svc:80" ]
-      worker: 16
-      bulk_max_size: 1024
-      compression_level: 1
+    output.elasticsearch.hosts: [ "{{ required ".Values.configOutputElasticsearchHost" .Values.configOutputElasticsearchHost }}" ]
+    {{- if .Values.configOutputElasticsearchWorker }}
+    output.elasticsearch.worker: {{ .Values.configOutputElasticsearchWorker }}
+    {{- end }}
+    {{- if ge (.Values.configOutputElasticsearchMaxRetries | int) 0 }}
+    output.elasticsearch.max_retries: {{ .Values.configOutputElasticsearchMaxRetries }}
+    {{- end }}
+    {{- if .Values.configOutputElasticsearchBulkMaxSize }}
+    output.elasticsearch.bulk_max_size: {{ .Values.configOutputElasticsearchBulkMaxSize }}
+    {{- end }}
+    {{- if .Values.configOutputElasticsearchCompressionLevel }}
+    output.elasticsearch.compression_level: {{ .Values.configOutputElasticsearchCompressionLevel }}
+    {{- end }}
 
 ###################################################################################################
