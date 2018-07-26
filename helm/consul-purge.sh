@@ -1,9 +1,6 @@
 ###################################################################################################
 
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: tiller
-  namespace: kube-system
+helm delete --purge consul
+kubectl delete pvc -l component=consul-consul
 
 ###################################################################################################
