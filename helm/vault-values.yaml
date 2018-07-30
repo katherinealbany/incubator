@@ -1,0 +1,34 @@
+###################################################################################################
+
+replicas: 1
+
+###################################################################################################
+
+storage:
+ consul:
+   path: vault/
+   address: consul-consul:8500
+
+###################################################################################################
+
+# Initialise
+# ----------
+#
+# kubectl exec --namespace default vault-vault-0 -c vault -- vault operator init -address=http://127.0.0.1:8200
+#
+# Unseal
+# ------
+#
+# kubectl exec --namespace default vault-vault-<<ORDINAL>> -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
+
+###################################################################################################
+
+# Unseal Key 1: dUctzV+CD6VOJPPC9eHyRGCj2f+PfoCLFLvuuAipN3cJ
+# Unseal Key 2: 71tfN9/truErq++G0G6VYR5atoybI06eQ5IZLCyscr2p
+# Unseal Key 3: iFKmkkjcvieLbG/mhiN/5p2jbEfMWWDUN+krZ7q5w9pI
+# Unseal Key 4: 2H8vjk8fzjvFEz2xVb7WAwQo6Wu2fQw/OLzpeozGCxdM
+# Unseal Key 5: x3WXZEIfByXkGFFFhi1XUga1IBmO2O5B4xp5dE56k/lO
+#
+# Initial Root Token: 09b45462-2e21-0f79-a1d9-3943e19c4cc3
+
+###################################################################################################
