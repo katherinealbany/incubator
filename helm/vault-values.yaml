@@ -1,13 +1,18 @@
 ###################################################################################################
 
-replicas: 1
+replicas: 3
+
+###################################################################################################
+
+logLevel: trace
 
 ###################################################################################################
 
 storage:
- consul:
-   path: vault/
-   address: consul-consul:8500
+  dynamodb:
+    table: Vault
+    region: eu-west-1
+    ha_enabled: 'true'
 
 ###################################################################################################
 
@@ -19,16 +24,16 @@ storage:
 # Unseal
 # ------
 #
-# kubectl exec --namespace default vault-vault-<<ORDINAL>> -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
+# kubectl exec --namespace default vault-vault-0 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
 
 ###################################################################################################
 
-# Unseal Key 1: dUctzV+CD6VOJPPC9eHyRGCj2f+PfoCLFLvuuAipN3cJ
-# Unseal Key 2: 71tfN9/truErq++G0G6VYR5atoybI06eQ5IZLCyscr2p
-# Unseal Key 3: iFKmkkjcvieLbG/mhiN/5p2jbEfMWWDUN+krZ7q5w9pI
-# Unseal Key 4: 2H8vjk8fzjvFEz2xVb7WAwQo6Wu2fQw/OLzpeozGCxdM
-# Unseal Key 5: x3WXZEIfByXkGFFFhi1XUga1IBmO2O5B4xp5dE56k/lO
-#
-# Initial Root Token: 09b45462-2e21-0f79-a1d9-3943e19c4cc3
+# Unseal Key 1: SpVk2IO/sWg753/bN5kiY/wDeROay/48mm5HviWxfGcK
+# Unseal Key 2: tqlYxiqYt8MO8pPp8E7nik9BHuUPzyUznlYGa15h7R1a
+# Unseal Key 3: nwtbFGIYWX1LJieRyj+7deZaQbxrZMW6zn7ukazWIWVh
+# Unseal Key 4: oXHNmJPkWCX8AHYeZlR+v2KwaULiOA58Br48oKcRT5SW
+# Unseal Key 5: cHPWur2xeJAh26aRz7YS1UQNDcGG15XwkjkicaLalNHO
+
+# Initial Root Token: c29a26ae-2e38-1173-f144-b85027234b40
 
 ###################################################################################################
