@@ -25,15 +25,7 @@ storage:
 # ------
 #
 # kubectl exec --namespace default vault-vault-0 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
-
-###################################################################################################
-
-# Unseal Key 1: SpVk2IO/sWg753/bN5kiY/wDeROay/48mm5HviWxfGcK
-# Unseal Key 2: tqlYxiqYt8MO8pPp8E7nik9BHuUPzyUznlYGa15h7R1a
-# Unseal Key 3: nwtbFGIYWX1LJieRyj+7deZaQbxrZMW6zn7ukazWIWVh
-# Unseal Key 4: oXHNmJPkWCX8AHYeZlR+v2KwaULiOA58Br48oKcRT5SW
-# Unseal Key 5: cHPWur2xeJAh26aRz7YS1UQNDcGG15XwkjkicaLalNHO
-
-# Initial Root Token: c29a26ae-2e38-1173-f144-b85027234b40
+# kubectl exec --namespace default vault-vault-1 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
+# kubectl exec --namespace default vault-vault-2 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
 
 ###################################################################################################
