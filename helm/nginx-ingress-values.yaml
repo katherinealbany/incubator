@@ -1,13 +1,14 @@
 ###################################################################################################
 
 controller:
-  kind: DaemonSet
+  # kind: DaemonSet
+  kind: Deployment
   stats:
     enabled: true
   metrics:
     enabled: true
   extraArgs:
-    v: 2
+    v: 4
   service:
     annotations:
       cloud.google.com/load-balancer-type: Internal
