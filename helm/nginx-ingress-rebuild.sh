@@ -1,9 +1,9 @@
 ###################################################################################################
 
-helm delete --purge consul
+helm delete --purge nginx-ingress
 
 ###################################################################################################
 
-helm install --debug --name consul --values consul-values.yaml stable/consul
+helm install --debug --namespace kube-system --name nginx-ingress --values nginx-ingress-values.yaml stable/nginx-ingress
 
 ###################################################################################################
