@@ -14,5 +14,5 @@ spec:
         domains:
           - vault.digitaltest-e.aws.travisperkins.cloud
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt
     kind: ClusterIssuer

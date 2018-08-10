@@ -11,9 +11,9 @@ controller:
     v: 4
   service:
     annotations:
-      cloud.google.com/load-balancer-type: Internal
+      # cloud.google.com/load-balancer-type: Internal
       external-dns.alpha.kubernetes.io/hostname: ingress.shared01.aws.travisperkins.cloud.
-      service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+      # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 
 ###################################################################################################
 
