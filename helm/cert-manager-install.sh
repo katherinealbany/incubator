@@ -1,5 +1,5 @@
 ###################################################################################################
 
-helm install --name cert-manager --version 0.4.0 --namespace kube-system stable/cert-manager
+helm upgrade --install --debug --wait cert-manager stable/cert-manager --version 0.4.0 --namespace kube-system
 
 ###################################################################################################
