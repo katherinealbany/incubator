@@ -1,9 +1,9 @@
 ###################################################################################################
 
-helm delete --purge cert-manager
+helm delete --purge external-dns
 
 ###################################################################################################
 
-helm install --debug --namespace kube-system --name cert-manager --values cert-manager-values.yaml stable/cert-manager
+helm install --debug --namespace kube-system --name external-dns --values external-dns-values.yaml stable/external-dns
 
 ###################################################################################################

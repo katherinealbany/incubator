@@ -1,6 +1,6 @@
 ###################################################################################################
 
-replicas: 3
+replicas: 1
 
 ###################################################################################################
 
@@ -12,20 +12,19 @@ storage:
   dynamodb:
     table: Vault
     region: eu-west-1
+    access_key: AKIAIDVB7N4TH62UNSUA
     ha_enabled: 'true'
 
 ###################################################################################################
 
-# Initialise
-# ----------
-#
-# kubectl exec --namespace default vault-vault-0 -c vault -- vault operator init -address=http://127.0.0.1:8200
-#
-# Unseal
-# ------
-#
-# kubectl exec --namespace default vault-vault-0 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
-# kubectl exec --namespace default vault-vault-1 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
-# kubectl exec --namespace default vault-vault-2 -c vault -- vault operator unseal -address=http://127.0.0.1:8200 <<KEY>>
+ingress: true
+ingressClass: nginx
+ingressTlsSecret: vault-digitaltest
+ingressAnnotations:
+  certmanager.k8s.io/cluster-issuer: letsencrypt
+
+###################################################################################################
+
+externalDnsDomainName: digitaltest-e.aws.travisperkins.cloud
 
 ###################################################################################################
