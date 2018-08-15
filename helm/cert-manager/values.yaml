@@ -1,5 +1,9 @@
 ###################################################################################################
 
-helm upgrade --install --debug --wait cert-manager stable/cert-manager --version 0.4.0 --namespace cert-manager
+# podDnsPolicy: None
+# podDnsConfig:
+#   nameservers:
+#     - 1.1.1.1
+#     - 8.8.8.8
 
 ###################################################################################################
