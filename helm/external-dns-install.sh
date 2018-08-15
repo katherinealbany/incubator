@@ -1,5 +1,5 @@
 ###################################################################################################
 
-helm upgrade --install --debug --wait cert-manager stable/cert-manager --version 0.4.0 --namespace cert-manager
+helm upgrade --install --debug --wait external-dns stable/external-dns --version 0.7.0 --namespace kube-system
 
 ###################################################################################################
