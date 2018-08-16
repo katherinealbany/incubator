@@ -1,9 +1,9 @@
 ###################################################################################################
 
-helm delete --purge nginx-ingress
+BASE=$(dirname ${BASH_SOURCE[0]})
 
 ###################################################################################################
 
-helm install --debug --namespace kube-system --name nginx-ingress --values nginx-ingress-values.yaml stable/nginx-ingress
+helm upgrade nginx-ingress stable/nginx-ingress --install --wait --namespace nginx-ingress --version 0.25.0 --values "${BASE}/values.yaml"
 
 ###################################################################################################

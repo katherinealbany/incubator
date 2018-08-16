@@ -1,0 +1,17 @@
+###################################################################################################
+
+controller:
+  kind: Deployment
+  stats:
+    enabled: true
+  metrics:
+    enabled: true
+  extraArgs:
+    v: 1
+  service:
+    annotations:
+      cloud.google.com/load-balancer-type: Internal
+      external-dns.alpha.kubernetes.io/hostname: nginx-ingress.test.fkaj.com.
+      service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+
+###################################################################################################
