@@ -8,7 +8,6 @@ helm upgrade cert-manager stable/cert-manager --install --wait --namespace cert-
 
 ###################################################################################################
 
-kubectl apply --record=true --wait=true --filename="${BASE}/lets-encrypt-staging.yaml"
-kubectl apply --record=true --wait=true --filename="${BASE}/lets-encrypt.yaml"
+kubectl apply --record=true --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
 
 ###################################################################################################

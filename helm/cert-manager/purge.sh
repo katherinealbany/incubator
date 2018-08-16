@@ -4,8 +4,7 @@ BASE=$(dirname ${BASH_SOURCE[0]})
 
 ###################################################################################################
 
-kubectl delete --wait=true --filename="${BASE}/lets-encrypt-staging.yaml"
-kubectl delete --wait=true --filename="${BASE}/lets-encrypt.yaml"
+kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
 
 ###################################################################################################
 
