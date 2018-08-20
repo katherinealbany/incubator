@@ -7,7 +7,7 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: ccoe@travisperkins.co.uk
+    email: letsencrypt@travisperkins.co.uk
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: cluster-issuer-lets-encrypt
