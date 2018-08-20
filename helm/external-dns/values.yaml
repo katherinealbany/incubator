@@ -1,9 +1,21 @@
 ###################################################################################################
 
-podDnsPolicy: None
-podDnsConfig:
-  nameservers:
-    - 1.1.1.1
-    - 8.8.8.8
+aws:
+  region: eu-west-1
+  zoneType: private
+  accessKey: AKIAJZCLLK633CDE2NMQ
+  secretKey:
+
+rbac:
+  create: true
+
+policy: sync
+
+logLevel: debug
+
+provider: aws
+
+domainFilters:
+  - test.fkaj.com
 
 ###################################################################################################
