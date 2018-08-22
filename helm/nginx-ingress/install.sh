@@ -1,9 +1,13 @@
 ###################################################################################################
 
-BASE=$(dirname ${BASH_SOURCE[0]})
+NGINX_INGRESS_VERSION='0.25.1'
 
 ###################################################################################################
 
-helm upgrade nginx-ingress stable/nginx-ingress --install --wait --namespace nginx-ingress --version 0.25.0 --values "${BASE}/values.yaml"
+BASE="$(dirname ${BASH_SOURCE[0]})"
+
+###################################################################################################
+
+helm upgrade nginx-ingress stable/nginx-ingress --install --debug --wait --namespace nginx-ingress --version "${NGINX_INGRESS_VERSION}" --values "${BASE}/values.yaml"
 
 ###################################################################################################
