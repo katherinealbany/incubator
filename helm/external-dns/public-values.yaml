@@ -2,7 +2,7 @@
 
 aws:
   region: eu-west-1
-  zoneType: private
+  zoneType: public
   accessKey: AKIAJZCLLK633CDE2NMQ
   secretKey:
 
@@ -21,6 +21,10 @@ logLevel: debug
 
 ###################################################################################################
 
-txtOwnerId: external-dns-private
+txtOwnerId: external-dns-public
+
+###################################################################################################
+
+annotationFilter: certmanager.k8s.io/external-dns-public=true
 
 ###################################################################################################
