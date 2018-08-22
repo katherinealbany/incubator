@@ -21,6 +21,6 @@ txtOwnerId: external-dns-public
 
 ###################################################################################################
 
-annotationFilter: certmanager.k8s.io/external-dns-public=true
+annotationFilter: external-dns/public=true
 
 ###################################################################################################
