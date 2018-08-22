@@ -4,6 +4,6 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-helm upgrade external-dns stable/external-dns --install --debug --wait --namespace external-dns --version 0.7.0 --values "${BASE}/values.yaml"
+helm upgrade external-dns stable/external-dns --install --debug --wait --namespace external-dns --version 0.7.1 --values "${BASE}/values.yaml"
 
 ###################################################################################################
