@@ -1,6 +1,11 @@
 ###################################################################################################
 
-kubectl delete --wait=true --filename="$(dirname ${BASH_SOURCE[0]})/cluster-issuer-lets-encrypt.yaml"
+BASE="$(dirname ${BASH_SOURCE[0]})"
+
+###################################################################################################
+
+kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt-staging.yaml"
+kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
 
 ###################################################################################################
 
