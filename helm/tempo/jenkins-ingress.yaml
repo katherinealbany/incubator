@@ -9,7 +9,6 @@ metadata:
     certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
     certmanager.k8s.io/acme-challenge-type: dns01
     certmanager.k8s.io/acme-dns01-provider: route53
-    external-dns.alpha.kubernetes.io/hostname: jenkins.test.fkaj.com.
 spec:
   tls:
     - secretName: certmanager-star-test-fkaj-com
