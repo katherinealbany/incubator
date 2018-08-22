@@ -6,14 +6,14 @@ metadata:
   annotations:
     external-dns/public: "true"
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
+    certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
     certmanager.k8s.io/acme-challenge-type: dns01
     certmanager.k8s.io/acme-dns01-provider: route53
 spec:
   tls:
-    - secretName: certmanager-star-test-fkaj-com
+    - secretName: jenkins.test.fkaj.com
       hosts:
-        - "*.test.fkaj.com"
+        - jenkins.test.fkaj.com
   rules:
     - host: jenkins.test.fkaj.com
       http:
