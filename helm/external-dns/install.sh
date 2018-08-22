@@ -1,5 +1,9 @@
 ###################################################################################################
 
-helm upgrade external-dns stable/external-dns --install --wait --namespace external-dns --version 0.7.0 --values "$(dirname ${BASH_SOURCE[0]})/values.yaml"
+BASE="$(dirname ${BASH_SOURCE[0]})"
+
+###################################################################################################
+
+helm upgrade external-dns stable/external-dns --install --debug --wait --namespace external-dns --version 0.7.0 --values "${BASE}/values.yaml"
 
 ###################################################################################################
