@@ -1,6 +1,6 @@
 ###################################################################################################
 
-replicas: 1
+replicas: 3
 
 ###################################################################################################
 
@@ -12,19 +12,18 @@ storage:
   dynamodb:
     table: Vault
     region: eu-west-1
-    access_key: AKIAIDVB7N4TH62UNSUA
     ha_enabled: 'true'
 
 ###################################################################################################
 
-ingress: true
-ingressClass: nginx
-ingressTlsSecret: vault-digitaltest
-ingressAnnotations:
-  certmanager.k8s.io/cluster-issuer: letsencrypt
+externalDnsDomainName: test.fkaj.com
 
 ###################################################################################################
 
-externalDnsDomainName: digitaltest-e.aws.travisperkins.cloud
+ingressClass: nginx
+ingressAnnotations:
+  external-dns/public: 'true'
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
