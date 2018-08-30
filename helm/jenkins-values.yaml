@@ -1,5 +1,13 @@
 ###################################################################################################
 
+externalDnsDomainName: test.fkaj.com
 
+###################################################################################################
+
+ingressClass: nginx
+ingressAnnotations:
+  external-dns/public: 'true'
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################

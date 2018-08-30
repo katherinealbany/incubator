@@ -1,6 +1,17 @@
 ###################################################################################################
 
-volumeSize                   : 8G
+externalDnsDomainName: test.fkaj.com
+
+###################################################################################################
+
 configDatasourcePrometheusUrl: http://prometheus-server.monitoring.svc:80/
+
+###################################################################################################
+
+ingressClass: nginx
+ingressAnnotations:
+  external-dns/public: 'true'
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
