@@ -1,0 +1,35 @@
+###################################################################################################
+
+externalDnsDomainName: test.fkaj.com
+
+###################################################################################################
+
+ingressClass: nginx
+ingressAnnotations:
+  external-dns/public: 'true'
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################
+
+chrome: true
+chromeDebug: true
+chromeVncPort: 5900
+chromeReplicas: 1
+chromeCpuMinimum: 250m
+chromeCpuMaximum: 250m
+chromeAutoscalerMaxReplicas: 20
+chromeAutoscalerTargetCPUUtilizationPercentage: 50
+
+###################################################################################################
+
+firefox: true
+firefoxDebug: true
+firefoxVncPort: 5901
+firefoxReplicas: 1
+firefoxCpuMinimum: 250m
+firefoxCpuMaximum: 250m
+firefoxAutoscalerMaxReplicas: 20
+firefoxAutoscalerTargetCPUUtilizationPercentage: 50
+
+###################################################################################################
