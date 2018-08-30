@@ -1,0 +1,6 @@
+###################################################################################################
+
+configSetupKibanaHost        : kibana-kibana.logging.svc:80
+configOutputElasticsearchHost: elasticsearch-elasticsearch-ingest.logging.svc:80
+
+###################################################################################################

@@ -1,0 +1,17 @@
+###################################################################################################
+
+externalDnsDomainName: test.fkaj.com
+
+###################################################################################################
+
+configElasticSearchUrl: http://elasticsearch-elasticsearch-client.logging.svc:80/
+
+###################################################################################################
+
+ingressClass: nginx
+ingressAnnotations:
+  external-dns/public: 'true'
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################
