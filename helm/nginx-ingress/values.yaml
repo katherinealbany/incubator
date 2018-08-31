@@ -7,10 +7,8 @@ controller:
     enabled: true
   service:
     annotations:
-      external-dns/public: "true"
-      # cloud.google.com/load-balancer-type: Internal
-      external-dns.alpha.kubernetes.io/hostname: nginx-ingress.test.fkaj.com.
-      # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+      cloud.google.com/load-balancer-type: Internal
+      service.beta.kubernetes.io/aws-load-balancer-internal: 'true'
   publishService:
     enabled: true
 
