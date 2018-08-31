@@ -8,7 +8,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-helm upgrade cert-manager stable/cert-manager --install --debug --wait --namespace cert-manager --version "${CERT_MANAGER_VERSION}" --set 'podDnsPolicy=None,podDnsConfig.nameservers={1.1.1.1,8.8.8.8}'
+helm upgrade cert-manager stable/cert-manager --install --debug --wait --namespace cert-manager --version "${CERT_MANAGER_VERSION}" --values "${BASE}/values.yaml"
 
 ###################################################################################################
 

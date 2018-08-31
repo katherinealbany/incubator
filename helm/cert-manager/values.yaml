@@ -1,0 +1,21 @@
+###################################################################################################
+
+ingressShim:
+  defaultIssuerKind: ClusterIssuer
+  defaultIssuerName: cluster-issuer-lets-encrypt-staging
+  defaultACMEChallengeType: dns01
+  defaultACMEDNS01ChallengeProvider: route53
+
+###################################################################################################
+
+podDnsPolicy: None
+podDnsConfig:
+  nameservers:
+    - 1.1.1.1
+    - 8.8.8.8
+
+###################################################################################################
+
+replicaCount: 3
+
+###################################################################################################
