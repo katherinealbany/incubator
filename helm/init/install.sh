@@ -9,6 +9,6 @@ kubectl apply --record=true --wait=true --filename="${BASE}/cluster-role-binding
 
 ###################################################################################################
 
-helm init --upgrade --wait --tiller-namespace kube-system --service-account tiller --history-max 10 --replicas 1
+helm init --upgrade --wait --tiller-namespace kube-system --service-account tiller --history-max 10 --replicas 3
 
 ###################################################################################################
