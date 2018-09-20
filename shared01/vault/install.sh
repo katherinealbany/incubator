@@ -1,26 +1,16 @@
-###################################################################################################
-
-aws:
-  region: eu-west-1
-  zoneType: public
-  accessKey: AKIAJZCLLK633CDE2NMQ
-  secretKey:
+#!/bin/bash -ex
+set -o pipefail
 
 ###################################################################################################
 
-rbac:
-  create: true
+BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-policy: sync
+[[ -z "${VAULT_VERSION}" ]] && VAULT_VERSION='1.0.3'
 
 ###################################################################################################
 
-txtOwnerId: external-dns-public
-
-###################################################################################################
-
-annotationFilter: external-dns/public=true
+helm upgrade vault ccoe/vault --install --debug --namespace vault --version "${VAULT_VERSION}" --values "${BASE}/values.yaml"
 
 ###################################################################################################

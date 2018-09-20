@@ -1,6 +1,4 @@
-###################################################################################################
-
-CERT_MANAGER_VERSION='0.4.1'
+#!/bin/bash -x
 
 ###################################################################################################
 
@@ -8,11 +6,19 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-helm upgrade cert-manager stable/cert-manager --install --debug --wait --namespace cert-manager --version "${CERT_MANAGER_VERSION}" --values "${BASE}/values.yaml"
+kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt-staging.yaml"
+kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
 
 ###################################################################################################
 
-kubectl apply --record=true --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt-staging.yaml"
-kubectl apply --record=true --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
+helm delete --purge cert-manager
+
+###################################################################################################
+
+kubectl delete --wait=true namespace cert-manager
+
+###################################################################################################
+
+exit 0
 
 ###################################################################################################

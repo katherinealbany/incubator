@@ -7,7 +7,7 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: letsencrypt@travisperkins.co.uk
+    email: ccoe@travisperkins.co.uk
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: cluster-issuer-lets-encrypt-staging
@@ -16,11 +16,9 @@ spec:
         - name: route53
           route53:
             region: eu-west-1
-            #######################################################################################
-            accessKeyID: AKIAJZCLLK633CDE2NMQ
+            accessKeyID: AKIAIDYIRXIZQBC2LFNQ
             secretAccessKeySecretRef:
-              name: ccoe-travisperkins-ccoe
               key: aws_secret_key
-            #######################################################################################
+              name: vault-shared01
 
 ###################################################################################################

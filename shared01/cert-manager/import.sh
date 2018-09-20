@@ -23,6 +23,7 @@ hash jq      ; assert_zero "${?}"
 hash cat     ; assert_zero "${?}"
 hash cut     ; assert_zero "${?}"
 hash find    ; assert_zero "${?}"
+hash mkdir   ; assert_zero "${?}"
 hash base64  ; assert_zero "${?}"
 hash dirname ; assert_zero "${?}"
 hash kubectl ; assert_zero "${?}"
@@ -32,8 +33,13 @@ hash openssl ; assert_zero "${?}"
 
 [[ -n "${1}"    ]] && BASE="${1}"
 [[ -z "${BASE}" ]] && BASE="$(dirname ${BASH_SOURCE[0]})"
+
 assert_not_blank "${BASE}"
-cd "${BASE}"
+
+###################################################################################################
+
+mkdir -m 700 -p -v "${BASE}" ; assert_zero "${?}"
+cd "${BASE}" ; assert_zero "${?}"
 
 ###################################################################################################
 
@@ -46,7 +52,10 @@ for namespace in ${NAMESPACES}; do
       rm -fv ${secret}
     else
       kubectl get secret --namespace=${namespace} $(echo ${secret} | cut -d '/' -f 2) ; CREATE="${?}"
-      [[ ${CREATE} -eq 1 ]] && kubectl create --namespace=${namespace} --filename=${secret} --validate=true
+      if [ ${CREATE} -eq 1 ]; then
+        kubectl get namespace ${namespace} ; [[ ${?} -eq 1 ]] && kubectl create namespace ${namespace}
+        kubectl create --namespace=${namespace} --filename=${secret} --validate=true
+      fi
     fi
   done
 done

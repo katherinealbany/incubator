@@ -1,18 +1,29 @@
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+replicas: 3
 
 ###################################################################################################
 
-kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt-staging.yaml"
-kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
+logLevel: trace
 
 ###################################################################################################
 
-helm delete --purge cert-manager
+storage:
+  dynamodb:
+    table: Vault
+    region: eu-west-1
+    access_key: AKIAIDYIRXIZQBC2LFNQ
+    secret_key:
+    ha_enabled: 'true'
 
 ###################################################################################################
 
-kubectl delete --wait=true ns cert-manager
+externalDnsDomainName: shared01.aws.travisperkins.cloud
+
+###################################################################################################
+
+ingressClass: nginx
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################

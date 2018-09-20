@@ -1,21 +1,15 @@
-###################################################################################################
-
-ingressShim:
-  defaultIssuerKind: ClusterIssuer
-  defaultIssuerName: cluster-issuer-lets-encrypt-staging
-  defaultACMEChallengeType: dns01
-  defaultACMEDNS01ChallengeProvider: route53
+#!/bin/bash -x
 
 ###################################################################################################
 
-podDnsPolicy: None
-podDnsConfig:
-  nameservers:
-    - 1.1.1.1
-    - 8.8.8.8
+helm delete --purge nginx-ingress
 
 ###################################################################################################
 
-replicaCount: 3
+kubectl delete --wait=true namespace nginx-ingress
+
+###################################################################################################
+
+exit 0
 
 ###################################################################################################

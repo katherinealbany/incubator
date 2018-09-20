@@ -1,9 +1,15 @@
 ###################################################################################################
 
-helm delete --purge kube2iam
+ingressShim:
+  defaultIssuerKind: ClusterIssuer
+  defaultIssuerName: cluster-issuer-lets-encrypt
 
 ###################################################################################################
 
-kubectl delete --wait=true ns kube2iam
+podDnsPolicy: None
+podDnsConfig:
+  nameservers:
+    - 1.1.1.1
+    - 8.8.8.8
 
 ###################################################################################################
