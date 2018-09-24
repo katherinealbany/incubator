@@ -3,7 +3,7 @@
 aws:
   region: eu-west-1
   zoneType: private
-  accessKey: AKIAIDYIRXIZQBC2LFNQ
+  accessKey: AKIAIKVY7OEOV636XIMQ
   secretKey:
 
 ###################################################################################################

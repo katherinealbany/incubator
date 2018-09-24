@@ -1,0 +1,28 @@
+###################################################################################################
+
+kubectl create namespace cert-manager
+kubectl create secret generic cert-manager-shared01 --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
+./install.sh
+kubectl logs -f --namespace cert-manager pod/cert-manager-
+
+###################################################################################################
+
+# Populate aws.secretKey value in both values files with EXTERNAL_DNS_AWS_SECRET_KEY
+./install.sh
+kubectl logs -f --namespace external-dns pod/external-dns-public-external-dns-
+kubectl logs -f --namespace external-dns pod/external-dns-private-external-dns-
+
+###################################################################################################
+
+./install.sh
+kubectl logs -f --namespace nginx-ingress pod/nginx-ingress-controller-
+
+###################################################################################################
+
+# Populate storage.dynamodb.secret_key value in values file with VAULT_AWS_SECRET_KEY
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace vault pod/vault-vault-0
+kubectl logs -f --namespace vault pod/vault-vault-1
+kubectl logs -f --namespace vault pod/vault-vault-2
+
+###################################################################################################

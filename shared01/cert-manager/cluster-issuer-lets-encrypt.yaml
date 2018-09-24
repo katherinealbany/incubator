@@ -16,9 +16,9 @@ spec:
         - name: route53
           route53:
             region: eu-west-1
-            accessKeyID: AKIAIDYIRXIZQBC2LFNQ
+            accessKeyID: AKIAIOMPFL6ZFZQ5RCRQ
             secretAccessKeySecretRef:
               key: aws_secret_key
-              name: vault-shared01
+              name: cert-manager-shared01
 
 ###################################################################################################

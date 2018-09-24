@@ -2,7 +2,7 @@
 
 ingressShim:
   defaultIssuerKind: ClusterIssuer
-  defaultIssuerName: cluster-issuer-lets-encrypt
+  defaultIssuerName: cluster-issuer-lets-encrypt-staging
 
 ###################################################################################################
 
