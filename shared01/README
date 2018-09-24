@@ -46,6 +46,14 @@ kubectl logs -f --namespace kibana deploy/kibana-kibana
 
 ###################################################################################################
 
+filebeat
+--------
+
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace filebeat pod/filebeat-filebeat-
+
+###################################################################################################
+
 vault
 -----
 
