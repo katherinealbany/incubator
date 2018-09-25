@@ -1,0 +1,22 @@
+###################################################################################################
+
+dataReplicas: 3
+dataVolumeSize: 1024Gi
+
+###################################################################################################
+
+externalDnsDomainName: ccoe01.aws.travisperkins.cloud
+
+###################################################################################################
+
+clientIngressClass: nginx
+clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+clientIngressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################
+
+ingestIngressClass: nginx
+ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingestIngressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################
