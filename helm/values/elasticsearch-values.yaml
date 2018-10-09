@@ -1,26 +1,53 @@
 ###################################################################################################
 
-dataReplicas  : 3
-dataVolumeSize: 128Gi
+data: true
+dataReplicas: 3
+dataConfigNodeData: true
+dataConfigNodeClient: false
+dataConfigNodeIngest: false
+dataConfigNodeMaster: false
 
 ###################################################################################################
 
-externalDnsDomainName: test.fkaj.com
+client: true
+clientReplicas: 3
+clientConfigNodeData: false
+clientConfigNodeClient: true
+clientConfigNodeIngest: false
+clientConfigNodeMaster: false
+
+###################################################################################################
+
+ingest: true
+ingestReplicas: 3
+ingestConfigNodeData: false
+ingestConfigNodeClient: false
+ingestConfigNodeIngest: true
+ingestConfigNodeMaster: false
+
+###################################################################################################
+
+master: true
+masterReplicas: 3
+masterConfigNodeData: false
+masterConfigNodeClient: false
+masterConfigNodeIngest: false
+masterConfigNodeMaster: true
+
+###################################################################################################
+
+externalDnsDomainName: ccoe01.aws.travisperkins.cloud
 
 ###################################################################################################
 
 clientIngressClass: nginx
-clientIngressAnnotations:
-  external-dns/public: 'true'
-clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt-staging
 clientIngressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
 
 ingestIngressClass: nginx
-ingestIngressAnnotations:
-  external-dns/public: 'true'
-ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt-staging
 ingestIngressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
