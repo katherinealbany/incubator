@@ -1,67 +1,44 @@
-#!/bin/bash -x
+#!/bin/bash -e
 set -o pipefail
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-PATH='/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin'
+BASE=$(git rev-parse --show-toplevel)
+
+. "${BASE}/support/scripts/vault.sh"
 
 ###################################################################################################
 
-function assert_zero {
-  ([[ "${1}" =~ ^[[:digit:]]+$ ]] && [[ "${1}" -eq 0 ]]) && return || exit 1
-}
+CERT_MANAGER_VAULT_PATH=$([[ -n "${1}" ]] && echo "${1}" || echo "${CERT_MANAGER_VAULT_PATH}")
+validate_not_blank 'CERT_MANAGER_VAULT_PATH' "${CERT_MANAGER_VAULT_PATH}"
 
 ###################################################################################################
 
-function assert_not_blank {
-  (! ([[ -z "${1}" ]] || [[ "${1}" =~ ^[[:blank:]]+$ ]])) && return || exit 1
-}
+validate_not_blank 'VAULT_ROLE_ID'   "${VAULT_ROLE_ID}"
+validate_not_blank 'VAULT_SECRET_ID' "${VAULT_SECRET_ID}"
+
+vault_approle_login "${VAULT_ROLE_ID}" "${VAULT_SECRET_ID}"
 
 ###################################################################################################
 
-hash jq      ; assert_zero "${?}"
-hash cat     ; assert_zero "${?}"
-hash cut     ; assert_zero "${?}"
-hash find    ; assert_zero "${?}"
-hash mkdir   ; assert_zero "${?}"
-hash base64  ; assert_zero "${?}"
-hash dirname ; assert_zero "${?}"
-hash kubectl ; assert_zero "${?}"
-hash openssl ; assert_zero "${?}"
-
-###################################################################################################
-
-[[ -n "${1}"    ]] && BASE="${1}"
-[[ -z "${BASE}" ]] && BASE="$(dirname ${BASH_SOURCE[0]})"
-
-assert_not_blank "${BASE}"
-
-###################################################################################################
-
-mkdir -m 700 -p -v "${BASE}" ; assert_zero "${?}"
-cd "${BASE}" ; assert_zero "${?}"
-
-###################################################################################################
-
-NAMESPACES="$(find . -type d -mindepth 1 -maxdepth 1 | cut -d '/' -f 2)" ; assert_zero "${?}"
-for namespace in ${NAMESPACES}; do
-  SECRETS="$(find ${namespace} -type f -mindepth 1 -maxdepth 1)" ; assert_zero "${?}"
-  for secret in ${SECRETS}; do
-    cat ${secret} | jq -r '.data."tls.crt"' | base64 --decode | openssl x509 -checkend 0 ; EXPIRED="${?}"
+NAMESPACES=$(vault_list_flat ${CERT_MANAGER_VAULT_PATH}/)
+for NAMESPACE in ${NAMESPACES}; do
+  SECRETS=$(vault_list_flat ${CERT_MANAGER_VAULT_PATH}/${NAMESPACE})
+  for SECRET in ${SECRETS}; do
+    MANIFEST=$(vault_read_field ${CERT_MANAGER_VAULT_PATH}/${NAMESPACE}/${SECRET} manifest)
+    echo ${MANIFEST} | jq -r '.data."tls.crt"' | base64 --decode | openssl x509 -checkend 0 ; EXPIRED="${?}"
     if [ ${EXPIRED} -eq 1 ]; then
-      rm -fv ${secret}
+      vault delete ${CERT_MANAGER_VAULT_PATH}/${NAMESPACE}/${SECRET}
+      [[ $(vault_list_flat ${CERT_MANAGER_VAULT_PATH}/${NAMESPACE} | wc -l) -eq 0 ]] && vault delete ${CERT_MANAGER_VAULT_PATH}/${NAMESPACE}
     else
-      kubectl get secret --namespace=${namespace} $(echo ${secret} | cut -d '/' -f 2) ; CREATE="${?}"
+      set +e && kubectl get secret --namespace=${NAMESPACE} $(echo ${SECRET} | cut -d '/' -f 2) ; CREATE="${?}" && set -e
       if [ ${CREATE} -eq 1 ]; then
-        kubectl get namespace ${namespace} ; [[ ${?} -eq 1 ]] && kubectl create namespace ${namespace}
-        kubectl create --namespace=${namespace} --filename=${secret} --validate=true
+        set +e && kubectl get namespace ${NAMESPACE} ; CREATE="${?}" && set -e && [[ ${CREATE} -eq 1 ]] && kubectl create namespace ${NAMESPACE}
+        echo ${MANIFEST} | kubectl create --namespace=${NAMESPACE} --filename=- --validate=true
       fi
     fi
   done
 done
-
-###################################################################################################
-
-find . -empty -type d -exec rm -rfv {} \;
 
 ###################################################################################################
