@@ -1,0 +1,16 @@
+###################################################################################################
+
+controller:
+  kind: DaemonSet
+  stats:
+    enabled: true
+  metrics:
+    enabled: true
+  service:
+    annotations:
+      cloud.google.com/load-balancer-type: Internal
+      service.beta.kubernetes.io/aws-load-balancer-internal: 'true'
+  publishService:
+    enabled: true
+
+###################################################################################################

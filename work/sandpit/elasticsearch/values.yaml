@@ -1,0 +1,22 @@
+###################################################################################################
+
+dataReplicas: 3
+dataVolumeSize: 256Gi
+
+###################################################################################################
+
+externalDnsDomainName: sandpit.fkaj.com
+
+###################################################################################################
+
+clientIngressClass: nginx
+clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+clientIngressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################
+
+ingestIngressClass: nginx
+ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingestIngressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################

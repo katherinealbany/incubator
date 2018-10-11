@@ -1,0 +1,16 @@
+###################################################################################################
+
+externalDnsDomainName: sandpit.fkaj.com
+
+###################################################################################################
+
+configElasticSearchUrl: http://elasticsearch-elasticsearch-client.elasticsearch.svc:80/
+configElasticSearchRequestTimeout: 300000
+
+###################################################################################################
+
+ingressClass: nginx
+ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
+ingressAnnotationCertManagerAcmeDns01Provider: route53
+
+###################################################################################################

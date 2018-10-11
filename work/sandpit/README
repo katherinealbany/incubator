@@ -1,0 +1,89 @@
+###################################################################################################
+
+helm
+----
+
+./install.sh
+
+###################################################################################################
+
+administrator
+-------------
+
+AWS_REGION=eu-west-2 ./install.sh
+kubectl exec -it --namespace administrator administrator-administrator-XXXXX -c administrator -- chroot /host bash -i
+
+###################################################################################################
+
+cert-manager
+------------
+
+kubectl create namespace cert-manager
+kubectl create secret generic cert-manager-sandpit --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
+./install.sh
+kubectl logs -f --namespace cert-manager pod/cert-manager-XXXXX
+
+###################################################################################################
+
+external-dns
+------------
+
+# Populate aws.secretKey value in both values files with EXTERNAL_DNS_AWS_SECRET_KEY
+./install.sh
+kubectl logs -f --namespace external-dns deploy/external-dns-public-external-dns
+kubectl logs -f --namespace external-dns deploy/external-dns-private-external-dns
+
+###################################################################################################
+
+nginx-ingress
+-------------
+
+./install.sh
+kubectl logs -f --namespace nginx-ingress pod/nginx-ingress-controller-XXXXX
+
+###################################################################################################
+
+elasticsearch
+-------------
+
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace elasticsearch pod/elasticsearch-elasticsearch-data-0
+kubectl logs -f --namespace elasticsearch pod/elasticsearch-elasticsearch-data-1
+kubectl logs -f --namespace elasticsearch pod/elasticsearch-elasticsearch-data-2
+
+###################################################################################################
+
+kibana
+------
+
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace kibana deploy/kibana-kibana
+
+###################################################################################################
+
+filebeat
+--------
+
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace filebeat pod/filebeat-filebeat-XXXXX
+
+###################################################################################################
+
+vault
+-----
+
+# Populate storage.dynamodb.secret_key value in values file with VAULT_AWS_SECRET_KEY
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace vault pod/vault-vault-0
+kubectl logs -f --namespace vault pod/vault-vault-1
+kubectl logs -f --namespace vault pod/vault-vault-2
+
+###################################################################################################
+
+jenkins
+-------
+
+AWS_REGION=eu-west-2 ./install.sh
+kubectl logs -f --namespace jenkins pod/jenkins-jenkins-0
+
+###################################################################################################
