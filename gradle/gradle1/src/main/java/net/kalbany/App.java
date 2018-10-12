@@ -1,9 +1,13 @@
 package net.kalbany;
 
+import java.util.logging.Logger;
+
 public class App {
 
-    public static void main(String[] args) {
-        System.out.println("Hello world.");
-    }
+   private static final Logger LOG = Logger.getLogger(App.class.getName());
+
+   public static void main (String[] args) {
+      LOG.info("Hello world.");
+   }
 
 }
