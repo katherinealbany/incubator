@@ -482,8 +482,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="348" />
-    <option name="y" value="87" />
+    <option name="x" value="257" />
+    <option name="y" value="88" />
     <option name="width" value="2063" />
     <option name="height" value="1301" />
   </component>
@@ -529,13 +529,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.gradle1 [run]">
-    <configuration name="gradle1 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Build">
+    <configuration name="Build" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -544,16 +544,16 @@
             <option value="build" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <method v="2" />
     </configuration>
-    <configuration name="gradle1 [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Clean" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -562,16 +562,16 @@
             <option value="clean" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <method v="2" />
     </configuration>
-    <configuration name="gradle1 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Run" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -580,20 +580,20 @@
             <option value="run" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.gradle1 [run]" />
-      <item itemvalue="Gradle.gradle1 [clean]" />
-      <item itemvalue="Gradle.gradle1 [build]" />
+      <item itemvalue="Gradle.Run" />
+      <item itemvalue="Gradle.Clean" />
+      <item itemvalue="Gradle.Build" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.gradle1 [run]" />
-        <item itemvalue="Gradle.gradle1 [build]" />
-        <item itemvalue="Gradle.gradle1 [clean]" />
+        <item itemvalue="Gradle.Run" />
+        <item itemvalue="Gradle.Build" />
+        <item itemvalue="Gradle.Clean" />
       </list>
     </recent_temporary>
   </component>
