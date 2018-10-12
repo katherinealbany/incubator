@@ -13,7 +13,6 @@ buildscript {
 
 plugins {
   id 'java'
-  id 'eclipse'
   id 'application'
 }
 
