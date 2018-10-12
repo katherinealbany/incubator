@@ -1,19 +1,19 @@
 //-----------------------------------------------------------------------------------------------//
 
 buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
-  }
+   repositories {
+      mavenCentral()
+   }
+   dependencies {
+      classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+   }
 }
 
 //-----------------------------------------------------------------------------------------------//
 
 plugins {
-  id 'java'
-  id 'application'
+   id 'java'
+   id 'application'
 }
 
 //-----------------------------------------------------------------------------------------------//
@@ -23,16 +23,16 @@ mainClassName = 'net.kalbany.App'
 //-----------------------------------------------------------------------------------------------//
 
 repositories {
-  jcenter()
+   jcenter()
 }
 
 //-----------------------------------------------------------------------------------------------//
 
 dependencies {
-  compile 'com.google.guava:guava:26.0-jre'
-  compile 'com.amazonaws:aws-java-sdk-s3'
+   compile 'com.google.guava:guava:26.0-jre'
+   compile 'com.amazonaws:aws-java-sdk-s3'
 
-  runtime 'javax.xml.bind:jaxb-api:2.3.0'
+   runtime 'javax.xml.bind:jaxb-api:2.3.0'
 }
 
 //-----------------------------------------------------------------------------------------------//
@@ -42,9 +42,9 @@ apply plugin: "io.spring.dependency-management"
 //-----------------------------------------------------------------------------------------------//
 
 dependencyManagement {
-  imports {
-    mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.228'
-  }
+   imports {
+      mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.228'
+   }
 }
 
 //-----------------------------------------------------------------------------------------------//
