@@ -9,8 +9,8 @@ dataConfigNodeMaster: false
 
 ###################################################################################################
 
-client: true
-clientReplicas: 3
+client: false
+clientReplicas: 2
 clientConfigNodeData: false
 clientConfigNodeClient: true
 clientConfigNodeIngest: false
@@ -18,8 +18,8 @@ clientConfigNodeMaster: false
 
 ###################################################################################################
 
-ingest: true
-ingestReplicas: 3
+ingest: false
+ingestReplicas: 2
 ingestConfigNodeData: false
 ingestConfigNodeClient: false
 ingestConfigNodeIngest: true
@@ -27,7 +27,7 @@ ingestConfigNodeMaster: false
 
 ###################################################################################################
 
-master: true
+master: false
 masterReplicas: 3
 masterConfigNodeData: false
 masterConfigNodeClient: false
@@ -36,18 +36,18 @@ masterConfigNodeMaster: true
 
 ###################################################################################################
 
-externalDnsDomainName: ccoe01.aws.travisperkins.cloud
+externalDnsDomainName: sandpit.fkaj.com
 
 ###################################################################################################
 
 clientIngressClass: nginx
-clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt-staging
+clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
 clientIngressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
 
 ingestIngressClass: nginx
-ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt-staging
+ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
 ingestIngressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
