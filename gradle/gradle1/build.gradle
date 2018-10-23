@@ -22,10 +22,12 @@ def org_apache_logging_log4j = '2.11.1'
 //-----------------------------------------------------------------------------------------------//
 
 dependencies {
-   implementation group: 'org.apache.logging.log4j', name: 'log4j-api'        , version: "${org_apache_logging_log4j}"
    implementation group: 'com.amazonaws'           , name: 'aws-java-sdk'     , version: '1.11.434'
    implementation group: 'io.kubernetes'           , name: 'client-java'      , version: '2.0.0'
    implementation group: 'com.google.cloud'        , name: 'google-cloud-core', version: '1.49.0'
+   implementation group: 'org.apache.logging.log4j', name: 'log4j-api'        , version: "${org_apache_logging_log4j}"
+
+   //--------------------------------------------------------------------------------------------//
 
    runtimeOnly group: 'org.apache.logging.log4j'        , name: 'log4j-core'             , version: "${org_apache_logging_log4j}"
    runtimeOnly group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.0'
