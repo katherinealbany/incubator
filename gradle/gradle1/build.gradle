@@ -29,10 +29,12 @@ repositories {
 //-----------------------------------------------------------------------------------------------//
 
 dependencies {
-   compile 'com.google.guava:guava:26.0-jre'
-   compile 'com.amazonaws:aws-java-sdk-s3'
+   compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+   compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
 
-   runtime 'javax.xml.bind:jaxb-api:2.3.0'
+   compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.434'
+
+   runtime group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.0'
 }
 
 //-----------------------------------------------------------------------------------------------//
