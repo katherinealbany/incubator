@@ -1,19 +1,14 @@
 //-----------------------------------------------------------------------------------------------//
 
-buildscript {
-   repositories {
-      mavenCentral()
-   }
-   dependencies {
-      classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
-   }
+plugins {
+   id 'java'
+   id 'application'
 }
 
 //-----------------------------------------------------------------------------------------------//
 
-plugins {
-   id 'java'
-   id 'application'
+repositories {
+   mavenCentral()
 }
 
 //-----------------------------------------------------------------------------------------------//
@@ -22,31 +17,18 @@ mainClassName = 'net.kalbany.App'
 
 //-----------------------------------------------------------------------------------------------//
 
-repositories {
-   jcenter()
-}
+def org_apache_logging_log4j = '2.11.1'
 
 //-----------------------------------------------------------------------------------------------//
 
 dependencies {
-   compile group: 'org.apache.logging.log4j', name: 'log4j-api' , version: '2.11.1'
-   compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+   implementation group: 'org.apache.logging.log4j', name: 'log4j-api'        , version: "${org_apache_logging_log4j}"
+   implementation group: 'com.amazonaws'           , name: 'aws-java-sdk'     , version: '1.11.434'
+   implementation group: 'io.kubernetes'           , name: 'client-java'      , version: '2.0.0'
+   implementation group: 'com.google.cloud'        , name: 'google-cloud-core', version: '1.49.0'
 
-   compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.434'
-
-   runtime group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.0'
-}
-
-//-----------------------------------------------------------------------------------------------//
-
-apply plugin: "io.spring.dependency-management"
-
-//-----------------------------------------------------------------------------------------------//
-
-dependencyManagement {
-   imports {
-      mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.228'
-   }
+   runtimeOnly group: 'org.apache.logging.log4j'        , name: 'log4j-core'             , version: "${org_apache_logging_log4j}"
+   runtimeOnly group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.0'
 }
 
 //-----------------------------------------------------------------------------------------------//
