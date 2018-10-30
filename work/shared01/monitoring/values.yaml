@@ -1,0 +1,72 @@
+###################################################################################################
+
+coreDns:
+  enabled: false
+
+###################################################################################################
+
+kubeDns:
+  enabled: true
+
+###################################################################################################
+
+grafana:
+  ingress:
+    tls:
+      - secretName: grafana.monitoring.shared01.aws.travisperkins.cloud
+        hosts:
+           - grafana.monitoring.shared01.aws.travisperkins.cloud
+    hosts: [ grafana.monitoring.shared01.aws.travisperkins.cloud ]
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
+      certmanager.k8s.io/acme-challenge-type: dns01
+      certmanager.k8s.io/acme-dns01-provider: route53
+      external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.shared01.aws.travisperkins.cloud.
+  adminUser: devops
+  adminPassword:
+
+###################################################################################################
+
+prometheus:
+  ingress:
+    tls:
+      - secretName: prometheus.monitoring.shared01.aws.travisperkins.cloud
+        hosts:
+           - prometheus.monitoring.shared01.aws.travisperkins.cloud
+    hosts: [ prometheus.monitoring.shared01.aws.travisperkins.cloud ]
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
+      certmanager.k8s.io/acme-challenge-type: dns01
+      certmanager.k8s.io/acme-dns01-provider: route53
+      external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.shared01.aws.travisperkins.cloud.
+  prometheusSpec:
+    replicas: 3
+  podDisruptionBudget:
+    enabled: true
+
+###################################################################################################
+
+alertmanager:
+  ingress:
+    tls:
+      - secretName: alertmanager.monitoring.shared01.aws.travisperkins.cloud
+        hosts:
+           - alertmanager.monitoring.shared01.aws.travisperkins.cloud
+    hosts: [ alertmanager.monitoring.shared01.aws.travisperkins.cloud ]
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
+      certmanager.k8s.io/acme-challenge-type: dns01
+      certmanager.k8s.io/acme-dns01-provider: route53
+      external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.shared01.aws.travisperkins.cloud.
+  alertmanagerSpec:
+    replicas: 3
+  podDisruptionBudget:
+    enabled: true
+
+###################################################################################################

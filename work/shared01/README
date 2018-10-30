@@ -69,6 +69,15 @@ kubectl logs -f --namespace filebeat pod/filebeat-filebeat-XXXXX
 
 ###################################################################################################
 
+monitoring
+----------
+
+# Populate grafana.adminPassword in values file
+./install.sh
+watch -n 1 'kubectl get pods --namespace monitoring'
+
+###################################################################################################
+
 vault
 -----
 
