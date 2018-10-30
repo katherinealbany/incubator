@@ -26,6 +26,9 @@ grafana:
       external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.shared01.aws.travisperkins.cloud.
   adminUser: devops
   adminPassword:
+  plugins:
+    - grafana-kubernetes-app 1.0.1
+    - grafana-piechart-panel 1.3.3
 
 ###################################################################################################
 
