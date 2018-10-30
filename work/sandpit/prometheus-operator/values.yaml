@@ -6,7 +6,7 @@ grafana:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
 
@@ -18,12 +18,14 @@ prometheus:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
   prometheusSpec:
     logLevel: debug
     replicas: 3
+  podDisruptionBudget:
+    enabled: true
 
 ###################################################################################################
 
@@ -33,11 +35,13 @@ alertmanager:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
   alertmanagerSpec:
     logLevel: debug
     replicas: 3
+  podDisruptionBudget:
+    enabled: true
 
 ###################################################################################################
