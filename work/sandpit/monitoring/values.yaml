@@ -33,7 +33,7 @@ prometheus:
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
   prometheusSpec:
-    replicas: 3
+    replicas: 1
   podDisruptionBudget:
     enabled: true
 
@@ -49,7 +49,7 @@ alertmanager:
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
   alertmanagerSpec:
-    replicas: 3
+    replicas: 1
   podDisruptionBudget:
     enabled: true
 
