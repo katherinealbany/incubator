@@ -19,6 +19,7 @@ grafana:
       certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
+  adminPassword:
 
 ###################################################################################################
 
@@ -32,7 +33,6 @@ prometheus:
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
   prometheusSpec:
-    logLevel: debug
     replicas: 3
   podDisruptionBudget:
     enabled: true
@@ -49,7 +49,6 @@ alertmanager:
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
   alertmanagerSpec:
-    logLevel: debug
     replicas: 3
   podDisruptionBudget:
     enabled: true
