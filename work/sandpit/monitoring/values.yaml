@@ -12,6 +12,10 @@ kubeDns:
 
 grafana:
   ingress:
+    tls:
+      - secretName: grafana.monitoring.sandpit.fkaj.com
+        hosts:
+           - grafana.monitoring.sandpit.fkaj.com
     hosts: [ grafana.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
@@ -19,12 +23,18 @@ grafana:
       certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
+      external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.sandpit.fkaj.com.
+  adminUser: devops
   adminPassword:
 
 ###################################################################################################
 
 prometheus:
   ingress:
+    tls:
+      - secretName: prometheus.monitoring.sandpit.fkaj.com
+        hosts:
+           - prometheus.monitoring.sandpit.fkaj.com
     hosts: [ prometheus.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
@@ -32,6 +42,7 @@ prometheus:
       certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
+      external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
   prometheusSpec:
     replicas: 1
   podDisruptionBudget:
@@ -41,6 +52,10 @@ prometheus:
 
 alertmanager:
   ingress:
+    tls:
+      - secretName: alertmanager.monitoring.sandpit.fkaj.com
+        hosts:
+           - alertmanager.monitoring.sandpit.fkaj.com
     hosts: [ alertmanager.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
@@ -48,6 +63,7 @@ alertmanager:
       certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
+      external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.sandpit.fkaj.com.
   alertmanagerSpec:
     replicas: 1
   podDisruptionBudget:
