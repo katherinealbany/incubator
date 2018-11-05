@@ -1,38 +1,7 @@
 ###################################################################################################
 
-data: true
 dataReplicas: 3
-dataConfigNodeData: true
-dataConfigNodeClient: false
-dataConfigNodeIngest: false
-dataConfigNodeMaster: false
-
-###################################################################################################
-
-client: false
-clientReplicas: 2
-clientConfigNodeData: false
-clientConfigNodeClient: true
-clientConfigNodeIngest: false
-clientConfigNodeMaster: false
-
-###################################################################################################
-
-ingest: false
-ingestReplicas: 2
-ingestConfigNodeData: false
-ingestConfigNodeClient: false
-ingestConfigNodeIngest: true
-ingestConfigNodeMaster: false
-
-###################################################################################################
-
-master: false
-masterReplicas: 3
-masterConfigNodeData: false
-masterConfigNodeClient: false
-masterConfigNodeIngest: false
-masterConfigNodeMaster: true
+dataVolumeSize: 16Gi
 
 ###################################################################################################
 
