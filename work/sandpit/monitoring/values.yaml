@@ -13,10 +13,9 @@ kubeDns:
 grafana:
   ingress:
     tls:
-      - secretName: grafana.monitoring.sandpit.fkaj.com
-        hosts:
-           - grafana.monitoring.sandpit.fkaj.com
-    hosts: [ grafana.monitoring.sandpit.fkaj.com ]
+      - hosts:    [ grafana.monitoring.sandpit.fkaj.com ]
+        secretName: grafana.monitoring.sandpit.fkaj.com
+    hosts:        [ grafana.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
@@ -24,30 +23,15 @@ grafana:
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.sandpit.fkaj.com.
-  sidecar:
-    resources:
-      requests:
-        cpu: 50m
-        memory: 50Mi
-      limits:
-        cpu: 50m
-        memory: 50Mi
-    dashboards:
-      enabled: true
   plugins:
     - grafana-kubernetes-app 1.0.1
     - grafana-piechart-panel 1.3.3
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 100m
-      memory: 128Mi
+  adminUser: devops
   persistence:
     size: 10Gi
     enabled: true
-  adminUser: devops
+    accessModes: [ ReadWriteOnce ]
+    storageClassName: standard
   adminPassword:
 
 ###################################################################################################
@@ -55,10 +39,9 @@ grafana:
 prometheus:
   ingress:
     tls:
-      - secretName: prometheus.monitoring.sandpit.fkaj.com
-        hosts:
-           - prometheus.monitoring.sandpit.fkaj.com
-    hosts: [ prometheus.monitoring.sandpit.fkaj.com ]
+      - hosts:    [ prometheus.monitoring.sandpit.fkaj.com ]
+        secretName: prometheus.monitoring.sandpit.fkaj.com
+    hosts:        [ prometheus.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
@@ -67,19 +50,23 @@ prometheus:
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
   prometheusSpec:
-    replicas: 1
-  podDisruptionBudget:
-    enabled: true
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard
+          accessModes: [ ReadWriteOnce ]
+          resources:
+            requests:
+              storage: 10Gi
 
 ###################################################################################################
 
 alertmanager:
   ingress:
     tls:
-      - secretName: alertmanager.monitoring.sandpit.fkaj.com
-        hosts:
-           - alertmanager.monitoring.sandpit.fkaj.com
-    hosts: [ alertmanager.monitoring.sandpit.fkaj.com ]
+      - hosts:    [ alertmanager.monitoring.sandpit.fkaj.com ]
+        secretName: alertmanager.monitoring.sandpit.fkaj.com
+    hosts:        [ alertmanager.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
@@ -88,8 +75,13 @@ alertmanager:
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.sandpit.fkaj.com.
   alertmanagerSpec:
-    replicas: 1
-  podDisruptionBudget:
-    enabled: true
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard
+          accessModes: [ ReadWriteOnce ]
+          resources:
+            requests:
+              storage: 10Gi
 
 ###################################################################################################
