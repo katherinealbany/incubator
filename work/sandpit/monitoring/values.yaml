@@ -20,15 +20,35 @@ grafana:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.sandpit.fkaj.com.
-  adminUser: devops
-  adminPassword:
+  sidecar:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 50Mi
+      limits:
+        cpu: 50m
+        memory: 50Mi
+    dashboards:
+      enabled: true
   plugins:
     - grafana-kubernetes-app 1.0.1
     - grafana-piechart-panel 1.3.3
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+  persistence:
+    size: 10Gi
+    enabled: true
+  adminUser: devops
+  adminPassword:
 
 ###################################################################################################
 
@@ -42,7 +62,7 @@ prometheus:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
@@ -63,7 +83,7 @@ alertmanager:
     enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt
+      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.sandpit.fkaj.com.
