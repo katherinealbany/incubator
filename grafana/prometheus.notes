@@ -1,12 +1,26 @@
-POD CPU USAGE % BY RESOURCE REQUEST
------------------------------------
+INDIVIDUAL POD CPU USAGE PERCENT BY RESOURCE REQUEST
+----------------------------------------------------
 
-(sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_requests_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+TREND   - (sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_requests_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+INSTANT - (sum(label_replace(irate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_requests_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
 
-POD CPU USAGE % BY RESOURCE LIMIT
----------------------------------
+INDIVIDUAL POD CPU USAGE PERCENT BY RESOURCE LIMIT
+--------------------------------------------------
 
-(sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_limits_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+TREND   - (sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_limits_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+INSTANT - (sum(label_replace(irate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_limits_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+
+COMBINED POD CPU USAGE PERCENT BY RESOURCE REQUEST
+--------------------------------------------------
+
+TREND   - (sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)"))) / (sum(kube_pod_container_resource_requests_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"})) * 100
+INSTANT - (sum(label_replace(irate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)"))) / (sum(kube_pod_container_resource_requests_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"})) * 100
+
+COMBINED POD CPU USAGE PERCENT BY RESOURCE LIMIT
+------------------------------------------------
+
+TREND   - (sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)"))) / (sum(kube_pod_container_resource_limits_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"})) * 100
+INSTANT - (sum(label_replace(irate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)"))) / (sum(kube_pod_container_resource_limits_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"})) * 100
 
 ###################################################################################################
 
