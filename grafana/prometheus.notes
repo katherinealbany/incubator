@@ -1,3 +1,15 @@
+POD CPU USAGE % BY RESOURCE REQUEST
+-----------------------------------
+
+(sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_requests_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+
+POD CPU USAGE % BY RESOURCE LIMIT
+---------------------------------
+
+(sum(label_replace(rate(container_cpu_usage_seconds_total{job="kubelet", service="kubelet", namespace="vault", container_name="vault"}[3m]), "pod", "${1}", "pod_name", "(.+)")) by (pod)) / (max(kube_pod_container_resource_limits_cpu_cores{job="kube-state-metrics", service="monitoring-kube-state-metrics", namespace="vault", container="vault"}) by (pod)) * 100
+
+###################################################################################################
+
 ALERTS
 ALERTS_FOR_STATE
 
