@@ -118,7 +118,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1542227089163,
+  "iteration": 1542227495197,
   "links": [
     {
       "icon": "external link",
@@ -394,7 +394,7 @@
     {
       "cacheTimeout": null,
       "colorBackground": false,
-      "colorValue": true,
+      "colorValue": false,
       "colors": [
         "#d44a3a",
         "rgba(237, 129, 40, 0.89)",
@@ -836,7 +836,7 @@
     {
       "cacheTimeout": null,
       "colorBackground": false,
-      "colorValue": true,
+      "colorValue": false,
       "colors": [
         "#d44a3a",
         "rgba(237, 129, 40, 0.89)",
@@ -1298,5 +1298,5 @@
   "timezone": "",
   "title": "Level 1",
   "uid": "7ymKUKBiz",
-  "version": 57
+  "version": 58
 }
