@@ -4,12 +4,11 @@ controller:
   kind: DaemonSet
   stats:
     enabled: true
+  config:
+    hsts: 'false'
+    enable-modsecurity: 'true'
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/port: '10254'
-        prometheus.io/scrape: 'true'
   service:
     annotations:
       cloud.google.com/load-balancer-type: Internal
