@@ -7,7 +7,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${EXTERNAL_DNS_VERSION}"                  ]] && EXTERNAL_DNS_VERSION='0.7.8'
+[[ -z "${EXTERNAL_DNS_VERSION}"                  ]] && EXTERNAL_DNS_VERSION='1.0.2'
 [[ -z "${EXTERNAL_DNS_TXT_OWNER_ID_SALT}"        ]] && EXTERNAL_DNS_TXT_OWNER_ID_SALT='default'
 [[ -z "${EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER}" ]] && EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER='external-dns/public=true'
 
