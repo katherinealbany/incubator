@@ -23,20 +23,20 @@ grafana:
     - grafana-kubernetes-app
     - grafana-piechart-panel
     - snuids-trafficlights-panel
-  sidecar:
-    resources:
-      requests:
-        cpu: 5m
-        memory: 75Mi
-      limits:
-        cpu: 10m
-        memory: 75Mi
-    dashboards:
-      searchNamespace: ALL
-    datasources:
-      searchNamespace: ALL
+  # sidecar:
+  #   resources:
+  #     requests:
+  #       cpu: 5m
+  #       memory: 75Mi
+  #     limits:
+  #       cpu: 10m
+  #       memory: 75Mi
+  #   dashboards:
+  #     searchNamespace: ALL
+  #   datasources:
+  #     searchNamespace: ALL
   replicas: 1
-  adminUser: admin
+  adminUser: devops
   resources:
     requests:
       cpu: 10m
@@ -49,7 +49,7 @@ grafana:
     enabled: true
     accessModes: [ ReadWriteOnce ]
     storageClassName: standard
-  adminPassword: admin
+  adminPassword: devops
   defaultDashboardsEnabled: true
 
 ###################################################################################################
@@ -83,10 +83,10 @@ prometheus:
     resources:
       requests:
         cpu: 10m
-        memory: 500Mi
+        memory: 1000Mi
       limits:
         cpu: 100m
-        memory: 500Mi
+        memory: 1000Mi
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -98,7 +98,8 @@ prometheus:
     scrapeInterval: 30s
     podAntiAffinity: soft
     evaluationInterval: 30s
-    serviceMonitorSelector: {}
+    serviceMonitorSelector:
+      prometheus: operator
     serviceMonitorNamespaceSelector: {}
 
 ###################################################################################################

@@ -4,8 +4,9 @@ kind: ServiceMonitor
 apiVersion: monitoring.coreos.com/v1
 metadata:
   name: nginx-ingress-service-monitor
+  namespace: nginx-ingress
   labels:
-    release: monitoring
+    prometheus: operator
 spec:
   jobLabel: nginx-ingress
   selector:
