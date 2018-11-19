@@ -7,7 +7,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${CERT_MANAGER_VERSION}"       ]] && CERT_MANAGER_VERSION='0.5.0'
+[[ -z "${CERT_MANAGER_VERSION}"       ]] && CERT_MANAGER_VERSION='0.5.1'
 [[ -z "${CERT_MANAGER_REPLICA_COUNT}" ]] && CERT_MANAGER_REPLICA_COUNT='3'
 
 ###################################################################################################

@@ -1,5 +1,15 @@
 ###################################################################################################
 
+resources:
+  requests:
+    cpu: 3m
+    memory: 50Mi
+  limits:
+    cpu: 10m
+    memory: 50Mi
+
+###################################################################################################
+
 ingressShim:
   defaultIssuerKind: ClusterIssuer
   defaultIssuerName: cluster-issuer-lets-encrypt-staging
