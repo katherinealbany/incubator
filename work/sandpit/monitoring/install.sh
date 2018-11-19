@@ -7,7 +7,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${PROMETHEUS_OPERATOR_VERSION}" ]] && PROMETHEUS_OPERATOR_VERSION='0.1.22'
+[[ -z "${PROMETHEUS_OPERATOR_VERSION}" ]] && PROMETHEUS_OPERATOR_VERSION='0.1.23'
 
 ###################################################################################################
 
