@@ -7,12 +7,11 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${CERT_MANAGER_VERSION}"       ]] && CERT_MANAGER_VERSION='0.5.1'
-[[ -z "${CERT_MANAGER_REPLICA_COUNT}" ]] && CERT_MANAGER_REPLICA_COUNT='3'
+[[ -z "${CERT_MANAGER_VERSION}" ]] && CERT_MANAGER_VERSION='0.5.1'
 
 ###################################################################################################
 
-helm upgrade cert-manager stable/cert-manager --install --debug --wait --namespace cert-manager --version "${CERT_MANAGER_VERSION}" --values "${BASE}/values.yaml" --set "replicaCount=${CERT_MANAGER_REPLICA_COUNT}"
+helm upgrade cert-manager stable/cert-manager --install --debug --wait --namespace cert-manager --version "${CERT_MANAGER_VERSION}" --values "${BASE}/values.yaml"
 
 ###################################################################################################
 
