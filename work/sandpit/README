@@ -7,14 +7,6 @@ helm
 
 ###################################################################################################
 
-administrator
--------------
-
-AWS_REGION=eu-west-2 ./install.sh
-kubectl exec -it --namespace administrator administrator-administrator-XXXXX -c administrator -- chroot /host bash -i
-
-###################################################################################################
-
 cert-manager
 ------------
 
