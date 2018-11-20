@@ -10,8 +10,8 @@ helm
 cert-manager
 ------------
 
-kubectl create namespace cert-manager
-kubectl create secret generic cert-manager-sandpit --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
+kubectl create namespace cert-manager --save-config=true
+kubectl create secret generic cert-manager --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
 ./install.sh
 kubectl logs -f --namespace cert-manager pod/cert-manager-XXXXX
 

@@ -18,7 +18,7 @@ spec:
             region: eu-west-1
             accessKeyID: AKIAJRU44OJZ6RNLR2GA
             secretAccessKeySecretRef:
+              name: cert-manager
               key: aws_secret_key
-              name: cert-manager-sandpit
 
 ###################################################################################################
