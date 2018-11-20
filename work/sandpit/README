@@ -37,6 +37,15 @@ kubectl logs -f --namespace nginx-ingress pod/nginx-ingress-controller-XXXXX
 ###################################################################################################
 ###################################################################################################
 
+monitoring
+----------
+
+# Populate grafana.adminPassword in values file
+./install.sh
+watch -n 1 'kubectl get pods --namespace monitoring'
+
+###################################################################################################
+
 elasticsearch
 -------------
 
@@ -60,15 +69,6 @@ filebeat
 
 AWS_REGION=eu-west-2 ./install.sh
 kubectl logs -f --namespace filebeat pod/filebeat-filebeat-XXXXX
-
-###################################################################################################
-
-monitoring
-----------
-
-# Populate grafana.adminPassword in values file
-./install.sh
-watch -n 1 'kubectl get pods --namespace monitoring'
 
 ###################################################################################################
 
