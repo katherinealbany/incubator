@@ -6,7 +6,12 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-helm reset --debug --force
+kubectl delete --wait=true --namespace kube-system service/tiller-deploy
+kubectl delete --wait=true --namespace kube-system deployment/tiller-deploy
+
+###################################################################################################
+
+helm reset --debug
 
 ###################################################################################################
 
