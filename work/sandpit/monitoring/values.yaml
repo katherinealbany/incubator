@@ -79,7 +79,7 @@ prometheus:
       external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
   prometheusSpec:
     logLevel: info
-    replicas: 1
+    replicas: 3
     resources:
       requests:
         cpu: 10m
@@ -119,7 +119,7 @@ alertmanager:
       external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.sandpit.fkaj.com.
   alertmanagerSpec:
     logLevel: info
-    replicas: 1
+    replicas: 3
     resources:
       requests:
         cpu: 10m
