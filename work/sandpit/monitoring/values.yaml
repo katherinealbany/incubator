@@ -23,19 +23,14 @@ grafana:
     - grafana-kubernetes-app
     - grafana-piechart-panel
     - snuids-trafficlights-panel
-  # sidecar:
-  #   resources:
-  #     requests:
-  #       cpu: 5m
-  #       memory: 75Mi
-  #     limits:
-  #       cpu: 10m
-  #       memory: 75Mi
-  #   dashboards:
-  #     searchNamespace: ALL
-  #   datasources:
-  #     searchNamespace: ALL
-  replicas: 1
+  sidecar:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 75Mi
+      limits:
+        cpu: 10m
+        memory: 75Mi
   adminUser: devops
   resources:
     requests:
@@ -50,7 +45,7 @@ grafana:
     accessModes: [ ReadWriteOnce ]
     storageClassName: standard
   adminPassword: devops
-  defaultDashboardsEnabled: true
+  defaultDashboardsEnabled: false
 
 ###################################################################################################
 
@@ -78,15 +73,14 @@ prometheus:
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
   prometheusSpec:
-    logLevel: info
     replicas: 3
     resources:
       requests:
         cpu: 10m
-        memory: 1000Mi
+        memory: 500Mi
       limits:
         cpu: 100m
-        memory: 1000Mi
+        memory: 500Mi
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -95,12 +89,14 @@ prometheus:
           resources:
             requests:
               storage: 10Gi
-    scrapeInterval: 30s
+    scrapeInterval: 15s
     podAntiAffinity: soft
-    evaluationInterval: 30s
+    evaluationInterval: 15s
+    podDisruptionBudget:
+      enabled: true
+      maxUnavailable: 1
     serviceMonitorSelector:
-      prometheus: operator
-    serviceMonitorNamespaceSelector: {}
+      prometheus: local
 
 ###################################################################################################
 
@@ -118,7 +114,6 @@ alertmanager:
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.sandpit.fkaj.com.
   alertmanagerSpec:
-    logLevel: info
     replicas: 3
     resources:
       requests:
@@ -136,17 +131,14 @@ alertmanager:
             requests:
               storage: 10Gi
     podAntiAffinity: soft
+    podDisruptionBudget:
+      enabled: true
+      maxUnavailable: 1
 
 ###################################################################################################
 
-nodeExporter:
-  resources:
-    requests:
-      cpu: 5m
-      memory: 25Mi
-    limits:
-      cpu: 10m
-      memory: 25Mi
+defaultRules:
+  create: false
 
 ###################################################################################################
 
@@ -155,7 +147,7 @@ kubeScheduler:
 
 ###################################################################################################
 
-kubeStateMetrics:
+kube-state-metrics:
   resources:
     requests:
       cpu: 5m
@@ -179,5 +171,16 @@ prometheusOperator:
 
 kubeControllerManager:
   enabled: false
+
+###################################################################################################
+
+prometheus-node-exporter:
+  resources:
+    requests:
+      cpu: 5m
+      memory: 25Mi
+    limits:
+      cpu: 10m
+      memory: 25Mi
 
 ###################################################################################################

@@ -6,7 +6,7 @@ metadata:
   name: nginx-ingress-service-monitor
   namespace: nginx-ingress
   labels:
-    prometheus: operator
+    prometheus: local
 spec:
   jobLabel: nginx-ingress
   selector:
