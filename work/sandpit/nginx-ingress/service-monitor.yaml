@@ -3,9 +3,10 @@
 kind: ServiceMonitor
 apiVersion: monitoring.coreos.com/v1
 metadata:
-  name: nginx-ingress-service-monitor
+  name: nginx-ingress
   namespace: nginx-ingress
   labels:
+    name: nginx-ingress
     prometheus: local
 spec:
   jobLabel: nginx-ingress
@@ -13,11 +14,10 @@ spec:
     matchLabels:
       app: nginx-ingress
       release: nginx-ingress
+  endpoints:
+    - port: metrics
   namespaceSelector:
     matchNames:
       - nginx-ingress
-  endpoints:
-    - port: metrics
-      interval: 30s
 
 ###################################################################################################

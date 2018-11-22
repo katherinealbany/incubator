@@ -27,10 +27,10 @@ grafana:
     resources:
       requests:
         cpu: 5m
-        memory: 75Mi
+        memory: 150Mi
       limits:
         cpu: 10m
-        memory: 75Mi
+        memory: 150Mi
   adminUser: devops
   resources:
     requests:
@@ -44,7 +44,7 @@ grafana:
     enabled: true
     accessModes: [ ReadWriteOnce ]
     storageClassName: standard
-  adminPassword: devops
+  adminPassword:
   defaultDashboardsEnabled: false
 
 ###################################################################################################
@@ -77,10 +77,10 @@ prometheus:
     resources:
       requests:
         cpu: 10m
-        memory: 750Mi
+        memory: 1000Mi
       limits:
         cpu: 100m
-        memory: 750Mi
+        memory: 1000Mi
     storageSpec:
       volumeClaimTemplate:
         spec:

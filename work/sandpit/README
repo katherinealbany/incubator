@@ -13,7 +13,6 @@ cert-manager
 kubectl create namespace cert-manager --save-config=true
 kubectl create secret generic cert-manager --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
 ./install.sh
-kubectl logs -f --namespace cert-manager pod/cert-manager-XXXXX
 
 ###################################################################################################
 
@@ -22,19 +21,7 @@ external-dns
 
 # Populate aws.secretKey value in both values files with EXTERNAL_DNS_AWS_SECRET_KEY
 ./install.sh
-kubectl logs -f --namespace external-dns deploy/external-dns-public-external-dns
-kubectl logs -f --namespace external-dns deploy/external-dns-private-external-dns
 
-###################################################################################################
-
-nginx-ingress
--------------
-
-./install.sh
-kubectl logs -f --namespace nginx-ingress pod/nginx-ingress-controller-XXXXX
-
-###################################################################################################
-###################################################################################################
 ###################################################################################################
 
 monitoring
@@ -42,8 +29,16 @@ monitoring
 
 # Populate grafana.adminPassword in values file
 ./install.sh
-watch -n 1 'kubectl get pods --namespace monitoring'
 
+###################################################################################################
+
+nginx-ingress
+-------------
+
+./install.sh
+
+###################################################################################################
+###################################################################################################
 ###################################################################################################
 
 elasticsearch
