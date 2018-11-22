@@ -35,10 +35,10 @@ grafana:
   resources:
     requests:
       cpu: 10m
-      memory: 150Mi
+      memory: 250Mi
     limits:
       cpu: 100m
-      memory: 150Mi
+      memory: 250Mi
   persistence:
     size: 10Gi
     enabled: true
@@ -77,10 +77,10 @@ prometheus:
     resources:
       requests:
         cpu: 10m
-        memory: 500Mi
+        memory: 750Mi
       limits:
         cpu: 100m
-        memory: 500Mi
+        memory: 750Mi
     storageSpec:
       volumeClaimTemplate:
         spec:

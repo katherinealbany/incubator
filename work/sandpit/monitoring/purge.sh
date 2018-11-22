@@ -10,8 +10,8 @@ ${BASE}/uninstall.sh
 
 ###################################################################################################
 
-for item in $(kubectl get crd --output=custom-columns=:.metadata.name | grep monitoring.coreos.com); do
-  kubectl delete --wait=true crd ${item}
+for item in $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep monitoring.coreos.com); do
+  kubectl delete --wait=true customresourcedefinitions ${item}
 done
 
 ###################################################################################################
