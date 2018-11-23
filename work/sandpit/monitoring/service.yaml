@@ -1,0 +1,19 @@
+###################################################################################################
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-prometheus
+  namespace: monitoring
+spec:
+  type: ClusterIP
+  ports:
+    - name: web
+      port: 9090
+      targetPort: web
+  selector:
+    app: prometheus
+    prometheus: prometheus-prometheus
+  sessionAffinity: ClientIP
+
+###################################################################################################

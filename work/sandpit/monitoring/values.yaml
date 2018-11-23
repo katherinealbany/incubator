@@ -26,25 +26,25 @@ grafana:
   sidecar:
     resources:
       requests:
-        cpu: 5m
-        memory: 250Mi
+        cpu: 1m
+        memory: 75Mi
       limits:
         cpu: 10m
-        memory: 250Mi
+        memory: 75Mi
   adminUser: devops
   resources:
     requests:
       cpu: 10m
-      memory: 500Mi
+      memory: 150Mi
     limits:
-      cpu: 100m
-      memory: 500Mi
+      cpu: 250m
+      memory: 150Mi
   persistence:
     size: 10Gi
     enabled: true
     accessModes: [ ReadWriteOnce ]
     storageClassName: standard
-  adminPassword:
+  adminPassword: devops
   defaultDashboardsEnabled: true
 
 ###################################################################################################
@@ -76,11 +76,12 @@ prometheus:
     replicas: 3
     resources:
       requests:
-        cpu: 10m
-        memory: 1500Mi
-      limits:
         cpu: 100m
-        memory: 1500Mi
+        memory: 1250Mi
+      limits:
+        cpu: 500m
+        memory: 1250Mi
+    retention: 15d
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -88,7 +89,7 @@ prometheus:
           accessModes: [ ReadWriteOnce ]
           resources:
             requests:
-              storage: 10Gi
+              storage: 50Gi
     scrapeInterval: 15s
     podAntiAffinity: soft
     evaluationInterval: 15s
@@ -144,6 +145,11 @@ defaultRules:
 
 kubeScheduler:
   enabled: false
+
+###################################################################################################
+
+nameOverride: prometheus
+fullnameOverride: prometheus
 
 ###################################################################################################
 

@@ -18,3 +18,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 helm upgrade monitoring stable/prometheus-operator --install --debug --namespace monitoring --version "${PROMETHEUS_OPERATOR_VERSION}" --values "${BASE}/values.yaml" --set "prometheusOperator.createCustomResource=${CREATE_CUSTOM_RESOURCE}"
 
 ###################################################################################################
+
+kubectl apply --record=true --wait=true --filename="${BASE}/service.yaml"
+
+###################################################################################################

@@ -2,6 +2,10 @@
 
 ###################################################################################################
 
+BASE="$(dirname ${BASH_SOURCE[0]})"
+
+###################################################################################################
+
 helm delete --purge monitoring
 
 ###################################################################################################
@@ -10,8 +14,12 @@ kubectl delete --wait=true namespace monitoring
 
 ###################################################################################################
 
-kubectl delete --wait=true --namespace kube-system service monitoring-prometheus-oper-kubelet
-kubectl delete --wait=true --namespace kube-system service monitoring-prometheus-oper-kube-dns
+kubectl delete --wait=true --filename="${BASE}/service.yaml"
+
+###################################################################################################
+
+kubectl delete --wait=true --namespace kube-system service prometheus-kubelet
+kubectl delete --wait=true --namespace kube-system service prometheus-kube-dns
 
 ###################################################################################################
 
