@@ -77,11 +77,3 @@ kubectl logs -f --namespace vault pod/vault-vault-1
 kubectl logs -f --namespace vault pod/vault-vault-2
 
 ###################################################################################################
-
-jenkins
--------
-
-AWS_REGION=eu-west-2 ./install.sh
-kubectl logs -f --namespace jenkins pod/jenkins-jenkins-0
-
-###################################################################################################

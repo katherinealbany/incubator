@@ -1,0 +1,23 @@
+###################################################################################################
+
+kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: nginx-ingress
+  namespace: nginx-ingress
+  labels:
+    name: nginx-ingress
+    prometheus: local
+spec:
+  jobLabel: nginx-ingress
+  selector:
+    matchLabels:
+      app: nginx-ingress
+      release: nginx-ingress
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - nginx-ingress
+
+###################################################################################################
