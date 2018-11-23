@@ -44,8 +44,8 @@ grafana:
     enabled: true
     accessModes: [ ReadWriteOnce ]
     storageClassName: standard
-  adminPassword: devops
-  defaultDashboardsEnabled: true
+  adminPassword:
+  defaultDashboardsEnabled: false
 
 ###################################################################################################
 
@@ -73,10 +73,10 @@ prometheus:
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
   prometheusSpec:
-    replicas: 3
+    replicas: 2
     resources:
       requests:
-        cpu: 100m
+        cpu: 250m
         memory: 1250Mi
       limits:
         cpu: 500m
@@ -119,7 +119,7 @@ alertmanager:
     resources:
       requests:
         cpu: 10m
-        memory: 50Mi
+        memory: 100Mi
       limits:
         cpu: 100m
         memory: 100Mi
@@ -139,7 +139,7 @@ alertmanager:
 ###################################################################################################
 
 defaultRules:
-  create: true
+  create: false
 
 ###################################################################################################
 
