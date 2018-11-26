@@ -34,7 +34,7 @@
   "style": "dark",
   "tags": [
     "Vault",
-    "Status"
+    "RED"
   ],
   "templating": {
     "list": [
@@ -246,5 +246,5 @@
     ]
   },
   "timezone": "",
-  "title": "Vault | Status"
+  "title": "Vault | RED"
 }
