@@ -1,0 +1,286 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
+        "name": "Annotations & Alerts",
+        "showIn": 0,
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 3,
+  "iteration": 1543239385447,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "tags": [
+        "Vault"
+      ],
+      "type": "dashboards"
+    }
+  ],
+  "panels": [],
+  "refresh": "3s",
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [
+    "Vault",
+    "Status"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "5m",
+          "value": "5m"
+        },
+        "hide": 2,
+        "label": "",
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "5m",
+            "value": "5m"
+          }
+        ],
+        "query": "5m",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "5m",
+          "value": "5m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "irate",
+        "options": [
+          {
+            "selected": true,
+            "text": "5m",
+            "value": "5m"
+          }
+        ],
+        "query": "5m",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "vault",
+          "value": "vault"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "container",
+        "options": [
+          {
+            "selected": true,
+            "text": "vault",
+            "value": "vault"
+          }
+        ],
+        "query": "vault",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "vault-vault",
+          "value": "vault-vault"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "statefulset",
+        "options": [
+          {
+            "selected": true,
+            "text": "vault-vault",
+            "value": "vault-vault"
+          }
+        ],
+        "query": "vault-vault",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "vault",
+          "value": "vault"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "namespace",
+        "options": [
+          {
+            "selected": true,
+            "text": "vault",
+            "value": "vault"
+          }
+        ],
+        "query": "vault",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "kube-state-metrics",
+          "value": "kube-state-metrics"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "kube_job",
+        "options": [
+          {
+            "selected": true,
+            "text": "kube-state-metrics",
+            "value": "kube-state-metrics"
+          }
+        ],
+        "query": "kube-state-metrics",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "monitoring-kube-state-metrics",
+          "value": "monitoring-kube-state-metrics"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "kube_service",
+        "options": [
+          {
+            "selected": true,
+            "text": "monitoring-kube-state-metrics",
+            "value": "monitoring-kube-state-metrics"
+          }
+        ],
+        "query": "monitoring-kube-state-metrics",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "kubelet",
+          "value": "kubelet"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "container_job",
+        "options": [
+          {
+            "selected": true,
+            "text": "kubelet",
+            "value": "kubelet"
+          }
+        ],
+        "query": "kubelet",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "kubelet",
+          "value": "kubelet"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "container_service",
+        "options": [
+          {
+            "selected": true,
+            "text": "kubelet",
+            "value": "kubelet"
+          }
+        ],
+        "query": "kubelet",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "1s",
+      "3s",
+      "5s",
+      "10s",
+      "15s",
+      "20s",
+      "25s",
+      "30s",
+      "35s",
+      "40s",
+      "45s",
+      "50s",
+      "55s",
+      "1m"
+    ],
+    "time_options": [
+      "5m",
+      "10m",
+      "15m",
+      "20m",
+      "25m",
+      "30m",
+      "35m",
+      "40m",
+      "45m",
+      "50m",
+      "55m",
+      "1h",
+      "2h",
+      "3h",
+      "4h",
+      "5h",
+      "6h",
+      "7h",
+      "8h",
+      "9h",
+      "10h",
+      "11h",
+      "12h",
+      "13h",
+      "14h",
+      "15h",
+      "16h",
+      "17h",
+      "18h",
+      "19h",
+      "20h",
+      "21h",
+      "22h",
+      "23h",
+      "1d",
+      "2d",
+      "3d",
+      "4d",
+      "5d",
+      "6d",
+      "7d"
+    ]
+  },
+  "timezone": "",
+  "title": "Vault | Status",
+  "uid": "JbfQwdLiz",
+  "version": 10
+}
