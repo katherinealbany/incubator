@@ -246,5 +246,6 @@
     ]
   },
   "timezone": "",
-  "title": "Vault | Status"
+  "title": "Vault | Status",
+  "uid": "Vault-Status"
 }
