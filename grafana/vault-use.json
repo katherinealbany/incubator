@@ -208,6 +208,63 @@
         "query": "kubelet",
         "skipUrlSync": false,
         "type": "constant"
+      },
+      {
+        "current": {
+          "text": "nginx-ingress-controller-metrics",
+          "value": "nginx-ingress-controller-metrics"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "nginx_ingress_job",
+        "options": [
+          {
+            "selected": true,
+            "text": "nginx-ingress-controller-metrics",
+            "value": "nginx-ingress-controller-metrics"
+          }
+        ],
+        "query": "nginx-ingress-controller-metrics",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "hide": 2,
+        "label": null,
+        "name": "nginx_ingress_host",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "nginx-ingress-controller-metrics",
+          "value": "nginx-ingress-controller-metrics"
+        },
+        "hide": 2,
+        "label": "",
+        "name": "nginx_ingress_service",
+        "options": [
+          {
+            "selected": true,
+            "text": "nginx-ingress-controller-metrics",
+            "value": "nginx-ingress-controller-metrics"
+          }
+        ],
+        "query": "nginx-ingress-controller-metrics",
+        "skipUrlSync": false,
+        "type": "constant"
       }
     ]
   },
