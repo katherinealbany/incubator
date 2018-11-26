@@ -14,7 +14,7 @@
       }
     ]
   },
-  "description": "The RED Method (Rate, Errors, Duration)",
+  "description": "The Four Golden Signals (Latency, Traffic, Errors, Saturation)",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -34,7 +34,7 @@
   "style": "dark",
   "tags": [
     "Vault",
-    "RED"
+    "LTES"
   ],
   "templating": {
     "list": [
@@ -246,6 +246,6 @@
     ]
   },
   "timezone": "",
-  "title": "Vault | RED",
-  "uid": "Vault-RED"
+  "title": "Vault | LTES",
+  "uid": "Vault-LTES"
 }
