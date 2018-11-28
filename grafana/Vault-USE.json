@@ -848,7 +848,7 @@
         "#d44a3a"
       ],
       "datasource": "Prometheus",
-      "decimals": null,
+      "decimals": 1,
       "format": "decbytes",
       "gauge": {
         "maxValue": null,
