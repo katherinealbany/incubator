@@ -46,7 +46,7 @@
         "minValue": 0,
         "show": true,
         "thresholdLabels": false,
-        "thresholdMarkers": false
+        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 6,
@@ -102,7 +102,7 @@
         }
       ],
       "thresholds": "90,95",
-      "title": "Aggregate CPU Utilisation (Request)",
+      "title": "Total CPU Utilisation",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -113,100 +113,7 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fill": 1,
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 4,
-        "y": 0
-      },
-      "id": 2,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 1,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "((sum(label_replace(rate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}]), \"pod\", \"${1}\", \"pod_name\", \"(.+)\")) by (pod)) / (sum(kube_pod_container_resource_requests_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", namespace=\"${namespace}\", container=\"${container}\"}) by (pod))) * 100",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (Request)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "percent",
-          "label": "",
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "valueName": "current"
     },
     {
       "cacheTimeout": null,
@@ -225,15 +132,15 @@
         "minValue": 0,
         "show": true,
         "thresholdLabels": false,
-        "thresholdMarkers": false
+        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 6,
         "w": 4,
-        "x": 12,
+        "x": 4,
         "y": 0
       },
-      "id": 3,
+      "id": 2,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -280,8 +187,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0.7,0.85",
-      "title": "Aggregate CPU Saturation",
+      "thresholds": "0.5,0.75",
+      "title": "Total CPU Saturation",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -292,7 +199,100 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 3,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 1,
+      "points": false,
+      "renderer": "flot",
+      "repeat": null,
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "((sum(label_replace(rate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}]), \"pod\", \"${1}\", \"pod_name\", \"(.+)\")) by (pod)) / (sum(kube_pod_container_resource_requests_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", namespace=\"${namespace}\", container=\"${container}\"}) by (pod))) * 100",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Utilisation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "percent",
+          "label": "",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -399,8 +399,8 @@
     "list": [
       {
         "current": {
-          "text": "5m",
-          "value": "5m"
+          "text": "3m",
+          "value": "3m"
         },
         "hide": 2,
         "label": "",
@@ -408,18 +408,18 @@
         "options": [
           {
             "selected": true,
-            "text": "5m",
-            "value": "5m"
+            "text": "3m",
+            "value": "3m"
           }
         ],
-        "query": "5m",
+        "query": "3m",
         "skipUrlSync": false,
         "type": "constant"
       },
       {
         "current": {
-          "text": "5m",
-          "value": "5m"
+          "text": "1m",
+          "value": "1m"
         },
         "hide": 2,
         "label": null,
@@ -427,11 +427,11 @@
         "options": [
           {
             "selected": true,
-            "text": "5m",
-            "value": "5m"
+            "text": "1m",
+            "value": "1m"
           }
         ],
-        "query": "5m",
+        "query": "1m",
         "skipUrlSync": false,
         "type": "constant"
       },
@@ -584,25 +584,6 @@
           }
         ],
         "query": "nginx-ingress-controller-metrics",
-        "skipUrlSync": false,
-        "type": "constant"
-      },
-      {
-        "current": {
-          "text": "",
-          "value": ""
-        },
-        "hide": 2,
-        "label": null,
-        "name": "nginx_ingress_host",
-        "options": [
-          {
-            "selected": true,
-            "text": "",
-            "value": ""
-          }
-        ],
-        "query": "",
         "skipUrlSync": false,
         "type": "constant"
       },
