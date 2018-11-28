@@ -1093,7 +1093,7 @@
       "title": "Aggregate Network Errors",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "150%",
+      "valueFontSize": "200%",
       "valueMaps": [
         {
           "op": "=",
@@ -1104,7 +1104,7 @@
       "valueName": "current"
     }
   ],
-  "refresh": "3s",
+  "refresh": "1s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
@@ -1325,7 +1325,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
