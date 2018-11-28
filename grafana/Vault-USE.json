@@ -46,7 +46,7 @@
         "minValue": 0,
         "show": true,
         "thresholdLabels": false,
-        "thresholdMarkers": true
+        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 6,
@@ -92,9 +92,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(label_replace(irate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${irate}]), \"pod\", \"${1}\", \"pod_name\", \"(.+)\")) / sum(kube_pod_container_resource_requests_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", namespace=\"${namespace}\", container=\"${container}\"})) * 100",
+          "expr": "(sum(label_replace(rate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}]), \"pod\", \"${1}\", \"pod_name\", \"(.+)\")) / sum(kube_pod_container_resource_requests_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", namespace=\"${namespace}\", container=\"${container}\"})) * 100",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -102,7 +102,7 @@
         }
       ],
       "thresholds": "90,95",
-      "title": "Total CPU Utilisation (Request)",
+      "title": "Aggregate CPU Utilisation (Request)",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -113,7 +113,7 @@
           "value": "null"
         }
       ],
-      "valueName": "current"
+      "valueName": "avg"
     },
     {
       "aliasColors": {},
@@ -225,7 +225,7 @@
         "minValue": 0,
         "show": true,
         "thresholdLabels": false,
-        "thresholdMarkers": true
+        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 6,
@@ -271,9 +271,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(label_replace(irate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${irate}]), \"pod\", \"${1}\", \"pod_name\", \"(.+)\")) / sum(kube_pod_container_resource_limits_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", namespace=\"${namespace}\", container=\"${container}\"})) * 100",
+          "expr": "(sum(label_replace(rate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}]), \"pod\", \"${1}\", \"pod_name\", \"(.+)\")) / sum(kube_pod_container_resource_limits_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", namespace=\"${namespace}\", container=\"${container}\"})) * 100",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -281,7 +281,7 @@
         }
       ],
       "thresholds": "90,95",
-      "title": "Total CPU Utilisation (Limit)",
+      "title": "Aggregate CPU Utilisation (Limit)",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -292,7 +292,7 @@
           "value": "null"
         }
       ],
-      "valueName": "current"
+      "valueName": "avg"
     },
     {
       "aliasColors": {},
