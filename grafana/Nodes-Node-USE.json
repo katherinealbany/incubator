@@ -35,7 +35,27 @@
     "Node"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "text": "3m",
+          "value": "3m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "3m",
+            "value": "3m"
+          }
+        ],
+        "query": "3m",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
