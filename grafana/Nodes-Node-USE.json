@@ -47,12 +47,12 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 5,
+        "h": 6,
+        "w": 8,
         "x": 0,
         "y": 1
       },
-      "id": 2,
+      "id": 8,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -80,17 +80,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"system\"}[${irate}])) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"user\"}[${irate}])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "System",
+          "legendFormat": "CPU {{cpu}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU Utilisation (System)",
+      "title": "CPU Utilisation (User)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -137,9 +137,9 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 5,
+        "h": 6,
+        "w": 8,
+        "x": 8,
         "y": 1
       },
       "id": 3,
@@ -170,10 +170,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"iowait\"}[${irate}])) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"iowait\"}[${irate}])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "I/O Wait",
+          "legendFormat": "CPU {{cpu}}",
           "refId": "A"
         }
       ],
@@ -227,99 +227,9 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 10,
-        "y": 1
-      },
-      "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": true,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"irq\"}[${irate}])) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "IRQ",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (IRQ)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fill": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 15,
+        "h": 6,
+        "w": 8,
+        "x": 16,
         "y": 1
       },
       "id": 5,
@@ -350,10 +260,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"nice\"}[${irate}])) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"nice\"}[${irate}])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Nice",
+          "legendFormat": "CPU {{cpu}}",
           "refId": "A"
         }
       ],
@@ -407,12 +317,12 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 5,
+        "h": 6,
+        "w": 8,
         "x": 0,
-        "y": 8
+        "y": 7
       },
-      "id": 6,
+      "id": 2,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -440,17 +350,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"softirq\"}[${irate}])) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"system\"}[${irate}])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Soft IRQ",
+          "legendFormat": "CPU {{cpu}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU Utilisation (Soft IRQ)",
+      "title": "CPU Utilisation (System)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -497,10 +407,107 @@
       "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 5,
-        "y": 8
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 7
+      },
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "repeat": null,
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"irq\"}[${irate}])) by (cpu)) * 100",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "CPU {{cpu}} (IRQ)",
+          "refId": "A"
+        },
+        {
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"softirq\"}[${irate}])) by (cpu)) * 100",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "CPU {{cpu}} (Soft IRQ)",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Utilisation (IRQ)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 7
       },
       "id": 7,
       "legend": {
@@ -530,10 +537,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"steal\"}[${irate}])) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"steal\"}[${irate}])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Steal",
+          "legendFormat": "CPU {{cpu}}",
           "refId": "A"
         }
       ],
@@ -541,96 +548,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "CPU Utilisation (Steal)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fill": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 10,
-        "y": 8
-      },
-      "id": 8,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": true,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"user\"}[${irate}])) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "User",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (User)",
       "tooltip": {
         "shared": true,
         "sort": 0,
