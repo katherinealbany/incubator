@@ -17,6 +17,7 @@
   "graphTooltip": 0,
   "links": [],
   "panels": [],
+  "refresh": "1s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
