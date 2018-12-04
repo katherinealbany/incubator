@@ -230,6 +230,10 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "3m",
+          "value": "3m"
+        },
         "hide": 2,
         "label": null,
         "name": "rate",
@@ -245,6 +249,10 @@
         "type": "constant"
       },
       {
+        "current": {
+          "text": "1m",
+          "value": "1m"
+        },
         "hide": 2,
         "label": null,
         "name": "irate",
