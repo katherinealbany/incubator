@@ -1,0 +1,117 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
+        "name": "Annotations & Alerts",
+        "showIn": 0,
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "The USE Method (Utilisation, Saturation, Errors)",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "links": [
+    {
+      "icon": "external link",
+      "tags": [
+        "Nodes",
+        "Node"
+      ],
+      "type": "dashboards"
+    }
+  ],
+  "panels": [],
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [
+    "Nodes",
+    "Node",
+    "USE"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "3m",
+          "value": "3m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "3m",
+            "value": "3m"
+          }
+        ],
+        "query": "3m",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "1m",
+          "value": "1m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "irate",
+        "options": [
+          {
+            "selected": true,
+            "text": "1m",
+            "value": "1m"
+          }
+        ],
+        "query": "1m",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1s",
+      "3s",
+      "5s",
+      "10s",
+      "15s",
+      "20s",
+      "25s",
+      "30s",
+      "35s",
+      "40s",
+      "45s",
+      "50s",
+      "55s",
+      "1m"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Nodes | Node | USE",
+  "uid": "Nodes | Node | USE"
+}
