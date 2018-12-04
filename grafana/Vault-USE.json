@@ -217,7 +217,7 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 8,
+        "w": 12,
         "x": 12,
         "y": 0
       },
@@ -250,13 +250,20 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_cfs_throttled_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}])) by (pod_name) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}])) by (pod_name)",
           "format": "time_series",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod_name}}",
           "refId": "A"
+        },
+        {
+          "expr": "(sum(rate(container_cpu_cfs_throttled_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}])) by (pod_name)) * -1",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod_name}}",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -280,11 +287,11 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "percent",
+          "format": "s",
           "label": "",
           "logBase": 1,
-          "max": "100",
-          "min": "0",
+          "max": null,
+          "min": null,
           "show": true
         },
         {
@@ -300,92 +307,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Prometheus",
-      "decimals": 0,
-      "format": "percent",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 20,
-        "y": 0
-      },
-      "id": 4,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeat": null,
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "sum(rate(container_cpu_cfs_throttled_seconds_total{job=\"${container_job}\", service=\"${container_service}\", namespace=\"${namespace}\", container_name=\"${container}\"}[${rate}])) * 100",
-          "format": "time_series",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "60,80",
-      "title": "Aggregate CPU Saturation",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
     },
     {
       "aliasColors": {},
