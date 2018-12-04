@@ -7,97 +7,39 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
-        "limit": 100,
         "name": "Annotations & Alerts",
-        "showIn": 0,
         "type": "dashboard"
       }
     ]
   },
-  "description": "The USE Method (Utilisation, Saturation, Errors)",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [
-    {
-      "icon": "external link",
-      "tags": [
-        "Nodes",
-        "Node"
-      ],
-      "type": "dashboards"
-    }
-  ],
+  "id": 42,
+  "links": [],
   "panels": [],
   "schemaVersion": 16,
   "style": "dark",
-  "tags": [
-    "Nodes",
-    "Node",
-    "USE"
-  ],
+  "tags": [],
   "templating": {
-    "list": [
-      {
-        "current": {
-          "text": "3m",
-          "value": "3m"
-        },
-        "hide": 2,
-        "label": null,
-        "name": "rate",
-        "options": [
-          {
-            "selected": true,
-            "text": "3m",
-            "value": "3m"
-          }
-        ],
-        "query": "3m",
-        "skipUrlSync": false,
-        "type": "constant"
-      },
-      {
-        "current": {
-          "text": "1m",
-          "value": "1m"
-        },
-        "hide": 2,
-        "label": null,
-        "name": "irate",
-        "options": [
-          {
-            "selected": true,
-            "text": "1m",
-            "value": "1m"
-          }
-        ],
-        "query": "1m",
-        "skipUrlSync": false,
-        "type": "constant"
-      }
-    ]
+    "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
-      "1s",
-      "3s",
       "5s",
       "10s",
-      "15s",
-      "20s",
-      "25s",
       "30s",
-      "35s",
-      "40s",
-      "45s",
-      "50s",
-      "55s",
-      "1m"
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
     ],
     "time_options": [
       "5m",
@@ -112,6 +54,7 @@
     ]
   },
   "timezone": "",
-  "title": "Nodes | Node | USE",
-  "uid": "Nodes | Node | USE"
+  "title": "New dashboard Copy",
+  "uid": "eqWFt6Ymk",
+  "version": 1
 }
