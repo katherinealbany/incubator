@@ -12,6 +12,7 @@
       }
     ]
   },
+  "description": "The USE Method (Utilisation, Saturation, Errors)",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -20,7 +21,10 @@
   "refresh": "1s",
   "schemaVersion": 16,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "Nodes",
+    "Node"
+  ],
   "templating": {
     "list": []
   },
