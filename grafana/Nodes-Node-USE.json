@@ -16,7 +16,16 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "links": [],
+  "links": [
+    {
+      "icon": "external link",
+      "tags": [
+        "Nodes",
+        "Node"
+      ],
+      "type": "dashboards"
+    }
+  ],
   "panels": [],
   "refresh": "1s",
   "schemaVersion": 16,
