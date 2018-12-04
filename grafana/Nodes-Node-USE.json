@@ -54,6 +54,25 @@
         "query": "3m",
         "skipUrlSync": false,
         "type": "constant"
+      },
+      {
+        "current": {
+          "text": "1m",
+          "value": "1m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "irate",
+        "options": [
+          {
+            "selected": true,
+            "text": "1m",
+            "value": "1m"
+          }
+        ],
+        "query": "1m",
+        "skipUrlSync": false,
+        "type": "constant"
       }
     ]
   },
