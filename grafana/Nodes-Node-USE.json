@@ -34,557 +34,658 @@
         "x": 0,
         "y": 0
       },
-      "id": 1,
+      "id": 13,
       "repeat": null,
-      "title": "CPU",
+      "title": "Overview",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
       "datasource": "$datasource",
-      "fill": 1,
+      "decimals": 0,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
       "gridPos": {
-        "h": 5,
-        "w": 8,
+        "h": 6,
+        "w": 4,
         "x": 0,
         "y": 1
       },
-      "id": 8,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "id": 11,
+      "interval": null,
       "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
       "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"user\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{job=\"${node_job}\", service=\"${node_service}\", instance=\"${node}\", mode!=\"idle\"}[${irate}]))) * 100",
           "format": "time_series",
+          "instant": true,
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}}",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (User)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
+      "thresholds": "80,90",
+      "title": "CPU Utilisation",
       "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
         {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "valueName": "current"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
+      "collapsed": true,
       "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 8,
-        "y": 1
-      },
-      "id": 2,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"system\"}[${irate}])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (System)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "id": 7,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"steal\"}[${irate}])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (Steal)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 8,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 6
+        "y": 7
       },
-      "id": 3,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
+      "id": 1,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 1,
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 7
+          },
+          "id": 8,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 0.5,
+          "points": true,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"user\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Utilisation (User)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 1,
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 7
+          },
+          "id": 2,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 0.5,
+          "points": true,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"system\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Utilisation (System)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 1,
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 7
+          },
+          "id": 7,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 0.5,
+          "points": true,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"steal\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Utilisation (Steal)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 1,
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 12
+          },
+          "id": 3,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 0.5,
+          "points": true,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"iowait\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Utilisation (I/O Wait)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 1,
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 12
+          },
+          "id": 4,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 0.5,
+          "points": true,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"irq\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}} (IRQ)",
+              "refId": "A"
+            },
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"softirq\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}} (Soft IRQ)",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Utilisation (IRQ)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "$datasource",
+          "fill": 1,
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 12
+          },
+          "id": 5,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 0.5,
+          "points": true,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"nice\"}[${irate}])) by (cpu)) * 100",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CPU {{cpu}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Utilisation (Nice)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": null,
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"iowait\"}[${irate}])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (I/O Wait)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 8,
-        "y": 6
-      },
-      "id": 4,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"irq\"}[${irate}])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}} (IRQ)",
-          "refId": "A"
-        },
-        {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"softirq\"}[${irate}])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}} (Soft IRQ)",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (IRQ)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 6
-      },
-      "id": 5,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 0.5,
-      "points": true,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=\"${node}\",mode=\"nice\"}[${irate}])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "CPU {{cpu}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Utilisation (Nice)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": "100",
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "CPU",
+      "type": "row"
     }
   ],
   "refresh": "1s",
@@ -608,6 +709,44 @@
         "type": "datasource"
       },
       {
+        "current": {
+          "text": "3m",
+          "value": "3m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "3m",
+            "value": "3m"
+          }
+        ],
+        "query": "3m",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "3m",
+          "value": "3m"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "irate",
+        "options": [
+          {
+            "selected": true,
+            "text": "3m",
+            "value": "3m"
+          }
+        ],
+        "query": "3m",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
         "allValue": null,
         "datasource": "$datasource",
         "hide": 0,
@@ -629,39 +768,39 @@
       },
       {
         "current": {
-          "text": "3m",
-          "value": "3m"
+          "text": "node-exporter",
+          "value": "node-exporter"
         },
         "hide": 2,
         "label": null,
-        "name": "rate",
+        "name": "node_job",
         "options": [
           {
             "selected": true,
-            "text": "3m",
-            "value": "3m"
+            "text": "node-exporter",
+            "value": "node-exporter"
           }
         ],
-        "query": "3m",
+        "query": "node-exporter",
         "skipUrlSync": false,
         "type": "constant"
       },
       {
         "current": {
-          "text": "1m",
-          "value": "1m"
+          "text": "monitoring-prometheus-node-exporter",
+          "value": "monitoring-prometheus-node-exporter"
         },
         "hide": 2,
         "label": null,
-        "name": "irate",
+        "name": "node_service",
         "options": [
           {
             "selected": true,
-            "text": "1m",
-            "value": "1m"
+            "text": "monitoring-prometheus-node-exporter",
+            "value": "monitoring-prometheus-node-exporter"
           }
         ],
-        "query": "1m",
+        "query": "monitoring-prometheus-node-exporter",
         "skipUrlSync": false,
         "type": "constant"
       }
