@@ -44,7 +44,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -134,7 +134,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -224,7 +224,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -314,7 +314,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -404,7 +404,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -501,7 +501,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -636,7 +636,7 @@
       },
       {
         "allValue": null,
-        "datasource": "Prometheus",
+        "datasource": "$datasource",
         "hide": 0,
         "includeAll": false,
         "label": "Node",
@@ -653,6 +653,22 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "tags": [],
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 0,
+        "label": "Datasource",
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
       }
     ]
   },
