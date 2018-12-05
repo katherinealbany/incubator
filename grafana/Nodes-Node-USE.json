@@ -597,6 +597,37 @@
   "templating": {
     "list": [
       {
+        "hide": 0,
+        "label": "Datasource",
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": null,
+        "datasource": "${datasource}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Node",
+        "multi": false,
+        "name": "node",
+        "options": [],
+        "query": "label_values(node_uname_info, instance)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
         "current": {
           "text": "3m",
           "value": "3m"
@@ -633,37 +664,6 @@
         "query": "1m",
         "skipUrlSync": false,
         "type": "constant"
-      },
-      {
-        "allValue": null,
-        "datasource": "${datasource}",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Node",
-        "multi": false,
-        "name": "node",
-        "options": [],
-        "query": "label_values(node_uname_info, instance)",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "hide": 0,
-        "label": "Datasource",
-        "name": "datasource",
-        "options": [],
-        "query": "prometheus",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
       }
     ]
   },
