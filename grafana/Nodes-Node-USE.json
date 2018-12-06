@@ -152,7 +152,7 @@
         "x": 4,
         "y": 1
       },
-      "id": 14,
+      "id": 3,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -170,9 +170,9 @@
       "nullPointMode": "connected",
       "nullText": null,
       "postfix": "",
-      "postfixFontSize": "50%",
+      "postfixFontSize": "100%",
       "prefix": "",
-      "prefixFontSize": "50%",
+      "prefixFontSize": "100%",
       "rangeMaps": [
         {
           "from": "null",
@@ -190,17 +190,17 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(node_memory_MemAvailable_bytes{job=\"${node_job}\", service=\"${node_service}\", instance=~\"^${instance}:[0-9]{1,5}\"} / node_memory_MemTotal_bytes{job=\"${node_job}\", service=\"${node_service}\", instance=~\"^${instance}:[0-9]{1,5}\"}) * 100",
+          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", node=\"${node}\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", node=\"${node}\"})) * 100",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "CPU Resource Requests",
           "refId": "A"
         }
       ],
       "thresholds": "90,95",
-      "title": "Memory Utilisation",
+      "title": "CPU Resource Requests",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "100%",
@@ -510,7 +510,7 @@
         "x": 0,
         "y": 13
       },
-      "id": 3,
+      "id": 300,
       "legend": {
         "alignAsTable": false,
         "avg": false,
