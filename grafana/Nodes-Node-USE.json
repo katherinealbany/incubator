@@ -61,8 +61,8 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 6,
-        "w": 4,
+        "h": 5,
+        "w": 3,
         "x": 0,
         "y": 1
       },
@@ -84,9 +84,9 @@
       "nullPointMode": "connected",
       "nullText": null,
       "postfix": "",
-      "postfixFontSize": "100%",
+      "postfixFontSize": "50%",
       "prefix": "",
-      "prefixFontSize": "100%",
+      "prefixFontSize": "50%",
       "rangeMaps": [
         {
           "from": "null",
@@ -117,7 +117,7 @@
       "title": "CPU Utilisation",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -147,9 +147,9 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 4,
+        "h": 5,
+        "w": 3,
+        "x": 3,
         "y": 1
       },
       "id": 3,
@@ -170,9 +170,9 @@
       "nullPointMode": "connected",
       "nullText": null,
       "postfix": "",
-      "postfixFontSize": "100%",
+      "postfixFontSize": "50%",
       "prefix": "",
-      "prefixFontSize": "100%",
+      "prefixFontSize": "50%",
       "rangeMaps": [
         {
           "from": "null",
@@ -203,7 +203,7 @@
       "title": "CPU Resource Requests",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -226,16 +226,16 @@
       "decimals": 0,
       "format": "percent",
       "gauge": {
-        "maxValue": 100,
+        "maxValue": 500,
         "minValue": 0,
         "show": true,
         "thresholdLabels": false,
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 8,
+        "h": 5,
+        "w": 3,
+        "x": 6,
         "y": 1
       },
       "id": 4,
@@ -256,9 +256,9 @@
       "nullPointMode": "connected",
       "nullText": null,
       "postfix": "",
-      "postfixFontSize": "100%",
+      "postfixFontSize": "50%",
       "prefix": "",
-      "prefixFontSize": "100%",
+      "prefixFontSize": "50%",
       "rangeMaps": [
         {
           "from": "null",
@@ -285,11 +285,11 @@
           "refId": "A"
         }
       ],
-      "thresholds": "90,95",
+      "thresholds": "250,375",
       "title": "CPU Resource Limits",
       "transparent": true,
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -305,7 +305,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 6
       },
       "id": 100,
       "panels": [],
@@ -324,7 +324,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 8
+        "y": 7
       },
       "id": 8,
       "legend": {
@@ -414,7 +414,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 8
+        "y": 7
       },
       "id": 200,
       "legend": {
@@ -504,7 +504,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 8
+        "y": 7
       },
       "id": 7,
       "legend": {
@@ -594,7 +594,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "id": 300,
       "legend": {
@@ -684,7 +684,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 13
+        "y": 12
       },
       "id": 400,
       "legend": {
@@ -781,7 +781,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 13
+        "y": 12
       },
       "id": 5,
       "legend": {
