@@ -1056,6 +1056,186 @@
       "valueName": "current"
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 10,
+        "w": 10,
+        "x": 3,
+        "y": 18
+      },
+      "id": 14,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pointradius": 1,
+      "points": false,
+      "renderer": "flot",
+      "repeat": null,
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$irate])) by (namespace)) * 100",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Usage (Namespace)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 10,
+        "w": 11,
+        "x": 13,
+        "y": 18
+      },
+      "id": 15,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pointradius": 1,
+      "points": false,
+      "renderer": "flot",
+      "repeat": null,
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$irate])) by (pod_name)) * 100",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod_name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Usage (Pod)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "cacheTimeout": null,
       "colorBackground": false,
       "colorValue": true,
@@ -1077,10 +1257,10 @@
       "gridPos": {
         "h": 5,
         "w": 3,
-        "x": 3,
-        "y": 18
+        "x": 0,
+        "y": 23
       },
-      "id": 14,
+      "id": 16,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1313,6 +1493,44 @@
           }
         ],
         "query": "monitoring-prometheus-node-exporter",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "kubelet",
+          "value": "kubelet"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "container_job",
+        "options": [
+          {
+            "selected": true,
+            "text": "kubelet",
+            "value": "kubelet"
+          }
+        ],
+        "query": "kubelet",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "prometheus-kubelet",
+          "value": "prometheus-kubelet"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "container_service",
+        "options": [
+          {
+            "selected": true,
+            "text": "prometheus-kubelet",
+            "value": "prometheus-kubelet"
+          }
+        ],
+        "query": "prometheus-kubelet",
         "skipUrlSync": false,
         "type": "constant"
       }
