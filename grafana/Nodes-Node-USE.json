@@ -38,193 +38,7 @@
       "id": 1,
       "panels": [],
       "repeat": null,
-      "title": "Overview",
-      "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "$datasource",
-      "decimals": 0,
-      "format": "percent",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 0,
-        "y": 1
-      },
-      "id": 3,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeat": null,
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "CPU Capacity (Requests)",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "90,95",
-      "title": "CPU Capacity (Requests)",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "$datasource",
-      "decimals": 0,
-      "format": "percent",
-      "gauge": {
-        "maxValue": 500,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 3,
-        "y": 1
-      },
-      "id": 4,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeat": null,
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "CPU Capacity (Limits)",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "250,375",
-      "title": "CPU Capacity (Limits)",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 6
-      },
-      "id": 100,
-      "panels": [],
-      "repeat": null,
-      "title": "CPU",
+      "title": "CPU (Hardware)",
       "type": "row"
     },
     {
@@ -250,9 +64,9 @@
         "h": 6,
         "w": 2,
         "x": 0,
-        "y": 7
+        "y": 1
       },
-      "id": 403,
+      "id": 2,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -336,9 +150,9 @@
         "h": 6,
         "w": 4,
         "x": 2,
-        "y": 7
+        "y": 1
       },
-      "id": 2,
+      "id": 3,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -410,9 +224,9 @@
         "h": 6,
         "w": 9,
         "x": 6,
-        "y": 7
+        "y": 1
       },
-      "id": 401,
+      "id": 4,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -500,9 +314,9 @@
         "h": 6,
         "w": 9,
         "x": 15,
-        "y": 7
+        "y": 1
       },
-      "id": 402,
+      "id": 5,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -605,9 +419,9 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 13
+        "y": 7
       },
-      "id": 8,
+      "id": 6,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -695,9 +509,9 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 13
+        "y": 7
       },
-      "id": 200,
+      "id": 7,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -785,9 +599,9 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 13
+        "y": 7
       },
-      "id": 7,
+      "id": 8,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -875,9 +689,9 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 18
+        "y": 12
       },
-      "id": 300,
+      "id": 9,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -965,9 +779,9 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 18
+        "y": 12
       },
-      "id": 400,
+      "id": 10,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1062,9 +876,9 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 18
+        "y": 12
       },
-      "id": 5,
+      "id": 11,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1140,6 +954,192 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 12,
+      "panels": [],
+      "repeat": null,
+      "title": "CPU (Container)",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "$datasource",
+      "decimals": 0,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 18
+      },
+      "id": 13,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "CPU Capacity (Requests)",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "90,95",
+      "title": "CPU Capacity (Requests)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "$datasource",
+      "decimals": 0,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 500,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 18
+      },
+      "id": 14,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "CPU Capacity (Limits)",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "250,375",
+      "title": "CPU Capacity (Limits)",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     }
   ],
   "refresh": "1s",
