@@ -38,7 +38,7 @@
       "id": 1,
       "panels": [],
       "repeat": null,
-      "title": "CPU (Hardware)",
+      "title": "CPU",
       "type": "row"
     },
     {
@@ -956,20 +956,6 @@
       }
     },
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 17
-      },
-      "id": 12,
-      "panels": [],
-      "repeat": null,
-      "title": "CPU (Container)",
-      "type": "row"
-    },
-    {
       "cacheTimeout": null,
       "colorBackground": false,
       "colorValue": true,
@@ -992,9 +978,9 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 18
+        "y": 17
       },
-      "id": 13,
+      "id": 12,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1064,11 +1050,11 @@
       "fill": 1,
       "gridPos": {
         "h": 10,
-        "w": 10,
+        "w": 8,
         "x": 3,
-        "y": 18
+        "y": 17
       },
-      "id": 14,
+      "id": 13,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1154,11 +1140,11 @@
       "fill": 1,
       "gridPos": {
         "h": 10,
-        "w": 11,
-        "x": 13,
-        "y": 18
+        "w": 13,
+        "x": 11,
+        "y": 17
       },
-      "id": 15,
+      "id": 14,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1258,9 +1244,9 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 23
+        "y": 22
       },
-      "id": 16,
+      "id": 15,
       "interval": null,
       "links": [],
       "mappingType": 1,
