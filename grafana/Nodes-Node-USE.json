@@ -826,7 +826,7 @@
         "options": [],
         "query": "label_values(node_uname_info{job=\"$node_job\", service=\"$node_service\", nodename=\"$node\"}, instance)",
         "refresh": 2,
-        "regex": "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})\\:.*",
+        "regex": "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}):[0-9]{1,5}",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -837,7 +837,6 @@
       },
       {
         "current": {
-          "selected": true,
           "text": "3m",
           "value": "3m"
         },
@@ -857,7 +856,6 @@
       },
       {
         "current": {
-          "selected": true,
           "text": "3m",
           "value": "3m"
         },
@@ -915,7 +913,6 @@
       },
       {
         "current": {
-          "selected": true,
           "text": "node-exporter",
           "value": "node-exporter"
         },
@@ -935,7 +932,6 @@
       },
       {
         "current": {
-          "selected": true,
           "text": "monitoring-prometheus-node-exporter",
           "value": "monitoring-prometheus-node-exporter"
         },
