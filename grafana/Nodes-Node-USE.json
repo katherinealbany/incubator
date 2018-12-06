@@ -104,7 +104,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{job=\"${node_job}\", service=\"${node_service}\", instance=~\"^${instance}:[0-9]{1,5}\", mode!=\"idle\"}[${irate}]))) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$irate]))) * 100",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -168,7 +168,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode!=\"idle\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}}",
@@ -280,7 +280,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", node=\"${node}\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", node=\"${node}\"})) * 100",
+          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -366,7 +366,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", node=\"${node}\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"${kube_job}\", service=\"${kube_service}\", node=\"${node}\"})) * 100",
+          "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -444,7 +444,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"user\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"user\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}}",
@@ -534,7 +534,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"system\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"system\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}}",
@@ -624,7 +624,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"steal\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"steal\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}}",
@@ -714,7 +714,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"iowait\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"iowait\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}}",
@@ -804,14 +804,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"irq\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"irq\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}} (IRQ)",
           "refId": "A"
         },
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"softirq\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"softirq\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}} (Soft IRQ)",
@@ -901,7 +901,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^${instance}:[0-9]{1,5}\", mode=\"nice\"}[${irate}])) by (cpu)) * 100",
+          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"nice\"}[$irate])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "CPU {{cpu}}",
