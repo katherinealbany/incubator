@@ -109,12 +109,12 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "CPU Utilisation",
+          "legendFormat": "Total CPU Utilisation",
           "refId": "A"
         }
       ],
       "thresholds": "90,95",
-      "title": "CPU Utilisation",
+      "title": "Total CPU Utilisation",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
