@@ -796,6 +796,46 @@
         "type": "datasource"
       },
       {
+        "allValue": null,
+        "datasource": "$datasource",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Node",
+        "multi": false,
+        "name": "node",
+        "options": [],
+        "query": "label_values(kube_node_info, node)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "datasource": "$datasource",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Instance",
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": "label_values(node_uname_info{nodename=\"$node\"}, instance)",
+        "refresh": 2,
+        "regex": "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})\\:.*",
+        "skipUrlSync": false,
+        "sort": 4,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
         "current": {
           "selected": true,
           "text": "3m",
@@ -836,24 +876,42 @@
         "type": "constant"
       },
       {
-        "allValue": null,
-        "datasource": "$datasource",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Node",
-        "multi": false,
-        "name": "node",
-        "options": [],
-        "query": "label_values(kube_node_info, node)",
-        "refresh": 2,
-        "regex": "",
+        "current": {
+          "text": "kube-state-metrics",
+          "value": "kube-state-metrics"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "kube_job",
+        "options": [
+          {
+            "selected": true,
+            "text": "kube-state-metrics",
+            "value": "kube-state-metrics"
+          }
+        ],
+        "query": "kube-state-metrics",
         "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "monitoring-kube-state-metrics",
+          "value": "monitoring-kube-state-metrics"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "kube_service",
+        "options": [
+          {
+            "selected": true,
+            "text": "monitoring-kube-state-metrics",
+            "value": "monitoring-kube-state-metrics"
+          }
+        ],
+        "query": "monitoring-kube-state-metrics",
+        "skipUrlSync": false,
+        "type": "constant"
       },
       {
         "current": {
@@ -894,26 +952,6 @@
         "query": "monitoring-prometheus-node-exporter",
         "skipUrlSync": false,
         "type": "constant"
-      },
-      {
-        "allValue": null,
-        "datasource": "$datasource",
-        "hide": 2,
-        "includeAll": false,
-        "label": "Instance",
-        "multi": false,
-        "name": "instance",
-        "options": [],
-        "query": "label_values(node_uname_info{nodename=\"$node\"}, instance)",
-        "refresh": 2,
-        "regex": "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})\\:.*",
-        "skipUrlSync": false,
-        "sort": 4,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       }
     ]
   },
