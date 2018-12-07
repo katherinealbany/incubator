@@ -28,12 +28,52 @@
   ],
   "panels": [
     {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 0,
+        "y": 0
+      },
+      "id": 17,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"false\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Ready",
+          "refId": "A"
+        }
+      ],
+      "title": "Ready",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 5
       },
       "id": 1,
       "panels": [],
@@ -64,7 +104,7 @@
         "h": 6,
         "w": 2,
         "x": 0,
-        "y": 1
+        "y": 6
       },
       "id": 2,
       "interval": null,
@@ -150,7 +190,7 @@
         "h": 6,
         "w": 4,
         "x": 2,
-        "y": 1
+        "y": 6
       },
       "id": 3,
       "interval": null,
@@ -224,7 +264,7 @@
         "h": 6,
         "w": 9,
         "x": 6,
-        "y": 1
+        "y": 6
       },
       "id": 4,
       "legend": {
@@ -314,7 +354,7 @@
         "h": 6,
         "w": 9,
         "x": 15,
-        "y": 1
+        "y": 6
       },
       "id": 5,
       "legend": {
@@ -419,7 +459,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 7
+        "y": 12
       },
       "id": 6,
       "legend": {
@@ -509,7 +549,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 7
+        "y": 12
       },
       "id": 7,
       "legend": {
@@ -599,7 +639,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 7
+        "y": 12
       },
       "id": 8,
       "legend": {
@@ -689,7 +729,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 12
+        "y": 17
       },
       "id": 9,
       "legend": {
@@ -779,7 +819,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 12
+        "y": 17
       },
       "id": 10,
       "legend": {
@@ -876,7 +916,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 12
+        "y": 17
       },
       "id": 11,
       "legend": {
@@ -978,7 +1018,7 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 17
+        "y": 22
       },
       "id": 12,
       "interval": null,
@@ -1052,7 +1092,7 @@
         "h": 10,
         "w": 8,
         "x": 3,
-        "y": 17
+        "y": 22
       },
       "id": 13,
       "legend": {
@@ -1142,7 +1182,7 @@
         "h": 10,
         "w": 13,
         "x": 11,
-        "y": 17
+        "y": 22
       },
       "id": 14,
       "legend": {
@@ -1244,7 +1284,7 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 22
+        "y": 27
       },
       "id": 15,
       "interval": null,
