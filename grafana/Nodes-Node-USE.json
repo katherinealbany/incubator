@@ -16,8 +16,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1544193788161,
   "links": [
     {
       "icon": "external link",
@@ -524,7 +522,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$irate]))) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$rate_interval]))) * 100",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -588,7 +586,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -783,7 +781,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"user\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"user\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -873,7 +871,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"system\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"system\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -963,7 +961,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"steal\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"steal\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -1053,7 +1051,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"iowait\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"iowait\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -1143,14 +1141,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"irq\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"irq\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}} (IRQ)",
           "refId": "A"
         },
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"softirq\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"softirq\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}} (Soft IRQ)",
@@ -1240,7 +1238,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"nice\"}[$irate])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"nice\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -1416,7 +1414,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$irate])) by (namespace)) * 100",
+          "expr": "(sum($rate_function(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$rate_interval])) by (namespace)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{namespace}}",
@@ -1506,7 +1504,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$irate])) by (pod_name)) * 100",
+          "expr": "(sum($rate_function(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$rate_interval])) by (pod_name)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{pod_name}}",
@@ -1703,42 +1701,99 @@
         "useTags": false
       },
       {
+        "allValue": null,
         "current": {
-          "text": "3m",
-          "value": "3m"
+          "text": "rate",
+          "value": "rate"
         },
-        "hide": 2,
-        "label": null,
-        "name": "rate",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Rate Function",
+        "multi": false,
+        "name": "rate_function",
         "options": [
           {
             "selected": true,
-            "text": "3m",
-            "value": "3m"
+            "text": "rate",
+            "value": "rate"
+          },
+          {
+            "selected": false,
+            "text": "irate",
+            "value": "irate"
           }
         ],
-        "query": "3m",
+        "query": "rate,irate",
         "skipUrlSync": false,
-        "type": "constant"
+        "type": "custom"
       },
       {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
         "current": {
           "text": "3m",
           "value": "3m"
         },
-        "hide": 2,
-        "label": null,
-        "name": "irate",
+        "hide": 0,
+        "label": "Rate Interval",
+        "name": "rate_interval",
         "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "2m",
+            "value": "2m"
+          },
           {
             "selected": true,
             "text": "3m",
             "value": "3m"
+          },
+          {
+            "selected": false,
+            "text": "4m",
+            "value": "4m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "6m",
+            "value": "6m"
+          },
+          {
+            "selected": false,
+            "text": "7m",
+            "value": "7m"
+          },
+          {
+            "selected": false,
+            "text": "8m",
+            "value": "8m"
+          },
+          {
+            "selected": false,
+            "text": "9m",
+            "value": "9m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
           }
         ],
-        "query": "3m",
+        "query": "1m,2m,3m,4m,5m,6m,7m,8m,9m,10m",
+        "refresh": 2,
         "skipUrlSync": false,
-        "type": "constant"
+        "type": "interval"
       },
       {
         "current": {
