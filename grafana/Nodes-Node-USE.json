@@ -1353,7 +1353,7 @@
         "datasource": "$datasource",
         "hide": 2,
         "includeAll": false,
-        "label": "Instance",
+        "label": "",
         "multi": false,
         "name": "instance",
         "options": [],
