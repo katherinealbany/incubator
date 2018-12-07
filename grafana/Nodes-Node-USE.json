@@ -68,6 +68,46 @@
       "type": "snuids-trafficlights-panel"
     },
     {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 2,
+        "y": 0
+      },
+      "id": 18,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Disk Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "Disk Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
