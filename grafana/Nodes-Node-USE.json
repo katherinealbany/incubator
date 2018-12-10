@@ -12,7 +12,6 @@
       }
     ]
   },
-  "description": "The USE Method (Utilisation, Saturation, Errors)",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -28,6 +27,7 @@
   ],
   "panels": [
     {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -35,441 +35,10 @@
         "y": 0
       },
       "id": 1,
+      "panels": [],
       "repeat": null,
       "title": "Overview",
       "type": "row"
-    },
-    {
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 2,
-      "repeat": null,
-      "title": "Condition",
-      "type": "row"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 0,
-        "y": 2
-      },
-      "id": 3,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"false\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Ready",
-          "refId": "A"
-        }
-      ],
-      "title": "Ready",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 3,
-        "y": 2
-      },
-      "id": 4,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Memory Pressure",
-          "refId": "A"
-        }
-      ],
-      "title": "Memory Pressure",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 6,
-        "y": 2
-      },
-      "id": 5,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Disk Pressure",
-          "refId": "A"
-        }
-      ],
-      "title": "Disk Pressure",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 9,
-        "y": 2
-      },
-      "id": 6,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Out Of Disk",
-          "refId": "A"
-        }
-      ],
-      "title": "Out Of Disk",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 12,
-        "y": 2
-      },
-      "id": 7,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "PID Pressure",
-          "refId": "A"
-        }
-      ],
-      "title": "PID Pressure",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 15,
-        "y": 2
-      },
-      "id": 8,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Kernel Deadlock",
-          "refId": "A"
-        }
-      ],
-      "title": "Kernel Deadlock",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 18,
-        "y": 2
-      },
-      "id": 9,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Network Unavailable",
-          "refId": "A"
-        }
-      ],
-      "title": "Network Unavailable",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 21,
-        "y": 2
-      },
-      "id": 10,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Unregister Net Device",
-          "refId": "A"
-        }
-      ],
-      "title": "Unregister Net Device",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "id": 11,
-      "panels": [],
-      "repeat": null,
-      "title": "CPU",
-      "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#d44a3a",
-        "rgba(237, 129, 40, 0.89)",
-        "#299c46"
-      ],
-      "datasource": "$datasource",
-      "decimals": null,
-      "format": "short",
-      "gauge": {
-        "maxValue": null,
-        "minValue": null,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 2,
-        "x": 0,
-        "y": 8
-      },
-      "id": 12,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeat": null,
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "node:node_num_cpu:sum{node=\"$node\"}",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Core Count",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "1,1",
-      "title": "Core Count",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
     },
     {
       "cacheTimeout": null,
@@ -493,10 +62,10 @@
       "gridPos": {
         "h": 6,
         "w": 4,
-        "x": 2,
-        "y": 8
+        "x": 0,
+        "y": 1
       },
-      "id": 13,
+      "id": 2,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -539,12 +108,12 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Total CPU Usage",
+          "legendFormat": "CPU Usage",
           "refId": "A"
         }
       ],
       "thresholds": "90,95",
-      "title": "Total CPU Usage",
+      "title": "CPU Usage",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -558,6 +127,440 @@
       "valueName": "current"
     },
     {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "$datasource",
+      "decimals": 0,
+      "format": "percent",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 3,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "(1 - (node_memory_MemAvailable_bytes{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"} / node_memory_MemTotal_bytes{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"})) * 100",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Memory Usage",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "80,90",
+      "title": "Memory Usage",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "panels": [],
+      "repeat": null,
+      "title": "Condition",
+      "type": "row"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 8
+      },
+      "id": 5,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"false\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Ready",
+          "refId": "A"
+        }
+      ],
+      "title": "Ready",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 8
+      },
+      "id": 6,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Memory Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 6,
+        "y": 8
+      },
+      "id": 7,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Disk Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "Disk Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 9,
+        "y": 8
+      },
+      "id": 8,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Out Of Disk",
+          "refId": "A"
+        }
+      ],
+      "title": "Out Of Disk",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 12,
+        "y": 8
+      },
+      "id": 9,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "PID Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "PID Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 15,
+        "y": 8
+      },
+      "id": 10,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Kernel Deadlock",
+          "refId": "A"
+        }
+      ],
+      "title": "Kernel Deadlock",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 18,
+        "y": 8
+      },
+      "id": 11,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Network Unavailable",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Unavailable",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 21,
+        "y": 8
+      },
+      "id": 12,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Unregister Net Device",
+          "refId": "A"
+        }
+      ],
+      "title": "Unregister Net Device",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 13,
+      "panels": [],
+      "repeat": null,
+      "title": "CPU",
+      "type": "row"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -566,9 +569,9 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 9,
-        "x": 6,
-        "y": 8
+        "w": 12,
+        "x": 0,
+        "y": 14
       },
       "id": 14,
       "legend": {
@@ -656,9 +659,9 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 9,
-        "x": 15,
-        "y": 8
+        "w": 12,
+        "x": 12,
+        "y": 14
       },
       "id": 15,
       "legend": {
@@ -760,10 +763,10 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 5,
-        "w": 8,
+        "h": 6,
+        "w": 6,
         "x": 0,
-        "y": 14
+        "y": 20
       },
       "id": 16,
       "legend": {
@@ -850,10 +853,10 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 8,
-        "y": 14
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 20
       },
       "id": 17,
       "legend": {
@@ -940,102 +943,12 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 14
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 20
       },
       "id": 18,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 1,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"steal\"}[$rate_interval])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Core {{cpu}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Usage (Steal)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 0,
-        "y": 19
-      },
-      "id": 19,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1120,12 +1033,12 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 8,
-        "y": 19
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 20
       },
-      "id": 20,
+      "id": 19,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1153,104 +1066,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"irq\"}[$rate_interval])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Core {{cpu}} (IRQ)",
-          "refId": "A"
-        },
-        {
-          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"softirq\"}[$rate_interval])) by (cpu)) * 100",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Core {{cpu}} (Soft IRQ)",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Usage (IRQ)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "percent",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 19
-      },
-      "id": 21,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null as zero",
-      "percentage": false,
-      "pointradius": 1,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"nice\"}[$rate_interval])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode=\"steal\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
@@ -1260,7 +1076,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU Usage (Nice)",
+      "title": "CPU Usage (Steal)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1319,12 +1135,12 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
+        "h": 6,
+        "w": 4,
         "x": 0,
-        "y": 24
+        "y": 26
       },
-      "id": 22,
+      "id": 20,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1367,12 +1183,12 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "CPU Capacity (Requests)",
+          "legendFormat": "CPU Allocation (Request)",
           "refId": "A"
         }
       ],
       "thresholds": "90,95",
-      "title": "CPU Capacity (Requests)",
+      "title": "CPU Allocation (Request)",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -1393,12 +1209,12 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 10,
-        "w": 8,
-        "x": 3,
-        "y": 24
+        "h": 12,
+        "w": 10,
+        "x": 4,
+        "y": 26
       },
-      "id": 23,
+      "id": 21,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1439,7 +1255,7 @@
       "title": "CPU Usage (Namespace)",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "transparent": true,
@@ -1483,12 +1299,12 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 10,
-        "w": 13,
-        "x": 11,
-        "y": 24
+        "h": 12,
+        "w": 10,
+        "x": 14,
+        "y": 26
       },
-      "id": 24,
+      "id": 22,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -1529,7 +1345,7 @@
       "title": "CPU Usage (Pod)",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "transparent": true,
@@ -1585,12 +1401,12 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
-        "w": 3,
+        "h": 6,
+        "w": 4,
         "x": 0,
-        "y": 29
+        "y": 32
       },
-      "id": 25,
+      "id": 23,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1633,12 +1449,12 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "CPU Capacity (Limits)",
+          "legendFormat": "CPU Allocation (Limit)",
           "refId": "A"
         }
       ],
       "thresholds": "250,375",
-      "title": "CPU Capacity (Limits)",
+      "title": "CPU Allocation (Limit)",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -1657,9 +1473,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 38
       },
-      "id": 26,
+      "id": 24,
       "panels": [],
       "repeat": null,
       "title": "Memory",
@@ -1671,9 +1487,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 39
       },
-      "id": 27,
+      "id": 25,
       "panels": [],
       "repeat": null,
       "title": "Storage",
@@ -1685,9 +1501,9 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 40
       },
-      "id": 28,
+      "id": 26,
       "panels": [],
       "repeat": null,
       "title": "Network",
@@ -1999,6 +1815,6 @@
     ]
   },
   "timezone": "",
-  "title": "Nodes | Node | USE",
-  "uid": "Nodes-Node-USE"
+  "title": "Nodes | Node",
+  "uid": "Nodes-Node"
 }
