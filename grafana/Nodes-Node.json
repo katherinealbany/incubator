@@ -103,7 +103,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum($rate_function(node_cpu_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$rate_interval]))) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\", mode!=\"iowait\", mode!~\"^(?:guest.*)$\"}[$rate_interval]))) * 100",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -601,7 +601,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\"}[$rate_interval])) by (cpu)) * 100",
+          "expr": "(sum($rate_function(node_cpu_seconds_total{instance=~\"^$instance:[0-9]{1,5}\", mode!=\"idle\", mode!=\"iowait\", mode!~\"^(?:guest.*)$\"}[$rate_interval])) by (cpu)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Core {{cpu}}",
