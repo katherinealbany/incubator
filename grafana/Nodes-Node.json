@@ -2802,7 +2802,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_disk_read_time_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
+          "expr": "$rate_function(node_disk_read_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -2812,7 +2812,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Read Time (Device)",
+      "title": "Read Throughput (Device)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -2830,7 +2830,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "s",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2892,7 +2892,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_disk_read_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
+          "expr": "$rate_function(node_disk_read_time_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -2902,7 +2902,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Read Throughput (Device)",
+      "title": "Read Time (Device)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -2920,7 +2920,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "decbytes",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -3072,7 +3072,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_disk_write_time_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
+          "expr": "$rate_function(node_disk_written_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3082,7 +3082,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Write Time (Device)",
+      "title": "Write Throughput (Device)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -3100,7 +3100,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "s",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -3162,7 +3162,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_disk_written_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
+          "expr": "$rate_function(node_disk_write_time_seconds_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3172,7 +3172,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Write Throughput (Device)",
+      "title": "Write Time (Device)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -3190,7 +3190,7 @@
       "yaxes": [
         {
           "decimals": null,
-          "format": "decbytes",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
