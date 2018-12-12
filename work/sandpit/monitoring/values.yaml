@@ -191,5 +191,10 @@ prometheus-node-exporter:
     limits:
       cpu: 10m
       memory: 100Mi
+  extraHostVolumeMounts:
+    - name: root
+      hostPath: /
+      readOnly: true
+      mountPath: /node/root
 
 ###################################################################################################
