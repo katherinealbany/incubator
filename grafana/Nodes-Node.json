@@ -3249,8 +3249,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "rate",
-          "value": "rate"
+          "text": "irate",
+          "value": "irate"
         },
         "hide": 0,
         "includeAll": false,
@@ -3259,12 +3259,12 @@
         "name": "rate_function",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "rate",
             "value": "rate"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "irate",
             "value": "irate"
           }
