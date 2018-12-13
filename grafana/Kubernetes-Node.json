@@ -19,7 +19,7 @@
     {
       "icon": "external link",
       "tags": [
-        "Nodes",
+        "Kubernetes",
         "Node"
       ],
       "type": "dashboards"
@@ -4312,7 +4312,7 @@
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
-    "Nodes",
+    "Kubernetes",
     "Node"
   ],
   "templating": {
@@ -4712,6 +4712,6 @@
     ]
   },
   "timezone": "",
-  "title": "Nodes | Node",
-  "uid": "Nodes-Node"
+  "title": "Kubernetes | Node",
+  "uid": "Kubernetes-Node"
 }
