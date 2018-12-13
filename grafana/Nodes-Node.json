@@ -3254,7 +3254,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_network_receive_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"^(en|et|ib|sl|wl|ww).*$\"}[$rate_interval])",
+          "expr": "$rate_function(node_network_receive_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"$node_network_device_regex\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3344,7 +3344,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_network_receive_drop_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"^(en|et|ib|sl|wl|ww).*$\"}[$rate_interval])",
+          "expr": "$rate_function(node_network_receive_drop_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"$node_network_device_regex\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3434,7 +3434,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_network_receive_errs_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"^(en|et|ib|sl|wl|ww).*$\"}[$rate_interval])",
+          "expr": "$rate_function(node_network_receive_errs_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"$node_network_device_regex\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3524,7 +3524,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_network_transmit_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"^(en|et|ib|sl|wl|ww).*$\"}[$rate_interval])",
+          "expr": "$rate_function(node_network_transmit_bytes_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"$node_network_device_regex\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3614,7 +3614,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_network_transmit_drop_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"^(en|et|ib|sl|wl|ww).*$\"}[$rate_interval])",
+          "expr": "$rate_function(node_network_transmit_drop_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"$node_network_device_regex\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -3704,7 +3704,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "$rate_function(node_network_transmit_errs_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"^(en|et|ib|sl|wl|ww).*$\"}[$rate_interval])",
+          "expr": "$rate_function(node_network_transmit_errs_total{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\", device=~\"$node_network_device_regex\"}[$rate_interval])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -4100,6 +4100,25 @@
           }
         ],
         "query": "prometheus-kubelet",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "text": "^(en|et|ib|sl|wl|ww).*$",
+          "value": "^(en|et|ib|sl|wl|ww).*$"
+        },
+        "hide": 2,
+        "label": null,
+        "name": "node_network_device_regex",
+        "options": [
+          {
+            "selected": true,
+            "text": "^(en|et|ib|sl|wl|ww).*$",
+            "value": "^(en|et|ib|sl|wl|ww).*$"
+          }
+        ],
+        "query": "^(en|et|ib|sl|wl|ww).*$",
         "skipUrlSync": false,
         "type": "constant"
       }
