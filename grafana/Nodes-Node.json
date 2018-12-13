@@ -27,18 +27,20 @@
   ],
   "panels": [
     {
-      "collapsed": false,
+      "content": "```\n\n Node Name         : $node\n Private IP        : $instance\n Kernel Version    : $kernel_version\n Kubelet Version   : $kubelet_version\n Operating System  : $os_image\n Container Runtime : $container_runtime_version\n\n```",
       "gridPos": {
-        "h": 1,
+        "h": 5,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 1,
-      "panels": [],
+      "id": 47,
+      "links": [],
+      "mode": "markdown",
       "repeat": null,
-      "title": "Overview",
-      "type": "row"
+      "title": "Node Information",
+      "transparent": true,
+      "type": "text"
     },
     {
       "cacheTimeout": null,
@@ -63,7 +65,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 1
+        "y": 5
       },
       "id": 2,
       "interval": null,
@@ -149,7 +151,7 @@
         "h": 6,
         "w": 4,
         "x": 4,
-        "y": 1
+        "y": 5
       },
       "id": 3,
       "interval": null,
@@ -218,7 +220,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 11
       },
       "id": 4,
       "panels": [],
@@ -233,7 +235,7 @@
         "h": 5,
         "w": 3,
         "x": 0,
-        "y": 8
+        "y": 12
       },
       "id": 5,
       "links": [],
@@ -273,7 +275,7 @@
         "h": 5,
         "w": 3,
         "x": 3,
-        "y": 8
+        "y": 12
       },
       "id": 6,
       "links": [],
@@ -313,7 +315,7 @@
         "h": 5,
         "w": 3,
         "x": 6,
-        "y": 8
+        "y": 12
       },
       "id": 7,
       "links": [],
@@ -353,7 +355,7 @@
         "h": 5,
         "w": 3,
         "x": 9,
-        "y": 8
+        "y": 12
       },
       "id": 8,
       "links": [],
@@ -393,7 +395,7 @@
         "h": 5,
         "w": 3,
         "x": 12,
-        "y": 8
+        "y": 12
       },
       "id": 9,
       "links": [],
@@ -433,7 +435,7 @@
         "h": 5,
         "w": 3,
         "x": 15,
-        "y": 8
+        "y": 12
       },
       "id": 10,
       "links": [],
@@ -473,7 +475,7 @@
         "h": 5,
         "w": 3,
         "x": 18,
-        "y": 8
+        "y": 12
       },
       "id": 11,
       "links": [],
@@ -513,7 +515,7 @@
         "h": 5,
         "w": 3,
         "x": 21,
-        "y": 8
+        "y": 12
       },
       "id": 12,
       "links": [],
@@ -552,7 +554,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 17
       },
       "id": 13,
       "panels": [],
@@ -571,7 +573,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 18
       },
       "id": 14,
       "legend": {
@@ -661,7 +663,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 18
       },
       "id": 15,
       "legend": {
@@ -766,7 +768,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 20
+        "y": 24
       },
       "id": 16,
       "legend": {
@@ -856,7 +858,7 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 20
+        "y": 24
       },
       "id": 17,
       "legend": {
@@ -946,7 +948,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 20
+        "y": 24
       },
       "id": 18,
       "legend": {
@@ -1036,7 +1038,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 20
+        "y": 24
       },
       "id": 19,
       "legend": {
@@ -1138,7 +1140,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 26
+        "y": 30
       },
       "id": 20,
       "interval": null,
@@ -1212,7 +1214,7 @@
         "h": 12,
         "w": 10,
         "x": 4,
-        "y": 26
+        "y": 30
       },
       "id": 21,
       "legend": {
@@ -1302,7 +1304,7 @@
         "h": 12,
         "w": 10,
         "x": 14,
-        "y": 26
+        "y": 30
       },
       "id": 22,
       "legend": {
@@ -1404,7 +1406,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 32
+        "y": 36
       },
       "id": 23,
       "interval": null,
@@ -1473,7 +1475,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 42
       },
       "id": 24,
       "panels": [],
@@ -1492,7 +1494,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 39
+        "y": 43
       },
       "id": 25,
       "legend": {
@@ -1582,7 +1584,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 39
+        "y": 43
       },
       "id": 26,
       "legend": {
@@ -1686,7 +1688,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 39
+        "y": 43
       },
       "id": 27,
       "legend": {
@@ -1776,7 +1778,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 45
+        "y": 49
       },
       "id": 28,
       "legend": {
@@ -1866,7 +1868,7 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 45
+        "y": 49
       },
       "id": 29,
       "legend": {
@@ -1956,7 +1958,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 45
+        "y": 49
       },
       "id": 30,
       "legend": {
@@ -2046,7 +2048,7 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 45
+        "y": 49
       },
       "id": 31,
       "legend": {
@@ -2148,7 +2150,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 51
+        "y": 55
       },
       "id": 32,
       "interval": null,
@@ -2222,7 +2224,7 @@
         "h": 12,
         "w": 10,
         "x": 4,
-        "y": 51
+        "y": 55
       },
       "id": 33,
       "legend": {
@@ -2312,7 +2314,7 @@
         "h": 12,
         "w": 10,
         "x": 14,
-        "y": 51
+        "y": 55
       },
       "id": 34,
       "legend": {
@@ -2414,7 +2416,7 @@
         "h": 6,
         "w": 4,
         "x": 0,
-        "y": 57
+        "y": 61
       },
       "id": 35,
       "interval": null,
@@ -2483,7 +2485,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 67
       },
       "id": 36,
       "panels": [],
@@ -2502,7 +2504,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 64
+        "y": 68
       },
       "id": 37,
       "legend": {
@@ -2592,7 +2594,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 64
+        "y": 68
       },
       "id": 38,
       "legend": {
@@ -2682,7 +2684,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 70
+        "y": 74
       },
       "id": 39,
       "legend": {
@@ -2772,7 +2774,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 70
+        "y": 74
       },
       "id": 40,
       "legend": {
@@ -2862,7 +2864,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 70
+        "y": 74
       },
       "id": 41,
       "legend": {
@@ -2952,7 +2954,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 76
+        "y": 80
       },
       "id": 42,
       "legend": {
@@ -3042,7 +3044,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 76
+        "y": 80
       },
       "id": 43,
       "legend": {
@@ -3132,7 +3134,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 76
+        "y": 80
       },
       "id": 44,
       "legend": {
@@ -3217,7 +3219,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 86
       },
       "id": 45,
       "panels": [],
@@ -3373,6 +3375,86 @@
         "query": "label_values(node_uname_info{job=\"$node_job\", service=\"$node_service\", nodename=\"$node\"}, instance)",
         "refresh": 2,
         "regex": "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}):[0-9]{1,5}",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "datasource": "$datasource",
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "os_image",
+        "options": [],
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, os_image)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "datasource": "$datasource",
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "kernel_version",
+        "options": [],
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, kernel_version)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "datasource": "$datasource",
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "kubelet_version",
+        "options": [],
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, kubelet_version)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "datasource": "$datasource",
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "container_runtime_version",
+        "options": [],
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, container_runtime_version)",
+        "refresh": 2,
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
