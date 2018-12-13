@@ -27,7 +27,7 @@
   ],
   "panels": [
     {
-      "content": "```\n\n Node Name         : $node\n Private IP        : $instance\n Kernel Version    : $kernel_version\n Kubelet Version   : $kubelet_version\n Operating System  : $os_image\n Container Runtime : $container_runtime_version\n\n```",
+      "content": "```\n\n   Private IP        : $instance\n   Kernel Version    : $kernel_version\n   Kubelet Version   : $kubelet_version\n   Operating System  : $os_image\n   Container Runtime : $container_runtime_version\n\n```",
       "gridPos": {
         "h": 5,
         "w": 24,
