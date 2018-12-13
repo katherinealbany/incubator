@@ -20,18 +20,22 @@ grafana:
       certmanager.k8s.io/acme-dns01-provider: route53
       external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.sandpit.fkaj.com.
   plugins:
+    - grafana-clock-panel
     - vonage-status-panel
+    - briangann-gauge-panel
     - grafana-kubernetes-app
     - grafana-piechart-panel
+    - grafana-polystat-panel
+    - grafana-worldmap-panel
     - snuids-trafficlights-panel
-  sidecar:
-    resources:
-      requests:
-        cpu: 1m
-        memory: 150Mi
-      limits:
-        cpu: 10m
-        memory: 150Mi
+  # sidecar:
+  #   resources:
+  #     requests:
+  #       cpu: 1m
+  #       memory: 150Mi
+  #     limits:
+  #       cpu: 10m
+  #       memory: 150Mi
   adminUser: devops
   resources:
     requests:
