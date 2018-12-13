@@ -722,7 +722,7 @@
         {
           "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "CPU Allocation (Request)",
@@ -988,7 +988,7 @@
         {
           "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "CPU Allocation (Limit)",
@@ -1728,7 +1728,7 @@
         {
           "expr": "(sum(kube_pod_container_resource_requests_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Memory Allocation (Request)",
@@ -1994,7 +1994,7 @@
         {
           "expr": "(sum(kube_pod_container_resource_limits_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Memory Allocation (Limit)",
@@ -3214,7 +3214,7 @@
       "type": "row"
     }
   ],
-  "refresh": "5s",
+  "refresh": "10s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
@@ -3237,8 +3237,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "irate",
-          "value": "irate"
+          "text": "rate",
+          "value": "rate"
         },
         "hide": 0,
         "includeAll": false,
@@ -3247,12 +3247,12 @@
         "name": "rate_function",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "rate",
             "value": "rate"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "irate",
             "value": "irate"
           }
@@ -3266,8 +3266,8 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "text": "5m",
-          "value": "5m"
+          "text": "3m",
+          "value": "3m"
         },
         "hide": 0,
         "label": "Rate Interval",
@@ -3284,7 +3284,7 @@
             "value": "2m"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "3m",
             "value": "3m"
           },
@@ -3294,7 +3294,7 @@
             "value": "4m"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "5m",
             "value": "5m"
           },
