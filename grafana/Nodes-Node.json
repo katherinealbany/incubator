@@ -3210,7 +3210,7 @@
       "id": 44,
       "panels": [],
       "repeat": null,
-      "title": "Network",
+      "title": "Network (Ingress/Egress)",
       "type": "row"
     },
     {
@@ -3752,6 +3752,20 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 104
+      },
+      "id": 51,
+      "panels": [],
+      "repeat": null,
+      "title": "Network (Internal)",
+      "type": "row"
     }
   ],
   "refresh": "15s",
