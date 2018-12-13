@@ -43,6 +43,326 @@
       "type": "text"
     },
     {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"false\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Ready",
+          "refId": "A"
+        }
+      ],
+      "title": "Ready",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 5
+      },
+      "id": 3,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Memory Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 6,
+        "y": 5
+      },
+      "id": 4,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Disk Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "Disk Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 9,
+        "y": 5
+      },
+      "id": 5,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Out Of Disk",
+          "refId": "A"
+        }
+      ],
+      "title": "Out Of Disk",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 12,
+        "y": 5
+      },
+      "id": 6,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "PID Pressure",
+          "refId": "A"
+        }
+      ],
+      "title": "PID Pressure",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 15,
+        "y": 5
+      },
+      "id": 7,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Kernel Deadlock",
+          "refId": "A"
+        }
+      ],
+      "title": "Kernel Deadlock",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 18,
+        "y": 5
+      },
+      "id": 8,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Network Unavailable",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Unavailable",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
+      "bgColor": null,
+      "datasource": "$datasource",
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 21,
+        "y": 5
+      },
+      "id": 9,
+      "links": [],
+      "repeat": null,
+      "targets": [
+        {
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"true\"} * 3)",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Unregister Net Device",
+          "refId": "A"
+        }
+      ],
+      "title": "Unregister Net Device",
+      "trafficLightSettings": {
+        "digits": null,
+        "fontSize": "0px",
+        "greenThreshold": 1,
+        "invertScale": true,
+        "lightsPerLine": null,
+        "max": null,
+        "redThreshold": 3,
+        "showTrend": false,
+        "showValue": false,
+        "spreadControls": true,
+        "units": "",
+        "width": 50
+      },
+      "transparent": true,
+      "type": "snuids-trafficlights-panel"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -53,9 +373,9 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 5
+        "y": 10
       },
-      "id": 2,
+      "id": 10,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -143,9 +463,9 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 5
+        "y": 10
       },
-      "id": 3,
+      "id": 11,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -233,9 +553,9 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 5
+        "y": 10
       },
-      "id": 4,
+      "id": 12,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -323,9 +643,9 @@
         "h": 6,
         "w": 6,
         "x": 18,
-        "y": 5
+        "y": 10
       },
-      "id": 5,
+      "id": 13,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -408,326 +728,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 0,
-        "y": 11
-      },
-      "id": 6,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"false\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Ready",
-          "refId": "A"
-        }
-      ],
-      "title": "Ready",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 3,
-        "y": 11
-      },
-      "id": 7,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Memory Pressure",
-          "refId": "A"
-        }
-      ],
-      "title": "Memory Pressure",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 6,
-        "y": 11
-      },
-      "id": 8,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Disk Pressure",
-          "refId": "A"
-        }
-      ],
-      "title": "Disk Pressure",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 9,
-        "y": 11
-      },
-      "id": 9,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Out Of Disk",
-          "refId": "A"
-        }
-      ],
-      "title": "Out Of Disk",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 12,
-        "y": 11
-      },
-      "id": 10,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "PID Pressure",
-          "refId": "A"
-        }
-      ],
-      "title": "PID Pressure",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 15,
-        "y": 11
-      },
-      "id": 11,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Kernel Deadlock",
-          "refId": "A"
-        }
-      ],
-      "title": "Kernel Deadlock",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 18,
-        "y": 11
-      },
-      "id": 12,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Network Unavailable",
-          "refId": "A"
-        }
-      ],
-      "title": "Network Unavailable",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
-    },
-    {
-      "bgColor": null,
-      "datasource": "$datasource",
-      "gridPos": {
-        "h": 5,
-        "w": 3,
-        "x": 21,
-        "y": 11
-      },
-      "id": 13,
-      "links": [],
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"true\"} * 3)",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Unregister Net Device",
-          "refId": "A"
-        }
-      ],
-      "title": "Unregister Net Device",
-      "trafficLightSettings": {
-        "digits": null,
-        "fontSize": "0px",
-        "greenThreshold": 1,
-        "invertScale": true,
-        "lightsPerLine": null,
-        "max": null,
-        "redThreshold": 3,
-        "showTrend": false,
-        "showValue": false,
-        "spreadControls": true,
-        "units": "",
-        "width": 50
-      },
-      "transparent": true,
-      "type": "snuids-trafficlights-panel"
     },
     {
       "collapsed": true,
@@ -1770,7 +1770,7 @@
             "h": 6,
             "w": 4,
             "x": 0,
-            "y": 18
+            "y": 48
           },
           "id": 27,
           "interval": null,
@@ -1844,7 +1844,7 @@
             "h": 6,
             "w": 10,
             "x": 4,
-            "y": 18
+            "y": 48
           },
           "id": 28,
           "legend": {
@@ -1934,7 +1934,7 @@
             "h": 6,
             "w": 10,
             "x": 14,
-            "y": 18
+            "y": 48
           },
           "id": 29,
           "legend": {
@@ -2050,7 +2050,7 @@
             "h": 6,
             "w": 4,
             "x": 0,
-            "y": 24
+            "y": 54
           },
           "id": 30,
           "interval": null,
@@ -2124,7 +2124,7 @@
             "h": 6,
             "w": 10,
             "x": 4,
-            "y": 24
+            "y": 54
           },
           "id": 31,
           "legend": {
@@ -2214,7 +2214,7 @@
             "h": 6,
             "w": 10,
             "x": 14,
-            "y": 24
+            "y": 54
           },
           "id": 32,
           "legend": {
@@ -2316,7 +2316,7 @@
             "h": 6,
             "w": 4,
             "x": 0,
-            "y": 30
+            "y": 60
           },
           "id": 33,
           "interval": null,
@@ -2390,7 +2390,7 @@
             "h": 6,
             "w": 5,
             "x": 4,
-            "y": 30
+            "y": 60
           },
           "id": 34,
           "legend": {
@@ -2480,7 +2480,7 @@
             "h": 6,
             "w": 5,
             "x": 9,
-            "y": 30
+            "y": 60
           },
           "id": 35,
           "legend": {
@@ -2570,7 +2570,7 @@
             "h": 6,
             "w": 10,
             "x": 14,
-            "y": 30
+            "y": 60
           },
           "id": 36,
           "legend": {
@@ -2660,7 +2660,7 @@
             "h": 12,
             "w": 12,
             "x": 0,
-            "y": 36
+            "y": 66
           },
           "id": 37,
           "legend": {
@@ -2750,7 +2750,7 @@
             "h": 12,
             "w": 12,
             "x": 12,
-            "y": 36
+            "y": 66
           },
           "id": 38,
           "legend": {
@@ -2855,7 +2855,7 @@
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 19
+            "y": 79
           },
           "id": 40,
           "legend": {
@@ -2945,7 +2945,7 @@
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 19
+            "y": 79
           },
           "id": 41,
           "legend": {
@@ -3035,7 +3035,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 25
+            "y": 85
           },
           "id": 42,
           "legend": {
@@ -3125,7 +3125,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 25
+            "y": 85
           },
           "id": 43,
           "legend": {
@@ -3215,7 +3215,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 25
+            "y": 85
           },
           "id": 44,
           "legend": {
@@ -3305,7 +3305,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 31
+            "y": 91
           },
           "id": 45,
           "legend": {
@@ -3395,7 +3395,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 31
+            "y": 91
           },
           "id": 46,
           "legend": {
@@ -3485,7 +3485,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 31
+            "y": 91
           },
           "id": 47,
           "legend": {
@@ -3590,7 +3590,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 20
+            "y": 98
           },
           "id": 49,
           "legend": {
@@ -3680,7 +3680,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 20
+            "y": 98
           },
           "id": 50,
           "legend": {
@@ -3770,7 +3770,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 20
+            "y": 98
           },
           "id": 51,
           "legend": {
@@ -3860,7 +3860,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 26
+            "y": 104
           },
           "id": 52,
           "legend": {
@@ -3950,7 +3950,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 26
+            "y": 104
           },
           "id": 53,
           "legend": {
@@ -4040,7 +4040,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 26
+            "y": 104
           },
           "id": 54,
           "legend": {
@@ -4145,7 +4145,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 15
+            "y": 111
           },
           "id": 56,
           "legend": {
@@ -4235,7 +4235,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 15
+            "y": 111
           },
           "id": 57,
           "legend": {
@@ -4325,7 +4325,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 15
+            "y": 111
           },
           "id": 58,
           "legend": {
@@ -4415,7 +4415,7 @@
             "h": 6,
             "w": 8,
             "x": 0,
-            "y": 21
+            "y": 117
           },
           "id": 59,
           "legend": {
@@ -4505,7 +4505,7 @@
             "h": 6,
             "w": 8,
             "x": 8,
-            "y": 21
+            "y": 117
           },
           "id": 60,
           "legend": {
@@ -4595,7 +4595,7 @@
             "h": 6,
             "w": 8,
             "x": 16,
-            "y": 21
+            "y": 117
           },
           "id": 61,
           "legend": {
@@ -4680,7 +4680,7 @@
       "type": "row"
     }
   ],
-  "refresh": "5s",
+  "refresh": "15s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
