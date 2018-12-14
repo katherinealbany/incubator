@@ -4675,7 +4675,7 @@
       }
     }
   ],
-  "refresh": "5m",
+  "refresh": "3m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
