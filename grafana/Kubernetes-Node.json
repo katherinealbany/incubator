@@ -4675,6 +4675,7 @@
       }
     }
   ],
+  "refresh": "5m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
@@ -5063,7 +5064,9 @@
       "45s",
       "50s",
       "55s",
-      "1m"
+      "1m",
+      "3m",
+      "5m"
     ],
     "time_options": [
       "5m",
