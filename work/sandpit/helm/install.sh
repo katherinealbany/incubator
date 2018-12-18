@@ -1,0 +1,1 @@
+../../support/helm/install.sh

@@ -1,0 +1,1 @@
+../../support/helm/uninstall.sh
