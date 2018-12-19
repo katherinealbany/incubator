@@ -1,30 +1,28 @@
----
-###################################################################################################
-
-resources:
-  requests:
-    cpu: 5m
-    memory: 50Mi
-  limits:
-    cpu: 5m
-    memory: 50Mi
+#!/bin/bash -ex
+set -o pipefail
 
 ###################################################################################################
 
-ingressShim:
-  defaultIssuerKind: ClusterIssuer
-  defaultIssuerName: cluster-issuer-lets-encrypt-staging
+BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-podDnsPolicy: None
-podDnsConfig:
-  nameservers:
-    - 1.1.1.1
-    - 8.8.8.8
+TEMPLATE_EXTENSION='.tmpl'
 
 ###################################################################################################
 
-replicaCount: 10
+TEMPLATES="$(find "${BASE}" -name "*${TEMPLATE_EXTENSION}" -print)"
+
+###################################################################################################
+
+for TEMPLATE in "${TEMPLATES}"; do
+  TEMPLATE_OUT="$(echo "${TEMPLATE}" | sed "s/${TEMPLATE_EXTENSION}//g")"
+
+  yamllint --config-file "${BASE}/.yamllint" --strict ${TEMPLATE}
+
+  gomplate --file "${TEMPLATE}" --out - | tee "${TEMPLATE_OUT}"
+
+  yamllint --config-file "${BASE}/.yamllint" --strict ${TEMPLATE_OUT}
+done
 
 ###################################################################################################
