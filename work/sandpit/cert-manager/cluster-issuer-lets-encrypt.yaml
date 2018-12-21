@@ -1,1 +1,24 @@
-../../support/cert-manager/cluster-issuer-lets-encrypt.yaml
+###################################################################################################
+
+kind: ClusterIssuer
+apiVersion: certmanager.k8s.io/v1alpha1
+metadata:
+  name: cluster-issuer-lets-encrypt
+  namespace: cert-manager
+spec:
+  acme:
+    email: ccoe@travisperkins.co.uk
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: cluster-issuer-lets-encrypt
+    dns01:
+      providers:
+        - name: route53
+          route53:
+            region: eu-west-1
+            accessKeyID: AKIAJRU44OJZ6RNLR2GA
+            secretAccessKeySecretRef:
+              name: cert-manager
+              key: aws_secret_key
+
+###################################################################################################
