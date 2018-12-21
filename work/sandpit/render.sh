@@ -32,14 +32,20 @@ TEMPLATES="$(find "${BASE}" -name "*${TEMPLATE_DELIMITER}${TEMPLATE_EXTENSION}" 
 for INPUT_FILE in ${TEMPLATES}; do
   #################################################################################################
   #################################################################################################
-  yamllint --config-file "${YAMLLINT_CONFIG_FILE}" --strict ${INPUT_FILE}
-
   OUTPUT_FILE="$(echo "${INPUT_FILE}" | sed "s/${TEMPLATE_DELIMITER}${TEMPLATE_EXTENSION}//g")"
-  OUTPUT_EXTENSION="$(echo "${OUTPUT_FILE}" | rev | awk -F"${TEMPLATE_DELIMITER}" '{print $1}' | rev)"
 
   gomplate --file "${INPUT_FILE}" --out - | tee "${OUTPUT_FILE}"
 
-  yamllint --config-file "${YAMLLINT_CONFIG_FILE}" --strict ${OUTPUT_FILE}
+  OUTPUT_EXTENSION="$(echo "${OUTPUT_FILE}" | rev | awk -F"${TEMPLATE_DELIMITER}" '{print $1}' | rev)"
+
+  case ${OUTPUT_EXTENSION} in
+    sh)
+      chmod -v u+x "${OUTPUT_FILE}"
+      ;;
+    yaml)
+      yamllint --config-file "${YAMLLINT_CONFIG_FILE}" --strict ${OUTPUT_FILE}
+      ;;
+  esac
   #################################################################################################
   #################################################################################################
 done
