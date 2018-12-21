@@ -16,15 +16,15 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${EXTENSION}" ]] && EXTENSION='.tmpl'
-TEMPLATES="$(find "${BASE}" -name "*${EXTENSION}" -mindepth 1 -maxdepth 1 -print)"
+[[ -z "${TEMPLATE_GLOB}" ]] && TEMPLATE_GLOB='*.tmpl'
+TEMPLATES="$(find "${BASE}" -name "${TEMPLATE_GLOB}" -mindepth 1 -maxdepth 1 -print)"
 
 ###################################################################################################
 
 for TEMPLATE in ${TEMPLATES}; do
   #################################################################################################
   #################################################################################################
-  TEMPLATE_OUT="$(echo "${TEMPLATE}" | sed "s/${EXTENSION}//g")"
+  TEMPLATE_OUT="$(echo "${TEMPLATE}" | sed "s/${TEMPLATE_GLOB}//g")"
   yamllint --config-file "${BASE}/.yamllint" --strict ${TEMPLATE}
   gomplate --file "${TEMPLATE}" --out - | tee "${TEMPLATE_OUT}"
   yamllint --config-file "${BASE}/.yamllint" --strict ${TEMPLATE_OUT}
