@@ -8,7 +8,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -f "${BASE}/clean.sh" ]] && "${BASE}/clean.sh"
+"${BASE}/clean.sh"
 
 ###################################################################################################
 
@@ -16,18 +16,18 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${TEMPLATE_GLOB}" ]] && TEMPLATE_GLOB='*.tmpl'
-TEMPLATES="$(find "${BASE}" -name "${TEMPLATE_GLOB}" -mindepth 1 -maxdepth 1 -print)"
+[[ -z "${TEMPLATE_EXTENSION}" ]] && TEMPLATE_EXTENSION='.tmpl'
+TEMPLATES="$(find "${BASE}" -name "*${TEMPLATE_EXTENSION}" -mindepth 1 -maxdepth 1 -print)"
 
 ###################################################################################################
 
-for TEMPLATE in ${TEMPLATES}; do
+for INPUT_FILE in ${TEMPLATES}; do
   #################################################################################################
   #################################################################################################
-  TEMPLATE_OUT="$(echo "${TEMPLATE}" | sed "s/${TEMPLATE_GLOB}//g")"
-  yamllint --config-file "${BASE}/.yamllint" --strict ${TEMPLATE}
-  gomplate --file "${TEMPLATE}" --out - | tee "${TEMPLATE_OUT}"
-  yamllint --config-file "${BASE}/.yamllint" --strict ${TEMPLATE_OUT}
+  OUTPUT_FILE="$(echo "${INPUT_FILE}" | sed "s/${TEMPLATE_EXTENSION}//g")"
+  yamllint --config-file "${BASE}/.yamllint" --strict ${INPUT_FILE}
+  gomplate --file "${INPUT_FILE}" --out - | tee "${OUTPUT_FILE}"
+  yamllint --config-file "${BASE}/.yamllint" --strict ${OUTPUT_FILE}
   #################################################################################################
   #################################################################################################
 done
