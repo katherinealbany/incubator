@@ -7,11 +7,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-[[ -z "${CERT_MANAGER_VERSION}" ]] && CERT_MANAGER_VERSION='0.5.2'
-
-###################################################################################################
-
-helm upgrade cert-manager stable/cert-manager --install --debug --wait --namespace cert-manager --version "${CERT_MANAGER_VERSION}" --values "${BASE}/values.yaml"
+helm upgrade '{{.Env.RELEASE}}' stable/cert-manager --install --debug --wait --namespace '{{.Env.NAMESPACE}}' --version '{{.Env.VERSION}}' --values "${BASE}/values.yaml"
 
 ###################################################################################################
 
