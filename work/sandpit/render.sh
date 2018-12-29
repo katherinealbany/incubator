@@ -12,10 +12,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-[[ -f ./environment ]] && source ./environment
-
-###################################################################################################
-
+[[ -z "${YAML_EXTENSION}"        ]] && YAML_EXTENSION='yaml'
 [[ -z "${TEMPLATE_DELIMITER}"    ]] && TEMPLATE_DELIMITER='.'
 [[ -z "${TEMPLATE_EXTENSION}"    ]] && TEMPLATE_EXTENSION='tmpl'
 [[ -z "${YAML_LINT_CONFIG_FILE}" ]] && YAML_LINT_CONFIG_FILE='./.yamllint'
@@ -30,25 +27,33 @@ TEMPLATES="$(find . -name "*${TEMPLATE_DELIMITER}${TEMPLATE_EXTENSION}" -print)"
 
 ###################################################################################################
 
-for INPUT in ${TEMPLATES}; do
+for INPUT_PATH in ${TEMPLATES}; do
+
   #################################################################################################
+
+  [[ -f ./environment ]] && source ./environment
+
   #################################################################################################
-  OUTPUT="$(echo "${INPUT}" | sed "s/${TEMPLATE_DELIMITER}${TEMPLATE_EXTENSION}//g")"
 
-  gomplate --file "${INPUT}" --out - | tee "${OUTPUT}"
+  INPUT_BASE="$(dirname "${INPUT_PATH}")"
+  [[ -f "${INPUT_BASE}/environment" ]] && source "${INPUT_BASE}/environment"
 
-  EXTENSION="$(echo "${OUTPUT}" | rev | awk -F"${TEMPLATE_DELIMITER}" '{print $1}' | rev)"
+  #################################################################################################
 
-  case ${EXTENSION} in
-    sh)
-      chmod -v u+x "${OUTPUT}"
-      ;;
-    yaml)
-      yamllint --config-file "${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT}
+  OUTPUT_PATH="$(echo "${INPUT_PATH}" | sed "s/${TEMPLATE_DELIMITER}${TEMPLATE_EXTENSION}//g")"
+  gomplate --file "${INPUT_PATH}" --out - | tee "${OUTPUT_PATH}"
+  chmod u=rx,go= "${OUTPUT_PATH}"
+
+  #################################################################################################
+
+  case "$(echo "${OUTPUT_PATH}" | rev | awk -F"${TEMPLATE_DELIMITER}" '{print $1}' | rev)" in
+    "${YAML_EXTENSION}")
+      yamllint --config-file "${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT_PATH}
       ;;
   esac
+
   #################################################################################################
-  #################################################################################################
+
 done
 
 ###################################################################################################
