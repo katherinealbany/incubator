@@ -1,17 +1,19 @@
-#!/bin/bash -x
+#!/bin/bash -e
+set -o pipefail
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-${BASE}/uninstall.sh
+"${BASE}/uninstall.sh"
 
 ###################################################################################################
 
-for item in $(kubectl get customresourcedefinition --output=custom-columns=:.metadata.name | grep certmanager.k8s.io); do
-  kubectl delete --wait=true customresourcedefinition ${item}
+for item in $(kubectl get customresourcedefinition --output=custom-columns=:.metadata.name | grep '{{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}}'); do
+  kubectl delete --wait=true customresourcedefinition "${item}"
 done
 
 ###################################################################################################

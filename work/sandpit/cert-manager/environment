@@ -4,11 +4,24 @@ export VERSION='0.5.2'
 
 ###################################################################################################
 
-export RELEASE='cert-manager'
+export REPO='stable'
+export CHART='cert-manager'
+export RELEASE="${CHART}"
 export NAMESPACE="${RELEASE}"
 
 ###################################################################################################
 
 export REPLICA_COUNT='3'
+
+###################################################################################################
+
+export CLUSTER_ISSUER_EMAIL='ccoe@travisperkins.co.uk'
+export CLUSTER_ISSUER_AWS_REGION='eu-west-1'
+export CLUSTER_ISSUER_ACME_VERSION='v02'
+
+###################################################################################################
+
+export CUSTOM_RESOURCE_DEFINITION_NAME='certmanager.k8s.io'
+export CUSTOM_RESOURCE_DEFINITION_VERSION='v1alpha1'
 
 ###################################################################################################

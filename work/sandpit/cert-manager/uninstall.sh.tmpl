@@ -1,21 +1,23 @@
-#!/bin/bash -x
+#!/bin/bash -e
+set -o pipefail
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt.yaml"
-kubectl delete --wait=true --filename="${BASE}/cluster-issuer-lets-encrypt-staging.yaml"
+kubectl delete --wait=true clusterissuers.{{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}} cluster-issuer-lets-encrypt
+kubectl delete --wait=true clusterissuers.{{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}} cluster-issuer-lets-encrypt-staging
 
 ###################################################################################################
 
-helm delete --purge cert-manager
+helm delete --purge '{{.Env.RELEASE}}'
 
 ###################################################################################################
 
-kubectl delete --wait=true namespace cert-manager
+kubectl delete --wait=true namespace '{{.Env.NAMESPACE}}'
 
 ###################################################################################################
 

@@ -1,13 +1,14 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 set -o pipefail
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-helm upgrade '{{.Env.RELEASE}}' stable/cert-manager --install --debug --wait --namespace '{{.Env.NAMESPACE}}' --version '{{.Env.VERSION}}' --values "${BASE}/values.yaml"
+helm upgrade '{{.Env.RELEASE}}' '{{.Env.REPO}}/{{.Env.CHART}}' --install --debug --wait --namespace '{{.Env.NAMESPACE}}' --version '{{.Env.VERSION}}' --values "${BASE}/values.yaml"
 
 ###################################################################################################
 
