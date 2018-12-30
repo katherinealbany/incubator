@@ -15,6 +15,16 @@ export REPLICA_COUNT='3'
 
 ###################################################################################################
 
+export RESOURCE_CPU='5m'
+export RESOURCE_MEMORY='50Mi'
+
+###################################################################################################
+
+export DNS_NAMESERVER_1='1.1.1.1'
+export DNS_NAMESERVER_2='8.8.8.8'
+
+###################################################################################################
+
 export CLUSTER_ISSUER_EMAIL='ccoe@travisperkins.co.uk'
 export CLUSTER_ISSUER_AWS_REGION='eu-west-1'
 export CLUSTER_ISSUER_ACME_VERSION='v02'
