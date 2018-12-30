@@ -1,9 +1,5 @@
 ###################################################################################################
 
-./render.sh .
-
-###################################################################################################
-
 helm
 ----
 
@@ -14,9 +10,12 @@ helm
 cert-manager
 ------------
 
+##### Replace CERT_MANAGER_AWS_ACCESS_KEY and CERT_MANAGER_AWS_SECRET_KEY #####
+
 kubectl create namespace cert-manager --save-config=true
 kubectl create secret generic cert-manager --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
-./install.sh
+CLUSTER_ISSUER_AWS_ACCESS_KEY=CERT_MANAGER_AWS_ACCESS_KEY ./render.sh cert-manager
+./cert-manager/install.sh
 
 ###################################################################################################
 
