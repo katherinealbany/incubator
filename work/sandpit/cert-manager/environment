@@ -1,37 +1,37 @@
 ###################################################################################################
 
-export VERSION='0.5.2'
+export CERT_MANAGER_VERSION='0.5.2'
 
 ###################################################################################################
 
-export REPO='stable'
-export CHART='cert-manager'
-export RELEASE="${CHART}"
-export NAMESPACE="${RELEASE}"
+export CERT_MANAGER_REPO='stable'
+export CERT_MANAGER_CHART='cert-manager'
+export CERT_MANAGER_RELEASE="${CHART}"
+export CERT_MANAGER_NAMESPACE="${RELEASE}"
 
 ###################################################################################################
 
-export REPLICA_COUNT='3'
+export CERT_MANAGER_EMAIL='ccoe@travisperkins.co.uk'
+export CERT_MANAGER_AWS_REGION='eu-west-1'
+export CERT_MANAGER_ACME_VERSION='v02'
 
 ###################################################################################################
 
-export RESOURCE_CPU='5m'
-export RESOURCE_MEMORY='50Mi'
+export CERT_MANAGER_REPLICA_COUNT='3'
 
 ###################################################################################################
 
-export DNS_NAMESERVER_1='1.1.1.1'
-export DNS_NAMESERVER_2='8.8.8.8'
+export CERT_MANAGER_RESOURCE_CPU='5m'
+export CERT_MANAGER_RESOURCE_MEMORY='50Mi'
 
 ###################################################################################################
 
-export CLUSTER_ISSUER_EMAIL='ccoe@travisperkins.co.uk'
-export CLUSTER_ISSUER_AWS_REGION='eu-west-1'
-export CLUSTER_ISSUER_ACME_VERSION='v02'
+export CERT_MANAGER_DNS_NAMESERVER_1='1.1.1.1'
+export CERT_MANAGER_DNS_NAMESERVER_2='8.8.8.8'
 
 ###################################################################################################
 
-export CUSTOM_RESOURCE_DEFINITION_NAME='certmanager.k8s.io'
-export CUSTOM_RESOURCE_DEFINITION_VERSION='v1alpha1'
+export CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME='certmanager.k8s.io'
+export CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION='v1alpha1'
 
 ###################################################################################################

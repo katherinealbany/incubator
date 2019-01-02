@@ -2,21 +2,21 @@
 ###################################################################################################
 
 kind: ClusterIssuer
-apiVersion: {{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}}/{{.Env.CUSTOM_RESOURCE_DEFINITION_VERSION}}
+apiVersion: {{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME}}/{{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION}}
 metadata:
   name: cluster-issuer-lets-encrypt
 spec:
   acme:
-    email: {{.Env.CLUSTER_ISSUER_EMAIL}}
-    server: https://acme-{{.Env.CLUSTER_ISSUER_ACME_VERSION}}.api.letsencrypt.org/directory
+    email: {{.Env.CERT_MANAGER_EMAIL}}
+    server: https://acme-{{.Env.CERT_MANAGER_ACME_VERSION}}.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: cluster-issuer-lets-encrypt
     dns01:
       providers:
         - name: route53
           route53:
-            region: {{.Env.CLUSTER_ISSUER_AWS_REGION}}
-            accessKeyID: {{.Env.CLUSTER_ISSUER_AWS_ACCESS_KEY}}
+            region: {{.Env.CERT_MANAGER_AWS_REGION}}
+            accessKeyID: {{.Env.CERT_MANAGER_AWS_ACCESS_KEY}}
             secretAccessKeySecretRef:
               name: cert-manager
               key: aws_secret_key

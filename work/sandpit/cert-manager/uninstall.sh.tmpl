@@ -7,16 +7,16 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-kubectl delete --wait=true clusterissuers.{{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}} cluster-issuer-lets-encrypt
-kubectl delete --wait=true clusterissuers.{{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}} cluster-issuer-lets-encrypt-staging
+kubectl delete --wait=true clusterissuers.{{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME}} cluster-issuer-lets-encrypt
+kubectl delete --wait=true clusterissuers.{{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME}} cluster-issuer-lets-encrypt-staging
 
 ###################################################################################################
 
-helm delete --purge '{{.Env.RELEASE}}'
+helm delete --purge '{{.Env.CERT_MANAGER_RELEASE}}'
 
 ###################################################################################################
 
-kubectl delete --wait=true namespace '{{.Env.NAMESPACE}}'
+kubectl delete --wait=true namespace '{{.Env.CERT_MANAGER_NAMESPACE}}'
 
 ###################################################################################################
 

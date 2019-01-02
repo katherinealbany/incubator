@@ -7,12 +7,12 @@
 
 ###################################################################################################
 
-helm delete --purge '{{.Env.PUBLIC_RELEASE}}'
-helm delete --purge '{{.Env.PRIVATE_RELEASE}}'
+helm delete --purge '{{.Env.EXTERNAL_DNS_PUBLIC_RELEASE}}'
+helm delete --purge '{{.Env.EXTERNAL_DNS_PRIVATE_RELEASE}}'
 
 ###################################################################################################
 
-kubectl delete --wait=true namespace '{{.Env.NAMESPACE}}'
+kubectl delete --wait=true namespace '{{.Env.EXTERNAL_DNS_NAMESPACE}}'
 
 ###################################################################################################
 

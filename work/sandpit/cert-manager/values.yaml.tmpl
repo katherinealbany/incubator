@@ -3,11 +3,11 @@
 
 resources:
   requests:
-    cpu: {{.Env.RESOURCE_CPU}}
-    memory: {{.Env.RESOURCE_MEMORY}}
+    cpu: {{.Env.CERT_MANAGER_RESOURCE_CPU}}
+    memory: {{.Env.CERT_MANAGER_RESOURCE_MEMORY}}
   limits:
-    cpu: {{.Env.RESOURCE_CPU}}
-    memory: {{.Env.RESOURCE_MEMORY}}
+    cpu: {{.Env.CERT_MANAGER_RESOURCE_CPU}}
+    memory: {{.Env.CERT_MANAGER_RESOURCE_MEMORY}}
 
 ###################################################################################################
 
@@ -20,11 +20,12 @@ ingressShim:
 podDnsPolicy: None
 podDnsConfig:
   nameservers:
-    - {{.Env.DNS_NAMESERVER_1}}
-    - {{.Env.DNS_NAMESERVER_2}}
+    - {{.Env.CERT_MANAGER_DNS_NAMESERVER_1}}
+    - {{.Env.CERT_MANAGER_DNS_NAMESERVER_2}}
 
 ###################################################################################################
 
-replicaCount: {{.Env.REPLICA_COUNT}}
+replicaCount: {{.Env.CERT_MANAGER_REPLICA_COUNT}}
 
 ###################################################################################################
+...

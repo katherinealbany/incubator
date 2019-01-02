@@ -1,4 +1,6 @@
 ###################################################################################################
+################################### Replace All XXXXXXXX Values ###################################
+###################################################################################################
 
 helm
 ----
@@ -11,11 +13,13 @@ helm
 cert-manager
 ------------
 
-##### Replace CERT_MANAGER_AWS_ACCESS_KEY and CERT_MANAGER_AWS_SECRET_KEY #####
+. ./cert-manager/environment
+export CERT_MANAGER_AWS_ACCESS_KEY=XXXXXXXX
+export CERT_MANAGER_AWS_SECRET_KEY=XXXXXXXX
+kubectl create namespace "${CERT_MANAGER_NAMESPACE}" --save-config=true
+kubectl create secret generic "${CERT_MANAGER_RELEASE}" --namespace "${CERT_MANAGER_NAMESPACE}" --from-literal=aws_secret_key=${CERT_MANAGER_AWS_SECRET_KEY}
+./render.sh cert-manager
 
-kubectl create namespace cert-manager --save-config=true
-kubectl create secret generic cert-manager --namespace cert-manager --from-literal=aws_secret_key=CERT_MANAGER_AWS_SECRET_KEY
-CLUSTER_ISSUER_AWS_ACCESS_KEY=CERT_MANAGER_AWS_ACCESS_KEY ./render.sh cert-manager
 ./cert-manager/install.sh
 
 ###################################################################################################
@@ -23,9 +27,15 @@ CLUSTER_ISSUER_AWS_ACCESS_KEY=CERT_MANAGER_AWS_ACCESS_KEY ./render.sh cert-manag
 external-dns
 ------------
 
-# Populate aws.secretKey value in both values files with EXTERNAL_DNS_AWS_SECRET_KEY
-./install.sh
+export EXTERNAL_DNS_AWS_ACCESS_KEY=XXXXXXXX
+export EXTERNAL_DNS_AWS_SECRET_KEY=XXXXXXXX
+export EXTERNAL_DNS_DOMAIN_FILTERS=XXXXXXXX
+./render.sh external-dns
 
+./external-dns/install.sh
+
+###################################################################################################
+###################################################################################################
 ###################################################################################################
 
 monitoring

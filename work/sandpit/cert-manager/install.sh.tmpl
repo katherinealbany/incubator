@@ -8,7 +8,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-helm upgrade '{{.Env.RELEASE}}' '{{.Env.REPO}}/{{.Env.CHART}}' --install --debug --wait --namespace '{{.Env.NAMESPACE}}' --version '{{.Env.VERSION}}' --values "${BASE}/values.yaml"
+helm upgrade '{{.Env.CERT_MANAGER_RELEASE}}' '{{.Env.CERT_MANAGER_REPO}}/{{.Env.CERT_MANAGER_CHART}}' --install --debug --wait --namespace '{{.Env.CERT_MANAGER_NAMESPACE}}' --version '{{.Env.CERT_MANAGER_VERSION}}' --values "${BASE}/values.yaml"
 
 ###################################################################################################
 

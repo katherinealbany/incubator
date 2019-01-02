@@ -4,16 +4,16 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: '{{.Env.NAME}}'
-  namespace: '{{.Env.NAMESPACE}}'
+  name: '{{.Env.HELM_NAME}}'
+  namespace: '{{.Env.HELM_NAMESPACE}}'
 roleRef:
-  kind: '{{.Env.ROLE_REFERENCE_KIND}}'
-  name: '{{.Env.ROLE_REFERENCE_NAME}}'
+  kind: '{{.Env.HELM_ROLE_REFERENCE_KIND}}'
+  name: '{{.Env.HELM_ROLE_REFERENCE_NAME}}'
   apiGroup: rbac.authorization.k8s.io
 subjects:
-  - name: '{{.Env.NAME}}'
+  - name: '{{.Env.HELM_NAME}}'
     kind: ServiceAccount
-    namespace: '{{.Env.NAMESPACE}}'
+    namespace: '{{.Env.HELM_NAMESPACE}}'
 
 ###################################################################################################
 ...

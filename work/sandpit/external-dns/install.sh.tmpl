@@ -8,7 +8,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-helm upgrade '{{.Env.PUBLIC_RELEASE}}'  '{{.Env.REPO}}/{{.Env.CHART}}' --install --debug --wait --namespace '{{.Env.NAMESPACE}}' --version '{{.Env.VERSION}}' --values "${BASE}/public-values.yaml"  --set txtOwnerId="{{.Env.PUBLIC_RELEASE}}-{{.Env.TXT_OWNER_ID_SALT}}"
-helm upgrade '{{.Env.PRIVATE_RELEASE}}' '{{.Env.REPO}}/{{.Env.CHART}}' --install --debug --wait --namespace '{{.Env.NAMESPACE}}' --version '{{.Env.VERSION}}' --values "${BASE}/private-values.yaml" --set txtOwnerId="{{.Env.PRIVATE_RELEASE}}-{{.Env.TXT_OWNER_ID_SALT}}"
+helm upgrade '{{.Env.EXTERNAL_DNS_PUBLIC_RELEASE}}'  '{{.Env.EXTERNAL_DNS_REPO}}/{{.Env.EXTERNAL_DNS_CHART}}' --install --debug --wait --namespace '{{.Env.EXTERNAL_DNS_NAMESPACE}}' --version '{{.Env.EXTERNAL_DNS_VERSION}}' --values "${BASE}/public-values.yaml"  --set txtOwnerId="{{.Env.EXTERNAL_DNS_PUBLIC_RELEASE}}-{{.Env.EXTERNAL_DNS_TXT_OWNER_ID_SALT}}"
+helm upgrade '{{.Env.EXTERNAL_DNS_PRIVATE_RELEASE}}' '{{.Env.EXTERNAL_DNS_REPO}}/{{.Env.EXTERNAL_DNS_CHART}}' --install --debug --wait --namespace '{{.Env.EXTERNAL_DNS_NAMESPACE}}' --version '{{.Env.EXTERNAL_DNS_VERSION}}' --values "${BASE}/private-values.yaml" --set txtOwnerId="{{.Env.EXTERNAL_DNS_PRIVATE_RELEASE}}-{{.Env.EXTERNAL_DNS_TXT_OWNER_ID_SALT}}"
 
 ###################################################################################################

@@ -1,16 +1,16 @@
 ###################################################################################################
 
-export NAME='tiller'
-export NAMESPACE='kube-system'
+export HELM_NAME='tiller'
+export HELM_NAMESPACE='kube-system'
 
 ###################################################################################################
 
-export REPLICAS='3'
-export HISTORY_MAX='10'
+export HELM_REPLICAS='3'
+export HELM_HISTORY_MAX='10'
 
 ###################################################################################################
 
-export ROLE_REFERENCE_KIND='ClusterRole'
-export ROLE_REFERENCE_NAME='cluster-admin'
+export HELM_ROLE_REFERENCE_KIND='ClusterRole'
+export HELM_ROLE_REFERENCE_NAME='cluster-admin'
 
 ###################################################################################################

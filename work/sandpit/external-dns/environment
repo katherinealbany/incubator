@@ -1,23 +1,32 @@
 ###################################################################################################
 
-export VERSION='1.2.0'
+export EXTERNAL_DNS_REPO='stable'
+export EXTERNAL_DNS_CHART='external-dns'
 
 ###################################################################################################
 
-export REPO='stable'
-export CHART='external-dns'
+export EXTERNAL_DNS_VERSION='1.2.0'
 
 ###################################################################################################
 
-export NAMESPACE="${CHART}"
+export EXTERNAL_DNS_NAMESPACE="${CHART}"
 
 ###################################################################################################
 
-export PUBLIC_RELEASE="${CHART}-public"
-export PRIVATE_RELEASE="${CHART}-private"
+export EXTERNAL_DNS_PUBLIC_RELEASE="${CHART}-public"
+export EXTERNAL_DNS_PRIVATE_RELEASE="${CHART}-private"
 
 ###################################################################################################
 
-export TXT_OWNER_ID_SALT='default'
+export EXTERNAL_DNS_RESOURCE_CPU='1m'
+export EXTERNAL_DNS_RESOURCE_MEMORY='40Mi'
+
+###################################################################################################
+
+export EXTERNAL_DNS_RBAC='true'
+export EXTERNAL_DNS_POLICY='sync'
+export EXTERNAL_DNS_AWS_REGION='eu-west-1'
+export EXTERNAL_DNS_TXT_OWNER_ID_SALT='default'
+export EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER='external-dns/public=true'
 
 ###################################################################################################

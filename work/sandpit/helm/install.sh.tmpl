@@ -13,6 +13,6 @@ kubectl apply --record=true --wait=true --filename="${BASE}/cluster-role-binding
 
 ###################################################################################################
 
-helm init --upgrade --debug --wait --tiller-namespace '{{.Env.NAMESPACE}}' --service-account '{{.Env.NAME}}' --history-max '{{.Env.HISTORY_MAX}}' --replicas '{{.Env.REPLICAS}}'
+helm init --upgrade --debug --wait --tiller-namespace '{{.Env.HELM_NAMESPACE}}' --service-account '{{.Env.HELM_NAME}}' --history-max '{{.Env.HELM_HISTORY_MAX}}' --replicas '{{.Env.HELM_REPLICAS}}'
 
 ###################################################################################################

@@ -11,7 +11,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-for item in $(kubectl get customresourcedefinition --output=custom-columns=:.metadata.name | grep '{{.Env.CUSTOM_RESOURCE_DEFINITION_NAME}}'); do
+for item in $(kubectl get customresourcedefinition --output=custom-columns=:.metadata.name | grep '{{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME}}'); do
   kubectl delete --wait=true customresourcedefinition "${item}"
 done
 

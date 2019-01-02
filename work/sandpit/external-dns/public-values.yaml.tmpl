@@ -2,19 +2,19 @@
 ###################################################################################################
 
 aws:
-  region: eu-west-1
+  region: {{.Env.EXTERNAL_DNS_AWS_REGION}}
   zoneType: public
-  accessKey: AKIAJ6GKRIX3OOKAQLCA
-  secretKey:
+  accessKey: {{.Env.EXTERNAL_DNS_AWS_ACCESS_KEY}}
+  secretKey: {{.Env.EXTERNAL_DNS_AWS_SECRET_KEY}}
 
 ###################################################################################################
 
 rbac:
-  create: true
+  create: {{.Env.EXTERNAL_DNS_RBAC}}
 
 ###################################################################################################
 
-policy: sync
+policy: {{.Env.EXTERNAL_DNS_POLICY}}
 
 ###################################################################################################
 
@@ -24,19 +24,19 @@ provider: aws
 
 resources:
   requests:
-    cpu: 1m
-    memory: 40Mi
+    cpu: {{.Env.EXTERNAL_DNS_RESOURCE_CPU}}
+    memory: {{.Env.EXTERNAL_DNS_RESOURCE_MEMORY}}
   limits:
-    cpu: 1m
-    memory: 40Mi
+    cpu: {{.Env.EXTERNAL_DNS_RESOURCE_CPU}}
+    memory: {{.Env.EXTERNAL_DNS_RESOURCE_MEMORY}}
 
 ###################################################################################################
 
-domainFilters: [ sandpit.fkaj.com ]
+domainFilters: [ {{.Env.EXTERNAL_DNS_DOMAIN_FILTERS}} ]
 
 ###################################################################################################
 
-annotationFilter: external-dns/public=true
+annotationFilter: {{.Env.EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER}}
 
 ###################################################################################################
 ...
