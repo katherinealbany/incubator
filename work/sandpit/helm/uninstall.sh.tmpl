@@ -1,13 +1,14 @@
-#!/bin/bash -x
+#!/bin/bash
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-kubectl delete --wait=true --namespace kube-system service/tiller-deploy
-kubectl delete --wait=true --namespace kube-system deployment/tiller-deploy
+kubectl delete --wait=true --namespace '{{.Env.NAMESPACE}}' service/tiller-deploy
+kubectl delete --wait=true --namespace '{{.Env.NAMESPACE}}' deployment/tiller-deploy
 
 ###################################################################################################
 
