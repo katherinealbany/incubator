@@ -12,8 +12,9 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-[[ -z "${DATASOURCE_URL}"        ]] && DATASOURCE_URL='/dev/null'
 [[ -z "${YAML_EXTENSION}"        ]] && YAML_EXTENSION='yaml'
+[[ -z "${DATASOURCE_NAME}"       ]] && DATASOURCE_NAME='data'
+[[ -z "${DATASOURCE_SPEC}"       ]] && DATASOURCE_SPEC='/dev/null'
 [[ -z "${TEMPLATE_DELIMITER}"    ]] && TEMPLATE_DELIMITER='.'
 [[ -z "${TEMPLATE_EXTENSION}"    ]] && TEMPLATE_EXTENSION='tmpl'
 [[ -z "${YAML_LINT_CONFIG_FILE}" ]] && YAML_LINT_CONFIG_FILE='./.yamllint'
@@ -42,7 +43,7 @@ for INPUT_PATH in ${TEMPLATES}; do
   #################################################################################################
 
   OUTPUT_PATH="$(echo "${INPUT_PATH}" | sed "s/${TEMPLATE_DELIMITER}${TEMPLATE_EXTENSION}//g")"
-  gomplate --datasource data="${DATASOURCE_URL}" --file "${INPUT_PATH}" --out - | tee "${OUTPUT_PATH}"
+  gomplate --datasource "${DATASOURCE_NAME}=${DATASOURCE_SPEC}" --file "${INPUT_PATH}" --out - | tee "${OUTPUT_PATH}"
   chmod u=rx,go= "${OUTPUT_PATH}"
 
   #################################################################################################
