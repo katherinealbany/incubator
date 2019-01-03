@@ -4,16 +4,16 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: '{{.Env.HELM_NAME}}'
-  namespace: '{{.Env.HELM_NAMESPACE}}'
+  name: {{ if (has (datasource "data") "HELM_NAME") }}{{ (datasource "data").HELM_NAME }}{{ else }}{{ .Env.HELM_NAME }}{{ end }}
+  namespace: {{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}
 roleRef:
-  kind: '{{.Env.HELM_ROLE_REFERENCE_KIND}}'
-  name: '{{.Env.HELM_ROLE_REFERENCE_NAME}}'
+  kind: {{ if (has (datasource "data") "HELM_ROLE_REFERENCE_KIND") }}{{ (datasource "data").HELM_ROLE_REFERENCE_KIND }}{{ else }}{{ .Env.HELM_ROLE_REFERENCE_KIND }}{{ end }}
+  name: {{ if (has (datasource "data") "HELM_ROLE_REFERENCE_NAME") }}{{ (datasource "data").HELM_ROLE_REFERENCE_NAME }}{{ else }}{{ .Env.HELM_ROLE_REFERENCE_NAME }}{{ end }}
   apiGroup: rbac.authorization.k8s.io
 subjects:
-  - name: '{{.Env.HELM_NAME}}'
+  - name: {{ if (has (datasource "data") "HELM_NAME") }}{{ (datasource "data").HELM_NAME }}{{ else }}{{ .Env.HELM_NAME }}{{ end }}
     kind: ServiceAccount
-    namespace: '{{.Env.HELM_NAMESPACE}}'
+    namespace: {{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}
 
 ###################################################################################################
 ...
