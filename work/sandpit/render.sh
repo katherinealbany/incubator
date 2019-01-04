@@ -55,9 +55,9 @@ for INPUT_PATH in ${TEMPLATES}; do
   case "$(echo "${OUTPUT_PATH}" | rev | awk -F"${TEMPLATE_DELIMITER}" '{print $1}' | rev)" in
     "${YAML_EXTENSION}")
       if [[ -f "${INPUT_BASE}/${YAML_LINT_CONFIG_FILE}" ]]; then
-        yamllint --config-file "${INPUT_BASE}/${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT_PATH}
+        yamllint --strict ${OUTPUT_PATH} --config-file "${INPUT_BASE}/${YAML_LINT_CONFIG_FILE}"
       elif [[ -f "./${YAML_LINT_CONFIG_FILE}" ]]; then
-        yamllint --config-file "./${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT_PATH}
+        yamllint --strict ${OUTPUT_PATH} --config-file "./${YAML_LINT_CONFIG_FILE}"
       else
         yamllint --strict ${OUTPUT_PATH}
       fi
