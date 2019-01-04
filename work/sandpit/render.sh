@@ -3,14 +3,10 @@ set -o pipefail
 [[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
-# Version v1.0.0                                                                                  #
+# Version 1.0.0                                                                                   #
 ###################################################################################################
 
 [[ -n "${1}" ]] && cd "${1}"
-
-###################################################################################################
-
-BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
@@ -25,7 +21,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 ###################################################################################################
 
 [[ -z "${YAML_EXTENSION}"        ]] && YAML_EXTENSION='yaml'
-[[ -z "${YAML_LINT_CONFIG_FILE}" ]] && YAML_LINT_CONFIG_FILE='./.yamllint'
+[[ -z "${YAML_LINT_CONFIG_FILE}" ]] && YAML_LINT_CONFIG_FILE='.yamllint'
 
 ###################################################################################################
 
@@ -58,7 +54,13 @@ for INPUT_PATH in ${TEMPLATES}; do
 
   case "$(echo "${OUTPUT_PATH}" | rev | awk -F"${TEMPLATE_DELIMITER}" '{print $1}' | rev)" in
     "${YAML_EXTENSION}")
-      yamllint --config-file "${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT_PATH}
+      if [[ -f "${INPUT_BASE}/${YAML_LINT_CONFIG_FILE}" ]]; then
+        yamllint --config-file "${INPUT_BASE}/${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT_PATH}
+      elif [[ -f "./${YAML_LINT_CONFIG_FILE}" ]]; then
+        yamllint --config-file "./${YAML_LINT_CONFIG_FILE}" --strict ${OUTPUT_PATH}
+      else
+        yamllint --strict ${OUTPUT_PATH}
+      fi
       ;;
   esac
 
