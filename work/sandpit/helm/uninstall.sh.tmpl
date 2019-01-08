@@ -16,6 +16,11 @@ kubectl delete --wait=true --filename="${BASE}/service-account.yaml"
 
 ###################################################################################################
 
+kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' service/tiller-deploy
+kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' deployment/tiller-deploy
+
+###################################################################################################
+
 exit 0
 
 ###################################################################################################
