@@ -21,6 +21,12 @@ kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAM
 
 ###################################################################################################
 
+for item in $(kubectl get pods --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' --selector=app=helm --selector=name=tiller --output=custom-columns=:.metadata.name | grep tiller-deploy); do
+  kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' pods "${item}"
+done
+
+###################################################################################################
+
 exit 0
 
 ###################################################################################################
