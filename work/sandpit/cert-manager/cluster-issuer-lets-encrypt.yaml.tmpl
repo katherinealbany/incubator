@@ -2,24 +2,24 @@
 ###################################################################################################
 
 kind: ClusterIssuer
-apiVersion: {{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME}}/{{.Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION}}
+apiVersion: {{ if (has (datasource "data") "CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}/{{ if (has (datasource "data") "CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION") }}{{ (datasource "data").CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION }}{{ else }}{{ .Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION }}{{ end }}
 metadata:
   name: cluster-issuer-lets-encrypt
 spec:
   acme:
-    email: {{.Env.CERT_MANAGER_EMAIL}}
-    server: https://acme-{{.Env.CERT_MANAGER_ACME_VERSION}}.api.letsencrypt.org/directory
+    email: {{ if (has (datasource "data") "CERT_MANAGER_EMAIL") }}{{ (datasource "data").CERT_MANAGER_EMAIL }}{{ else }}{{ .Env.CERT_MANAGER_EMAIL }}{{ end }}
+    server: https://acme-{{ if (has (datasource "data") "CERT_MANAGER_ACME_VERSION") }}{{ (datasource "data").CERT_MANAGER_ACME_VERSION }}{{ else }}{{ .Env.CERT_MANAGER_ACME_VERSION }}{{ end }}.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: cluster-issuer-lets-encrypt
     dns01:
       providers:
         - name: route53
           route53:
-            region: {{.Env.CERT_MANAGER_AWS_REGION}}
-            accessKeyID: {{.Env.CERT_MANAGER_AWS_ACCESS_KEY}}
+            region: {{ if (has (datasource "data") "CERT_MANAGER_AWS_REGION") }}{{ (datasource "data").CERT_MANAGER_AWS_REGION }}{{ else }}{{ .Env.CERT_MANAGER_AWS_REGION }}{{ end }}
+            accessKeyID: {{ if (has (datasource "data") "CERT_MANAGER_AWS_ACCESS_KEY") }}{{ (datasource "data").CERT_MANAGER_AWS_ACCESS_KEY }}{{ else }}{{ .Env.CERT_MANAGER_AWS_ACCESS_KEY }}{{ end }}
             secretAccessKeySecretRef:
-              name: cert-manager
-              key: aws_secret_key
+              key: {{ if (has (datasource "data") "CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_KEY") }}{{ (datasource "data").CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_KEY }}{{ else }}{{ .Env.CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_KEY }}{{ end }}
+              name: {{ if (has (datasource "data") "CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_NAME") }}{{ (datasource "data").CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_NAME }}{{ else }}{{ .Env.CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_NAME }}{{ end }}
 
 ###################################################################################################
 ...

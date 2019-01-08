@@ -6,13 +6,15 @@ export CERT_MANAGER_VERSION='0.5.2'
 
 export CERT_MANAGER_REPO='stable'
 export CERT_MANAGER_CHART='cert-manager'
-export CERT_MANAGER_RELEASE="${CHART}"
-export CERT_MANAGER_NAMESPACE="${RELEASE}"
+export CERT_MANAGER_RELEASE="${CERT_MANAGER_CHART}"
+export CERT_MANAGER_NAMESPACE="${CERT_MANAGER_RELEASE}"
 
 ###################################################################################################
 
 export CERT_MANAGER_EMAIL='ccoe@travisperkins.co.uk'
-export CERT_MANAGER_AWS_REGION='eu-west-1'
+
+###################################################################################################
+
 export CERT_MANAGER_ACME_VERSION='v02'
 
 ###################################################################################################
@@ -31,7 +33,18 @@ export CERT_MANAGER_DNS_NAMESERVER_2='8.8.8.8'
 
 ###################################################################################################
 
+export CERT_MANAGER_DEFAULT_ISSUER_KIND='ClusterIssuer'
+export CERT_MANAGER_DEFAULT_ISSUER_NAME='cluster-issuer-lets-encrypt-staging'
+
+###################################################################################################
+
 export CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME='certmanager.k8s.io'
 export CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_VERSION='v1alpha1'
+
+###################################################################################################
+
+export CERT_MANAGER_AWS_REGION='eu-west-1'
+export CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_KEY='aws_secret_key'
+export CERT_MANAGER_AWS_SECRET_ACCESS_KEY_SECRET_REF_NAME="${CERT_MANAGER_RELEASE}"
 
 ###################################################################################################

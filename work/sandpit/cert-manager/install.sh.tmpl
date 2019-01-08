@@ -8,7 +8,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-helm upgrade '{{.Env.CERT_MANAGER_RELEASE}}' '{{.Env.CERT_MANAGER_REPO}}/{{.Env.CERT_MANAGER_CHART}}' --install --debug --wait --namespace '{{.Env.CERT_MANAGER_NAMESPACE}}' --version '{{.Env.CERT_MANAGER_VERSION}}' --values "${BASE}/values.yaml"
+helm upgrade '{{ if (has (datasource "data") "CERT_MANAGER_RELEASE") }}{{ (datasource "data").CERT_MANAGER_RELEASE }}{{ else }}{{ .Env.CERT_MANAGER_RELEASE }}{{ end }}' '{{ if (has (datasource "data") "CERT_MANAGER_REPO") }}{{ (datasource "data").CERT_MANAGER_REPO }}{{ else }}{{ .Env.CERT_MANAGER_REPO }}{{ end }}/{{ if (has (datasource "data") "CERT_MANAGER_CHART") }}{{ (datasource "data").CERT_MANAGER_CHART }}{{ else }}{{ .Env.CERT_MANAGER_CHART }}{{ end }}' --install --debug --wait --namespace '{{ if (has (datasource "data") "CERT_MANAGER_NAMESPACE") }}{{ (datasource "data").CERT_MANAGER_NAMESPACE }}{{ else }}{{ .Env.CERT_MANAGER_NAMESPACE }}{{ end }}' --version '{{ if (has (datasource "data") "CERT_MANAGER_VERSION") }}{{ (datasource "data").CERT_MANAGER_VERSION }}{{ else }}{{ .Env.CERT_MANAGER_VERSION }}{{ end }}' --values "${BASE}/values.yaml"
 
 ###################################################################################################
 

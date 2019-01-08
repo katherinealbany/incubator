@@ -3,29 +3,29 @@
 
 resources:
   requests:
-    cpu: {{.Env.CERT_MANAGER_RESOURCE_CPU}}
-    memory: {{.Env.CERT_MANAGER_RESOURCE_MEMORY}}
+    cpu: {{ if (has (datasource "data") "CERT_MANAGER_RESOURCE_CPU") }}{{ (datasource "data").CERT_MANAGER_RESOURCE_CPU }}{{ else }}{{ .Env.CERT_MANAGER_RESOURCE_CPU }}{{ end }}
+    memory: {{ if (has (datasource "data") "CERT_MANAGER_RESOURCE_MEMORY") }}{{ (datasource "data").CERT_MANAGER_RESOURCE_MEMORY }}{{ else }}{{ .Env.CERT_MANAGER_RESOURCE_MEMORY }}{{ end }}
   limits:
-    cpu: {{.Env.CERT_MANAGER_RESOURCE_CPU}}
-    memory: {{.Env.CERT_MANAGER_RESOURCE_MEMORY}}
+    cpu: {{ if (has (datasource "data") "CERT_MANAGER_RESOURCE_CPU") }}{{ (datasource "data").CERT_MANAGER_RESOURCE_CPU }}{{ else }}{{ .Env.CERT_MANAGER_RESOURCE_CPU }}{{ end }}
+    memory: {{ if (has (datasource "data") "CERT_MANAGER_RESOURCE_MEMORY") }}{{ (datasource "data").CERT_MANAGER_RESOURCE_MEMORY }}{{ else }}{{ .Env.CERT_MANAGER_RESOURCE_MEMORY }}{{ end }}
 
 ###################################################################################################
 
 ingressShim:
-  defaultIssuerKind: ClusterIssuer
-  defaultIssuerName: cluster-issuer-lets-encrypt-staging
+  defaultIssuerKind: {{ if (has (datasource "data") "CERT_MANAGER_DEFAULT_ISSUER_KIND") }}{{ (datasource "data").CERT_MANAGER_DEFAULT_ISSUER_KIND }}{{ else }}{{ .Env.CERT_MANAGER_DEFAULT_ISSUER_KIND }}{{ end }}
+  defaultIssuerName: {{ if (has (datasource "data") "CERT_MANAGER_DEFAULT_ISSUER_NAME") }}{{ (datasource "data").CERT_MANAGER_DEFAULT_ISSUER_NAME }}{{ else }}{{ .Env.CERT_MANAGER_DEFAULT_ISSUER_NAME }}{{ end }}
 
 ###################################################################################################
 
 podDnsPolicy: None
 podDnsConfig:
   nameservers:
-    - {{.Env.CERT_MANAGER_DNS_NAMESERVER_1}}
-    - {{.Env.CERT_MANAGER_DNS_NAMESERVER_2}}
+    - {{ if (has (datasource "data") "CERT_MANAGER_DNS_NAMESERVER_1") }}{{ (datasource "data").CERT_MANAGER_DNS_NAMESERVER_1 }}{{ else }}{{ .Env.CERT_MANAGER_DNS_NAMESERVER_1 }}{{ end }}
+    - {{ if (has (datasource "data") "CERT_MANAGER_DNS_NAMESERVER_2") }}{{ (datasource "data").CERT_MANAGER_DNS_NAMESERVER_2 }}{{ else }}{{ .Env.CERT_MANAGER_DNS_NAMESERVER_2 }}{{ end }}
 
 ###################################################################################################
 
-replicaCount: {{.Env.CERT_MANAGER_REPLICA_COUNT}}
+replicaCount: {{ if (has (datasource "data") "CERT_MANAGER_REPLICA_COUNT") }}{{ (datasource "data").CERT_MANAGER_REPLICA_COUNT }}{{ else }}{{ .Env.CERT_MANAGER_REPLICA_COUNT }}{{ end }}
 
 ###################################################################################################
 ...
