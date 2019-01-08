@@ -7,8 +7,8 @@ metadata:
   name: {{ if (has (datasource "data") "HELM_NAME") }}{{ (datasource "data").HELM_NAME }}{{ else }}{{ .Env.HELM_NAME }}{{ end }}
   namespace: {{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}
 roleRef:
-  kind: {{ if (has (datasource "data") "HELM_ROLE_REFERENCE_KIND") }}{{ (datasource "data").HELM_ROLE_REFERENCE_KIND }}{{ else }}{{ .Env.HELM_ROLE_REFERENCE_KIND }}{{ end }}
-  name: {{ if (has (datasource "data") "HELM_ROLE_REFERENCE_NAME") }}{{ (datasource "data").HELM_ROLE_REFERENCE_NAME }}{{ else }}{{ .Env.HELM_ROLE_REFERENCE_NAME }}{{ end }}
+  kind: ClusterRole
+  name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - name: {{ if (has (datasource "data") "HELM_NAME") }}{{ (datasource "data").HELM_NAME }}{{ else }}{{ .Env.HELM_NAME }}{{ end }}
