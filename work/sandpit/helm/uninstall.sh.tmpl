@@ -18,6 +18,7 @@ kubectl delete --wait=true --filename="${BASE}/service-account.yaml"
 
 kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' service/tiller-deploy
 kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' deployment/tiller-deploy
+
 for item in $(kubectl get pods --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' --selector=app=helm --selector=name=tiller --output=custom-columns=:.metadata.name | grep tiller-deploy); do
   kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "HELM_NAMESPACE") }}{{ (datasource "data").HELM_NAMESPACE }}{{ else }}{{ .Env.HELM_NAMESPACE }}{{ end }}' "pod/${item}"
 done
