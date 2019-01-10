@@ -17,7 +17,7 @@ ingressShim:
 
 ###################################################################################################
 
-podDnsPolicy: None
+podDnsPolicy: {{ if (has (datasource "data") "CERT_MANAGER_DNS_POLICY") }}{{ (datasource "data").CERT_MANAGER_DNS_POLICY }}{{ else }}{{ .Env.CERT_MANAGER_DNS_POLICY }}{{ end }}
 podDnsConfig:
   nameservers:
     - {{ if (has (datasource "data") "CERT_MANAGER_DNS_NAMESERVER_1") }}{{ (datasource "data").CERT_MANAGER_DNS_NAMESERVER_1 }}{{ else }}{{ .Env.CERT_MANAGER_DNS_NAMESERVER_1 }}{{ end }}

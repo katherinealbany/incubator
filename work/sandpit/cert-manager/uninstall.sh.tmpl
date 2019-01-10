@@ -3,10 +3,6 @@
 
 ###################################################################################################
 
-BASE="$(dirname "${BASH_SOURCE[0]}")"
-
-###################################################################################################
-
 kubectl delete --wait=true 'clusterissuers.{{ if (has (datasource "data") "CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}' cluster-issuer-lets-encrypt
 kubectl delete --wait=true 'clusterissuers.{{ if (has (datasource "data") "CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}' cluster-issuer-lets-encrypt-staging
 
@@ -16,7 +12,7 @@ helm delete --purge '{{ if (has (datasource "data") "CERT_MANAGER_RELEASE") }}{{
 
 ###################################################################################################
 
-kubectl delete --wait=true namespace '{{ if (has (datasource "data") "CERT_MANAGER_NAMESPACE") }}{{ (datasource "data").CERT_MANAGER_NAMESPACE }}{{ else }}{{ .Env.CERT_MANAGER_NAMESPACE }}{{ end }}'
+kubectl delete --wait=true 'namespace/{{ if (has (datasource "data") "CERT_MANAGER_NAMESPACE") }}{{ (datasource "data").CERT_MANAGER_NAMESPACE }}{{ else }}{{ .Env.CERT_MANAGER_NAMESPACE }}{{ end }}'
 
 ###################################################################################################
 

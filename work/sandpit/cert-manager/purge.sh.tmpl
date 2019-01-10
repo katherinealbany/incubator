@@ -3,15 +3,11 @@
 
 ###################################################################################################
 
-BASE="$(dirname "${BASH_SOURCE[0]}")"
+"$(dirname "${BASH_SOURCE[0]}")/uninstall.sh"
 
 ###################################################################################################
 
-"${BASE}/uninstall.sh"
-
-###################################################################################################
-
-for item in $(kubectl get customresourcedefinition --output=custom-columns=:.metadata.name | grep '{{ if (has (datasource "data") "CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}'); do
+for item in $(kubectl get customresourcedefinitions --selector='app={{ if (has (datasource "data") "CERT_MANAGER_CHART") }}{{ (datasource "data").CERT_MANAGER_CHART }}{{ else }}{{ .Env.CERT_MANAGER_CHART }}{{ end }}' --selector='release={{ if (has (datasource "data") "CERT_MANAGER_RELEASE") }}{{ (datasource "data").CERT_MANAGER_RELEASE }}{{ else }}{{ .Env.CERT_MANAGER_RELEASE }}{{ end }}' --output=custom-columns=:.metadata.name | grep '{{ if (has (datasource "data") "CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.CERT_MANAGER_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}'); do
   kubectl delete --wait=true "customresourcedefinition/${item}"
 done
 

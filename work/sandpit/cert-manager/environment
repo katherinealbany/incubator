@@ -1,5 +1,9 @@
 ###################################################################################################
 
+export CERT_MANAGER_EMAIL='ccoe@travisperkins.co.uk'
+
+###################################################################################################
+
 export CERT_MANAGER_VERSION='0.5.2'
 
 ###################################################################################################
@@ -8,10 +12,6 @@ export CERT_MANAGER_REPO='stable'
 export CERT_MANAGER_CHART='cert-manager'
 export CERT_MANAGER_RELEASE="${CERT_MANAGER_CHART}"
 export CERT_MANAGER_NAMESPACE="${CERT_MANAGER_RELEASE}"
-
-###################################################################################################
-
-export CERT_MANAGER_EMAIL='ccoe@travisperkins.co.uk'
 
 ###################################################################################################
 
@@ -28,6 +28,7 @@ export CERT_MANAGER_RESOURCE_MEMORY='50Mi'
 
 ###################################################################################################
 
+export CERT_MANAGER_DNS_POLICY='None'
 export CERT_MANAGER_DNS_NAMESERVER_1='1.1.1.1'
 export CERT_MANAGER_DNS_NAMESERVER_2='8.8.8.8'
 
