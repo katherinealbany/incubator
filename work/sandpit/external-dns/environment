@@ -1,32 +1,29 @@
 ###################################################################################################
 
-export EXTERNAL_DNS_REPO='stable'
-export EXTERNAL_DNS_CHART='external-dns'
+[[ -z "${EXTERNAL_DNS_VERSION}" ]] && export EXTERNAL_DNS_VERSION='1.3.2'
 
 ###################################################################################################
 
-export EXTERNAL_DNS_VERSION='1.2.0'
+[[ -z "${EXTERNAL_DNS_REPO}"      ]] && export EXTERNAL_DNS_REPO='stable'
+[[ -z "${EXTERNAL_DNS_CHART}"     ]] && export EXTERNAL_DNS_CHART='external-dns'
+[[ -z "${EXTERNAL_DNS_NAMESPACE}" ]] && export EXTERNAL_DNS_NAMESPACE="${EXTERNAL_DNS_CHART}"
 
 ###################################################################################################
 
-export EXTERNAL_DNS_NAMESPACE="${CHART}"
+[[ -z "${EXTERNAL_DNS_PUBLIC_RELEASE}"  ]] && export EXTERNAL_DNS_PUBLIC_RELEASE="${EXTERNAL_DNS_CHART}-public"
+[[ -z "${EXTERNAL_DNS_PRIVATE_RELEASE}" ]] && export EXTERNAL_DNS_PRIVATE_RELEASE="${EXTERNAL_DNS_CHART}-private"
 
 ###################################################################################################
 
-export EXTERNAL_DNS_PUBLIC_RELEASE="${CHART}-public"
-export EXTERNAL_DNS_PRIVATE_RELEASE="${CHART}-private"
+[[ -z "${EXTERNAL_DNS_RESOURCE_CPU}"    ]] && export EXTERNAL_DNS_RESOURCE_CPU='1m'
+[[ -z "${EXTERNAL_DNS_RESOURCE_MEMORY}" ]] && export EXTERNAL_DNS_RESOURCE_MEMORY='40Mi'
 
 ###################################################################################################
 
-export EXTERNAL_DNS_RESOURCE_CPU='1m'
-export EXTERNAL_DNS_RESOURCE_MEMORY='40Mi'
-
-###################################################################################################
-
-export EXTERNAL_DNS_RBAC='true'
-export EXTERNAL_DNS_POLICY='sync'
-export EXTERNAL_DNS_AWS_REGION='eu-west-1'
-export EXTERNAL_DNS_TXT_OWNER_ID_SALT='default'
-export EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER='external-dns/public=true'
+[[ -z "${EXTERNAL_DNS_RBAC}"                     ]] && export EXTERNAL_DNS_RBAC='true'
+[[ -z "${EXTERNAL_DNS_POLICY}"                   ]] && export EXTERNAL_DNS_POLICY='sync'
+[[ -z "${EXTERNAL_DNS_AWS_REGION}"               ]] && export EXTERNAL_DNS_AWS_REGION='eu-west-1'
+[[ -z "${EXTERNAL_DNS_TXT_OWNER_ID_SALT}"        ]] && export EXTERNAL_DNS_TXT_OWNER_ID_SALT='default'
+[[ -z "${EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER}" ]] && export EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER='external-dns/public=true'
 
 ###################################################################################################
