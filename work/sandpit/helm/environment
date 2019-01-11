@@ -1,11 +1,11 @@
 ###################################################################################################
 
-export HELM_NAME='tiller'
-export HELM_NAMESPACE='kube-system'
+[[ -z "${HELM_NAME}"      ]] && export HELM_NAME='tiller'
+[[ -z "${HELM_NAMESPACE}" ]] && export HELM_NAMESPACE='kube-system'
 
 ###################################################################################################
 
-export HELM_REPLICAS='3'
-export HELM_MAX_HISTORY='10'
+[[ -z "${HELM_REPLICAS}"    ]] && export HELM_REPLICAS='3'
+[[ -z "${HELM_MAX_HISTORY}" ]] && export HELM_MAX_HISTORY='10'
 
 ###################################################################################################
