@@ -3,16 +3,12 @@
 
 ###################################################################################################
 
-[[ -n "${1}" ]] && sleep "${1}"
+helm delete --purge '{{ if (has (datasource "data") "EXTERNAL_DNS_PRIVATE_RELEASE") }}{{ (datasource "data").EXTERNAL_DNS_PRIVATE_RELEASE }}{{ else }}{{ .Env.EXTERNAL_DNS_PRIVATE_RELEASE }}{{ end }}'
+helm delete --purge '{{ if (has (datasource "data") "EXTERNAL_DNS_PUBLIC_RELEASE") }}{{ (datasource "data").EXTERNAL_DNS_PUBLIC_RELEASE }}{{ else }}{{ .Env.EXTERNAL_DNS_PUBLIC_RELEASE }}{{ end }}'
 
 ###################################################################################################
 
-helm delete --purge '{{.Env.EXTERNAL_DNS_PUBLIC_RELEASE}}'
-helm delete --purge '{{.Env.EXTERNAL_DNS_PRIVATE_RELEASE}}'
-
-###################################################################################################
-
-kubectl delete --wait=true namespace '{{.Env.EXTERNAL_DNS_NAMESPACE}}'
+kubectl delete --wait=true 'namespace/{{ if (has (datasource "data") "EXTERNAL_DNS_NAMESPACE") }}{{ (datasource "data").EXTERNAL_DNS_NAMESPACE }}{{ else }}{{ .Env.EXTERNAL_DNS_NAMESPACE }}{{ end }}'
 
 ###################################################################################################
 
