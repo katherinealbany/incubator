@@ -1,13 +1,10 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 set -o pipefail
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
-
-###################################################################################################
-
-[[ -z "${PROMETHEUS_OPERATOR_VERSION}" ]] && PROMETHEUS_OPERATOR_VERSION='0.1.29'
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
@@ -15,7 +12,7 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-helm upgrade monitoring stable/prometheus-operator --install --debug --namespace monitoring --version "${PROMETHEUS_OPERATOR_VERSION}" --values "${BASE}/values.yaml" --set "prometheusOperator.createCustomResource=${CREATE_CUSTOM_RESOURCE}"
+helm upgrade monitoring stable/prometheus-operator --install --debug --namespace monitoring --version '{{ if (has (datasource "data") "MONITORING_PROMETHEUS_OPERATOR_VERSION") }}{{ (datasource "data").MONITORING_PROMETHEUS_OPERATOR_VERSION }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_OPERATOR_VERSION }}{{ end }}' --values "${BASE}/values.yaml" --set "prometheusOperator.createCustomResource=${CREATE_CUSTOM_RESOURCE}"
 
 ###################################################################################################
 

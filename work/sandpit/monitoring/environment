@@ -1,5 +1,5 @@
 ###################################################################################################
 
-[[ -z "${MONITORING_VERSION}" ]] && export MONITORING_VERSION='1.7.0'
+[[ -z "${MONITORING_PROMETHEUS_OPERATOR_VERSION}" ]] && export MONITORING_PROMETHEUS_OPERATOR_VERSION='1.7.0'
 
 ###################################################################################################
