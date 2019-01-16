@@ -1,3 +1,4 @@
+---
 ###################################################################################################
 
 coreDns:
@@ -8,9 +9,9 @@ coreDns:
 grafana:
   ingress:
     tls:
-      - hosts:    [ grafana.monitoring.sandpit.fkaj.com ]
+      - hosts: [ grafana.monitoring.sandpit.fkaj.com ]
         secretName: grafana.monitoring.sandpit.fkaj.com
-    hosts:        [ grafana.monitoring.sandpit.fkaj.com ]
+    hosts: [ grafana.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
       external-dns/public: 'true'
@@ -67,9 +68,9 @@ kubeEtcd:
 prometheus:
   ingress:
     tls:
-      - hosts:    [ prometheus.monitoring.sandpit.fkaj.com ]
+      - hosts: [ prometheus.monitoring.sandpit.fkaj.com ]
         secretName: prometheus.monitoring.sandpit.fkaj.com
-    hosts:        [ prometheus.monitoring.sandpit.fkaj.com ]
+    hosts: [ prometheus.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
       external-dns/public: 'true'
@@ -110,9 +111,9 @@ prometheus:
 alertmanager:
   ingress:
     tls:
-      - hosts:    [ alertmanager.monitoring.sandpit.fkaj.com ]
+      - hosts: [ alertmanager.monitoring.sandpit.fkaj.com ]
         secretName: alertmanager.monitoring.sandpit.fkaj.com
-    hosts:        [ alertmanager.monitoring.sandpit.fkaj.com ]
+    hosts: [ alertmanager.monitoring.sandpit.fkaj.com ]
     enabled: true
     annotations:
       external-dns/public: 'true'
@@ -202,3 +203,4 @@ prometheus-node-exporter:
       mountPath: /node/root
 
 ###################################################################################################
+...
