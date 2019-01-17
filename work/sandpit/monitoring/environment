@@ -1,5 +1,16 @@
 ###################################################################################################
 
-[[ -z "${MONITORING_PROMETHEUS_OPERATOR_VERSION}" ]] && export MONITORING_PROMETHEUS_OPERATOR_VERSION='1.7.0'
+[[ -z "${MONITORING_VERSION}" ]] && export MONITORING_VERSION='1.7.0'
+
+###################################################################################################
+
+[[ -z "${MONITORING_REPO}"      ]] && export MONITORING_REPO='stable'
+[[ -z "${MONITORING_CHART}"     ]] && export MONITORING_CHART='prometheus-operator'
+[[ -z "${MONITORING_RELEASE}"   ]] && export MONITORING_RELEASE='monitoring'
+[[ -z "${MONITORING_NAMESPACE}" ]] && export MONITORING_NAMESPACE="${MONITORING_RELEASE}"
+
+###################################################################################################
+
+[[ -z "${MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME}" ]] && export MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME='monitoring.coreos.com'
 
 ###################################################################################################

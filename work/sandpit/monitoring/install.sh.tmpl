@@ -8,11 +8,11 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-[[ $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep monitoring.coreos.com | wc -l | awk '{print $1}') -eq 0 ]] && CREATE_CUSTOM_RESOURCE=true || CREATE_CUSTOM_RESOURCE=false
+[[ $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep '{{ if (has (datasource "data") "MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}' | wc -l | awk '{print $1}') -eq 0 ]] && CREATE_CUSTOM_RESOURCE=true || CREATE_CUSTOM_RESOURCE=false
 
 ###################################################################################################
 
-helm upgrade monitoring stable/prometheus-operator --install --debug --namespace monitoring --version '{{ if (has (datasource "data") "MONITORING_PROMETHEUS_OPERATOR_VERSION") }}{{ (datasource "data").MONITORING_PROMETHEUS_OPERATOR_VERSION }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_OPERATOR_VERSION }}{{ end }}' --values "${BASE}/values.yaml" --set "prometheusOperator.createCustomResource=${CREATE_CUSTOM_RESOURCE}"
+helm upgrade '{{ if (has (datasource "data") "MONITORING_RELEASE") }}{{ (datasource "data").MONITORING_RELEASE }}{{ else }}{{ .Env.MONITORING_RELEASE }}{{ end }}' '{{ if (has (datasource "data") "MONITORING_REPO") }}{{ (datasource "data").MONITORING_REPO }}{{ else }}{{ .Env.MONITORING_REPO }}{{ end }}/{{ if (has (datasource "data") "MONITORING_CHART") }}{{ (datasource "data").MONITORING_CHART }}{{ else }}{{ .Env.MONITORING_CHART }}{{ end }}' --install --debug --wait --namespace '{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}' --version '{{ if (has (datasource "data") "MONITORING_VERSION") }}{{ (datasource "data").MONITORING_VERSION }}{{ else }}{{ .Env.MONITORING_VERSION }}{{ end }}' --values "${BASE}/values.yaml" --set "prometheusOperator.createCustomResource=${CREATE_CUSTOM_RESOURCE}"
 
 ###################################################################################################
 

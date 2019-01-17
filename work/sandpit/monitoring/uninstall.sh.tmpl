@@ -1,16 +1,17 @@
-#!/bin/bash -x
+#!/bin/bash
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-helm delete --purge monitoring
+helm delete --purge '{{ if (has (datasource "data") "MONITORING_RELEASE") }}{{ (datasource "data").MONITORING_RELEASE }}{{ else }}{{ .Env.MONITORING_RELEASE }}{{ end }}'
 
 ###################################################################################################
 
-kubectl delete --wait=true namespace monitoring
+kubectl delete --wait=true 'namespace/{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}'
 
 ###################################################################################################
 
@@ -18,8 +19,8 @@ kubectl delete --wait=true --filename="${BASE}/service.yaml"
 
 ###################################################################################################
 
-kubectl delete --wait=true --namespace kube-system service prometheus-kubelet
-kubectl delete --wait=true --namespace kube-system service prometheus-kube-dns
+kubectl delete --wait=true --namespace kube-system service/prometheus-kubelet
+kubectl delete --wait=true --namespace kube-system service/prometheus-kube-dns
 
 ###################################################################################################
 

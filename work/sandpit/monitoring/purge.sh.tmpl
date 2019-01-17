@@ -1,17 +1,18 @@
-#!/bin/bash -x
+#!/bin/bash
+[[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-BASE="$(dirname ${BASH_SOURCE[0]})"
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-${BASE}/uninstall.sh
+"${BASE}/uninstall.sh"
 
 ###################################################################################################
 
-for item in $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep monitoring.coreos.com); do
-  kubectl delete --wait=true customresourcedefinitions ${item}
+for item in $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep '{{ if (has (datasource "data") "MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}'); do
+  kubectl delete --wait=true "customresourcedefinition/${item}"
 done
 
 ###################################################################################################
