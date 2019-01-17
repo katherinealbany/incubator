@@ -21,10 +21,6 @@ render.sh cert-manager
 
 ###################################################################################################
 
-DONE: .gitignore
-DONE: .yamllint
-DONE: install.sh.tmpl
-
 external-dns
 ------------
 
@@ -40,6 +36,10 @@ render.sh external-dns
 
 monitoring
 ----------
+
+DONE: .gitignore
+DONE: .yamllint
+DONE: install.sh.tmpl
 
 # Populate grafana.adminPassword in values file
 ./install.sh
