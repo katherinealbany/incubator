@@ -1,5 +1,9 @@
 ###################################################################################################
 
+[[ -z "${MONITORING_NAME}" ]] && export MONITORING_NAME='prometheus'
+
+###################################################################################################
+
 [[ -z "${MONITORING_VERSION}" ]] && export MONITORING_VERSION='1.7.0'
 
 ###################################################################################################
@@ -8,6 +12,11 @@
 [[ -z "${MONITORING_CHART}"     ]] && export MONITORING_CHART='prometheus-operator'
 [[ -z "${MONITORING_RELEASE}"   ]] && export MONITORING_RELEASE='monitoring'
 [[ -z "${MONITORING_NAMESPACE}" ]] && export MONITORING_NAMESPACE="${MONITORING_RELEASE}"
+
+###################################################################################################
+
+[[ -z "${MONITORING_KUBEDNS_NAMESPACE}" ]] && export MONITORING_KUBEDNS_NAMESPACE='kube-system'
+[[ -z "${MONITORING_KUBELET_NAMESPACE}" ]] && export MONITORING_KUBELET_NAMESPACE='kube-system'
 
 ###################################################################################################
 

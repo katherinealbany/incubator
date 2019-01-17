@@ -60,6 +60,11 @@ kubeDns:
 
 ###################################################################################################
 
+kubelet:
+  namespace: {{ if (has (datasource "data") "MONITORING_KUBELET_NAMESPACE") }}{{ (datasource "data").MONITORING_KUBELET_NAMESPACE }}{{ else }}{{ .Env.MONITORING_KUBELET_NAMESPACE }}{{ end }}
+
+###################################################################################################
+
 kubeEtcd:
   enabled: false
 
@@ -156,8 +161,8 @@ kubeScheduler:
 
 ###################################################################################################
 
-nameOverride: prometheus
-fullnameOverride: prometheus
+nameOverride: {{ if (has (datasource "data") "MONITORING_NAME") }}{{ (datasource "data").MONITORING_NAME }}{{ else }}{{ .Env.MONITORING_NAME }}{{ end }}
+fullnameOverride: {{ if (has (datasource "data") "MONITORING_NAME") }}{{ (datasource "data").MONITORING_NAME }}{{ else }}{{ .Env.MONITORING_NAME }}{{ end }}
 
 ###################################################################################################
 

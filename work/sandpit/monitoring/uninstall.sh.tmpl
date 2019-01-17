@@ -19,8 +19,8 @@ kubectl delete --wait=true --filename="${BASE}/service.yaml"
 
 ###################################################################################################
 
-kubectl delete --wait=true --namespace kube-system service/prometheus-kubelet
-kubectl delete --wait=true --namespace kube-system service/prometheus-kube-dns
+kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "MONITORING_KUBELET_NAMESPACE") }}{{ (datasource "data").MONITORING_KUBELET_NAMESPACE }}{{ else }}{{ .Env.MONITORING_KUBELET_NAMESPACE }}{{ end }}' 'service/{{ if (has (datasource "data") "MONITORING_NAME") }}{{ (datasource "data").MONITORING_NAME }}{{ else }}{{ .Env.MONITORING_NAME }}{{ end }}-kubelet'
+kubectl delete --wait=true --namespace '{{ if (has (datasource "data") "MONITORING_KUBEDNS_NAMESPACE") }}{{ (datasource "data").MONITORING_KUBEDNS_NAMESPACE }}{{ else }}{{ .Env.MONITORING_KUBEDNS_NAMESPACE }}{{ end }}' 'service/{{ if (has (datasource "data") "MONITORING_NAME") }}{{ (datasource "data").MONITORING_NAME }}{{ else }}{{ .Env.MONITORING_NAME }}{{ end }}-kube-dns'
 
 ###################################################################################################
 
