@@ -8,7 +8,7 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-[[ $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep '{{ if (has (datasource "data") "MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}' | wc -l | awk '{print $1}') -eq 0 ]] && CREATE_CUSTOM_RESOURCE=true || CREATE_CUSTOM_RESOURCE=false
+[[ $(kubectl get customresourcedefinitions --output=custom-columns=:.metadata.name | grep '{{ if (has (datasource "data") "MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME") }}{{ (datasource "data").MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ else }}{{ .Env.MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME }}{{ end }}' | wc -l | awk -F' ' '{print $1}') -eq 0 ]] && CREATE_CUSTOM_RESOURCE=true || CREATE_CUSTOM_RESOURCE=false
 
 ###################################################################################################
 

@@ -21,6 +21,10 @@ render.sh cert-manager
 
 ###################################################################################################
 
+DONE: .gitignore
+DONE: .yamllint
+DONE: install.sh.tmpl
+
 external-dns
 ------------
 
