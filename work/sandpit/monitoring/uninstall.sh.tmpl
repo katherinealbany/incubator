@@ -7,15 +7,15 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
+kubectl delete --wait=true --filename="${BASE}/service.yaml"
+
+###################################################################################################
+
 helm delete --purge '{{ if (has (datasource "data") "MONITORING_RELEASE") }}{{ (datasource "data").MONITORING_RELEASE }}{{ else }}{{ .Env.MONITORING_RELEASE }}{{ end }}'
 
 ###################################################################################################
 
 kubectl delete --wait=true 'namespace/{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}'
-
-###################################################################################################
-
-kubectl delete --wait=true --filename="${BASE}/service.yaml"
 
 ###################################################################################################
 
