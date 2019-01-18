@@ -39,7 +39,12 @@ monitoring
 
 DONE: .gitignore
 DONE: .yamllint
+    : environment
 DONE: install.sh.tmpl
+DONE: purge.sh.tmpl
+    : service.yaml.tmpl
+DONE: uninstall.sh.tmpl
+    : values.yaml.tmpl
 
 # Populate grafana.adminPassword in values file
 ./install.sh
