@@ -42,7 +42,6 @@ DONE: .yamllint
     : environment
 DONE: install.sh.tmpl
 DONE: purge.sh.tmpl
-    : service.yaml.tmpl
 DONE: uninstall.sh.tmpl
     : values.yaml.tmpl
 
