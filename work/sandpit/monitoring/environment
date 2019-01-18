@@ -20,6 +20,10 @@
 
 ###################################################################################################
 
+[[ -z "${MONITORING_SERVICE_SESSION_AFFINITY}" ]] && export MONITORING_SERVICE_SESSION_AFFINITY='ClientIP'
+
+###################################################################################################
+
 [[ -z "${MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME}" ]] && export MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME='monitoring.coreos.com'
 
 ###################################################################################################

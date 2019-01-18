@@ -16,6 +16,6 @@ helm upgrade '{{ if (has (datasource "data") "MONITORING_RELEASE") }}{{ (datasou
 
 ###################################################################################################
 
-kubectl apply --record=true --wait=true --filename="${BASE}/service.yaml"
+kubectl patch --record=true --namespace '{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}' 'service/{{ if (has (datasource "data") "MONITORING_NAME") }}{{ (datasource "data").MONITORING_NAME }}{{ else }}{{ .Env.MONITORING_NAME }}{{ end }}-prometheus' --patch '{"spec":{"sessionAffinity":"{{ if (has (datasource "data") "MONITORING_SERVICE_SESSION_AFFINITY") }}{{ (datasource "data").MONITORING_SERVICE_SESSION_AFFINITY }}{{ else }}{{ .Env.MONITORING_SERVICE_SESSION_AFFINITY }}{{ end }}"}}'
 
 ###################################################################################################

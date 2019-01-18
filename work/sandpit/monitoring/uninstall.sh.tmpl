@@ -7,10 +7,6 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-kubectl delete --wait=true --filename="${BASE}/service.yaml"
-
-###################################################################################################
-
 helm delete --purge '{{ if (has (datasource "data") "MONITORING_RELEASE") }}{{ (datasource "data").MONITORING_RELEASE }}{{ else }}{{ .Env.MONITORING_RELEASE }}{{ end }}'
 
 ###################################################################################################
