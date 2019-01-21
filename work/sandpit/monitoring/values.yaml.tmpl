@@ -73,43 +73,43 @@ kubeEtcd:
 prometheus:
   ingress:
     tls:
-      - hosts: [ prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
-        secretName: prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
-    hosts: [ prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
-    enabled: true
+      - hosts: [ {{ if (has (datasource "data") "MONITORING_PROMETHEUS_WORD") }}{{ (datasource "data").MONITORING_PROMETHEUS_WORD }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+        secretName: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_WORD") }}{{ (datasource "data").MONITORING_PROMETHEUS_WORD }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
+    hosts: [ {{ if (has (datasource "data") "MONITORING_PROMETHEUS_WORD") }}{{ (datasource "data").MONITORING_PROMETHEUS_WORD }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+    enabled: {{ if (has (datasource "data") "MONITORING_PROMETHEUS") }}{{ (datasource "data").MONITORING_PROMETHEUS }}{{ else }}{{ .Env.MONITORING_PROMETHEUS }}{{ end }}
     annotations:
-      external-dns/public: 'true'
-      kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
-      certmanager.k8s.io/acme-challenge-type: dns01
-      certmanager.k8s.io/acme-dns01-provider: route53
-      external-dns.alpha.kubernetes.io/hostname: prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
+      external-dns/public: '{{ if (has (datasource "data") "MONITORING_PROMETHEUS_EXTERNAL_DNS_PUBLIC") }}{{ (datasource "data").MONITORING_PROMETHEUS_EXTERNAL_DNS_PUBLIC }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_EXTERNAL_DNS_PUBLIC }}{{ end }}'
+      kubernetes.io/ingress.class: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_INGRESS_CLASS") }}{{ (datasource "data").MONITORING_PROMETHEUS_INGRESS_CLASS }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_INGRESS_CLASS }}{{ end }}
+      certmanager.k8s.io/cluster-issuer: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_CERTMANAGER_CLUSTER_ISSUER") }}{{ (datasource "data").MONITORING_PROMETHEUS_CERTMANAGER_CLUSTER_ISSUER }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_CERTMANAGER_CLUSTER_ISSUER }}{{ end }}
+      certmanager.k8s.io/acme-challenge-type: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_CERTMANAGER_ACME_CHALLENGE_TYPE") }}{{ (datasource "data").MONITORING_PROMETHEUS_CERTMANAGER_ACME_CHALLENGE_TYPE }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_CERTMANAGER_ACME_CHALLENGE_TYPE }}{{ end }}
+      certmanager.k8s.io/acme-dns01-provider: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_CERTMANAGER_ACME_DNS01_PROVIDER") }}{{ (datasource "data").MONITORING_PROMETHEUS_CERTMANAGER_ACME_DNS01_PROVIDER }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_CERTMANAGER_ACME_DNS01_PROVIDER }}{{ end }}
+      external-dns.alpha.kubernetes.io/hostname: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_WORD") }}{{ (datasource "data").MONITORING_PROMETHEUS_WORD }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
   prometheusSpec:
-    replicas: 2
+    replicas: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_REPLICAS") }}{{ (datasource "data").MONITORING_PROMETHEUS_REPLICAS }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_REPLICAS }}{{ end }}
     resources:
       requests:
-        cpu: 250m
-        memory: 1250Mi
+        cpu: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_PROMETHEUS_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_RESOURCE_CPU_MIN }}{{ end }}
+        memory: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_PROMETHEUS_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_RESOURCE_MEMORY }}{{ end }}
       limits:
-        cpu: 500m
-        memory: 1250Mi
-    retention: 10d
+        cpu: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_PROMETHEUS_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_RESOURCE_CPU_MAX }}{{ end }}
+        memory: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_PROMETHEUS_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_RESOURCE_MEMORY }}{{ end }}
+    retention: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_RETENTION") }}{{ (datasource "data").MONITORING_PROMETHEUS_RETENTION }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_RETENTION }}{{ end }}
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: standard
-          accessModes: [ ReadWriteOnce ]
+          storageClassName: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_PERSISTENCE_STORAGE_CLASS") }}{{ (datasource "data").MONITORING_PROMETHEUS_PERSISTENCE_STORAGE_CLASS }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_PERSISTENCE_STORAGE_CLASS }}{{ end }}
+          accessModes: [ {{ if (has (datasource "data") "MONITORING_PROMETHEUS_PERSISTENCE_ACCESS_MODE") }}{{ (datasource "data").MONITORING_PROMETHEUS_PERSISTENCE_ACCESS_MODE }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_PERSISTENCE_ACCESS_MODE }}{{ end }} ]
           resources:
             requests:
-              storage: 50Gi
-    scrapeInterval: 15s
-    podAntiAffinity: soft
-    evaluationInterval: 15s
+              storage: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_PERSISTENCE_SIZE") }}{{ (datasource "data").MONITORING_PROMETHEUS_PERSISTENCE_SIZE }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_PERSISTENCE_SIZE }}{{ end }}
+    scrapeInterval: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_SCRAPE_INTERVAL") }}{{ (datasource "data").MONITORING_PROMETHEUS_SCRAPE_INTERVAL }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_SCRAPE_INTERVAL }}{{ end }}
+    podAntiAffinity: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_POD_ANTI_AFFINITY") }}{{ (datasource "data").MONITORING_PROMETHEUS_POD_ANTI_AFFINITY }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_POD_ANTI_AFFINITY }}{{ end }}
+    evaluationInterval: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_EVALUATION_INTERVAL") }}{{ (datasource "data").MONITORING_PROMETHEUS_EVALUATION_INTERVAL }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_EVALUATION_INTERVAL }}{{ end }}
     podDisruptionBudget:
-      enabled: true
-      maxUnavailable: 1
+      enabled: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_POD_DISRUPTION_BUDGET") }}{{ (datasource "data").MONITORING_PROMETHEUS_POD_DISRUPTION_BUDGET }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_POD_DISRUPTION_BUDGET }}{{ end }}
+      maxUnavailable: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_POD_DISRUPTION_BUDGET_MAX_UNAVAILABLE") }}{{ (datasource "data").MONITORING_PROMETHEUS_POD_DISRUPTION_BUDGET_MAX_UNAVAILABLE }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_POD_DISRUPTION_BUDGET_MAX_UNAVAILABLE }}{{ end }}
     serviceMonitorSelector:
-      prometheus: local
+      {{ if (has (datasource "data") "MONITORING_PROMETHEUS_SERVICE_MONITOR_SELECTOR") }}{{ (datasource "data").MONITORING_PROMETHEUS_SERVICE_MONITOR_SELECTOR }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_SERVICE_MONITOR_SELECTOR }}{{ end }}
 
 ###################################################################################################
 
