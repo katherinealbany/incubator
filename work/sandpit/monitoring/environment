@@ -28,12 +28,20 @@
 
 ###################################################################################################
 
+[[ -z "${MONITORING_KUBESCHEDULER}" ]] && export MONITORING_KUBESCHEDULER='false'
+
+###################################################################################################
+
 [[ -z "${MONITORING_KUBEDNS_NAMESPACE}" ]] && export MONITORING_KUBEDNS_NAMESPACE='kube-system'
 [[ -z "${MONITORING_KUBELET_NAMESPACE}" ]] && export MONITORING_KUBELET_NAMESPACE='kube-system'
 
 ###################################################################################################
 
 [[ -z "${MONITORING_EXTERNAL_DNS_PUBLIC}" ]] && export MONITORING_EXTERNAL_DNS_PUBLIC='false'
+
+###################################################################################################
+
+[[ -z "${MONITORING_KUBECONTROLLERMANAGER}" ]] && export MONITORING_KUBECONTROLLERMANAGER='false'
 
 ###################################################################################################
 
@@ -48,6 +56,29 @@
 ###################################################################################################
 
 [[ -z "${MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME}" ]] && export MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME='monitoring.coreos.com'
+
+###################################################################################################
+
+[[ -z "${MONITORING_NODE_EXPORTER_RESOURCE_MEMORY}"      ]] && export MONITORING_NODE_EXPORTER_RESOURCE_MEMORY='100Mi'
+[[ -z "${MONITORING_NODE_EXPORTER_RESOURCE_CPU_MIN}"     ]] && export MONITORING_NODE_EXPORTER_RESOURCE_CPU_MIN='5m'
+[[ -z "${MONITORING_NODE_EXPORTER_RESOURCE_CPU_MAX}"     ]] && export MONITORING_NODE_EXPORTER_RESOURCE_CPU_MAX='10m'
+
+[[ -z "${MONITORING_NODE_EXPORTER_ROOT_MOUNT_NAME}"      ]] && export MONITORING_NODE_EXPORTER_ROOT_MOUNT_NAME='root'
+[[ -z "${MONITORING_NODE_EXPORTER_ROOT_MOUNT_HOSTPATH}"  ]] && export MONITORING_NODE_EXPORTER_ROOT_MOUNT_HOSTPATH='/'
+[[ -z "${MONITORING_NODE_EXPORTER_ROOT_MOUNT_READONLY}"  ]] && export MONITORING_NODE_EXPORTER_ROOT_MOUNT_READONLY='true'
+[[ -z "${MONITORING_NODE_EXPORTER_ROOT_MOUNT_MOUNTPATH}" ]] && export MONITORING_NODE_EXPORTER_ROOT_MOUNT_MOUNTPATH='/node/root'
+
+###################################################################################################
+
+[[ -z "${MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY}"  ]] && export MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY='100Mi'
+[[ -z "${MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MIN}" ]] && export MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MIN='5m'
+[[ -z "${MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MAX}" ]] && export MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MAX='10m'
+
+###################################################################################################
+
+[[ -z "${MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY}"  ]] && export MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY='100Mi'
+[[ -z "${MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MIN}" ]] && export MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MIN='10m'
+[[ -z "${MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MAX}" ]] && export MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MAX='50m'
 
 ###################################################################################################
 
@@ -118,6 +149,7 @@
 [[ -z "${MONITORING_ALERTMANAGER_RESOURCE_CPU_MAX}"                      ]] && export MONITORING_ALERTMANAGER_RESOURCE_CPU_MAX='100m'
 
 [[ -z "${MONITORING_ALERTMANAGER_REPLICAS}"                              ]] && export MONITORING_ALERTMANAGER_REPLICAS='3'
+[[ -z "${MONITORING_ALERTMANAGER_DEFAULT_RULES}"                         ]] && export MONITORING_ALERTMANAGER_DEFAULT_RULES='true'
 [[ -z "${MONITORING_ALERTMANAGER_INGRESS_CLASS}"                         ]] && export MONITORING_ALERTMANAGER_INGRESS_CLASS="${MONITORING_INGRESS_CLASS}"
 [[ -z "${MONITORING_ALERTMANAGER_POD_ANTI_AFFINITY}"                     ]] && export MONITORING_ALERTMANAGER_POD_ANTI_AFFINITY='soft'
 [[ -z "${MONITORING_ALERTMANAGER_EXTERNAL_DNS_PUBLIC}"                   ]] && export MONITORING_ALERTMANAGER_EXTERNAL_DNS_PUBLIC="${MONITORING_EXTERNAL_DNS_PUBLIC}"

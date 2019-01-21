@@ -152,12 +152,12 @@ alertmanager:
 ###################################################################################################
 
 defaultRules:
-  create: true
+  create: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_DEFAULT_RULES") }}{{ (datasource "data").MONITORING_ALERTMANAGER_DEFAULT_RULES }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_DEFAULT_RULES }}{{ end }}
 
 ###################################################################################################
 
 kubeScheduler:
-  enabled: false
+  enabled: {{ if (has (datasource "data") "MONITORING_KUBESCHEDULER") }}{{ (datasource "data").MONITORING_KUBESCHEDULER }}{{ else }}{{ .Env.MONITORING_KUBESCHEDULER }}{{ end }}
 
 ###################################################################################################
 
@@ -169,43 +169,43 @@ fullnameOverride: {{ if (has (datasource "data") "MONITORING_NAME") }}{{ (dataso
 kube-state-metrics:
   resources:
     requests:
-      cpu: 5m
-      memory: 100Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MIN }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY }}{{ end }}
     limits:
-      cpu: 10m
-      memory: 100Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_KUBE_STATE_METRICS_RESOURCE_CPU_MAX }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_KUBE_STATE_METRICS_RESOURCE_MEMORY }}{{ end }}
 
 ###################################################################################################
 
 prometheusOperator:
   resources:
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MIN }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY }}{{ end }}
     limits:
-      cpu: 50m
-      memory: 100Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_OPERATOR_RESOURCE_CPU_MAX }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_PROMETHEUS_OPERATOR_RESOURCE_MEMORY }}{{ end }}
 
 ###################################################################################################
 
 kubeControllerManager:
-  enabled: false
+  enabled: {{ if (has (datasource "data") "MONITORING_KUBECONTROLLERMANAGER") }}{{ (datasource "data").MONITORING_KUBECONTROLLERMANAGER }}{{ else }}{{ .Env.MONITORING_KUBECONTROLLERMANAGER }}{{ end }}
 
 ###################################################################################################
 
 prometheus-node-exporter:
   resources:
     requests:
-      cpu: 5m
-      memory: 100Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_RESOURCE_CPU_MIN }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_RESOURCE_MEMORY }}{{ end }}
     limits:
-      cpu: 10m
-      memory: 100Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_RESOURCE_CPU_MAX }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_RESOURCE_MEMORY }}{{ end }}
   extraHostVolumeMounts:
-    - name: root
-      hostPath: /
-      readOnly: true
-      mountPath: /node/root
+    - name: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_ROOT_MOUNT_NAME") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_ROOT_MOUNT_NAME }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_ROOT_MOUNT_NAME }}{{ end }}
+      hostPath: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_ROOT_MOUNT_HOSTPATH") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_ROOT_MOUNT_HOSTPATH }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_ROOT_MOUNT_HOSTPATH }}{{ end }}
+      readOnly: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_ROOT_MOUNT_READONLY") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_ROOT_MOUNT_READONLY }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_ROOT_MOUNT_READONLY }}{{ end }}
+      mountPath: {{ if (has (datasource "data") "MONITORING_NODE_EXPORTER_ROOT_MOUNT_MOUNTPATH") }}{{ (datasource "data").MONITORING_NODE_EXPORTER_ROOT_MOUNT_MOUNTPATH }}{{ else }}{{ .Env.MONITORING_NODE_EXPORTER_ROOT_MOUNT_MOUNTPATH }}{{ end }}
 
 ###################################################################################################
 ...
