@@ -4,7 +4,16 @@
 
 ###################################################################################################
 
+[[ -z "${MONITORING_COREDNS}" ]] && export MONITORING_COREDNS='false'
+[[ -z "${MONITORING_KUBEDNS}" ]] && export MONITORING_KUBEDNS='true'
+
+###################################################################################################
+
 [[ -z "${MONITORING_VERSION}" ]] && export MONITORING_VERSION='1.7.0'
+
+###################################################################################################
+
+[[ -z "${MONITORING_KUBEETCD}" ]] && export MONITORING_KUBEETCD='false'
 
 ###################################################################################################
 
@@ -15,8 +24,16 @@
 
 ###################################################################################################
 
+[[ -z "${MONITORING_INGRESS_CLASS}" ]] && export MONITORING_INGRESS_CLASS='nginx'
+
+###################################################################################################
+
 [[ -z "${MONITORING_KUBEDNS_NAMESPACE}" ]] && export MONITORING_KUBEDNS_NAMESPACE='kube-system'
 [[ -z "${MONITORING_KUBELET_NAMESPACE}" ]] && export MONITORING_KUBELET_NAMESPACE='kube-system'
+
+###################################################################################################
+
+[[ -z "${MONITORING_EXTERNAL_DNS_PUBLIC}" ]] && export MONITORING_EXTERNAL_DNS_PUBLIC='false'
 
 ###################################################################################################
 
@@ -24,6 +41,37 @@
 
 ###################################################################################################
 
+[[ -z "${MONITORING_CERTMANAGER_CLUSTER_ISSUER}"      ]] && export MONITORING_CERTMANAGER_CLUSTER_ISSUER='cluster-issuer-lets-encrypt-staging'
+[[ -z "${MONITORING_CERTMANAGER_ACME_CHALLENGE_TYPE}" ]] && export MONITORING_CERTMANAGER_ACME_CHALLENGE_TYPE='dns01'
+[[ -z "${MONITORING_CERTMANAGER_ACME_DNS01_PROVIDER}" ]] && export MONITORING_CERTMANAGER_ACME_DNS01_PROVIDER='route53'
+
+###################################################################################################
+
 [[ -z "${MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME}" ]] && export MONITORING_CUSTOM_RESOURCE_DEFINITION_NAME='monitoring.coreos.com'
+
+###################################################################################################
+
+[[ -z "${MONITORING_GRAFANA}"                                 ]] && export MONITORING_GRAFANA='true'
+[[ -z "${MONITORING_GRAFANA_WORD}"                            ]] && export MONITORING_GRAFANA_WORD='grafana'
+[[ -z "${MONITORING_GRAFANA_ADMIN_USER}"                      ]] && export MONITORING_GRAFANA_ADMIN_USER='devops'
+[[ -z "${MONITORING_GRAFANA_INGRESS_CLASS}"                   ]] && export MONITORING_GRAFANA_INGRESS_CLASS="${MONITORING_INGRESS_CLASS}"
+[[ -z "${MONITORING_GRAFANA_DEFAULT_DASHBOARDS}"              ]] && export MONITORING_GRAFANA_DEFAULT_DASHBOARDS='false'
+[[ -z "${MONITORING_GRAFANA_EXTERNAL_DNS_PUBLIC}"             ]] && export MONITORING_GRAFANA_EXTERNAL_DNS_PUBLIC="${MONITORING_EXTERNAL_DNS_PUBLIC}"
+
+[[ -z "${MONITORING_GRAFANA_RESOURCE_MEMORY}"                 ]] && export MONITORING_GRAFANA_RESOURCE_MEMORY='750Mi'
+[[ -z "${MONITORING_GRAFANA_RESOURCE_CPU_MIN}"                ]] && export MONITORING_GRAFANA_RESOURCE_CPU_MIN='100m'
+[[ -z "${MONITORING_GRAFANA_RESOURCE_CPU_MAX}"                ]] && export MONITORING_GRAFANA_RESOURCE_CPU_MAX='250m'
+
+[[ -z "${MONITORING_GRAFANA_PERSISTENCE}"                     ]] && export MONITORING_GRAFANA_PERSISTENCE='true'
+[[ -z "${MONITORING_GRAFANA_PERSISTENCE_SIZE}"                ]] && export MONITORING_GRAFANA_PERSISTENCE_SIZE='10Gi'
+[[ -z "${MONITORING_GRAFANA_PERSISTENCE_ACCESS_MODE}"         ]] && export MONITORING_GRAFANA_PERSISTENCE_ACCESS_MODE='ReadWriteOnce'
+
+[[ -z "${MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY}"         ]] && export MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY='150Mi'
+[[ -z "${MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MIN}"        ]] && export MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MIN='1m'
+[[ -z "${MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MAX}"        ]] && export MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MAX='10m'
+
+[[ -z "${MONITORING_GRAFANA_CERTMANAGER_CLUSTER_ISSUER}"      ]] && export MONITORING_GRAFANA_CERTMANAGER_CLUSTER_ISSUER="${MONITORING_CERTMANAGER_CLUSTER_ISSUER}"
+[[ -z "${MONITORING_GRAFANA_CERTMANAGER_ACME_CHALLENGE_TYPE}" ]] && export MONITORING_GRAFANA_CERTMANAGER_ACME_CHALLENGE_TYPE="${MONITORING_CERTMANAGER_ACME_CHALLENGE_TYPE}"
+[[ -z "${MONITORING_GRAFANA_CERTMANAGER_ACME_DNS01_PROVIDER}" ]] && export MONITORING_GRAFANA_CERTMANAGER_ACME_DNS01_PROVIDER="${MONITORING_CERTMANAGER_ACME_DNS01_PROVIDER}"
 
 ###################################################################################################

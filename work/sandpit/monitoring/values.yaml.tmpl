@@ -2,24 +2,24 @@
 ###################################################################################################
 
 coreDns:
-  enabled: false
+  enabled: {{ if (has (datasource "data") "MONITORING_COREDNS") }}{{ (datasource "data").MONITORING_COREDNS }}{{ else }}{{ .Env.MONITORING_COREDNS }}{{ end }}
 
 ###################################################################################################
 
 grafana:
   ingress:
     tls:
-      - hosts: [ grafana.monitoring.sandpit.fkaj.com ]
-        secretName: grafana.monitoring.sandpit.fkaj.com
-    hosts: [ grafana.monitoring.sandpit.fkaj.com ]
-    enabled: true
+      - hosts: [ {{ if (has (datasource "data") "MONITORING_GRAFANA_WORD") }}{{ (datasource "data").MONITORING_GRAFANA_WORD }}{{ else }}{{ .Env.MONITORING_GRAFANA_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+        secretName: {{ if (has (datasource "data") "MONITORING_GRAFANA_WORD") }}{{ (datasource "data").MONITORING_GRAFANA_WORD }}{{ else }}{{ .Env.MONITORING_GRAFANA_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
+    hosts: [ {{ if (has (datasource "data") "MONITORING_GRAFANA_WORD") }}{{ (datasource "data").MONITORING_GRAFANA_WORD }}{{ else }}{{ .Env.MONITORING_GRAFANA_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+    enabled: {{ if (has (datasource "data") "MONITORING_GRAFANA") }}{{ (datasource "data").MONITORING_GRAFANA }}{{ else }}{{ .Env.MONITORING_GRAFANA }}{{ end }}
     annotations:
-      external-dns/public: 'true'
-      kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
-      certmanager.k8s.io/acme-challenge-type: dns01
-      certmanager.k8s.io/acme-dns01-provider: route53
-      external-dns.alpha.kubernetes.io/hostname: grafana.monitoring.sandpit.fkaj.com.
+      external-dns/public: '{{ if (has (datasource "data") "MONITORING_GRAFANA_EXTERNAL_DNS_PUBLIC") }}{{ (datasource "data").MONITORING_GRAFANA_EXTERNAL_DNS_PUBLIC }}{{ else }}{{ .Env.MONITORING_GRAFANA_EXTERNAL_DNS_PUBLIC }}{{ end }}'
+      kubernetes.io/ingress.class: {{ if (has (datasource "data") "MONITORING_GRAFANA_INGRESS_CLASS") }}{{ (datasource "data").MONITORING_GRAFANA_INGRESS_CLASS }}{{ else }}{{ .Env.MONITORING_GRAFANA_INGRESS_CLASS }}{{ end }}
+      certmanager.k8s.io/cluster-issuer: {{ if (has (datasource "data") "MONITORING_GRAFANA_CERTMANAGER_CLUSTER_ISSUER") }}{{ (datasource "data").MONITORING_GRAFANA_CERTMANAGER_CLUSTER_ISSUER }}{{ else }}{{ .Env.MONITORING_GRAFANA_CERTMANAGER_CLUSTER_ISSUER }}{{ end }}
+      certmanager.k8s.io/acme-challenge-type: {{ if (has (datasource "data") "MONITORING_GRAFANA_CERTMANAGER_ACME_CHALLENGE_TYPE") }}{{ (datasource "data").MONITORING_GRAFANA_CERTMANAGER_ACME_CHALLENGE_TYPE }}{{ else }}{{ .Env.MONITORING_GRAFANA_CERTMANAGER_ACME_CHALLENGE_TYPE }}{{ end }}
+      certmanager.k8s.io/acme-dns01-provider: {{ if (has (datasource "data") "MONITORING_GRAFANA_CERTMANAGER_ACME_DNS01_PROVIDER") }}{{ (datasource "data").MONITORING_GRAFANA_CERTMANAGER_ACME_DNS01_PROVIDER }}{{ else }}{{ .Env.MONITORING_GRAFANA_CERTMANAGER_ACME_DNS01_PROVIDER }}{{ end }}
+      external-dns.alpha.kubernetes.io/hostname: {{ if (has (datasource "data") "MONITORING_GRAFANA_WORD") }}{{ (datasource "data").MONITORING_GRAFANA_WORD }}{{ else }}{{ .Env.MONITORING_GRAFANA_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
   plugins:
     - grafana-clock-panel
     - vonage-status-panel
@@ -29,34 +29,34 @@ grafana:
     - grafana-polystat-panel
     - grafana-worldmap-panel
     - snuids-trafficlights-panel
-  # sidecar:
-  #   resources:
-  #     requests:
-  #       cpu: 1m
-  #       memory: 150Mi
-  #     limits:
-  #       cpu: 10m
-  #       memory: 150Mi
-  adminUser: devops
+  sidecar:
+    resources:
+      requests:
+        cpu: {{ if (has (datasource "data") "MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MIN }}{{ end }}
+        memory: {{ if (has (datasource "data") "MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY }}{{ end }}
+      limits:
+        cpu: {{ if (has (datasource "data") "MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_GRAFANA_SIDECAR_RESOURCE_CPU_MAX }}{{ end }}
+        memory: {{ if (has (datasource "data") "MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_GRAFANA_SIDECAR_RESOURCE_MEMORY }}{{ end }}
+  adminUser: {{ if (has (datasource "data") "MONITORING_GRAFANA_ADMIN_USER") }}{{ (datasource "data").MONITORING_GRAFANA_ADMIN_USER }}{{ else }}{{ .Env.MONITORING_GRAFANA_ADMIN_USER }}{{ end }}
   resources:
     requests:
-      cpu: 100m
-      memory: 750Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_GRAFANA_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_GRAFANA_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_GRAFANA_RESOURCE_CPU_MIN }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_GRAFANA_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_GRAFANA_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_GRAFANA_RESOURCE_MEMORY }}{{ end }}
     limits:
-      cpu: 250m
-      memory: 750Mi
+      cpu: {{ if (has (datasource "data") "MONITORING_GRAFANA_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_GRAFANA_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_GRAFANA_RESOURCE_CPU_MAX }}{{ end }}
+      memory: {{ if (has (datasource "data") "MONITORING_GRAFANA_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_GRAFANA_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_GRAFANA_RESOURCE_MEMORY }}{{ end }}
   persistence:
-    size: 10Gi
-    enabled: true
-    accessModes: [ ReadWriteOnce ]
-    storageClassName: standard
-  adminPassword:
-  defaultDashboardsEnabled: true
+    size: {{ if (has (datasource "data") "MONITORING_GRAFANA_PERSISTENCE_SIZE") }}{{ (datasource "data").MONITORING_GRAFANA_PERSISTENCE_SIZE }}{{ else }}{{ .Env.MONITORING_GRAFANA_PERSISTENCE_SIZE }}{{ end }}
+    enabled: {{ if (has (datasource "data") "MONITORING_GRAFANA_PERSISTENCE") }}{{ (datasource "data").MONITORING_GRAFANA_PERSISTENCE }}{{ else }}{{ .Env.MONITORING_GRAFANA_PERSISTENCE }}{{ end }}
+    accessModes: [ {{ if (has (datasource "data") "MONITORING_GRAFANA_PERSISTENCE_ACCESS_MODE") }}{{ (datasource "data").MONITORING_GRAFANA_PERSISTENCE_ACCESS_MODE }}{{ else }}{{ .Env.MONITORING_GRAFANA_PERSISTENCE_ACCESS_MODE }}{{ end }} ]
+    storageClassName: {{ if (has (datasource "data") "MONITORING_GRAFANA_PERSISTENCE_STORAGE_CLASS") }}{{ (datasource "data").MONITORING_GRAFANA_PERSISTENCE_STORAGE_CLASS }}{{ else }}{{ .Env.MONITORING_GRAFANA_PERSISTENCE_STORAGE_CLASS }}{{ end }}
+  adminPassword: {{ if (has (datasource "data") "MONITORING_GRAFANA_ADMIN_PASSWORD") }}{{ (datasource "data").MONITORING_GRAFANA_ADMIN_PASSWORD }}{{ else }}{{ .Env.MONITORING_GRAFANA_ADMIN_PASSWORD }}{{ end }}
+  defaultDashboardsEnabled: {{ if (has (datasource "data") "MONITORING_GRAFANA_DEFAULT_DASHBOARDS") }}{{ (datasource "data").MONITORING_GRAFANA_DEFAULT_DASHBOARDS }}{{ else }}{{ .Env.MONITORING_GRAFANA_DEFAULT_DASHBOARDS }}{{ end }}
 
 ###################################################################################################
 
 kubeDns:
-  enabled: true
+  enabled: {{ if (has (datasource "data") "MONITORING_KUBEDNS") }}{{ (datasource "data").MONITORING_KUBEDNS }}{{ else }}{{ .Env.MONITORING_KUBEDNS }}{{ end }}
 
 ###################################################################################################
 
@@ -66,16 +66,16 @@ kubelet:
 ###################################################################################################
 
 kubeEtcd:
-  enabled: false
+  enabled: {{ if (has (datasource "data") "MONITORING_KUBEETCD") }}{{ (datasource "data").MONITORING_KUBEETCD }}{{ else }}{{ .Env.MONITORING_KUBEETCD }}{{ end }}
 
 ###################################################################################################
 
 prometheus:
   ingress:
     tls:
-      - hosts: [ prometheus.monitoring.sandpit.fkaj.com ]
-        secretName: prometheus.monitoring.sandpit.fkaj.com
-    hosts: [ prometheus.monitoring.sandpit.fkaj.com ]
+      - hosts: [ prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+        secretName: prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
+    hosts: [ prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
     enabled: true
     annotations:
       external-dns/public: 'true'
@@ -83,7 +83,7 @@ prometheus:
       certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
-      external-dns.alpha.kubernetes.io/hostname: prometheus.monitoring.sandpit.fkaj.com.
+      external-dns.alpha.kubernetes.io/hostname: prometheus.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
   prometheusSpec:
     replicas: 2
     resources:
@@ -116,9 +116,9 @@ prometheus:
 alertmanager:
   ingress:
     tls:
-      - hosts: [ alertmanager.monitoring.sandpit.fkaj.com ]
-        secretName: alertmanager.monitoring.sandpit.fkaj.com
-    hosts: [ alertmanager.monitoring.sandpit.fkaj.com ]
+      - hosts: [ alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+        secretName: alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
+    hosts: [ alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
     enabled: true
     annotations:
       external-dns/public: 'true'
@@ -126,7 +126,7 @@ alertmanager:
       certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
       certmanager.k8s.io/acme-challenge-type: dns01
       certmanager.k8s.io/acme-dns01-provider: route53
-      external-dns.alpha.kubernetes.io/hostname: alertmanager.monitoring.sandpit.fkaj.com.
+      external-dns.alpha.kubernetes.io/hostname: alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
   alertmanagerSpec:
     replicas: 3
     resources:
