@@ -116,38 +116,38 @@ prometheus:
 alertmanager:
   ingress:
     tls:
-      - hosts: [ alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
-        secretName: alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
-    hosts: [ alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
-    enabled: true
+      - hosts: [ {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_WORD") }}{{ (datasource "data").MONITORING_ALERTMANAGER_WORD }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+        secretName: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_WORD") }}{{ (datasource "data").MONITORING_ALERTMANAGER_WORD }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}
+    hosts: [ {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_WORD") }}{{ (datasource "data").MONITORING_ALERTMANAGER_WORD }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }} ]
+    enabled: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER") }}{{ (datasource "data").MONITORING_ALERTMANAGER }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER }}{{ end }}
     annotations:
-      external-dns/public: 'true'
-      kubernetes.io/ingress.class: nginx
-      certmanager.k8s.io/cluster-issuer: cluster-issuer-lets-encrypt-staging
-      certmanager.k8s.io/acme-challenge-type: dns01
-      certmanager.k8s.io/acme-dns01-provider: route53
-      external-dns.alpha.kubernetes.io/hostname: alertmanager.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
+      external-dns/public: '{{ if (has (datasource "data") "MONITORING_ALERTMANAGER_EXTERNAL_DNS_PUBLIC") }}{{ (datasource "data").MONITORING_ALERTMANAGER_EXTERNAL_DNS_PUBLIC }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_EXTERNAL_DNS_PUBLIC }}{{ end }}'
+      kubernetes.io/ingress.class: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_INGRESS_CLASS") }}{{ (datasource "data").MONITORING_ALERTMANAGER_INGRESS_CLASS }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_INGRESS_CLASS }}{{ end }}
+      certmanager.k8s.io/cluster-issuer: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_CERTMANAGER_CLUSTER_ISSUER") }}{{ (datasource "data").MONITORING_ALERTMANAGER_CERTMANAGER_CLUSTER_ISSUER }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_CERTMANAGER_CLUSTER_ISSUER }}{{ end }}
+      certmanager.k8s.io/acme-challenge-type: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_CERTMANAGER_ACME_CHALLENGE_TYPE") }}{{ (datasource "data").MONITORING_ALERTMANAGER_CERTMANAGER_ACME_CHALLENGE_TYPE }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_CERTMANAGER_ACME_CHALLENGE_TYPE }}{{ end }}
+      certmanager.k8s.io/acme-dns01-provider: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_CERTMANAGER_ACME_DNS01_PROVIDER") }}{{ (datasource "data").MONITORING_ALERTMANAGER_CERTMANAGER_ACME_DNS01_PROVIDER }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_CERTMANAGER_ACME_DNS01_PROVIDER }}{{ end }}
+      external-dns.alpha.kubernetes.io/hostname: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_WORD") }}{{ (datasource "data").MONITORING_ALERTMANAGER_WORD }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_WORD }}{{ end }}.{{ if (has (datasource "data") "MONITORING_NAMESPACE") }}{{ (datasource "data").MONITORING_NAMESPACE }}{{ else }}{{ .Env.MONITORING_NAMESPACE }}{{ end }}.{{ if (has (datasource "data") "MONITORING_DOMAIN") }}{{ (datasource "data").MONITORING_DOMAIN }}{{ else }}{{ .Env.MONITORING_DOMAIN }}{{ end }}.
   alertmanagerSpec:
-    replicas: 3
+    replicas: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_REPLICAS") }}{{ (datasource "data").MONITORING_ALERTMANAGER_REPLICAS }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_REPLICAS }}{{ end }}
     resources:
       requests:
-        cpu: 10m
-        memory: 100Mi
+        cpu: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_RESOURCE_CPU_MIN") }}{{ (datasource "data").MONITORING_ALERTMANAGER_RESOURCE_CPU_MIN }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_RESOURCE_CPU_MIN }}{{ end }}
+        memory: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_ALERTMANAGER_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_RESOURCE_MEMORY }}{{ end }}
       limits:
-        cpu: 100m
-        memory: 100Mi
+        cpu: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_RESOURCE_CPU_MAX") }}{{ (datasource "data").MONITORING_ALERTMANAGER_RESOURCE_CPU_MAX }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_RESOURCE_CPU_MAX }}{{ end }}
+        memory: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_RESOURCE_MEMORY") }}{{ (datasource "data").MONITORING_ALERTMANAGER_RESOURCE_MEMORY }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_RESOURCE_MEMORY }}{{ end }}
     storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: standard
-          accessModes: [ ReadWriteOnce ]
+          storageClassName: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_PERSISTENCE_STORAGE_CLASS") }}{{ (datasource "data").MONITORING_ALERTMANAGER_PERSISTENCE_STORAGE_CLASS }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_PERSISTENCE_STORAGE_CLASS }}{{ end }}
+          accessModes: [ {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_PERSISTENCE_ACCESS_MODE") }}{{ (datasource "data").MONITORING_ALERTMANAGER_PERSISTENCE_ACCESS_MODE }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_PERSISTENCE_ACCESS_MODE }}{{ end }} ]
           resources:
             requests:
-              storage: 10Gi
-    podAntiAffinity: soft
+              storage: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_PERSISTENCE_SIZE") }}{{ (datasource "data").MONITORING_ALERTMANAGER_PERSISTENCE_SIZE }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_PERSISTENCE_SIZE }}{{ end }}
+    podAntiAffinity: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_POD_ANTI_AFFINITY") }}{{ (datasource "data").MONITORING_ALERTMANAGER_POD_ANTI_AFFINITY }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_POD_ANTI_AFFINITY }}{{ end }}
     podDisruptionBudget:
-      enabled: true
-      maxUnavailable: 1
+      enabled: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_POD_DISRUPTION_BUDGET") }}{{ (datasource "data").MONITORING_ALERTMANAGER_POD_DISRUPTION_BUDGET }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_POD_DISRUPTION_BUDGET }}{{ end }}
+      maxUnavailable: {{ if (has (datasource "data") "MONITORING_ALERTMANAGER_POD_DISRUPTION_BUDGET_MAX_UNAVAILABLE") }}{{ (datasource "data").MONITORING_ALERTMANAGER_POD_DISRUPTION_BUDGET_MAX_UNAVAILABLE }}{{ else }}{{ .Env.MONITORING_ALERTMANAGER_POD_DISRUPTION_BUDGET_MAX_UNAVAILABLE }}{{ end }}
 
 ###################################################################################################
 
