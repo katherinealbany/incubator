@@ -15,7 +15,7 @@ cert-manager
 export CERT_MANAGER_AWS_ACCESS_KEY=XXXXXXXX
 export CERT_MANAGER_AWS_SECRET_KEY=XXXXXXXX
 kubectl create namespace "${CERT_MANAGER_NAMESPACE}"
-kubectl create secret generic "${CERT_MANAGER_RELEASE}" --namespace "${CERT_MANAGER_NAMESPACE}" --from-literal=aws_secret_key=${CERT_MANAGER_AWS_SECRET_KEY}
+kubectl create secret generic "${CERT_MANAGER_RELEASE}" --namespace "${CERT_MANAGER_NAMESPACE}" --from-literal=aws_secret_key="${CERT_MANAGER_AWS_SECRET_KEY}"
 render.sh cert-manager
 ./cert-manager/install.sh
 
