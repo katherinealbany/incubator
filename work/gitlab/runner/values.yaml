@@ -7,7 +7,6 @@ rbac:
 
 runners:
   image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:1.0.0
-  privileged: true
 
 ###################################################################################################
 
