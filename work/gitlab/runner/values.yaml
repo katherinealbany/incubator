@@ -10,7 +10,6 @@ runners:
 
 ###################################################################################################
 
-logLevel: debug
 gitlabUrl: https://gitlab.com/
 concurrent: 100
 checkInterval: 3
