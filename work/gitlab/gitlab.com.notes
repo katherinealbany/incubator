@@ -1,0 +1,6 @@
+kubectl cluster-info | grep 'Kubernetes master' | awk '/http/ {print $NF}'
+
+kubectl get secrets -n gitlab
+
+kubectl get secret -n gitlab gitlab-token-XXXXX -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
+kubectl get secret -n gitlab gitlab-token-XXXXX -o jsonpath="{['data']['token']}"   | base64 --decode
