@@ -8,6 +8,6 @@ BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-helm upgrade gitlab-runner gitlab/gitlab-runner --install --debug --wait --namespace gitlab.com --values "${BASE}/values.yaml"
+helm upgrade gitlab-runner gitlab/gitlab-runner --install --debug --wait --namespace gitlab-com --values "${BASE}/values.yaml"
 
 ###################################################################################################
