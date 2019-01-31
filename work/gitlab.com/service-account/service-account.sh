@@ -1,4 +1,4 @@
-kubectl create --record=true --wait=true namespace gitlab-com
+kubectl create --save-config=true namespace gitlab-com
 
 kubectl apply --record=true --wait=true --filename=- <<EOF
 kind: ServiceAccount
