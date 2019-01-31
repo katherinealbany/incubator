@@ -6,12 +6,13 @@ rbac:
 ###################################################################################################
 
 runners:
-  image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:1.0.0
+  image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:latest
+  privileged: true
 
 ###################################################################################################
 
 gitlabUrl: https://gitlab.com/
-concurrent: 100
+concurrent: 50
 checkInterval: 3
 runnerRegistrationToken:
 
