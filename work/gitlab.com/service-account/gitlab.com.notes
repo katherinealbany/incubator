@@ -1,6 +1,7 @@
 kubectl cluster-info | grep 'Kubernetes master' | awk '/http/ {print $NF}'
 
-kubectl get secrets -n kube-system | grep gitlab.com
+kubectl get secrets -n gitlab.com | grep gitlab.com
 
-kubectl get secret -n kube-system gitlab.com-token-XXXXX -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
-kubectl get secret -n kube-system gitlab.com-token-XXXXX -o jsonpath="{['data']['token']}"   | base64 --decode
+kubectl get secret -n gitlab.com gitlab.com-token-XXXXX -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
+
+kubectl get secret -n gitlab.com gitlab.com-token-XXXXX -o jsonpath="{['data']['token']}" | base64 --decode
