@@ -19,7 +19,7 @@ runners:
 
 gitlabUrl: https://gitlab.com/
 concurrent: 50
-checkInterval: 3
+checkInterval: 1
 runnerRegistrationToken:
 
 ###################################################################################################

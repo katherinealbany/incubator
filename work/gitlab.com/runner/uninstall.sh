@@ -7,7 +7,7 @@ helm delete --purge gitlab-runner
 
 ###################################################################################################
 
-kubectl delete --wait=true namespace/gitlab-com
+kubectl delete --wait=true namespace/gitlab-runner
 
 ###################################################################################################
 
