@@ -5,6 +5,12 @@ rbac:
 
 ###################################################################################################
 
+envVars:
+  - name: DOCKER_HOST
+    value: tcp://localhost:2375
+
+###################################################################################################
+
 runners:
   image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:latest
   privileged: true
