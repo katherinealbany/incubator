@@ -5,15 +5,33 @@ rbac:
 
 ###################################################################################################
 
-runners:
-  image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:latest
-  privileged: true
+envVars:
+  - name: RUNNER_ENV
+    value: DOCKER_HOST='tcp://localhost:2375'
+  - name: RUNNER_NAME
+    value: Travis Perkins Group Runners (Google Cloud Platform)
+  - name: REGISTER_RUN_UNTAGGED
+    value: 'true'
 
 ###################################################################################################
 
+runners:
+  tags: tp,gcp,cache
+  cache:
+    cacheType: gcs
+    cacheShared: true
+    gcsBucketName: gitlab-com-travis-perkins-cache
+    secretName: google-cloud-storage
+  image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:latest
+  privileged: true
+  imagePullPolicy: always
+
+###################################################################################################
+
+logLevel: debug
 gitlabUrl: https://gitlab.com/
-concurrent: 50
-checkInterval: 1
+concurrent: 25
+checkInterval: 3
 runnerRegistrationToken:
 
 ###################################################################################################
