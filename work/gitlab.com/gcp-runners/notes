@@ -1,0 +1,8 @@
+kubectl create namespace gitlab-runner
+
+kubectl create secret generic google-cloud-storage --namespace gitlab-runner --from-literal=gcs-access-id="XXXXX" --from-literal=gcs-private-key="YYYYY"
+
+## XXXXX = client_id field from tp-ccoe-sandpit-72ebef5dc12c.json
+## YYYYY = private_key field from tp-ccoe-sandpit-72ebef5dc12c.json
+
+./install.sh
