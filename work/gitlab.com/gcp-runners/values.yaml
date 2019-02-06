@@ -7,31 +7,46 @@ rbac:
 
 envVars:
   - name: RUNNER_ENV
-    value: DOCKER_HOST='tcp://localhost:2375'
+    value: DOCKER_HOST=tcp://localhost:2375
   - name: RUNNER_NAME
     value: Travis Perkins CCoE Runners (Google Cloud Platform)
   - name: REGISTER_RUN_UNTAGGED
-    value: 'true'
+    value: 'false'
 
 ###################################################################################################
 
 runners:
-  tags: tp,ccoe,gcp,cache
+  tags: tp,ccoe,gcp,cache,chaos
   cache:
     cacheType: gcs
     cacheShared: true
     gcsBucketName: gitlab-com-travis-perkins-cache
     secretName: google-cloud-storage
   image: registry.gitlab.com/travis-perkins/ccoe/docker/tooling:latest
+  builds:
+    memoryLimit: 256Mi
+    memoryRequests: 256Mi
   privileged: true
+  nodeSelector:
+    type: chaos
   imagePullPolicy: always
+
+###################################################################################################
+
+resources:
+  limits:
+    memory: 100Mi
+    cpu: 1000m
+  requests:
+    memory: 100Mi
+    cpu: 10m
 
 ###################################################################################################
 
 logLevel: info
 gitlabUrl: https://gitlab.com/
 concurrent: 25
-checkInterval: 3
+checkInterval: 1
 runnerRegistrationToken:
 
 ###################################################################################################
