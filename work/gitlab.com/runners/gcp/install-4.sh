@@ -1,15 +1,13 @@
-#!/bin/bash
+#!/bin/bash -e
+set -o pipefail
 [[ -n "${DEBUG}" ]] && set -x
 
 ###################################################################################################
 
-helm delete --purge gitlab-runner-4
-helm delete --purge gitlab-runner-3
-helm delete --purge gitlab-runner-2
-helm delete --purge gitlab-runner-1
+BASE="$(dirname "${BASH_SOURCE[0]}")"
 
 ###################################################################################################
 
-exit 0
+helm upgrade gitlab-runner-4 gitlab/gitlab-runner --install --debug --wait --namespace gitlab-runner --values "${BASE}/values.yaml"
 
 ###################################################################################################
