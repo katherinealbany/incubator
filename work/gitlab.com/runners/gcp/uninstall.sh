@@ -3,6 +3,7 @@
 
 ###################################################################################################
 
+helm delete --purge gitlab-runner-4
 helm delete --purge gitlab-runner-3
 helm delete --purge gitlab-runner-2
 helm delete --purge gitlab-runner-1
