@@ -9,14 +9,14 @@ envVars:
   - name: RUNNER_ENV
     value: DOCKER_HOST=tcp://localhost:2375
   - name: RUNNER_NAME
-    value: Travis Perkins Shared Runners (Google Cloud Platform)
+    value: Travis Perkins Group Runners (Google Cloud Platform)
   - name: REGISTER_RUN_UNTAGGED
     value: 'true'
 
 ###################################################################################################
 
 runners:
-  tags: tp,gcp,cache
+  tags: travis-perkins,gcp,cache
   cache:
     cacheType: gcs
     cacheShared: true
@@ -28,7 +28,7 @@ runners:
 
 ###################################################################################################
 
-logLevel: info
+logLevel: debug
 gitlabUrl: https://gitlab.com/
 concurrent: 25
 checkInterval: 1
