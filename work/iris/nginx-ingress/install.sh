@@ -1,0 +1,1 @@
+../../support/nginx-ingress/install.sh

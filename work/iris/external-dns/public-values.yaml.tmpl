@@ -1,0 +1,42 @@
+---
+###################################################################################################
+
+aws:
+  region: {{ if (has (datasource "data") "EXTERNAL_DNS_AWS_REGION") }}{{ (datasource "data").EXTERNAL_DNS_AWS_REGION }}{{ else }}{{ .Env.EXTERNAL_DNS_AWS_REGION }}{{ end }}
+  zoneType: public
+  accessKey: {{ if (has (datasource "data") "EXTERNAL_DNS_AWS_ACCESS_KEY") }}{{ (datasource "data").EXTERNAL_DNS_AWS_ACCESS_KEY }}{{ else }}{{ .Env.EXTERNAL_DNS_AWS_ACCESS_KEY }}{{ end }}
+  secretKey: {{ if (has (datasource "data") "EXTERNAL_DNS_AWS_SECRET_KEY") }}{{ (datasource "data").EXTERNAL_DNS_AWS_SECRET_KEY }}{{ else }}{{ .Env.EXTERNAL_DNS_AWS_SECRET_KEY }}{{ end }}
+
+###################################################################################################
+
+rbac:
+  create: {{ if (has (datasource "data") "EXTERNAL_DNS_RBAC") }}{{ (datasource "data").EXTERNAL_DNS_RBAC }}{{ else }}{{ .Env.EXTERNAL_DNS_RBAC }}{{ end }}
+
+###################################################################################################
+
+policy: {{ if (has (datasource "data") "EXTERNAL_DNS_POLICY") }}{{ (datasource "data").EXTERNAL_DNS_POLICY }}{{ else }}{{ .Env.EXTERNAL_DNS_POLICY }}{{ end }}
+
+###################################################################################################
+
+provider: aws
+
+###################################################################################################
+
+resources:
+  requests:
+    cpu: {{ if (has (datasource "data") "EXTERNAL_DNS_RESOURCE_CPU") }}{{ (datasource "data").EXTERNAL_DNS_RESOURCE_CPU }}{{ else }}{{ .Env.EXTERNAL_DNS_RESOURCE_CPU }}{{ end }}
+    memory: {{ if (has (datasource "data") "EXTERNAL_DNS_RESOURCE_MEMORY") }}{{ (datasource "data").EXTERNAL_DNS_RESOURCE_MEMORY }}{{ else }}{{ .Env.EXTERNAL_DNS_RESOURCE_MEMORY }}{{ end }}
+  limits:
+    cpu: {{ if (has (datasource "data") "EXTERNAL_DNS_RESOURCE_CPU") }}{{ (datasource "data").EXTERNAL_DNS_RESOURCE_CPU }}{{ else }}{{ .Env.EXTERNAL_DNS_RESOURCE_CPU }}{{ end }}
+    memory: {{ if (has (datasource "data") "EXTERNAL_DNS_RESOURCE_MEMORY") }}{{ (datasource "data").EXTERNAL_DNS_RESOURCE_MEMORY }}{{ else }}{{ .Env.EXTERNAL_DNS_RESOURCE_MEMORY }}{{ end }}
+
+###################################################################################################
+
+domainFilters: [ {{ if (has (datasource "data") "EXTERNAL_DNS_DOMAIN_FILTERS") }}{{ (datasource "data").EXTERNAL_DNS_DOMAIN_FILTERS }}{{ else }}{{ .Env.EXTERNAL_DNS_DOMAIN_FILTERS }}{{ end }} ]
+
+###################################################################################################
+
+annotationFilter: {{ if (has (datasource "data") "EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER") }}{{ (datasource "data").EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER }}{{ else }}{{ .Env.EXTERNAL_DNS_PUBLIC_ANNOTATION_FILTER }}{{ end }}
+
+###################################################################################################
+...

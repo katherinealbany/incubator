@@ -1,0 +1,14 @@
+#!/bin/bash -e
+set -o pipefail
+[[ -n "${DEBUG}" ]] && set -x
+
+###################################################################################################
+
+BASE="$(dirname "${BASH_SOURCE[0]}")"
+
+###################################################################################################
+
+helm upgrade '{{ if (has (datasource "data") "EXTERNAL_DNS_PUBLIC_RELEASE") }}{{ (datasource "data").EXTERNAL_DNS_PUBLIC_RELEASE }}{{ else }}{{ .Env.EXTERNAL_DNS_PUBLIC_RELEASE }}{{ end }}' '{{ if (has (datasource "data") "EXTERNAL_DNS_REPO") }}{{ (datasource "data").EXTERNAL_DNS_REPO }}{{ else }}{{ .Env.EXTERNAL_DNS_REPO }}{{ end }}/{{ if (has (datasource "data") "EXTERNAL_DNS_CHART") }}{{ (datasource "data").EXTERNAL_DNS_CHART }}{{ else }}{{ .Env.EXTERNAL_DNS_CHART }}{{ end }}' --install --debug --wait --namespace '{{ if (has (datasource "data") "EXTERNAL_DNS_NAMESPACE") }}{{ (datasource "data").EXTERNAL_DNS_NAMESPACE }}{{ else }}{{ .Env.EXTERNAL_DNS_NAMESPACE }}{{ end }}' --version '{{ if (has (datasource "data") "EXTERNAL_DNS_VERSION") }}{{ (datasource "data").EXTERNAL_DNS_VERSION }}{{ else }}{{ .Env.EXTERNAL_DNS_VERSION }}{{ end }}' --values "${BASE}/public-values.yaml" --set txtOwnerId='{{ if (has (datasource "data") "EXTERNAL_DNS_PUBLIC_RELEASE") }}{{ (datasource "data").EXTERNAL_DNS_PUBLIC_RELEASE }}{{ else }}{{ .Env.EXTERNAL_DNS_PUBLIC_RELEASE }}{{ end }}-{{ if (has (datasource "data") "EXTERNAL_DNS_TXT_OWNER_ID_SALT") }}{{ (datasource "data").EXTERNAL_DNS_TXT_OWNER_ID_SALT }}{{ else }}{{ .Env.EXTERNAL_DNS_TXT_OWNER_ID_SALT }}{{ end }}'
+helm upgrade '{{ if (has (datasource "data") "EXTERNAL_DNS_PRIVATE_RELEASE") }}{{ (datasource "data").EXTERNAL_DNS_PRIVATE_RELEASE }}{{ else }}{{ .Env.EXTERNAL_DNS_PRIVATE_RELEASE }}{{ end }}' '{{ if (has (datasource "data") "EXTERNAL_DNS_REPO") }}{{ (datasource "data").EXTERNAL_DNS_REPO }}{{ else }}{{ .Env.EXTERNAL_DNS_REPO }}{{ end }}/{{ if (has (datasource "data") "EXTERNAL_DNS_CHART") }}{{ (datasource "data").EXTERNAL_DNS_CHART }}{{ else }}{{ .Env.EXTERNAL_DNS_CHART }}{{ end }}' --install --debug --wait --namespace '{{ if (has (datasource "data") "EXTERNAL_DNS_NAMESPACE") }}{{ (datasource "data").EXTERNAL_DNS_NAMESPACE }}{{ else }}{{ .Env.EXTERNAL_DNS_NAMESPACE }}{{ end }}' --version '{{ if (has (datasource "data") "EXTERNAL_DNS_VERSION") }}{{ (datasource "data").EXTERNAL_DNS_VERSION }}{{ else }}{{ .Env.EXTERNAL_DNS_VERSION }}{{ end }}' --values "${BASE}/private-values.yaml" --set txtOwnerId='{{ if (has (datasource "data") "EXTERNAL_DNS_PRIVATE_RELEASE") }}{{ (datasource "data").EXTERNAL_DNS_PRIVATE_RELEASE }}{{ else }}{{ .Env.EXTERNAL_DNS_PRIVATE_RELEASE }}{{ end }}-{{ if (has (datasource "data") "EXTERNAL_DNS_TXT_OWNER_ID_SALT") }}{{ (datasource "data").EXTERNAL_DNS_TXT_OWNER_ID_SALT }}{{ else }}{{ .Env.EXTERNAL_DNS_TXT_OWNER_ID_SALT }}{{ end }}'
+
+###################################################################################################

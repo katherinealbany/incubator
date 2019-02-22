@@ -11,7 +11,8 @@ BASE="$(dirname ${BASH_SOURCE[0]})"
 
 ###################################################################################################
 
-helm upgrade nginx-ingress stable/nginx-ingress --install --debug --wait --namespace nginx-ingress --version "${NGINX_INGRESS_VERSION}" --values "${BASE}/values.yaml"
+helm upgrade nginx-ingress-private stable/nginx-ingress --install --debug --wait --namespace nginx-ingress --version "${NGINX_INGRESS_VERSION}" --values "${BASE}/private-values.yaml"
+helm upgrade nginx-ingress-public  stable/nginx-ingress --install --debug --wait --namespace nginx-ingress --version "${NGINX_INGRESS_VERSION}" --values "${BASE}/public-values.yaml"
 
 ###################################################################################################
 

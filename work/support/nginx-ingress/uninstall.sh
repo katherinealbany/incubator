@@ -10,7 +10,8 @@ kubectl delete --wait=true --filename="${BASE}/service-monitor.yaml"
 
 ###################################################################################################
 
-helm delete --purge nginx-ingress
+helm delete --purge nginx-ingress-public
+helm delete --purge nginx-ingress-private
 
 ###################################################################################################
 
