@@ -7,13 +7,13 @@ export VAULT_TOKEN=XXXXX
 
 vault auth enable -default-lease-ttl=24h -max-lease-ttl=24h -description="Username/Password Authentication" userpass
 
-vault write auth/userpass/users/katherine password=XXXXX
-
 vault auth list ### Get Accessor ID
+
+vault write auth/userpass/users/katherine password=XXXXX
 
 vault write identity/entity name=Katherine metadata=email=katherine.albany@travisperkins.co.uk
 
-vault write identity/entity-alias name=katherine canonical_id=593235e9-60ef-e4ce-fec4-b6430b1ad0b1 mount_accessor=auth_userpass_a5e6a3f7
+vault write identity/entity-alias name=katherine canonical_id=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id') mount_accessor=auth_userpass_a5e6a3f7
 
 
 
