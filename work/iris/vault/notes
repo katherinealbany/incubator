@@ -1,11 +1,26 @@
 ###################################################################################################
 
-export VAULT_ADDR=https://vault.sandpit.fkaj.com/
+export VAULT_ADDR=https://XXXXX
 export VAULT_TOKEN=XXXXX
 
 ###################################################################################################
 
 vault auth enable -default-lease-ttl=24h -max-lease-ttl=24h -description="Username/Password Authentication" userpass
+
+vault write auth/userpass/users/katherine password=XXXXX
+
+vault auth list ### Get Accessor ID
+
+vault write identity/entity name=Katherine metadata=email=katherine.albany@travisperkins.co.uk
+
+vault write identity/entity-alias name=katherine canonical_id=593235e9-60ef-e4ce-fec4-b6430b1ad0b1 mount_accessor=auth_userpass_a5e6a3f7
+
+
+
+
+
+
+
 
 vault policy write administrator -<<EOF
 path "*" {
@@ -13,7 +28,16 @@ path "*" {
 }
 EOF
 
-vault write auth/userpass/users/katherine policies=administrator password=XXXXX
+vault write identity/group name=Administrators policies=administrator member_entity_ids=593235e9-60ef-e4ce-fec4-b6430b1ad0b1
+
+
+
+
+
+
+
+
+vault write auth/userpass/users/katherine password=XXXXX
 
 vault login -method=userpass username=katherine && unset VAULT_TOKEN
 
