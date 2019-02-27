@@ -1,19 +1,18 @@
 ###################################################################################################
 
-export VAULT_ADDR=https://XXXXX
+export VAULT_ADDR=https://XXXXX/
 export VAULT_TOKEN=XXXXX
+export VAULT_PASSWORD=XXXXX
 
 ###################################################################################################
 
-vault auth enable -default-lease-ttl=24h -max-lease-ttl=24h -description="Username/Password Authentication" userpass
+vault auth enable -default-lease-ttl=24h -max-lease-ttl=240h -description="Username/Password Authentication" userpass
 
-vault auth list ### Get Accessor ID
-
-vault write auth/userpass/users/katherine password=XXXXX
+vault write auth/userpass/users/katherine password=${VAULT_PASSWORD}
 
 vault write identity/entity name=Katherine metadata=email=katherine.albany@travisperkins.co.uk
 
-vault write identity/entity-alias name=katherine canonical_id=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id') mount_accessor=auth_userpass_a5e6a3f7
+vault write identity/entity-alias name=katherine canonical_id=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "userpass") | .accessor')
 
 
 
@@ -39,7 +38,7 @@ vault write identity/group name=Administrators policies=administrator member_ent
 
 vault write auth/userpass/users/katherine password=XXXXX
 
-vault login -method=userpass username=katherine && unset VAULT_TOKEN
+vault login -method=userpass username=katherine && unset VAULT_TOKEN && vault token revoke ${VAULT_TOKEN}
 
 ###################################################################################################
 
@@ -81,6 +80,3 @@ vault read aws/travis-perkins/digital/shared/creds/administrator
 vault auth enable -default-lease-ttl=60m -max-lease-ttl=24h -description="Headless Systems Authentication" approle
 
 ###################################################################################################
-
-
-vault token revoke "<initial root token>"
