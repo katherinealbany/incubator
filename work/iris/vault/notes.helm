@@ -1,0 +1,47 @@
+###################################################################################################
+
+export VAULT_ADDR=XXXXX
+
+###################################################################################################
+
+vault login -method=userpass username=katherine.albany
+
+###################################################################################################
+
+vault write aws/travis-perkins/digital/shared/roles/helm-chart-publisher credential_type=iam_user policy_document=-<<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "1",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::ccoe-helm-charts/*",
+        "arn:aws:s3:::digital-helm-charts/*"
+      ]
+    }
+  ]
+}
+EOF
+
+vault policy write helm-chart-publisher -<<EOF
+path "aws/travis-perkins/digital/shared/creds/helm-chart-publisher" {
+  capabilities = [ "read" ]
+}
+EOF
+
+vault write -force auth/approle/role/helm-chart-publisher
+
+vault write identity/entity name=helm-chart-publisher policies=helm-chart-publisher
+
+vault write identity/entity-alias name=$(vault read -format=json auth/approle/role/helm-chart-publisher/role-id | jq -r '.data.role_id') canonical_id=$(vault read -format=json /identity/entity/name/helm-chart-publisher | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "approle") | .accessor')
+
+###################################################################################################
+###################################################################################################
+
+vault write auth/approle/login role_id=$(vault read -format=json auth/approle/role/helm-chart-publisher/role-id | jq -r '.data.role_id') secret_id=$(vault write -force -format=json auth/approle/role/helm-chart-publisher/secret-id | jq -r '.data.secret_id')
+
+###################################################################################################
