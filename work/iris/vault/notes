@@ -1,18 +1,17 @@
 ###################################################################################################
 
-export VAULT_ADDR=https://XXXXX/
+export VAULT_ADDR=XXXXX
 export VAULT_TOKEN=XXXXX
-export VAULT_PASSWORD=XXXXX
 
 ###################################################################################################
 
 vault auth enable -default-lease-ttl=24h -max-lease-ttl=240h -description="Username/Password Authentication" userpass
 
-vault write auth/userpass/users/katherine password=${VAULT_PASSWORD}
+vault write auth/userpass/users/katherine.albany password=XXXXX
 
-vault write identity/entity name=Katherine metadata=email=katherine.albany@travisperkins.co.uk
+vault write identity/entity name=katherine.albany metadata=email=katherine.albany@travisperkins.co.uk
 
-vault write identity/entity-alias name=katherine canonical_id=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "userpass") | .accessor')
+vault write identity/entity-alias name=katherine.albany canonical_id=$(vault read -format=json /identity/entity/name/katherine.albany | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "userpass") | .accessor')
 
 vault policy write administrator -<<EOF
 path "*" {
@@ -20,9 +19,11 @@ path "*" {
 }
 EOF
 
-vault write identity/group name=Administrators policies=administrator member_entity_ids=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id')
+vault write identity/group name=administrators policies=administrator member_entity_ids=$(vault read -format=json /identity/entity/name/katherine.albany | jq -r '.data.id')
 
-vault login -method=userpass username=katherine && vault token revoke ${VAULT_TOKEN} && unset VAULT_TOKEN
+vault login -method=userpass username=katherine.albany
+
+vault token revoke ${VAULT_TOKEN} && unset VAULT_TOKEN
 
 ###################################################################################################
 
