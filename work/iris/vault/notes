@@ -14,31 +14,15 @@ vault write identity/entity name=Katherine metadata=email=katherine.albany@travi
 
 vault write identity/entity-alias name=katherine canonical_id=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "userpass") | .accessor')
 
-
-
-
-
-
-
-
 vault policy write administrator -<<EOF
 path "*" {
   capabilities = [ "create", "read", "update", "delete", "list", "sudo" ]
 }
 EOF
 
-vault write identity/group name=Administrators policies=administrator member_entity_ids=593235e9-60ef-e4ce-fec4-b6430b1ad0b1
+vault write identity/group name=Administrators policies=administrator member_entity_ids=$(vault read -format=json /identity/entity/name/katherine | jq -r '.data.id')
 
-
-
-
-
-
-
-
-vault write auth/userpass/users/katherine password=XXXXX
-
-vault login -method=userpass username=katherine && unset VAULT_TOKEN && vault token revoke ${VAULT_TOKEN}
+vault login -method=userpass username=katherine && vault token revoke ${VAULT_TOKEN} && unset VAULT_TOKEN
 
 ###################################################################################################
 
