@@ -21,8 +21,6 @@ storage:
   dynamodb:
     table: Vault
     region: eu-west-1
-    access_key:
-    secret_key:
     ha_enabled: 'true'
 
 ###################################################################################################
@@ -31,9 +29,7 @@ externalDnsDomainName: iris02.travisperkins.io
 
 ###################################################################################################
 
-ingressClass: nginx-public
-ingressAnnotations:
-  external-dns/public: 'true'
+ingressClass: nginx-private
 ingressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
 ingressAnnotationCertManagerAcmeDns01Provider: route53
 
