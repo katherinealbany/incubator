@@ -44,4 +44,6 @@ vault write identity/entity-alias name=$(vault read -format=json auth/approle/ro
 
 vault write auth/approle/login role_id=$(vault read -format=json auth/approle/role/helm-chart-publisher/role-id | jq -r '.data.role_id') secret_id=$(vault write -force -format=json auth/approle/role/helm-chart-publisher/secret-id | jq -r '.data.secret_id')
 
+vault read aws/travis-perkins/digital/shared/creds/helm-chart-publisher
+
 ###################################################################################################
