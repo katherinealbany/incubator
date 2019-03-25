@@ -30,6 +30,7 @@ vault token revoke ${VAULT_TOKEN} && unset VAULT_TOKEN
 vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/digital/dev -description="Travis Perkins Digital Dev (728146537364)" aws
 vault write aws/travis-perkins/digital/dev/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
 vault write aws/travis-perkins/digital/dev/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
+vault write -force aws/travis-perkins/digital/dev/config/rotate-root
 vault read aws/travis-perkins/digital/dev/creds/administrator
 
 ###################################################################################################
@@ -37,6 +38,7 @@ vault read aws/travis-perkins/digital/dev/creds/administrator
 vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/digital/test -description="Travis Perkins Digital Test (749340814140)" aws
 vault write aws/travis-perkins/digital/test/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
 vault write aws/travis-perkins/digital/test/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
+vault write -force aws/travis-perkins/digital/test/config/rotate-root
 vault read aws/travis-perkins/digital/test/creds/administrator
 
 ###################################################################################################
@@ -44,6 +46,7 @@ vault read aws/travis-perkins/digital/test/creds/administrator
 vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/digital/staging -description="Travis Perkins Digital Staging (897601288174)" aws
 vault write aws/travis-perkins/digital/staging/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
 vault write aws/travis-perkins/digital/staging/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
+vault write -force aws/travis-perkins/digital/staging/config/rotate-root
 vault read aws/travis-perkins/digital/staging/creds/administrator
 
 ###################################################################################################
@@ -51,6 +54,7 @@ vault read aws/travis-perkins/digital/staging/creds/administrator
 vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/digital/prod -description="Travis Perkins Digital Prod (755956198463)" aws
 vault write aws/travis-perkins/digital/prod/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
 vault write aws/travis-perkins/digital/prod/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
+vault write -force aws/travis-perkins/digital/prod/config/rotate-root
 vault read aws/travis-perkins/digital/prod/creds/administrator
 
 ###################################################################################################
@@ -58,6 +62,7 @@ vault read aws/travis-perkins/digital/prod/creds/administrator
 vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/digital/shared -description="Travis Perkins Digital Shared (233757773908)" aws
 vault write aws/travis-perkins/digital/shared/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
 vault write aws/travis-perkins/digital/shared/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
+vault write -force aws/travis-perkins/digital/shared/config/rotate-root
 vault read aws/travis-perkins/digital/shared/creds/administrator
 
 ###################################################################################################
