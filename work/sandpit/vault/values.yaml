@@ -25,7 +25,7 @@ storage:
   dynamodb:
     table: Sandpit-Vault
     region: eu-west-1
-    access_key: AKIAJB27TOHJLXBXOC7A
+    access_key: AKIAJPIRC7ZU2XNOJIIQ
     secret_key:
     ha_enabled: 'true'
 
