@@ -11,6 +11,8 @@ controller:
     enabled: true
   service:
     enableHttp: false
+    annotations:
+      cloud.google.com/load-balancer-type: Internal
   resources:
     requests:
       cpu: 50m

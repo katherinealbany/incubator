@@ -10,17 +10,13 @@ externalDnsDomainName: sandpit.fkaj.com
 ###################################################################################################
 
 clientIngressClass: nginx
-clientIngressAnnotations:
-  external-dns/public: 'true'
-clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt-staging
+clientIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
 clientIngressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
 
 ingestIngressClass: nginx
-ingestIngressAnnotations:
-  external-dns/public: 'true'
-ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt-staging
+ingestIngressAnnotationCertManagerClusterIssuer: cluster-issuer-lets-encrypt
 ingestIngressAnnotationCertManagerAcmeDns01Provider: route53
 
 ###################################################################################################
