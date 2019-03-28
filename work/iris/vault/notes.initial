@@ -27,6 +27,14 @@ vault token revoke ${VAULT_TOKEN} && unset VAULT_TOKEN
 
 ###################################################################################################
 
+vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/ccoe/sandpit -description="Travis Perkins CCoE Sandpit (831252103283)" aws
+vault write aws/travis-perkins/ccoe/sandpit/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
+vault write aws/travis-perkins/ccoe/sandpit/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
+vault write -force aws/travis-perkins/ccoe/sandpit/config/rotate-root
+vault read aws/travis-perkins/ccoe/sandpit/creds/administrator
+
+###################################################################################################
+
 vault secrets enable -default-lease-ttl=60m -max-lease-ttl=24h -path=aws/travis-perkins/digital/dev -description="Travis Perkins Digital Dev (728146537364)" aws
 vault write aws/travis-perkins/digital/dev/config/root region=eu-west-1 access_key=XXXXX secret_key=XXXXX
 vault write aws/travis-perkins/digital/dev/roles/administrator credential_type=iam_user policy_arns=arn:aws:iam::aws:policy/AdministratorAccess
