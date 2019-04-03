@@ -78,3 +78,7 @@ vault read aws/travis-perkins/digital/shared/creds/administrator
 vault auth enable -default-lease-ttl=60m -max-lease-ttl=24h -description="Headless Systems Authentication" approle
 
 ###################################################################################################
+
+vault secrets enable -version=2 -description="Key/Value Secret Storage" kv
+
+###################################################################################################
