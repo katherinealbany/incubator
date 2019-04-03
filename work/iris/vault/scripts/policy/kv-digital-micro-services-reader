@@ -1,0 +1,2 @@
+vault policy write kv-digital-micro-services-reader -<<EOF
+EOF
