@@ -1,10 +1,5 @@
 ###################################################################################################
 
-export VAULT_ADDR=https://vault.iris.travisperkins.digital/
-export VAULT_TOKEN=XXXXX
-
-###################################################################################################
-
 vault auth enable -default-lease-ttl=24h -max-lease-ttl=240h -description="Username/Password Authentication" userpass
 
 vault write auth/userpass/users/katherine.albany password=XXXXX
