@@ -8,10 +8,21 @@ vault write aws/travis-perkins/digital/shared/roles/micro-services-metadata-edit
       "Sid": "1",
       "Effect": "Allow",
       "Action": [
+        "s3:ListBucket",
+        "s3:ListBucketVersions"
+      ],
+      "Resource": [
+        "arn:aws:s3:::micro-services-metadata"
+      ]
+    },
+    {
+      "Sid": "2",
+      "Effect": "Allow",
+      "Action": [
         "s3:GetObject",
         "s3:PutObject",
-        "s3:ListBucket",
-        "s3:DeleteObject"
+        "s3:DeleteObject",
+        "s3:GetObjectVersion"
       ],
       "Resource": [
         "arn:aws:s3:::micro-services-metadata/*"
@@ -37,8 +48,8 @@ vault write identity/group name=micro-services-metadata-editors policies=aws-tra
 
 ###################################################################################################
 
-vault write -force auth/approle/role/gitlab-shared-engine-shared01-aws-travisperkins-cloud-digital-micro-services-product
+vault write -force auth/approle/role/micro-services-metadata-editor
 
-vault write identity/entity-alias name=$(vault read -format=json auth/approle/role/gitlab-shared-engine-shared01-aws-travisperkins-cloud-digital-micro-services-product/role-id | jq -r '.data.role_id') canonical_id=$(vault read -format=json /identity/entity/name/micro-services-metadata-editor | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "approle") | .accessor')
+vault write identity/entity-alias name=$(vault read -format=json auth/approle/role/micro-services-metadata-editor/role-id | jq -r '.data.role_id') canonical_id=$(vault read -format=json /identity/entity/name/micro-services-metadata-editor | jq -r '.data.id') mount_accessor=$(vault auth list -format=json | jq -r '.[] | select(.type == "approle") | .accessor')
 
 ###################################################################################################
