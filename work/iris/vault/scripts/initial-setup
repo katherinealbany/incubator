@@ -15,7 +15,7 @@ vault write identity/entity-alias name=katherine.albany canonical_id=$(vault rea
 
 vault policy write administrator -<<EOF
 path "*" {
-  capabilities = [ "create", "read", "update", "delete", "list", "sudo" ]
+  capabilities = [ "sudo", "list", "create", "read", "update", "delete" ]
 }
 EOF
 
