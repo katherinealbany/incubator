@@ -34,7 +34,7 @@ EOF
 
 ###################################################################################################
 
-vault policy write aws-travis-perkins-digital-shared_digital-micro-services-metadata-editor -<<EOF
+vault policy write digital-micro-services-metadata-editor -<<EOF
 path "aws/travis-perkins/digital/shared/creds/digital-micro-services-metadata-editor" {
   capabilities = [ "read" ]
 }
@@ -42,9 +42,7 @@ EOF
 
 ###################################################################################################
 
-vault write identity/entity name=digital-micro-services-metadata-editor
-
-vault write identity/group name=digital-micro-services-metadata-editors policies=aws-travis-perkins-digital-shared_digital-micro-services-metadata-editor member_entity_ids=$(vault read -format=json /identity/entity/name/digital-micro-services-metadata-editor | jq -r '.data.id')
+vault write identity/entity name=digital-micro-services-metadata-editor policies=digital-micro-services-metadata-editor
 
 ###################################################################################################
 
