@@ -1,3 +1,8 @@
+#!/bin/bash -e
+set -o pipefail
+
+###################################################################################################
+
 vault policy write kv-digital-micro-services-writer -<<EOF
 path "kv/data/digital/micro-services" {
   capabilities = [ "create", "update", "delete" ]
@@ -19,3 +24,5 @@ path "kv/metadata/digital/micro-services" {
   capabilities = [ "create", "update", "delete" ]
 }
 EOF
+
+###################################################################################################
