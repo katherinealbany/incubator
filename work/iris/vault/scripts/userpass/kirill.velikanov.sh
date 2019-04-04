@@ -8,7 +8,7 @@ EMAIL_ADDRESS='kyrylo.velykanov@travisperkins.co.uk'
 
 ###################################################################################################
 
-vault write identity/entity name=${USERNAME} metadata=email=${EMAIL_ADDRESS}
+vault write identity/entity name=${USERNAME} metadata=email=${EMAIL_ADDRESS} policies=default
 
 ###################################################################################################
 
