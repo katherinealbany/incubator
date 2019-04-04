@@ -3,7 +3,7 @@ set -o pipefail
 
 ###################################################################################################
 
-POLICIES='kv-digital-reader,kv-digital-writer,kv-digital-micro-services-reader,kv-digital-micro-services-writer'
+POLICIES='kv-reader,kv-digital-reader,kv-digital-writer,kv-digital-micro-services-reader,kv-digital-micro-services-writer'
 MEMBER_ENTITY_NAMES='kirill.velikanov,sergey.evstifeev'
 
 ###################################################################################################
