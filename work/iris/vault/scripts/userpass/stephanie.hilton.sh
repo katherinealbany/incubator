@@ -8,7 +8,7 @@ EMAIL_ADDRESS="${USERNAME}@travisperkins.co.uk"
 
 ###################################################################################################
 
-vault write identity/entity name=${USERNAME} metadata=email=${EMAIL_ADDRESS} policies=default
+vault write identity/entity name=${USERNAME} metadata=email=${EMAIL_ADDRESS}
 
 ###################################################################################################
 
