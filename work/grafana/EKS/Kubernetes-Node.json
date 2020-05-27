@@ -56,7 +56,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"Ready\", status=\"false\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"Ready\", status=\"true\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"Ready\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"Ready\", status=\"false\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -96,7 +96,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"MemoryPressure\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"MemoryPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"MemoryPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"MemoryPressure\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -136,7 +136,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"DiskPressure\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"DiskPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"DiskPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"DiskPressure\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -176,7 +176,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"OutOfDisk\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"OutOfDisk\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"OutOfDisk\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"OutOfDisk\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -216,7 +216,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"PIDPressure\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"PIDPressure\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"PIDPressure\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"PIDPressure\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -256,7 +256,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"KernelDeadlock\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"KernelDeadlock\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"KernelDeadlock\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"KernelDeadlock\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -296,7 +296,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"NetworkUnavailable\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"NetworkUnavailable\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"NetworkUnavailable\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"NetworkUnavailable\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -336,7 +336,7 @@
       "repeat": null,
       "targets": [
         {
-          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\", condition=\"FrequentUnregisterNetDevice\", status=\"true\"} * 3)",
+          "expr": "scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"FrequentUnregisterNetDevice\", status=\"false\"} * 1) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"FrequentUnregisterNetDevice\", status=\"unknown\"} * 2) + scalar(kube_node_status_condition{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\", condition=\"FrequentUnregisterNetDevice\", status=\"true\"} * 3)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1087,7 +1087,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
+          "expr": "(sum(kube_pod_container_resource_requests_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"})) * 100",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1353,7 +1353,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
+          "expr": "(sum(kube_pod_container_resource_limits_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}) / sum(kube_node_status_allocatable_cpu_cores{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"})) * 100",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1597,7 +1597,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum($rate_function(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$rate_interval])) by (namespace)) * 100",
+          "expr": "(sum($rate_function(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=~\"$node.*\", cpu=\"total\", container_name!=\"\"}[$rate_interval])) by (namespace)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{namespace}}",
@@ -1687,7 +1687,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum($rate_function(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=\"$node\", cpu=\"total\", container_name!=\"\"}[$rate_interval])) by (pod_name)) * 100",
+          "expr": "(sum($rate_function(container_cpu_usage_seconds_total{job=\"$container_job\", service=\"$container_service\", node=~\"$node.*\", cpu=\"total\", container_name!=\"\"}[$rate_interval])) by (pod_name)) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{pod_name}}",
@@ -2093,7 +2093,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_resource_requests_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
+          "expr": "(sum(kube_pod_container_resource_requests_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}) / sum(kube_node_status_allocatable_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"})) * 100",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -2359,7 +2359,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_resource_limits_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}) / sum(kube_node_status_allocatable_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"})) * 100",
+          "expr": "(sum(kube_pod_container_resource_limits_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}) / sum(kube_node_status_allocatable_memory_bytes{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"})) * 100",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -2693,7 +2693,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(container_memory_usage_bytes{job=\"$container_job\", service=\"$container_service\", node=\"$node\", container_name!=\"\"}) by (namespace) / scalar(node_memory_MemTotal_bytes{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"})) * 100",
+          "expr": "(sum(container_memory_usage_bytes{job=\"$container_job\", service=\"$container_service\", node=~\"$node.*\", container_name!=\"\"}) by (namespace) / scalar(node_memory_MemTotal_bytes{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"})) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{namespace}}",
@@ -2783,7 +2783,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(container_memory_usage_bytes{job=\"$container_job\", service=\"$container_service\", node=\"$node\", container_name!=\"\"}) by (pod_name) / scalar(node_memory_MemTotal_bytes{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"})) * 100",
+          "expr": "(sum(container_memory_usage_bytes{job=\"$container_job\", service=\"$container_service\", node=~\"$node.*\", container_name!=\"\"}) by (pod_name) / scalar(node_memory_MemTotal_bytes{job=\"$node_job\", service=\"$node_service\", instance=~\"^$instance:[0-9]{1,5}\"})) * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{pod_name}}",
@@ -4786,7 +4786,7 @@
           }
         ],
         "query": "1m,2m,3m,4m,5m,6m,7m,8m,9m,10m",
-        "refresh": 2,
+        "refresh": 1,
         "skipUrlSync": false,
         "type": "interval"
       },
@@ -4800,8 +4800,8 @@
         "name": "node",
         "options": [],
         "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\"}, node)",
-        "refresh": 2,
-        "regex": "",
+        "refresh": 1,
+        "regex": "^(ip-[0-9]{1,3}-[0-9]{1,3}-[0-9]{1,3}-[0-9]{1,3}).*$",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
@@ -4819,8 +4819,8 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(node_uname_info{job=\"$node_job\", service=\"$node_service\", nodename=\"$node\"}, instance)",
-        "refresh": 2,
+        "query": "label_values(node_uname_info{job=\"$node_job\", service=\"$node_service\", nodename=~\"$node.*\"}, instance)",
+        "refresh": 1,
         "regex": "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}):[0-9]{1,5}",
         "skipUrlSync": false,
         "sort": 0,
@@ -4839,8 +4839,8 @@
         "multi": false,
         "name": "os_image",
         "options": [],
-        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, os_image)",
-        "refresh": 2,
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}, os_image)",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -4859,8 +4859,8 @@
         "multi": false,
         "name": "kernel_version",
         "options": [],
-        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, kernel_version)",
-        "refresh": 2,
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}, kernel_version)",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -4879,8 +4879,8 @@
         "multi": false,
         "name": "kubelet_version",
         "options": [],
-        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, kubelet_version)",
-        "refresh": 2,
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}, kubelet_version)",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -4899,8 +4899,8 @@
         "multi": false,
         "name": "container_runtime_version",
         "options": [],
-        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=\"$node\"}, container_runtime_version)",
-        "refresh": 2,
+        "query": "label_values(kube_node_info{job=\"$kube_job\", service=\"$kube_service\", node=~\"$node.*\"}, container_runtime_version)",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
