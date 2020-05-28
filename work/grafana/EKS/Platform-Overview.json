@@ -12,15 +12,15 @@
       }
     ]
   },
-  "editable": false,
+  "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "links": [
     {
       "icon": "external link",
       "tags": [
-        "Kubernetes",
-        "Node"
+        "Platform",
+        "Overview"
       ],
       "type": "dashboards"
     }
@@ -4791,8 +4791,8 @@
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "Kubernetes",
-    "Node"
+    "Platform",
+    "Overview"
   ],
   "templating": {
     "list": [
@@ -5201,6 +5201,6 @@
     ]
   },
   "timezone": "",
-  "title": "Kubernetes | Node",
-  "uid": "Kubernetes-Node"
+  "title": "Platform | Overview",
+  "uid": "Platform-Overview"
 }
