@@ -25,7 +25,106 @@
       "type": "dashboards"
     }
   ],
-  "panels": [],
+  "panels": [
+    {
+      "columns": [],
+      "datasource": "$datasource",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 17,
+        "w": 23,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {},
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "hidden"
+        },
+        {
+          "alias": "",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)"
+          ],
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value",
+          "thresholds": [
+            "0",
+            "2"
+          ],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "text": "FAILED",
+              "value": "-1"
+            },
+            {
+              "text": "UNKNOWN",
+              "value": "0"
+            },
+            {
+              "text": "DEPLOYED",
+              "value": "1"
+            },
+            {
+              "text": "DELETED",
+              "value": "2"
+            },
+            {
+              "text": "SUPERSEDED",
+              "value": "3"
+            },
+            {
+              "text": "DELETING",
+              "value": "5"
+            },
+            {
+              "text": "PENDING INSTALL",
+              "value": "6"
+            },
+            {
+              "text": "PENDING UPGRADE",
+              "value": "7"
+            },
+            {
+              "text": "PENDING ROLLBACK",
+              "value": "8"
+            }
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "expr": "min(helm_chart_info) by (chart, release, namespace, version)",
+          "format": "table",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Panel Title",
+      "transform": "table",
+      "type": "table"
+    }
+  ],
   "refresh": "3m",
   "schemaVersion": 18,
   "style": "dark",
